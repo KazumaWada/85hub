@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One-Line English Diary</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 50px;
+        }
+        .diary-container {
+            max-width: 600px;
+            width: 100%;
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .diary-input {
+            margin-bottom: 20px;
+        }
+        .diary-entries {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="diary-container">
+        <div class="diary-input">
+        <input type="text" class="form-control" id="diaryEntry" placeholder="なんかかけ" maxlength="100" style="border: none; box-shadow: none;">
+        <button class="btn mt-3 w-10" onclick="addEntry()">post</button>
+        
+            
+        </div>
+        <div class="diary-entries">
+            <ul id="entriesList" class="list-group">
+            <li>hello!(2024/11/9)</li>
+            <span>url: https://x.com</span>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function addEntry() {
+            const entryText = document.getElementById("diaryEntry").value;
+            if (entryText.trim() === "") return;
+
+            const entryItem = document.createElement("li");
+            entryItem.className = "list-group-item";
+            entryItem.textContent = entryText;
+
+            document.getElementById("entriesList").appendChild(entryItem);
+            document.getElementById("diaryEntry").value = "";
+        }
+    </script>
+</body>
+</html>
