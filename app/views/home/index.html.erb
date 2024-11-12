@@ -31,6 +31,53 @@
 </head>
 <body>
 
+
+<%# devise用↓ %>
+<% if user_signed_in? %>
+  <p>こんにちは,<%= current_user.email %>(<%= link_to "プロフィールへ", profile_path %>)</p><br />
+<p> </p>
+<%# method:deleteだけでは動かないようになっている。rails7だから。%>
+<%= link_to 'Logout', destroy_user_session_path, data: { turbo_method: :delete } %>
+<% else %>
+<%= link_to 'Sign up', new_user_registration_path %>or
+<%= link_to 'Login', new_user_session_path %>
+<% end %>
+
+<div class="diary-container">
+<div class="diary-entries">
+            <li class="text-center" style="list-style: none;">hello! 2024/11/9</li>
+</div>
+</div>
+
+<div class="diary-container">
+<div class="diary-entries">
+            <li class="text-center" style="list-style: none;">hello! 2024/11/9</li>
+</div>
+</div>
+
+<div class="diary-container">
+<div class="diary-entries">
+            <li class="text-center" style="list-style: none;">hello! 2024/11/9</li>
+</div>
+</div>
+<div class="diary-container">
+<div class="diary-entries">
+            <li class="text-center" style="list-style: none;">hello! 2024/11/9</li>
+</div>
+</div>
+<br>
+
+<p>xにシェアして英語仲間の輪を広げていこう!</p>
+<p>ここにシェアするとどんな感じになるのか図を書く</p>
+
+
+
+
+
+
+
+
+<%# 
     <div class="diary-container">
         <div class="diary-input">
         <input type="text" class="form-control" id="diaryEntry" placeholder="なんかかけ" maxlength="100" style="border: none; box-shadow: none;">
@@ -45,7 +92,7 @@
             </ul>
         </div>
     </div>
-
+%>
     <script>
         function addEntry() {
             const entryText = document.getElementById("diaryEntry").value;

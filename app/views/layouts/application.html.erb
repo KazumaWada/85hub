@@ -11,8 +11,19 @@
   </head>
 
   <body>
-  <h1>onedayoneline.com</h1>
-    <%= yield %>
-  <%= debug(params) if Rails.env.development? %>
+  <%= render 'layouts/header' %>
+  
+  <%= yield %>
+  
+  <%# devise用↓ %>
+    <% if notice %>
+      <p><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p><%= alert %></p>
+    <% end %>
+
+<%= render 'layouts/footer' %>
+<%= debug(params) if Rails.env.development? %>
   </body>
 </html>
