@@ -1,3 +1,10 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>One-Line English Diary</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 <style>
 .custom-input {
     border-radius: 30px;
@@ -21,6 +28,27 @@
     border-radius: 30px;
     padding: 0.75rem 1.5rem;
 }
+body {
+    background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 50px;
+}
+.diary-container {
+    max-width: 600px;
+    width: 100%;
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.diary-input {
+    margin-bottom: 20px;
+}
+.diary-entries {
+    margin-top: 20px;
+}
 .diary-container {
             max-width: 600px;
             width: 100%;
@@ -36,47 +64,22 @@
             margin-top: 20px;
         }
 </style>
-</head>
 <body>
+
 <h1><%= @user.email %></h1>
+<h1><%= @user.name %></h1>
 
 
 <div class="container">
 <div class="input-container">
-
-<form>
-    <div class="diary-container">
-        <div class="diary-entries mb-3 d-flex align-items-center">
-            <input type="text" class="form-control custom-input text-center" placeholder="enter" style="border: none; box-shadow: none;">
-            <button type="submit" class="btn btn-primary ms-2 submit-btn">Submit</button>
-        </div>
-    </div>
-</form>
-
-
-<br>
-
-<div class="diary-container">
-<div class="diary-entries">
-<li class="text-center" style="list-style: none;">hello! 2024/11/9</li>
-</div>
-</div>
-
-<div class="diary-container">
-<div class="diary-entries">
-<li class="text-center" style="list-style: none;">hello! 2024/11/9</li>
-</div>
-</div>
-
-<div class="diary-container">
-<div class="diary-entries">
-<li class="text-center" style="list-style: none;">hello! 2024/11/9</li>
+<%= render 'entries/new', entry: @entry %>
+<%= render 'entries/show', entries: @entries %>
 </div>
 </div>
 
 
 
-</div>
-</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
