@@ -34,13 +34,18 @@ gem "jbuilder"
 # gem "kredis"
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem "bcrypt", "~> 3.1.7"
+#passwordをhash化するためのgem
+gem "bcrypt", "~> 3.1.7"
+#↑の依存gem
+gem 'stringio', '3.0.4'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
+
+
 
 #自分でユーザー登録を理解するために手動で実装していく。
 #gem 'devise'

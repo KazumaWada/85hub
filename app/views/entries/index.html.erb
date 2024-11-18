@@ -1,9 +1,0 @@
-<h1>Your Diary Entries</h1>
-
-<%= link_to 'New Entry', new_entry_path %>
-
-<ul>
-  <% @entries.each do |entry| %>
-    <li><%= entry.content %> - <%= entry.created_at.strftime("%Y-%m-%d %H:%M") %></li>
-  <% end %>
-</ul>

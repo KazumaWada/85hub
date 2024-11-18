@@ -65,15 +65,16 @@ body {
         }
 </style>
 <body>
+<% provide(:title, @user.name) %>
+<h1>
+  <%= gravatar_for @user %>
+  <%= @user.name %>
+</h1>
 
-<h1><%= @user.email %></h1>
-<h1><%= @user.name %></h1>
 
 
 <div class="container">
 <div class="input-container">
-<%= render 'entries/new', entry: @entry %>
-<%= render 'entries/show', entries: @entries %>
 </div>
 </div>
 

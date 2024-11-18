@@ -99,7 +99,7 @@ class ApplicationController < ActionController::Base
 end
 ```
 
-# 続き
+
 これのemailをnameに変える。その色々な手続きをやる。
 # githubに書いてあるやつを、もう一度全部訳してから理解してみる。
 ################################################################################################
@@ -134,3 +134,6 @@ end
 
 <%= render "devise/shared/links" %>
 ################################################################################################
+
+# デプロイ
+https://railstutorial.jp/chapters/sign_up?version=4.2#sec-professional_grade_deployment
