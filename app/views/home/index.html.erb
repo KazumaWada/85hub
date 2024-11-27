@@ -30,36 +30,30 @@
     </style>
 </head>
 <body>
-
-
-
-
-<div class="diary-container">
-<div class="diary-entries">
-            <li class="text-center" style="list-style: none;">hello! 2024/11/9</li>
-</div>
-</div>
-
-<div class="diary-container">
-<div class="diary-entries">
-            <li class="text-center" style="list-style: none;">hello! 2024/11/9</li>
-</div>
-</div>
-
-<div class="diary-container">
-<div class="diary-entries">
-            <li class="text-center" style="list-style: none;">hello! 2024/11/9</li>
-</div>
-</div>
-<div class="diary-container">
-<div class="diary-entries">
-            <li class="text-center" style="list-style: none;">hello! 2024/11/9</li>
-</div>
-</div>
+<%= image_tag(@random_image, class: "img-fluid")%>
+<%#<%= image_tag(@random_image, alt: "Random Theme", class: "img-fluid") %>
+<%#<%= image_tag "theme01.webp", class: "img-fluid" %>
 <br>
+<%#<%= image_tag "theme02.webp", class: "img-fluid" %>
+<br>
+<%#<%= image_tag "theme03.webp", class: "img-fluid" %>
+<br>
+<%#<%= image_tag "theme04.webp", class: "img-fluid" %>
+<%#<% if logged_in? %>
+  <%#<div class="row">
+    <%#<aside class="col-md-4">
+      <%#<section class="user_info">
+      <%#</section>
+      <%#<section class="micropost_form">
+      <%#<%= render 'shared/micropost_form' %>
+      <%#</section>
+    <%#</aside>
+  <%#</div>
+<%#<% else %>
+    <%#<%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary" %>
+<%#<% end %>
 
-<p>xにシェアして英語仲間の輪を広げていこう!</p>
-<p>ここにシェアするとどんな感じになるのか図を書く</p>
+
 
 
 
@@ -76,6 +70,7 @@
         
             
         </div>
+        
         <div class="diary-entries">
             <ul id="entriesList" class="list-group">
             <li>hello!(2024/11/9)</li>

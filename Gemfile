@@ -43,9 +43,12 @@ gem 'stringio', '3.0.4'
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
 # Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap", require: false
+gem "bootsnap"
+gem "sassc-rails" #for bootstrap
 
+gem "font-awesome-sass"
 
+#gem 'webpacker'これは使わずに、railsのimport mapsを使う。(node.jsのimportみたいなやつ。デプロイに手間がかからないから。)
 
 #自分でユーザー登録を理解するために手動で実装していく。
 #gem 'devise'

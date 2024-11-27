@@ -1,15 +1,83 @@
-<h1>onedayoneline.com</h1>
-    <p>一日ワンセンテンスだけ投稿して英語力を上げよう！</p>
+<style>
+.myButton {
+  #position: fixed;
+  #top: 10px;
+  #right: 10px;
+  #z-index: 1000; /* 他の要素より前面に表示 */
+  #width: 80px; /* ボタンの幅 */
+  #height: 45px; /* ボタンの高さ */
+  # border-radius: 50%; /* 丸くする */
+  /* サイズや見た目を調整する */
+  background-color: white;
+  #color: white;
+  border: none;
+  cursor: pointer;
+  display: flex; /* 中央揃え */
+  align-items: center; /* 縦方向の中央揃え */
+  justify-content: center; /* 横方向の中央揃え */
+  font
+}
+</style>
+
+
+<h1><%= link_to "onedayoneline.com", root_path, style: "color: black; text-decoration: none;" %></h1>
+
+    <p>言葉にするたび、英語があなたのものになる。</p>
+
+  
+
+
+<p><%= link_to "初めての方はこちら🔰", about_path %></p>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
 <div class="container-fluid">
   <div class="d-flex gap-3">
-    <a href="/" class="text-decoration-none">Home</a>
-    <a href="https://kazfluent.com/" class="text-decoration-none">ブログ</a>
-    <a href="/" class="text-decoration-none">みんなの投稿</a>
-    <a href="/about" class="text-decoration-none">はじめての方はこちら</a>
-    <a href="/about" class="text-decoration-none">アプリ</a>
+
+<% if logged_in? %>
+   [ <button class="myButton"><%= link_to "✍️", profile_path %></button>,
+<% else %>
+[<button class="myButton"><%= link_to "✍️", login_path, data: {turbo: false} %></button>,
+<% end %>
+
+    <%= link_to "みんな", microposts_path %>,
+    <%= link_to "Blog", "https://kazfluent.com", target: "_blank", rel: "noopener" %>,
+    <%= link_to "アプリ", current_user %> ]
+ 
+    
+    
+
+
+    <%#まだいらん。ユーザーが集まってから。
+    <%#<a href="/" class="text-decoration-none">みんなの投稿</a>
+
+
+
+
+
+
+
+<%#<%= link_to "Home", root_path %>
+    <%#<a href="https://kazfluent.com/" class="text-decoration-none">ブログ</a>%>
+    <%#<a href="/" class="text-decoration-none">みんなの投稿</a>%>
+    <%#<a href="/about" class="text-decoration-none">はじめての方はこちら</a>%>
+    <%#<a href="/app" class="text-decoration-none">アプリ</a>%>
+    
+    <%#<%= link_to "Log in", login_path %>
+    <%#<%= link_to "Sign up", signup_path %>
+    <%#<% if logged_in? %>
+   <%# <%= link_to "Profile", current_user %>
+   <%# <%= link_to "Settings", edit_user_path(current_user) %>
+   <%# <%= button_to "Logout", logout_path, method: :delete, class: "button-to-link-style" %>
+
+
+
+
+    <%#<% end %>
   </div>
 </div>
 </nav>
 <br>
+
+
+
+

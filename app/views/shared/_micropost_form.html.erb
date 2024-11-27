@@ -1,0 +1,23 @@
+<!--rendered by users/show -->
+<div class="diary-container">
+  <div class="diary-entries">
+    <%= form_with(model: @micropost, local: true, html: { class: "micropost-form" }) do |f| %>
+      <!-- エラーメッセージの表示 -->
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <!-- 入力フィールド -->
+      <div class="field">
+        <%= f.text_area :content, 
+          placeholder: "✍️📚✨", 
+          class: "form-control diary-textarea",
+          style: "border: none; box-shadow: none;" %>
+      </div>
+
+      <!-- 投稿ボタン -->
+      <div class="actions text-center">
+        <%= f.submit "Post", class: "btn btn-primary diary-submit-btn" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+

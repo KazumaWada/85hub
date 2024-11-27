@@ -35,20 +35,20 @@ body {
     align-items: center;
     padding-top: 50px;
 }
-.diary-container {
-    max-width: 600px;
-    width: 100%;
-    background: white;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-.diary-input {
-    margin-bottom: 20px;
-}
-.diary-entries {
-    margin-top: 20px;
-}
+# .diary-container {
+#     max-width: 600px;
+#     width: 100%;
+#     background: white;
+#     border-radius: 8px;
+#     padding: 20px;
+#     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+# }
+# .diary-input {
+#     margin-bottom: 20px;
+# }
+# .diary-entries {
+#     margin-top: 20px;
+# }
 .diary-container {
             max-width: 600px;
             width: 100%;
@@ -63,6 +63,12 @@ body {
         .diary-entries {
             margin-top: 20px;
         }
+        .button-to-link-style {
+  all: unset; /* ボタンのデフォルトスタイルをすべてリセット */
+  color: blue; /* リンクの色 */
+  text-decoration: underline; /* 下線を追加 */
+  cursor: pointer; /* ポインターを表示 */
+}
 </style>
 <body>
 <% provide(:title, @user.name) %>
@@ -70,13 +76,26 @@ body {
   <%= gravatar_for @user %>
   <%= @user.name %>
 </h1>
+<p><%= button_to "Logout", logout_path, method: :delete, class: "button-to-link-style" %></p>
 
+<div class="col-md-8">
 
+  <section class="micropost_form">
+  <%= render 'shared/micropost_form' %>
+  </section>
 
-<div class="container">
-<div class="input-container">
+<% if @user.microposts.any? %>
+  <h3>History (<%= @user.microposts.count %>)</h3>
+  <ol class="microposts">
+  <!--@microposts = @user.microposts from 'user#show'-->
+    <%= render @microposts %>
+  </ol>
+<% end %>
 </div>
-</div>
+
+
+
+
 
 
 

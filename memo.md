@@ -102,38 +102,118 @@ end
 
 これのemailをnameに変える。その色々な手続きをやる。
 # githubに書いてあるやつを、もう一度全部訳してから理解してみる。
-################################################################################################
-# "controller"=>"devise/registrations", "action"=>"new"のinit
-<h2>Sign up</h2>
+# HTTP/cookie(session)
+- http: 前にやったことは忘れている。だから安全
+- cookie: 覚えるように設定して、無駄な繰り返しを防ぐ。(railsではsessionメソッドがある。)
+sessionがあるから、自分がすでにログインしたアカウントに次回もログインせずに使用することができるようになる。
+そしてログアウトすると、sessionがdestroyされるような仕組みにする。
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+#　続き
+logout errorになっているからそこを直す。
+javascriptをrails7.0.8.6に導入していく。
+doc: https://guides.rubyonrails.org/v7.0/
+import mapを使って実装していく。(yarnとかwebpack必要ないから。)
+↓
+どうにもならんから、最初からにして、今まで書いたコードをコピーしてもう一回やっていくことにする。
+↓
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+# 移行する必要があるもの
+モデル:
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+app/models配下のファイル（例: user.rb, post.rbなど）。
+コントローラー:
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+app/controllers配下のファイル（例: users_controller.rb, posts_controller.rbなど）。
+APIを使っている場合はapp/controllers/api配下も忘れずに。
+ビュー:
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+app/views配下のテンプレートファイル（例: users/index.html.erb, posts/show.html.erbなど）。
+マイグレーションファイル:
 
-<%= render "devise/shared/links" %>
-################################################################################################
+db/migrate配下のマイグレーションファイルを新しいプロジェクトにコピー。
+設定ファイル:
+
+必要に応じてconfig配下のファイル（例: routes.rb, environmentsフォルダ内の設定ファイルなど）。
+アセット（必要な場合）:
+
+app/javascriptやapp/assets配下のJavaScript、CSS、画像ファイル。
+Gemfile:
+
+依存するGemを新しいGemfileに移行し、bundle installを実行。
+
+# 移行する手順
+dockerfile,ymlを新たなファイルで作る。
+そこでrailsアプリを実行する。
+↓
+全てコピーして移行する。
+↓
+全てをonedayonelineにすり替えて、ちゃんと起動するか確かめる。
+
 
 # デプロイ
 https://railstutorial.jp/chapters/sign_up?version=4.2#sec-professional_grade_deployment
+
+
+
+sessionは必要ないよね?
+https://railstutorial.jp/chapters/updating_and_deleting_users?version=4.2#sec-friendly_forwarding
+↑
+ここから先は飛ばしている。
+10/24
+# 続き
+write->
+userpic->userページ->日記、ブクマ
+初めての方はこちら->
+ブログ->
+
+zennみたいに、右上にlogin&ユーザーアイコンを書いてみる。
+
+#　今
+英語"日記"っていう言い方をもっと浸し見やすいもの、かっこいいものに変えればユーザーはもっと食いつくと思う。
+
+英語ジャーナル
+デイリースパーク (Daily Spark)
+1日の始まりや気づきを英語で表現するイメージ。
+Spark Daily
+シンプルに「Spark」を前にしてリズミカルな響きに。
+Daily Glow
+「光」や「輝き」を連想させ、ポジティブな印象。
+Word Spark
+1日のひらめきを「言葉」にフォーカス。
+Little Spark
+1日の小さなひらめきを書き留める。
+Daily Growth
+日々の成長を表現。
+Scribble Spark
+気軽に落書きのように書く感覚。
+Micro Spark
+小さなひらめきが毎日積み重なるイメージ。
+Spark Journey
+小さなひらめきの旅が始まる。
+Daily Seed
+成長の種を毎日植えるイメージ。
+Quick Glow
+すぐに取り組める明るい記録。
+
+「小さな言葉が、大きな成長を生む。」
+「あなたの成長は、1行から始まる。」
+「今日の1行が、明日の自信に。」
+「気づけば英語が、あなたの日常に。」
+「書くたびに、英語がもっと身近に。」
+「英語力は、明日ではなく今日の1行から始まる。」
+「未来の自分が感謝する習慣を、今始めよう。」
+🔥「言葉にするたび、英語があなたのものになる。」
+「1行の種が、大きな木に育つ。」
+
+# どうやってユーザーを毎日自分のアプリに訪れさせるのか。
+毎日毎日英語ジャーナルを続けさせるにはどうすればいいのか。
+->自分が見本になる。
+->ビジュアルで憧れさせる。
+->🔥ユーザーを日記を書くことでどうよくなるのか何かで納得させる。(これやろ!自分がそうだから)
+->🔥書いたジャーナルの進化を見せる：
+AIがユーザーの投稿を読み取って成長を可視化する「あなたの英語力の進化レポート」を定期的に送る。
+
+例：「今週のあなたの英語は、こんなに上達しました！」
+英単語のカウント、語彙の広がりなどを可視化。
+ビジュアルでのモチベーション：
+ユーザーが英語で話している風景の生成に加え、ジャーナル内容をベースにした未来のシーン（例：英語でプレゼンする姿、旅行先で英語を話す自分）をイメージさせる。
