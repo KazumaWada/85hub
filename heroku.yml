@@ -6,7 +6,7 @@ setup:
     S3_BUCKET: my-example-bucket
 build:
   docker:
-    web: Dockerfile
+    web: dockerfile
     worker: worker/dockerfile
   config:
     RAILS_ENV: development
