@@ -26,4 +26,7 @@ COPY . /app
 EXPOSE 3000
 
 # デフォルトのコマンドを設定
-CMD ["rails", "server", "-b", "0.0.0.0"]
+#CMD ["rails", "server", "-b", "0.0.0.0"]
+#heroku上で、server already runungと出たから古いやつを消す。
+CMD ["bash", "-c", "rm -f /app/tmp/pids/server.pid && bundle exec rails server -b 0.0.0.0"]
+
