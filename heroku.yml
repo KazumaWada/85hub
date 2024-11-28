@@ -17,7 +17,7 @@ release:
  #deploy前に実行するコマンド。多分db:migrateも行う。
  #key not found: "DATABASE_HOST"
 #remote: /app/config/database.yml:20:in `fetch'
-     #- rails db:migrate
+     #- rails db:migratej
   image: worker
 run:
   web: bundle exec puma -C config/puma.rb #app開始時に実行するプロセス.(runセクションがなければdockerfileのCMDが実行される)

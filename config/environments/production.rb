@@ -1,6 +1,8 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
+  ##heroku用##
+  config.hosts << "still-wildwood-17659-2f43f8ce151a.herokuapp.com"
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.

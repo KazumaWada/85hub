@@ -25,8 +25,12 @@ COPY . /app
 # ポート3000を公開
 EXPOSE 3000
 
-# デフォルトのコマンドを設定
+# ローカル用
 #CMD ["rails", "server", "-b", "0.0.0.0"]
 #heroku上で、server already runungと出たから古いやつを消す。
-CMD ["bash", "-c", "rm -f /app/tmp/pids/server.pid && bundle exec rails server -b 0.0.0.0"]
+
+#CMD ["bash", "-c", "rm -f /app/tmp/pids/server.pid && bundle exec rails server -b 0.0.0.0"]
+#本番用
+CMD ["bundle", "exec", "rails", "server", "-p", "$PORT", "-b", "0.0.0.0"]
+
 
