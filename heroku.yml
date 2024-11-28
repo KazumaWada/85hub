@@ -13,7 +13,8 @@ build:
     FOO: bar
 release:
   command:
-    - ./deployment-tasks.sh #deploy前に実行するコマンド。多分db:migrateも行う。
+    #- ./deployment-tasks.sh #deploy前に実行するコマンド。多分db:migrateも行う。
+     - rails db:migrate
   image: worker
 run:
   web: bundle exec puma -C config/puma.rb #app開始時に実行するプロセス.(runセクションがなければdockerfileのCMDが実行される)
