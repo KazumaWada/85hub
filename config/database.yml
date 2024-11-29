@@ -1,8 +1,31 @@
+# default: &default
+#   adapter: postgresql
+#   encoding: unicode
+#   pool: 5
+#   host: <%= ENV["DATABASE_HOST"] || nil %> # hostが設定されていない場合はnil(render対策)
+
+# development:
+#   <<: *default
+#   host: <%= ENV.fetch("DATABASE_HOST", "localhost") %>
+#   username: <%= ENV.fetch("DATABASE_USER", "postgres") %>
+#   password: <%= ENV.fetch("DATABASE_PASSWORD", "password") %>
+#   database: <%= ENV.fetch("DATABASE_NAME", "myapp_development") %>
+
+# test:
+#   <<: *default
+#   host: <%= ENV.fetch("DATABASE_HOST", "localhost") %>
+#   username: <%= ENV.fetch("DATABASE_USER", "postgres") %>
+#   password: <%= ENV.fetch("DATABASE_PASSWORD", "password") %>
+#   database: myapp_test
+
+# production:
+#   url: <%= ENV["DATABASE_URL"] %> #renderの環境変数. defaultを継承しないようにするHOSTを参照してしまうから。
+#   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
 default: &default
   adapter: postgresql
   encoding: unicode
   pool: 5
-  host: <%= ENV["DATABASE_HOST"] || nil %> # hostが設定されていない場合はnil(render対策)
 
 development:
   <<: *default
@@ -19,8 +42,13 @@ test:
   database: myapp_test
 
 production:
-  url: <%= ENV["DATABASE_URL"] %> #renderの環境変数. defaultを継承しないようにするHOSTを参照してしまうから。
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  <<: *default
+  # DATABASE_URLのみ使用するように明示的に設定
+  url: <%= ENV.fetch("DATABASE_URL") %>
+  host: nil # 不要なhostを無効化
+  username: nil # usernameも無効化
+  password: nil # passwordも無効化
+  database: nil # database名も無効化
 
  
   
