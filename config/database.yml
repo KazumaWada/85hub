@@ -19,8 +19,10 @@ test:
   database: myapp_test
 
 production:
-  <<: *default
-  url: <%= ENV.fetch("DATABASE_URL") %> #renderの環境変数. defaultを継承しないようにするHOSTを参照してしまうから。
+  url: <%= ENV["DATABASE_URL"] %> #renderの環境変数. defaultを継承しないようにするHOSTを参照してしまうから。
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+ 
   
 
    
