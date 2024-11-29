@@ -17,7 +17,9 @@ WORKDIR /app
 # GemfileとGemfile.lockを先にコピーして依存関係をインストール
 COPY Gemfile /app/Gemfile
 COPY Gemfile.lock /app/Gemfile.lock
-RUN bundle install
+#gemのインストールをx86_64-linuxにも対応させる
+RUN RUN bundle lock --add-platform x86_64-linux \
+&& bundle install
 
 # アプリケーションコードをコピー
 COPY . /app
@@ -25,12 +27,8 @@ COPY . /app
 # ポート3000を公開
 EXPOSE 3000
 
-# ローカル用
-#CMD ["rails", "server", "-b", "0.0.0.0"]
-#heroku上で、server already runungと出たから古いやつを消す。
+# アプリケーションを起動
+CMD ["rails", "server", "-b", "0.0.0.0"]
 
-#CMD ["bash", "-c", "rm -f /app/tmp/pids/server.pid && bundle exec rails server -b 0.0.0.0"]
-#本番用
-CMD ["bundle", "exec", "rails", "server", "-p", "$PORT", "-b", "0.0.0.0"]
 
 
