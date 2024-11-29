@@ -19,6 +19,8 @@ production:
   database: app_production
   username: app
   password: <%= ENV["APP_DATABASE_PASSWORD"] %>
+  url: <%= ENV["DATABASE_URL"] %> #renderの環境変数を追加
+
 
 
 # PostgreSQL. Versions 9.3 and up are supported.
