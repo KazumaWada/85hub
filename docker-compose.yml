@@ -23,6 +23,7 @@ services:
       DATABASE_USER: myuser
       DATABASE_PASSWORD: mypassword
       DATABASE_NAME: myapp_development
+      DATABASE_URL: postgresql://mysite:FjgR8swZquSkHWjYG8LbN4cXea2oqQCr@dpg-ct4supilqhvc73a5cgl0-a/mysite_0kc4
 
 volumes:
   postgres_data:
