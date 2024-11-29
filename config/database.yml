@@ -1,25 +1,28 @@
-default: &default #全環境で継承される
+default: &default
   adapter: postgresql
   encoding: unicode
   pool: 5
 
 development:
   <<: *default
-  host: <%= ENV.fetch("DATABASE_HOST", "localhost") %> # ローカル環境用のデフォルト値を追加
+  host: <%= ENV.fetch("DATABASE_HOST", "localhost") %>
   username: <%= ENV.fetch("DATABASE_USER", "postgres") %>
   password: <%= ENV.fetch("DATABASE_PASSWORD", "password") %>
   database: <%= ENV.fetch("DATABASE_NAME", "myapp_development") %>
 
 test:
   <<: *default
-  host: <%= ENV.fetch("DATABASE_HOST", "localhost") %> # テスト環境用のデフォルト値を追加
+  host: <%= ENV.fetch("DATABASE_HOST", "localhost") %>
   username: <%= ENV.fetch("DATABASE_USER", "postgres") %>
   password: <%= ENV.fetch("DATABASE_PASSWORD", "password") %>
   database: myapp_test
 
 production:
-  <<: *default
-  url: <%= ENV.fetch("DATABASE_URL") %> #renderの環境変数を追加
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  url: <%= ENV.fetch("DATABASE_URL") %> #renderの環境変数. defaultを継承しないようにするHOSTを参照してしまうから。
+
 
 # default: &default 
 #   adapter: postgresql
