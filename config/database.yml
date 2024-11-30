@@ -45,6 +45,7 @@ production:
   #<<: *default
   # DATABASE_URLのみ使用するように明示的に設定
   url: <%= ENV.fetch("DATABASE_URL") %>
+  host: <%= ENV["DATABASE_HOST"] %>
   # host: nil # 不要なhostを無効化
   # username: nil # usernameも無効化
   # password: nil # passwordも無効化
