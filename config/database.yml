@@ -42,7 +42,7 @@ test:
   database: myapp_test
 
 production:
-  <<: *default
+  #<<: *default
   # DATABASE_URLのみ使用するように明示的に設定
   url: <%= ENV.fetch("DATABASE_URL") %>
   # host: nil # 不要なhostを無効化
