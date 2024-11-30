@@ -42,14 +42,22 @@ test:
   database: myapp_test
 
 production:
-  #<<: *default
-  # DATABASE_URLのみ使用するように明示的に設定
-  url: <%= ENV.fetch("DATABASE_URL") %>
+  adapter: postgresql
+  encoding: unicode
+  database: <%= ENV["DATABASE_NAME"] %>
+  pool: 5
+  username: <%= ENV["DATABASE_USER"] %>
+  password: <%= ENV["DATABASE_PASSWORD"] %>
   host: <%= ENV["DATABASE_HOST"] %>
-  # host: nil # 不要なhostを無効化
-  # username: nil # usernameも無効化
-  # password: nil # passwordも無効化
-  # database: nil # database名も無効化
+  port: 5432
+  # #<<: *default
+  # # DATABASE_URLのみ使用するように明示的に設定
+  # url: <%= ENV.fetch("DATABASE_URL") %>
+  # host: <%= ENV["DATABASE_HOST"] %>
+  # # host: nil # 不要なhostを無効化
+  # # username: nil # usernameも無効化
+  # # password: nil # passwordも無効化
+  # # database: nil # database名も無効化
 
  
   
