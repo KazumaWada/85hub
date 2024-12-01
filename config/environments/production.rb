@@ -2,6 +2,7 @@ require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
   ##render用##
+  config.hosts.clear
   config.hosts << "one-m4ho.onrender.com"
   config.hosts << ".onrender.com"
 
