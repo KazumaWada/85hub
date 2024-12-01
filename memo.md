@@ -319,5 +319,7 @@ I prefer this response
 ```
 
 # render deploy
-- javascriptが使えない問題
-RAILS_SERVE_STATIC_FILESこのkeyを設定する必要がある??
+- hostブロック。多分render側のキャッシュだと思う。
+↓
+もう一回作り直すのも手だと思う。
+ondayoneline.comのnotionに環境変数を書いておく。それをコピペ。
