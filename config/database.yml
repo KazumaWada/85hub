@@ -26,6 +26,8 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: 5
+  host: <%= ENV["DATABASE_HOST"] || nil %> # hostが設定されていない場合はnil(render対策)
+
 
 development:
   <<: *default
@@ -50,14 +52,9 @@ production:
   password: <%= ENV["DATABASE_PASSWORD"] %>
   host: <%= ENV["DATABASE_HOST"] %>
   port: 5432
-  # #<<: *default
-  # # DATABASE_URLのみ使用するように明示的に設定
-  # url: <%= ENV.fetch("DATABASE_URL") %>
-  # host: <%= ENV["DATABASE_HOST"] %>
-  # # host: nil # 不要なhostを無効化
-  # # username: nil # usernameも無効化
-  # # password: nil # passwordも無効化
-  # # database: nil # database名も無効化
+
+
+
 
  
   
