@@ -1,10 +1,8 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
-  #一時的にhostを無効化。これでデプロイできたら原因はhostということになる。
-  config.hosts.clear
   ##render用##
-  ##config.hosts << "onedayoneline.onrender.com"
+  config.hosts << "onedayoneline-1.onrender.com"
 
   # Settings specified here will take precedence over those in config/application.rb.
 
