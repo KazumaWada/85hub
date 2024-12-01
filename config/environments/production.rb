@@ -2,7 +2,8 @@ require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
   ##render用##
-  config.hosts << "onedayoneline-1.onrender.com"
+  #config.hosts << "onedayoneline-1.onrender.com"
+  config.hosts << ".onrender.com"
 
   # Settings specified here will take precedence over those in config/application.rb.
 
