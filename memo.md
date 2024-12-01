@@ -319,23 +319,5 @@ I prefer this response
 ```
 
 # render deploy
-- エラー分(これでproductionの書き方が原因ではない事がわかった。)
-1.Exiting
-/opt/render/project/src/config/database.yml:71:in `fetch': Cannot load database configuration: (KeyError)
-key not found: "DATABASE_HOST"
-Did you mean?  "DATABASE_URL"
-2.
-	from config.ru:3:in `require_relative'
-	from config.ru:3:in `block in <main>'
-
-3.
-==> No open ports detected, continuing to scan...
-==> Docs on specifying a port: https://render.com/docs/web-services#port-binding
-==> Exited with 
-
-多分、メインのエラーは3だから、これがこけると、DATABASE関連もコケるのか聞いてみる。
-
-- この書き方の違いはなんなのか
-password: <%= ENV.fetch("DATABASE_PASSWORD", "password") %>
-host: <%= ENV["DATABASE_HOST"] %>
-- 
+- javascriptが使えない問題
+RAILS_SERVE_STATIC_FILESこのkeyを設定する必要がある??
