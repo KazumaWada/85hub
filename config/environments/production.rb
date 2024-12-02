@@ -4,7 +4,8 @@ Rails.application.configure do
   ##render用##
   ##config.hosts.clear
   #config.hosts << "one-m4ho.onrender.com"
-  config.hosts << ".onrender.com"
+  config.hosts << "onedayoneline.onrender.com"
+  #config.hosts << ".onrender.com"
 
   # Settings specified here will take precedence over those in config/application.rb.
 
