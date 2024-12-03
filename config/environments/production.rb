@@ -7,6 +7,9 @@ Rails.application.configure do
   config.hosts << "onedayoneline.onrender.com"
   #config.hosts << ".onrender.com"
 
+  config.host_authorization = {
+    exclude: ->(request) { request.path =~ /healthcheck/ }
+  }
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
