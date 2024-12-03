@@ -4,7 +4,7 @@ Rails.application.configure do
   ##render用##
   ##config.hosts.clear
   #config.hosts << "one-m4ho.onrender.com"
-  config.hosts.clear
+  #config.hosts.clear
   #renderでエラーになる原因の解明↓
   config.action_dispatch.trusted_proxies = nil
   

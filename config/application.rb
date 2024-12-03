@@ -18,6 +18,8 @@ module App
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
-    # データベースを無効化#
+    #render対策hostを無効化
+    config.hosts.clear
+    config.middleware.delete ActionDispatch::HostAuthorization
   end
 end
