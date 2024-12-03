@@ -4,8 +4,8 @@ Rails.application.configure do
   ##render用##
   ##config.hosts.clear
   #config.hosts << "one-m4ho.onrender.com"
-  config.hosts << "onedayoneline.onrender.com"
-  #config.hosts << ".onrender.com"
+  #config.hosts << "onedayoneline.onrender.com"
+  config.hosts << ".onrender.com"
 
   config.host_authorization = {
     exclude: ->(request) { request.path =~ /healthcheck/ }
