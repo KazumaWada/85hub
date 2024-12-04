@@ -53,6 +53,9 @@ COPY Gemfile Gemfile.lock ./
 RUN bundle lock --add-platform x86_64-linux && \
     bundle install --jobs=4 --retry=3
 
+# production環境で、assetをprecompile(manifest.jsを本番でも使えるようにするため。)
+RUN RAILS_ENV=production bin/rails assets:precompile
+
 # アプリケーションコードをコピー
 COPY . .
 
