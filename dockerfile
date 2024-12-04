@@ -62,5 +62,8 @@ COPY . .
 # ポート3000を公開
 EXPOSE 3000
 
-# アプリケーションを起動
-CMD ["rails", "server", "-b", "0.0.0.0"]
+# CMDはdockerfile内で一度だけ実行できる。だから、本番と開発どちらも書く。
+#CMD ["rails", "server", "-b", "0.0.0.0"]
+CMD ["sh", "-c", "bin/rails db:migrate RAILS_ENV=production && rails server -b 0.0.0.0"]
+
+
