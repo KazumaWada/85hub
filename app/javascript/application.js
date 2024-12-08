@@ -5,4 +5,3 @@ import "bootstrap"
 import "stripe"
 import "@fortawesome/fontawesome-free/js/all";
 import "controllers"
-

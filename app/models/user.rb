@@ -5,6 +5,15 @@ class User < ApplicationRecord
     #user.rb: データのロジックを書く時に使われる。(他のmodel, controller,DB)
     #user_helper: 主にviewで使う時に使われる。
 
+    ##.com/user.name
+    extend FriendlyId
+    friendly_id :name, use: :slugged
+
+    #slug(name)がupdateされたらuserのリンクも変わるようにする(後に実装)  
+    # def should_generate_new_friendly_id?
+    #  name_changed? || super
+    # end
+    ##
 
     #self: 現在のuser
     before_save { self.email = email.downcase }

@@ -323,3 +323,59 @@ I prefer this response
 ↓
 もう一回作り直すのも手だと思う。
 ondayoneline.comのnotionに環境変数を書いておく。それをコピペ。
+
+_micropost.html.erb
+
+```ruby
+<div class="diary-container">
+        <div class="diary-entries">
+            <ul id="entriesList" class="list-group">
+
+            
+            <p><%= micropost.content %>
+               <%= micropost.created_at %>
+               #これを押したら、/microposts.18というrouteへ移動することになる。
+               <%= button_to "🗑️", micropost_path(micropost), method: :delete, data: { confirm: "Are you sure?" } %> 
+               <p><%= micropost.inspect %></p>
+            </p>      
+
+            </ul>
+        </div>
+</div>
+```
+
+
+
+# current_userを省いて、friendlyを使う。完成させてからsessionをfriendlyに追加していく。
+
+# 続き
+paramsにmicropostが付いていないエラー
+
+```_micropost_form.html.erb
+<!--ここでは、@userを意識する必要はない。rendered by users/show -->
+<div class="diary-container">
+  <div class="diary-entries">
+
+<!-- irb(main):001> app.microposts_path(slug: "a")=> "/a/microposts" -->
+
+    <%= form_with(model: @micropost, url: microposts_path(slug: @user.slug), method: :post, local: true, html: { class: "micropost-form" }) do |f| %>
+  <!-- 入力フィールド -->
+  <div class="field">
+    <%= f.text_area :content, 
+      placeholder: "✍️📚✨", 
+      class: "form-control diary-textarea",
+      style: "border: none; box-shadow: none;" %>
+  </div>
+
+  <!-- 送信ボタン -->
+  <div class="actions text-center">
+    <%= f.submit "Post", class: "btn btn-primary diary-submit-btn" %>
+  </div>
+<% end %>
+
+
+  </div>
+</div>
+
+
+```

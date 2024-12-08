@@ -87,8 +87,10 @@ body {
 <% if @user.microposts.any? %>
   <h3>History (<%= @user.microposts.count %>)</h3>
   <ol class="microposts">
+
   <!--@microposts = @user.microposts from 'user#show'-->
-    <%= render @microposts %>
+    <%= render @microposts %><!-- _micropost.html.erb -->
+    
   </ol>
 <% end %>
 </div>

@@ -34,7 +34,8 @@ class UsersController < ApplicationController
     #⭐️だからこの↓書き方だと、/profileとかにしたら、paramsはidを見つけられない!!
     #↑だからcurrent_userメソッドでid以外に取得できる方法を使う！
     # @user = User.find(params[:id])
-    @user = current_user
+    #@user = current_user
+    @user = User.friendly.find(params[:slug]) # routingが/user.nameなので、slug(user.name)を使って探す。
     @microposts = @user.microposts
     @micropost = current_user.microposts.build if logged_in?
   end
@@ -51,7 +52,7 @@ class UsersController < ApplicationController
     if @user.save
       log_in @user#signupした後に再度loginさせる手間を省く。
       flash[:success] = "Welcome #{@user.name}!"
-      redirect_to @user
+      redirect_to user_path(@user)
     else
       puts "ERROR MESSAGE#{@user.errors.full_messages}"
       puts @user.errors.full_messages
@@ -75,6 +76,11 @@ class UsersController < ApplicationController
     else
       render 'edit'
     end 
+  end
+
+  def destroy
+    #postを消す。
+    flash[:succeess] = 'deleted!'
   end
 
   def current_user

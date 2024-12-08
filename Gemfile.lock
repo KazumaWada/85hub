@@ -94,6 +94,8 @@ GEM
     ffi (1.17.0-x86_64-linux-gnu)
     font-awesome-sass (6.5.2)
       sassc (~> 2.0)
+    friendly_id (5.5.1)
+      activerecord (>= 4.0.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
     i18n (1.14.6)
@@ -239,6 +241,7 @@ DEPENDENCIES
   capybara
   debug
   font-awesome-sass
+  friendly_id (~> 5.5.0)
   importmap-rails
   jbuilder
   pg (~> 1.1)

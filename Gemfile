@@ -48,6 +48,9 @@ gem "sassc-rails" #for bootstrap
 
 gem "font-awesome-sass"
 
+#.com/{@user.name}⭐️
+gem 'friendly_id', '~> 5.5.0'
+
 #gem 'webpacker'これは使わずに、railsのimport mapsを使う。(node.jsのimportみたいなやつ。デプロイに手間がかからないから。)
 
 #自分でユーザー登録を理解するために手動で実装していく。

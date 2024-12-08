@@ -1,27 +1,45 @@
 Rails.application.routes.draw do
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-  #get 'home/index'
-  get 'home/show'
-  get 'home/create'
-  get 'home/edit'
-  get 'home/update'
-  get 'home/destroy'
-  get '/about',to: 'home#about', as: 'about'
-  # Defines the root path route ("/")
-  # root "articles#index"
-  resources :users
-  get '/profile', to: 'users#show', as: 'profile'
   root "home#index"
+  get '/about',to: 'home#about', as: 'about'
   #あとで、user#showに、entryを持ってきたいから、変える。いや、ここで作って、user#showにレンダリングすればいい。
   get 'signup', to: 'users#new', as: 'signup'
   get 'login', to: 'sessions#new', as: 'login' #asを記すことで、login_pathを使うことができる。
   post 'login', to: 'sessions#create'
   resources :sessions, only: [:create]#paramsで見つけられるように。
   delete 'logout', to: 'sessions#destroy' , as: 'logout'
+  
+  #frieendly_id
+  get '/:slug', to: 'users#show', as: :user #user_pathを記述できるようになる。
+  #.com/user.name/posts/1
+  scope '/:slug' do
+    resources :microposts, only: [:create, :destroy, :new] #, path: 'posts'
+  end
+  #.com/microposts
+  resources :microposts, only: [:index]
+
+
+  get 'home/show'
+  get 'home/create'
+  get 'home/edit'
+  get 'home/update'
+  get 'home/destroy'
+  
+  # Defines the root path route ("/")
+  # root "articles#index"
+  resources :users, only: [:index, :new, :create, :destroy]
+  #get '/profile', to: 'users#show', as: :profile
+
+# # profile配下にpostsをネスト profile/posts/1
+#resources :users, only: [:show] do
+ #resources :microposts, only: [:create, :destroy, :index] #path: 'posts' (/pathとなる。)
+#end
+  #resources :microposts, only: [:create, :destroy, :index]#/posts, /posts/1
+
+  
   #delete 'logout'  => 'sessions#destroy'
   #postはuser-viewに存在するからcreateとdestroyのみでok
-  resources :microposts, only: [:create, :destroy, :index]#/posts, /posts/1
 
 
 end
