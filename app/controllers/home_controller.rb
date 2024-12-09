@@ -5,6 +5,12 @@ class HomeController < ApplicationController
     @micropost = current_user.microposts.build if logged_in?
     #this can handle to "theme99.webp"
     @random_image = "theme%02d.webp" % rand(1..26)
+
+    locations_path = Rails.root.join('config', 'locations.json')
+    @locations = JSON.parse(File.read(locations_path))
+    #@location = @locations[@random_image] if nill->"Unknow"という書き方になっている。
+    @location = @locations.fetch(@random_image, "Unknown")
+    
   end
 
   def show
@@ -23,5 +29,11 @@ class HomeController < ApplicationController
   end
 
   def about
+  end
+  def app
+  end
+  def question
+  end
+  def blog
   end
 end

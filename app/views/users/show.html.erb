@@ -33,7 +33,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 50px;
+    #padding-top: 50px;
 }
 # .diary-container {
 #     max-width: 600px;
@@ -72,11 +72,16 @@ body {
 </style>
 <body>
 <% provide(:title, @user.name) %>
-<h1>
-  <%= gravatar_for @user %>
+<h1 class="mt-4">
+  <!--<%= gravatar_for @user %>--> 
   <%= @user.name %>
 </h1>
+<button class="btn btn-light text-left">
 <p><%= button_to "Logout", logout_path, method: :delete, class: "button-to-link-style" %></p>
+</button>
+<button class="btn btn-light text-left">
+<%= link_to "🧘‍♀️ zen modeで書く", user_path(slug: 'a'), class: "text-dark text-decoration-none", data: { turbo: false } %>
+</button>
 
 <div class="col-md-8">
 
@@ -90,7 +95,7 @@ body {
 
   <!--@microposts = @user.microposts from 'user#show'-->
     <%= render @microposts %><!-- _micropost.html.erb -->
-    
+
   </ol>
 <% end %>
 </div>

@@ -4,18 +4,18 @@
 
 <!-- irb(main):001> app.microposts_path(slug: "a")=> "/a/microposts" -->
 
-    <%= form_with(model: @micropost, url: microposts_path(slug: @user.slug), method: :post, local: true, html: { class: "micropost-form" }) do |f| %>
+<%= form_with(model: @micropost, url: microposts_path(slug: @user.slug), method: :post, local: true, html: { class: "micropost-form" }) do |f| %>
   <!-- 入力フィールド -->
   <div class="field">
     <%= f.text_area :content, 
-      placeholder: "✍️📚✨", 
+      placeholder: "ここに書こう", 
       class: "form-control diary-textarea",
       style: "border: none; box-shadow: none;" %>
   </div>
 
   <!-- 送信ボタン -->
-  <div class="actions text-center">
-    <%= f.submit "Post", class: "btn btn-primary diary-submit-btn" %>
+  <div class="actions text-right">
+    <%= f.submit "post", class: "btn btn-light diary-submit-btn" %>
   </div>
 <% end %>
 

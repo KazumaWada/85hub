@@ -6,45 +6,6 @@
     <title>One-Line English Diary</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-#         body {
-#             background-color: #f8f9fa;
-#             display: flex;
-#             flex-direction: column;
-#             align-items: center;
-#             padding-top: 50px;
-#         }
-#         .diary-container {
-#             max-width: 600px;
-#             width: 100%;
-#             background: white;
-#             border-radius: 8px;
-#             padding: 20px;
-#             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-#         }
-#         .diary-input {
-#             margin-bottom: 20px;
-#         }
-#         .diary-entries {
-#             margin-top: 20px;
-#         }
-#         .myButton {
-#   #position: fixed;
-#   #top: 10px;
-#   #right: 10px;
-#   #z-index: 1000; /* 他の要素より前面に表示 */
-#   #width: 80px; /* ボタンの幅 */
-#   #height: 45px; /* ボタンの高さ */
-#   # border-radius: 50%; /* 丸くする */
-#   /* サイズや見た目を調整する */
-#   background-color: white;
-#   #color: white;
-#   border: none;
-#   cursor: pointer;
-#   display: flex; /* 中央揃え */
-#   align-items: center; /* 縦方向の中央揃え */
-#   justify-content: center; /* 横方向の中央揃え */
-#   font
-# }
 .header{
     
 }
@@ -66,32 +27,12 @@
     </style>
 </head>
 <body>
-<!--<div class="header d-flex flex-column justify-content-center align-items-center vh-100 text-center">--> 
 
- <div class="text-center mt-4" id="nav-section">
-  <h1>
-    <%= link_to "onedayoneline.com", root_path, class: "text-decoration-none text-dark" %>
-  </h1>
-  <p>言葉にするたび、英語があなたのものになる。</p>
-  <button class="btn btn-light mt-3 mb-3">
-    <%= link_to "✍️", login_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
-  </button>
-  <button class="btn btn-light mt-3 mb-3">
-   <a href="#links-section" class="text-dark text-decoration-none">👀</a>
-  </button>
-  <button class="btn btn-light mt-3 mb-3">
-   <a href="#links-section" class="text-dark text-decoration-none">📚</a>
-  </button>
-  <button class="btn btn-light mt-3 mb-3">
-   <a href="#links-section" class="text-dark text-decoration-none">📱</a>
-  </button>
-  <button class="btn btn-light mt-3 mb-3">
-   <a href="#links-section" class="text-dark text-decoration-none">?</a>
-  </button>
   
 <figure class="text-center mt-2">
+<!--自動で、app/assets/imagesを参照-->
   <%= image_tag(@random_image, class: "img-fluid") %>
-  <figcaption class="mt-2 text-muted">📍 Sydney, Australia</figcaption>
+  <figcaption class="mt-2 mr-1 text-left text-muted">📍 <%= @location %></figcaption>
 </figure>
 
 </div>
@@ -99,17 +40,7 @@
 
 
 
-<div class="header d-flex text-left bg-gray flex-column justify-content-center align-items-center vh-100" id="links-section">
-<div class="links">
-<br>
-<ul>
-<li><%= link_to "✍️ 書く", about_path %></li>
-<li><%= link_to "👀 みんなの投稿をを見る", root_path %></li>
-<li><%= link_to "📚 サイト管理者の英語ブログ kazufluent.com", root_path %></li>
-<li><%= link_to "📱 アプリのように使ってみよう", root_path %></li>
-<a href="#nav-section" class="text-dark text-decoration-none">go back</a>
-</ul>
-</div>
+
 
 
 

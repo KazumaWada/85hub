@@ -1,4 +1,3 @@
-#これはpostを全表示するけど、まだ実装しない。あとで考える。12/6更新。
 <style></style>
 <% @microposts.each do |micropost| %>
     <div class="micropost">
@@ -6,7 +5,7 @@
     <div class="diary-entries">
       <!-- エラーメッセージを表示 -->
       <!-- 投稿の内容 -->
-  
+  <p>ここに全ての投稿が表示される。</p>
     <li style="list-style: none;"><strong><%= micropost.user.name %></strong>: <%= micropost.content %>🔖</li>
 
 </div>

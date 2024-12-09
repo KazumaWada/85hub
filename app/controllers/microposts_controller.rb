@@ -6,7 +6,9 @@ class MicropostsController < ApplicationController
     def index
       #単数: model, 複数: DBのテーブル名
       #@microposts = Micropost.all
-      @microposts = Micropost.includes(:user).all#投稿と一緒にuser.nameも表示したいから。
+      #@microposts = Micropost.includes(:user).all#投稿と一緒にuser.nameも表示したいから。
+      #Userを見せないともっと集中できていいかも。
+      @microposts = Micropost.all
     end
 
     def new

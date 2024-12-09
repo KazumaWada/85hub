@@ -4,11 +4,15 @@ Rails.application.routes.draw do
   root "home#index"
   get '/about',to: 'home#about', as: 'about'
   #あとで、user#showに、entryを持ってきたいから、変える。いや、ここで作って、user#showにレンダリングすればいい。
-  get 'signup', to: 'users#new', as: 'signup'
-  get 'login', to: 'sessions#new', as: 'login' #asを記すことで、login_pathを使うことができる。
-  post 'login', to: 'sessions#create'
+  get '/signup', to: 'users#new', as: 'signup'
+  get '/login', to: 'sessions#new', as: 'login' #asを記すことで、login_pathを使うことができる。
+  post '/login', to: 'sessions#create'
+  get '/app', to: 'home#app', as: 'app'
   resources :sessions, only: [:create]#paramsで見つけられるように。
-  delete 'logout', to: 'sessions#destroy' , as: 'logout'
+  delete '/logout', to: 'sessions#destroy' , as: 'logout'
+  get '/question', to: 'home#question', as: 'question'
+  get '/blog', to: "home#blog", as: 'blog'
+  resources :microposts, only: [:index]#slugで先に影響されないように。/micropostsは危ないから。
   
   #frieendly_id
   get '/:slug', to: 'users#show', as: :user #user_pathを記述できるようになる。
@@ -16,8 +20,7 @@ Rails.application.routes.draw do
   scope '/:slug' do
     resources :microposts, only: [:create, :destroy, :new] #, path: 'posts'
   end
-  #.com/microposts
-  resources :microposts, only: [:index]
+
 
 
   get 'home/show'
