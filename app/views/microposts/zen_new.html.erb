@@ -1,14 +1,14 @@
-<!--ここでは、@userを意識する必要はない。rendered by users/show -->
+<div class="col-md-12 mt-3">
 <div class="diary-container">
   <div class="diary-entries">
 
 <!-- irb(main):001> app.microposts_path(slug: "a")=> "/a/microposts" -->
-
-<%= form_with(model: @micropost, url: "/#{@user.slug}/microposts", method: :post, local: true, html: { class: "micropost-form" }) do |f| %>
+<!--routerでpostを"post 'zen/microposts', to: 'microposts#zen_create'"と設定したからurlそう書く。-->
+<%= form_with(model: @micropost, url: "/#{@user.slug}/zen/microposts", method: :post, local: true, html: { class: "micropost-form" }) do |f| %>
   <!-- 入力フィールド -->
   <div class="field">
     <%= f.text_area :content, 
-      placeholder: "ここに書こう", 
+      placeholder: "i have pen, i have a apple", 
       class: "form-control diary-textarea",
       style: "border: none; box-shadow: none;" %>
   </div>
@@ -19,7 +19,10 @@
   </div>
 <% end %>
 
-
   </div>
 </div>
 
+
+
+
+</div>

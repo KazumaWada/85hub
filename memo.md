@@ -349,33 +349,17 @@ _micropost.html.erb
 # current_userを省いて、friendlyを使う。完成させてからsessionをfriendlyに追加していく。
 
 # 続き
-paramsにmicropostが付いていないエラー
+### zen mode
+投稿したら、blankになっているという警告が出ている。
+仮説: formで送信した値が、初期化されていない。
+->zenで作る(.new, new.html)->micropostsへ送る(なんでそっちに送った??)
+→zenで作る(.new, new.html)->zen_createへ送る(そう).urlに/zenが入っているから、zenのコントローラーで処理する必要があると思う。
+そもそも使うurlがどちらも同じだったら、こういうことは起こらず、どちらで使用しても大丈夫になっている。でも/zenを追加したからややこしいことになっている。
+↓
+formの送信先を/zen/
+↓
+まだエラー。多分def zen_createのuserの探し方とかpathが変わるから全部変わってくるんだと思うよ。
 
-```_micropost_form.html.erb
-<!--ここでは、@userを意識する必要はない。rendered by users/show -->
-<div class="diary-container">
-  <div class="diary-entries">
+Params: #<ActionController::Parameters {"authenticity_token"=>"O21_7BPMngTfVyho2VoD7keZfi84Cta2XM-MWt9zQRdJ8Zp98fD9Y4ESaGYXTUBoGhJIQlMBOhHa_-R8gB5rRA", "micropost"=>{"content"=>nil}, "commit"=>"post", "controller"=>"microposts", "action"=>"zen_create", "slug"=>"a"} permitted: false>
 
-<!-- irb(main):001> app.microposts_path(slug: "a")=> "/a/microposts" -->
-
-    <%= form_with(model: @micropost, url: microposts_path(slug: @user.slug), method: :post, local: true, html: { class: "micropost-form" }) do |f| %>
-  <!-- 入力フィールド -->
-  <div class="field">
-    <%= f.text_area :content, 
-      placeholder: "✍️📚✨", 
-      class: "form-control diary-textarea",
-      style: "border: none; box-shadow: none;" %>
-  </div>
-
-  <!-- 送信ボタン -->
-  <div class="actions text-center">
-    <%= f.submit "Post", class: "btn btn-primary diary-submit-btn" %>
-  </div>
-<% end %>
-
-
-  </div>
-</div>
-
-
-```
+### カレンダーをスクラッチから実装する方法rubyのプラグインで割と日数を入力できるようになると思う。

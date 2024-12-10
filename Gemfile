@@ -51,6 +51,9 @@ gem "font-awesome-sass"
 #.com/{@user.name}⭐️
 gem 'friendly_id', '~> 5.5.0'
 
+#userの登録画面にカレンダーを実装する。
+gem 'simple_calendar'
+
 #gem 'webpacker'これは使わずに、railsのimport mapsを使う。(node.jsのimportみたいなやつ。デプロイに手間がかからないから。)
 
 #自分でユーザー登録を理解するために手動で実装していく。

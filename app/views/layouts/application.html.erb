@@ -34,12 +34,15 @@
  <!--User#showでは非表示にするコード-->
  <% if controller_name == 'users' && action_name == 'show' %>
  <div class="text-center">
+
   <button class="btn btn-light">
   <%= link_to "🏠", root_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
   </button>
+
   <button class="btn btn-light">
-    <%= link_to "✍️", user_path(slug: 'a'), class: "text-dark text-decoration-none", data: { turbo: false } %>
+    <%= link_to "✍️", zen_path(slug: 'a'), class: "text-dark text-decoration-none", data: { turbo: false } %>
   </button>
+
   <button class="btn btn-light">
    <%= link_to "👀", microposts_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
   </button>
@@ -54,6 +57,15 @@
   </button>
   </div>
 
+ <% elsif controller_name == 'microposts' && action_name == 'zen_new' %>
+
+<button class="btn btn-light">
+  <%= link_to "🏠", root_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
+</button>
+<button class="btn btn-light">
+  <%= link_to "👤", user_path(slug: 'a'), class: "text-dark text-decoration-none", data: { turbo: false } %>
+</button>
+
  <% else %>
  <div class="text-center mt-3" id="nav-section">
  <h1>
@@ -64,14 +76,17 @@
  <button class="btn btn-light mt-3 mb-3">
   <%= link_to "🏠", root_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
   </button>
+  <button class="btn btn-light">
+  <%= link_to "👤", user_path(slug: 'a'), class: "text-dark text-decoration-none", data: { turbo: false } %>
+  </button>
   <button class="btn btn-light mt-3 mb-3">
-    <%= link_to "✍️", user_path(slug: 'a'), class: "text-dark text-decoration-none", data: { turbo: false } %>
+    <%= link_to "✍️", zen_path(slug: 'a'), class: "text-dark text-decoration-none", data: { turbo: false } %>
   </button>
   <button class="btn btn-light mt-3 mb-3">
    <%= link_to "👀", microposts_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
   </button>
   <button class="btn btn-light mt-3 mb-3">
-   <%= link_to "📚", blog_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
+   <%= link_to "📖", blog_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
   </button>
   <button class="btn btn-light mt-3 mb-3">
    <%= link_to "📱", app_path, class: "text-dark text-decoration-none", data: { turbo: false } %>

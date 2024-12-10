@@ -3,7 +3,6 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   root "home#index"
   get '/about',to: 'home#about', as: 'about'
-  #あとで、user#showに、entryを持ってきたいから、変える。いや、ここで作って、user#showにレンダリングすればいい。
   get '/signup', to: 'users#new', as: 'signup'
   get '/login', to: 'sessions#new', as: 'login' #asを記すことで、login_pathを使うことができる。
   post '/login', to: 'sessions#create'
@@ -18,7 +17,12 @@ Rails.application.routes.draw do
   get '/:slug', to: 'users#show', as: :user #user_pathを記述できるようになる。
   #.com/user.name/posts/1
   scope '/:slug' do
+    get 'zen', to: 'microposts#zen_new', as: 'zen' #zen_path(slug: 'example-slug')
+    post 'zen/microposts', to: 'microposts#zen_create'
+    #post送信用のurl
+    #post '/zen/microposts', to: 'microposts#create', as: :zen_microposts
     resources :microposts, only: [:create, :destroy, :new] #, path: 'posts'
+    
   end
 
 

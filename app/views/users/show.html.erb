@@ -71,19 +71,61 @@ body {
 }
 </style>
 <body>
+<div class="profile-sectiob">
+
 <% provide(:title, @user.name) %>
-<h1 class="mt-4">
+<h5>
   <!--<%= gravatar_for @user %>--> 
   <%= @user.name %>
-</h1>
-<button class="btn btn-light text-left">
-<p><%= button_to "Logout", logout_path, method: :delete, class: "button-to-link-style" %></p>
-</button>
-<button class="btn btn-light text-left">
-<%= link_to "🧘‍♀️ zen modeで書く", user_path(slug: 'a'), class: "text-dark text-decoration-none", data: { turbo: false } %>
-</button>
+</h5>
 
-<div class="col-md-8">
+</div>
+
+
+<div class="col-md-12">
+
+<div id="requests">
+  <%= week_calendar events: @requests do |date, requests| %>
+    ✅
+    <%= date.to_formatted_s(:short) %>
+  <% end %>
+</div>
+
+<div class="container">
+  <div class="row">
+    <!-- 曜日ヘッダー -->
+    <div class="col text-center font-weight-bold">Sun</div>
+    <div class="col text-center font-weight-bold">Mon</div>
+    <div class="col text-center font-weight-bold">Tue</div>
+    <div class="col text-center font-weight-bold">Wed</div>
+    <div class="col text-center font-weight-bold">Thu</div>
+    <div class="col text-center font-weight-bold">Fri</div>
+    <div class="col text-center font-weight-bold">Sat</div>
+  </div>
+  <div class="row">
+    <!-- 空白のセル（前月の日付がない部分） -->
+    <div class="col border"></div>
+    <div class="col border"></div>
+    <div class="col border"></div>
+    <div class="col border"></div>
+    <div class="col border"></div>
+    <div class="col border"></div>
+    <div class="col border">1</div>
+  </div>
+  <div class="row">
+    <!-- カレンダーの日付 -->
+    <div class="col border">2</div>
+    <div class="col border">3</div>
+    <div class="col border">4</div>
+    <div class="col border">5</div>
+    <div class="col border">6</div>
+    <div class="col border">7</div>
+    <div class="col border">8</div>
+  </div>
+  <!-- 他の週も同様に続ける -->
+</div>
+
+<%= link_to "🧘zen modeで書く", zen_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
 
   <section class="micropost_form">
   <%= render 'shared/micropost_form' %>
@@ -93,8 +135,8 @@ body {
   <h3>History (<%= @user.microposts.count %>)</h3>
   <ol class="microposts">
 
-  <!--@microposts = @user.microposts from 'user#show'-->
-    <%= render @microposts %><!-- _micropost.html.erb -->
+  
+    <%= render partial: 'microposts/micropost'%>
 
   </ol>
 <% end %>
