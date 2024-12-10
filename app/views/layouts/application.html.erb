@@ -47,7 +47,7 @@
    <%= link_to "👀", microposts_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
   </button>
   <button class="btn btn-light">
-   <%= link_to "📚", blog_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
+   <%= link_to "📖", blog_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
   </button>
   <button class="btn btn-light">
    <%= link_to "📱", app_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
@@ -59,12 +59,9 @@
 
  <% elsif controller_name == 'microposts' && action_name == 'zen_new' %>
 
-<button class="btn btn-light">
+ <button class="btn btn-light">
   <%= link_to "🏠", root_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
-</button>
-<button class="btn btn-light">
-  <%= link_to "👤", user_path(slug: 'a'), class: "text-dark text-decoration-none", data: { turbo: false } %>
-</button>
+  </button>
 
  <% else %>
  <div class="text-center mt-3" id="nav-section">

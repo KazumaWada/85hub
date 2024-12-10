@@ -5,34 +5,7 @@ class MicropostsController < ApplicationController
 
   # calendar機能をつけて、ユーザーが投稿したら、印が付くような仕組みにする。
     def calendar
-      @user = User.find_by(slug: params[:slug])
-      @microposts_by_date = @user.microposts.group_by { |post| post.created_at.to_date }
-      #output
-      {Tue, 10 Dec 2024=>
-  [#<Micropost:0x0000ffff93ebacb0
-    id: 38,
-    content: "zen mode here",
-    user_id: 22,
-    created_at: Tue, 10 Dec 2024 09:18:09.186024000 UTC +00:00,
-    updated_at: Tue, 10 Dec 2024 09:18:09.186024000 UTC +00:00>,
-   #<Micropost:0x0000ffff9a95f480
-    id: 37,
-    content: "a",
-    user_id: 22,
-    created_at: Tue, 10 Dec 2024 09:14:15.486638000 UTC +00:00,
-    updated_at: Tue, 10 Dec 2024 09:14:15.486638000 UTC +00:00>,
-   #<Micropost:0x0000ffff987378a8
-    id: 36,
-    content: "test from zen mode",
-    user_id: 22,
-    created_at: Tue, 10 Dec 2024 09:08:56.772587000 UTC +00:00,
-    updated_at: Tue, 10 Dec 2024 09:08:56.772587000 UTC +00:00>,
-   #<Micropost:0x0000ffff98737808
-    id: 35,
-    content: "hey",
-    user_id: 22,
-    created_at: Tue, 10 Dec 2024 08:55:42.894778000 UTC +00:00,
-    updated_at: Tue, 10 Dec 2024 08:55:42.894778000 UTC +00:00>]}
+      @user = User.find_by(slug: params[:slug])   
     end
 
     def index

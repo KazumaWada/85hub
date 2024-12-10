@@ -28,13 +28,13 @@
     border-radius: 30px;
     padding: 0.75rem 1.5rem;
 }
-body {
-    background-color: #f8f9fa;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    #padding-top: 50px;
-}
+# body {
+#     background-color: #f8f9fa;
+#     display: flex;
+#     flex-direction: column;
+#     align-items: center;
+#     #padding-top: 50px;
+# }
 # .diary-container {
 #     max-width: 600px;
 #     width: 100%;
@@ -72,61 +72,60 @@ body {
 </style>
 <body>
 <div class="profile-sectiob">
-
 <% provide(:title, @user.name) %>
-<h5>
+<div class="text-center mt-5">
   <!--<%= gravatar_for @user %>--> 
-  <%= @user.name %>
-</h5>
+  <h4><%= @user.name %></h4>
+  <p>56 days completed, shared 4889 words. yay!!</p>
+</div>
 
 </div>
 
 
 <div class="col-md-12">
-
 <div id="requests">
-  <%= week_calendar events: @requests do |date, requests| %>
-    ✅
-    <%= date.to_formatted_s(:short) %>
+<div class="container">
+
+<!--
+<div class = "text-left">
+<h6><%= @current_month %></h6>
+</div>
+-->
+
+  <div class="row text-center font-weight-bold">
+    <div class="col">Sun</div>
+    <div class="col">Mon</div>
+    <div class="col">Tue</div>
+    <div class="col">Wed</div>
+    <div class="col">Thu</div>
+    <div class="col">Fri</div>
+    <div class="col">Sat</div>
+  </div>
+
+  <% @calendar_days.each_slice(7) do |week| %>
+    <div class="row">
+      <% week.each do |date| %>
+        <div class="col border text-center" style="height: 40px; font-size: 1em;">
+          <% if date ==  Date.today%>
+          <div class ="bg-light">
+           <%= date.day %>.
+          </div>
+          <% else %>
+          <div>
+          <%= date.day %>
+          </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   <% end %>
 </div>
 
-<div class="container">
-  <div class="row">
-    <!-- 曜日ヘッダー -->
-    <div class="col text-center font-weight-bold">Sun</div>
-    <div class="col text-center font-weight-bold">Mon</div>
-    <div class="col text-center font-weight-bold">Tue</div>
-    <div class="col text-center font-weight-bold">Wed</div>
-    <div class="col text-center font-weight-bold">Thu</div>
-    <div class="col text-center font-weight-bold">Fri</div>
-    <div class="col text-center font-weight-bold">Sat</div>
-  </div>
-  <div class="row">
-    <!-- 空白のセル（前月の日付がない部分） -->
-    <div class="col border"></div>
-    <div class="col border"></div>
-    <div class="col border"></div>
-    <div class="col border"></div>
-    <div class="col border"></div>
-    <div class="col border"></div>
-    <div class="col border">1</div>
-  </div>
-  <div class="row">
-    <!-- カレンダーの日付 -->
-    <div class="col border">2</div>
-    <div class="col border">3</div>
-    <div class="col border">4</div>
-    <div class="col border">5</div>
-    <div class="col border">6</div>
-    <div class="col border">7</div>
-    <div class="col border">8</div>
-  </div>
-  <!-- 他の週も同様に続ける -->
-</div>
 
-<%= link_to "🧘zen modeで書く", zen_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
 
+<button class="btn btn-light">
+<%= link_to "🧘 zen modeを使う", zen_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
+</button>
   <section class="micropost_form">
   <%= render 'shared/micropost_form' %>
   </section>

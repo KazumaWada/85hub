@@ -38,6 +38,17 @@ class UsersController < ApplicationController
     @user = User.friendly.find(params[:slug]) # routingが/user.nameなので、slug(user.name)を使って探す。
     @microposts = @user.microposts
     @micropost = current_user.microposts.build if logged_in?
+
+    # カレンダー表示用の日付を計算
+    start_date = Date.today.beginning_of_month.beginning_of_week(:sunday)
+    end_date = Date.today.end_of_month.end_of_week(:sunday)
+    #end_date = start_date + 13 
+
+    @today = Date.today
+    @current_month = Date::MONTHNAMES[Time.now.month]
+    # 日付の範囲を配列にする
+    @calendar_days = (start_date..end_date).to_a
+    
   end
 
   def new
