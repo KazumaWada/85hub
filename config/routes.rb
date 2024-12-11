@@ -4,11 +4,12 @@ Rails.application.routes.draw do
   root "home#index"
   get '/about',to: 'home#about', as: 'about'
   get '/signup', to: 'users#new', as: 'signup'
-  get '/login', to: 'sessions#new', as: 'login' #asを記すことで、login_pathを使うことができる。
+  get '/login', to: 'sessions#new', as: 'login' #as-> could login_path
   post '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy', as: 'logout'
   get '/app', to: 'home#app', as: 'app'
   resources :sessions, only: [:create]#paramsで見つけられるように。
-  delete '/logout', to: 'sessions#destroy' , as: 'logout'
+  
   get '/question', to: 'home#question', as: 'question'
   get '/blog', to: "home#blog", as: 'blog'
   resources :microposts, only: [:index]#slugで先に影響されないように。/micropostsは危ないから。

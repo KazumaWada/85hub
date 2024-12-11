@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
 
   def new
+    
   end
 
   #ログインに成功したら。sessiomを作成すすためのかんす。
