@@ -2,6 +2,7 @@ class MicropostsController < ApplicationController
   #CSRFtokenを投稿時に無効化する。
   protect_from_forgery with: :null_session
   skip_before_action :verify_authenticity_token, only: [:create]
+  before_action :require_login, only: [:zen_new]
 
   # calendar機能をつけて、ユーザーが投稿したら、印が付くような仕組みにする。
     def calendar

@@ -1,30 +1,13 @@
 class UsersController < ApplicationController
-  #edit,updateをさせる前に、def logged_in_userを実行
-  before_action :logged_in_user, only: [:edit, :update]
-  before_action :correct_user, only: [:edit, :update]
-  #>> User.find(1)
-  #<User id: 1, name: "Michael Hartl", email: "mhartl@example.com",
-  
-  #>> User.find_by(email: "mhartl@example.com")
-  #User.first
-  #User.all
-
-  #paramsはこのhash内のデータがviewから渡される。
-  # "user" => { "name" => "Foo Bar",
-  #             "email" => "foo@invalid",
-  #             "password" => "[FILTERED]",
-  #             "password_confirmation" => "[FILTERED]"
-  #           }
-
-  #つまり、
-  # @user = User.new(params[:user])
-  # 以下とほぼ等価
-  # @user = User.new(name: "Foo Bar", email: "foo@invalid",
-  #                  password: "foo", password_confirmation: "bar")
+  # #edit,updateをさせる前に、def logged_in_userを実行
+  # before_action :logged_in_user, only: [:edit, :update]
+  # before_action :correct_user, only: [:edit, :update]
+  #before_action :authenticate_user!
+  before_action :require_login, only: [:show]
 
   def index
     #UserはmodelのUser
-    @users = User.all
+    #@users = User.all
   end
 
   def show
@@ -37,7 +20,7 @@ class UsersController < ApplicationController
     #@user = current_user
     @user = User.friendly.find(params[:slug]) # routingが/user.nameなので、slug(user.name)を使って探す。
     @microposts = @user.microposts
-    @micropost = current_user.microposts.build if logged_in?
+    #@micropost = current_user.microposts.build if logged_in?
 
     # カレンダー表示用の日付を計算
     start_date = Date.today.beginning_of_month.beginning_of_week(:sunday)
@@ -55,20 +38,19 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  def create #ユーザーのあらゆる情報をparamsから取得することができる。
-    @user = User.new(user_params)# so that you can use only permitted user
+  #ここはUserをDBに登録のみ->loginへ(sessions#createcookieの実装を行う)
+  def create 
+    @user = User.new(user_params)
 
-    puts "ERROR MESSAGE#{@user.errors.full_messages}"
-    Rails.logger.debug "Params: #{params.inspect}"
     if @user.save
-      log_in @user#signupした後に再度loginさせる手間を省く。
-      flash[:success] = "Welcome #{@user.name}!"
-      redirect_to user_path(@user)
+      #log_in @user#signupした後に再度loginさせる手間を省く。(後に実装予定)
+      redirect_to login_path
+      flash[:success] = "Welcome #{@user.name}! please login"
     else
-      puts "ERROR MESSAGE#{@user.errors.full_messages}"
       puts @user.errors.full_messages
-      render 'new' # if signup fails, go back to /users/new
-    end # <-- Correct placement for create action's end
+      flash.now[:danger] = "invalid ..."
+      redirect_to root_path 
+    end 
   end
 
   def edit
@@ -94,29 +76,35 @@ class UsersController < ApplicationController
     flash[:succeess] = 'deleted!'
   end
 
-  def current_user
-    @current_user ||= User.find_by(id: session[:user_id])
-    #@current_user ||= User.find(params[:id])
-    #user == current_user
-  end
+  # def current_user
+  #   @current_user ||= User.find_by(id: session[:user_id])
+  #   #@current_user ||= User.find(params[:id])
+  #   #user == current_user
+  # end
 
   private
+
+  def authenticate_user!
+    unless current_user
+      signup_path
+    end
+  end
 
   #paramsの情報を外部から使用できないようにする。
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 
-  def logged_in_user
-    unless logged_in?
-      flash[:danger] = "please log in."
-      redirect_to login_url
-    end
-  end
+  # def logged_in_user
+  #   unless logged_in?
+  #     flash[:danger] = "please log in."
+  #     redirect_to login_url
+  #   end
+  # end
 
-  def correct_user
-    @user = User.find(params[:id])
-    redirect_to(root_url) unless @user == current_user
+  def current_user#pathでは使えない。cookieで保存されているのはuser_idのみ。cookie.signedにuser.nameも保存すれば、current_userが便利に使えるようになる。
+    @current_user ||= User.find_by(id: cookies.signed[:user_id])
+    logger.debug "👷👷👷👷👷@current_user: #{@current_user.inspect}" 
   end
   
 end 

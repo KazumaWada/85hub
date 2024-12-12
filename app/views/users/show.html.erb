@@ -133,12 +133,10 @@
 <% if @user.microposts.any? %>
   <h3>History (<%= @user.microposts.count %>)</h3>
   <ol class="microposts">
-
-  
     <%= render partial: 'microposts/micropost'%>
-
   </ol>
 <% end %>
+    <%= button_to "Logout", logout_path, method: :delete, class: "button-to-link-style" %>
 </div>
 
 

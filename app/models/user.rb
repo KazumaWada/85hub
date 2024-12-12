@@ -24,7 +24,7 @@ class User < ApplicationRecord
                       format: { with: VALID_EMAIL_REGEX },
                       uniqueness: { case_sensitive: false }#大小文字区別しない
 
-    has_secure_password
+    has_secure_password#(.authenticate, password_digest)
     #allow_nil:trueは、User情報をupdateするときにパスワードを必要としないから 
     #↑新規登録の時は、has_secure_passwordでpasswordが空欄だと引っかかるからok            
     validates :password, presence: true, length: { minimum: 6 }, allow_nil: true

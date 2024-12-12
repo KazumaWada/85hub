@@ -4,8 +4,10 @@ Rails.application.routes.draw do
   root "home#index"
   get '/about',to: 'home#about', as: 'about'
   get '/signup', to: 'users#new', as: 'signup'
-  get '/login', to: 'sessions#new', as: 'login' #as-> could login_path
-  post '/login', to: 'sessions#create'
+  post '/signup', to: 'users#create'
+
+  get '/login', to: 'sessions#new', as: 'login'
+  post '/login', to: 'sessions#create', as: 'login_with_cookie'
   delete '/logout', to: 'sessions#destroy', as: 'logout'
   get '/app', to: 'home#app', as: 'app'
   resources :sessions, only: [:create]#paramsで見つけられるように。

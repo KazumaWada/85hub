@@ -53,7 +53,7 @@
   </button>
 
   <button class="btn btn-light">
-    <%= link_to "✍️", zen_path(slug: 'a'), class: "text-dark text-decoration-none", data: { turbo: false } %>
+    <%= link_to "✍️", zen_path(current_user), class: "text-dark text-decoration-none", data: { turbo: false } %>
   </button>
 
   <button class="btn btn-light">
@@ -72,25 +72,36 @@
 
  <% elsif controller_name == 'microposts' && action_name == 'zen_new' %>
 
- <button class="btn btn-light">
   <%= link_to "🏠", root_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
-  </button>
 
  <% else %>
+
  <div class="text-center mt-3" id="nav-section">
  <h1>
     <%= link_to "onedayoneline.com", root_path, class: "text-decoration-none text-dark" %>
   </h1>
   <p>言葉にするたび、英語があなたのものになる。</p>
-  <p>hey, Kazuma!</p>
+  <p>
+  <% if current_user.nil? %>
+    hey, ゲストさん! 
+    <%= link_to "ログイン", login_path, class: "text-primary text-decoration-none" %>
+  <% else %>
+    hey, <%= current_user.name %>!
+  <% end %>
+  </p>
+
+
+ 
+
+
  <button class="btn btn-light mt-3 mb-3">
   <%= link_to "🏠", root_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
   </button>
   <button class="btn btn-light">
-  <%= link_to "👤", user_path(slug: 'a'), class: "text-dark text-decoration-none", data: { turbo: false } %>
+  <%= link_to "👤", current_user ? user_path(current_user) : login_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
   </button>
   <button class="btn btn-light mt-3 mb-3">
-    <%= link_to "✍️", zen_path(slug: 'a'), class: "text-dark text-decoration-none", data: { turbo: false } %>
+    <%= link_to "✍️", current_user ? zen_path(current_user) : login_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
   </button>
   <button class="btn btn-light mt-3 mb-3">
    <%= link_to "👀", microposts_path, class: "text-dark text-decoration-none", data: { turbo: false } %>

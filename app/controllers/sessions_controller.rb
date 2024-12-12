@@ -1,42 +1,40 @@
 class SessionsController < ApplicationController
 
   def new
-    
   end
 
-  #ログインに成功したら。sessiomを作成すすためのかんす。
-  def create#params[:session][:email],[:password]という形になっている。
-    #@user: このファイル以外でも使い回す
-    #user: このファイル内のみで使用
-    #user = User.find_by(email: params[:session][:email])
-    #多分pathを/loginにしているからだと思う。paramsで見つけられない。
-    logger.debug "🛠️🛠️🛠️🛠️🛠️🛠️🛠️🛠️🛠️Params: #{params.inspect}"
-    user = User.find_by(name: params[:session][:name])
-    logger.debug "👷👷👷👷👷User: #{user.inspect}" if user
-    logger.debug "🎫🎫🎫🎫🎫Password: #{params[:password]}"
+  def create
+    user = User.find_by(name: session_params[:name])
 
-    #if user && user.authenticate(params[:session][:password])#authenticate: has_secure_passwordが提供する。
-    if user && user.authenticate(params[:session][:password])#authenticate: has_secure_passwordが提供する。
-      # ユーザーログイン後にユーザー情報のページにリダイレクトする
-      log_in user #user.rb
-      # user.rb←これにしているつもりだけど、session_helperに行っている
-      #remember user　←とりあえず後にしよう。
-      #redirect_to @user
-      flash.now[:success] = "welcome back👍"
-      redirect_to current_user
+    if user && user.authenticate(session_params[:password])
+      #current_userメソッドを使えるようにするためにこうやって書いている。
+      cookies.signed[:user_data] = {
+                                    value: { user_id: user.id, slug: user.slug },
+                                    httponly: true,
+                                    secure: Rails.env.production?
+      }
+
+      #cookies.signed[:user_id] = { value: user.id, httponly: true, secure: Rails.env.production? }
+      
+      flash[:success] = "ようこそ🎉! #{current_user.name}さん。"
+      redirect_to question_path
     else
-      flash.now[:danger] = "invalid ..."#now:page refresh it its gone.
-      #render 'new'
-      render 'home/index'
+      flash.now[:danger] = "invalid ..."
+      redirect_to root_path 
     end
   end
 
   def destroy
     Rails.logger.info "Destroy action called"
-    log_out 
-    flash[:success] = "logged out👍"
+    cookies.delete(:user_data)
+    flash[:success] = "successfuly logged out"
     redirect_to root_path
-    
   end
 end
 
+
+private
+
+ def session_params
+    params.require(:session).permit(:name, :password)
+ end
