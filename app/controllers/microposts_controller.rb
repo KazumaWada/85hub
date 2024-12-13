@@ -52,7 +52,7 @@ class MicropostsController < ApplicationController
      
         @user = User.find_by(slug: params[:slug])
         @micropost = @user.microposts.build(micropost_params)
-        @microposts_by_date = @user.microposts.group_by { |post| post.created_at.to_date }
+        #@microposts_by_date = @user.microposts.group_by { |post| post.created_at.to_date }
 
         puts "----- Debug: Params Start -----"
         Rails.logger.debug "Params content: #{params.inspect}"

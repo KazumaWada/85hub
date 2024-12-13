@@ -76,7 +76,8 @@
 <div class="text-center mt-5">
   <!--<%= gravatar_for @user %>--> 
   <h4><%= @user.name %></h4>
-  <p>56 days completed, shared 4889 words. yay!!</p>
+  <skip_before_action>
+  <p><%= @posted_days_sum %> posts completed, shared <%= @total_posts_characters %> words. yay!!</p>
 </div>
 
 </div>
@@ -86,11 +87,11 @@
 <div id="requests">
 <div class="container">
 
-<!--
+
 <div class = "text-left">
-<h6><%= @current_month %></h6>
+<h6><%= @today.strftime("%m/%d") %></h6>
 </div>
--->
+
 
   <div class="row text-center font-weight-bold">
     <div class="col">Sun</div>
@@ -101,19 +102,28 @@
     <div class="col">Fri</div>
     <div class="col">Sat</div>
   </div>
-
+  <!--1ヶ月分の日付を7つずつweekでloop-->
   <% @calendar_days.each_slice(7) do |week| %>
     <div class="row">
+    <!--weekをさらにdateでloop-->
       <% week.each do |date| %>
         <div class="col border text-center" style="height: 40px; font-size: 1em;">
-          <% if date ==  Date.today%>
+          
+        <% if @posted_dates.include?(date.day) %><!--Data型と数値で方が違うからこう書く-->
+          <div>
+          ✅<%= date.day %>
+          </div>
+
+        <% elsif date ==  Date.today%><!--もし今日投稿していたら、.はスキップ-->
           <div class ="bg-light">
            <%= date.day %>.
           </div>
-          <% else %>
-          <div>
+
+       <% else %>
+         <div>
           <%= date.day %>
-          </div>
+        </div>
+
           <% end %>
         </div>
       <% end %>

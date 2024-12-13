@@ -349,5 +349,4 @@ _micropost.html.erb
 # current_userを省いて、friendlyを使う。完成させてからsessionをfriendlyに追加していく。
 
 # 続き
-各ログインの対策
-logged_inメソッドを作ったら便利。current_userを条件分岐で使えばok?
+- カレンダー機能の実装done!

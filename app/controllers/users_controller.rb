@@ -20,18 +20,29 @@ class UsersController < ApplicationController
     #@user = current_user
     @user = User.friendly.find(params[:slug]) # routingが/user.nameなので、slug(user.name)を使って探す。
     @microposts = @user.microposts
+    @posted_days_sum = @user.microposts.count
+    @total_posts_characters = @user.microposts.sum { |post| post.content.length }
     #@micropost = current_user.microposts.build if logged_in?
 
-    # カレンダー表示用の日付を計算
+    
     start_date = Date.today.beginning_of_month.beginning_of_week(:sunday)
     end_date = Date.today.end_of_month.end_of_week(:sunday)
     #end_date = start_date + 13 
 
     @today = Date.today
     @current_month = Date::MONTHNAMES[Time.now.month]
-    # 日付の範囲を配列にする
+
+    # １ヶ月分の日付を配列に
     @calendar_days = (start_date..end_date).to_a
-    
+    #これがcreated_atの配列になる。
+    @posted_dates = @user.microposts.pluck(:created_at).map(&:to_date).map { |date| date.day }
+    logger.debug "👷👷👷👷👷@posted_dates: #{@posted_dates.inspect}" 
+    # Micropost Pluck (1.6ms)  SELECT "microposts"."created_at" FROM "microposts" WHERE "microposts"."user_id" = $1 ORDER BY "microposts"."created_at" DESC  [["user_id", 34]]
+    # => [Fri, 13 Dec 2024]
+    #↓
+    #irb(main):006> user.microposts.pluck(:created_at).map(&:to_date).map { |date| date.day } 
+    #Micropost Pluck (30.0ms)  SELECT "microposts"."created_at" FROM "microposts" WHERE "microposts"."user_id" = $1 ORDER BY "microposts"."created_at" DESC  [["user_id", 34]]
+    #=> [13]
   end
 
   def new
