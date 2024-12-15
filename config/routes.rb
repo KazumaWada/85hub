@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   resources :microposts, only: [:index]#slugで先に影響されないように。/micropostsは危ないから。
   
   #frieendly_id
-  get '/:slug', to: 'users#show', as: :user #user_pathを記述できるようになる。
+  get '/:slug', to: 'users#show', as: :user, constraints: { slug: /[a-zA-Z0-9\-_]+/ }#たまにidを読み込もうとするから。
   #.com/user.name/posts/1
   scope '/:slug' do
     get 'zen', to: 'microposts#zen_new', as: 'zen' #zen_path(slug: 'example-slug')

@@ -19,7 +19,8 @@ class UsersController < ApplicationController
     #↑だからcurrent_userメソッドでid以外に取得できる方法を使う！
     # @user = User.find(params[:id])
     #@user = current_user
-    @user = User.friendly.find(params[:slug]) # routingが/user.nameなので、slug(user.name)を使って探す。
+    #@user = User.friendly.find(params[:slug]) # routingが/user.nameなので、slug(user.name)を使って探す。
+    @user = User.find_by(slug: params[:slug])   
     @microposts = @user.microposts
     @posted_days_sum = @user.microposts.count
     @total_posts_characters = @user.microposts.sum { |post| post.content.length }

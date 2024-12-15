@@ -2,9 +2,9 @@
 <div class="diary-container">
   <div class="diary-entries">
 
-<!-- irb(main):001> app.microposts_path(slug: "a")=> "/a/microposts" -->
-<!--routerでpostを"post 'zen/microposts', to: 'microposts#zen_create'"と設定したからurlそう書く。-->
-<%= form_with(model: @micropost, url: "/#{@user.slug}/zen/microposts", method: :post, local: true, html: { class: "micropost-form" }) do |f| %>
+
+
+<%= form_with(model: @micropost, url: "/#{current_user.name}/zen/microposts", method: :post, local: true, html: { class: "micropost-form" }) do |f| %>
   <!-- 入力フィールド -->
   <div class="field">
     <%= f.text_area :content, 
