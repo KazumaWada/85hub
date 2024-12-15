@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   #before_action :authenticate_user!
   before_action :require_login, only: [:show]
 
+
   def index
     #UserはmodelのUser
     #@users = User.all
@@ -43,6 +44,40 @@ class UsersController < ApplicationController
     #irb(main):006> user.microposts.pluck(:created_at).map(&:to_date).map { |date| date.day } 
     #Micropost Pluck (30.0ms)  SELECT "microposts"."created_at" FROM "microposts" WHERE "microposts"."user_id" = $1 ORDER BY "microposts"."created_at" DESC  [["user_id", 34]]
     #=> [13]
+    # OpenAI APIのクライアントを初期化
+  # client = OpenAI::Client.new(
+  #   access_token: ENV["OPENAI_API_KEY"],
+  #   log_errors: true
+  # )
+
+  # retry_count = 0
+  # begin
+  #   response = client.chat(
+  #     parameters: {
+  #       model: "gpt-3.5-turbo", # 推奨される新しいモデル
+  #       messages: [
+  #         { role: "system", content: "あなたはRubyの専門家です。" },
+  #         { role: "user", content: "Rubyでの文字列操作方法について教えて" }
+  #       ],
+  #       max_tokens: 100
+  #     }
+  #   )
+  #   @ai_response = response.dig("choices", 0, "message", "content")
+  # rescue Faraday::Error => e
+  #   if e.message.include?("status 429") && retry_count < 3
+  #     retry_count += 1
+  #     sleep(2 ** retry_count) # 再試行までの待機時間を指数的に増加
+  #     retry
+  #   else
+  #     logger.error "OpenAI APIのリクエスト中にエラーが発生しました: #{e.message}"
+  #     @ai_response = "エラーが発生しました。後ほど再度お試しください。"
+  #   end
+  # end
+  
+  
+  
+  
+
   end
 
   def new

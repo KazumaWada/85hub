@@ -27,7 +27,16 @@
     </style>
 </head>
 <body>
+ <div class="text-center mt-3" id="nav-section">
+ <% if current_user.nil? %>
+   hey, ゲストさん! 
+   <%= link_to "ログイン", login_path, class: "text-primary text-decoration-none" %>
+ <% else %>
+   hey, <%= current_user.name %>!
+ <% end %>
+ </p>
 
+ <%= render template: "microposts/index" %>
   
 <figure class="text-center mt-2">
 <!--自動で、app/assets/imagesを参照-->

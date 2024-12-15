@@ -3,6 +3,7 @@ class HomeController < ApplicationController
     #@user = User.find(params[:id])#これはuser/1から取得している。rootだと探せない。
     @user = current_user
     @micropost = current_user.microposts.build if logged_in?
+    @microposts = Micropost.all
     #this can handle to "theme99.webp"
     @random_image = "theme%02d.webp" % rand(1..26)
 

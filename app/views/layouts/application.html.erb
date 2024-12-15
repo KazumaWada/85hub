@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>onedayoneline.com</title>
+    <title>eigopencil</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <!--tuboを一時的に無効化 deleteが機能しないから-->
     <%= javascript_include_tag 'application', 'data-turbo-track': 'reload', defer: true %>
@@ -13,6 +13,7 @@
     <!--これが全てのbootstrapのデザイン(navbar,form)を支えている。↓-->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- <%= javascript_importmap_tags %> -->
+    <%= favicon_link_tag "favicon.ico" %>
   </head>
   <style>
   * {
@@ -51,14 +52,16 @@
   <button class="btn btn-light">
   <%= link_to "🏠", root_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
   </button>
-
   <button class="btn btn-light">
-    <%= link_to "✍️", zen_path(current_user), class: "text-dark text-decoration-none", data: { turbo: false } %>
+  <%= link_to "👤", current_user ? user_path(current_user) : login_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
+  </button>
+  <button class="btn btn-light">
+    <%= link_to "✏️", zen_path(current_user), class: "text-dark text-decoration-none", data: { turbo: false } %>
   </button>
 
-  <button class="btn btn-light">
+  <!--<button class="btn btn-light">
    <%= link_to "👀", microposts_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
-  </button>
+  </button>-->
   <button class="btn btn-light">
    <%= link_to "📖", blog_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
   </button>
@@ -71,51 +74,37 @@
   </div>
 
  <% elsif controller_name == 'microposts' && action_name == 'zen_new' %>
-
-  <%= link_to "🏠", root_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
-
+ <!--<p>🧘‍♂️</p>-->
  <% else %>
 
- <div class="text-center mt-3" id="nav-section">
- <h1>
-    <%= link_to "eigohub.ai", root_path, class: "text-decoration-none text-dark" %>
-  </h1>
-  <p>言葉にするたび、英語があなたのものになる。</p>
-  <p>
-  <% if current_user.nil? %>
-    hey, ゲストさん! 
-    <%= link_to "ログイン", login_path, class: "text-primary text-decoration-none" %>
-  <% else %>
-    hey, <%= current_user.name %>!
-  <% end %>
-  </p>
+  <div class="text-center" id="nav-section">
 
 
  
 
 
- <button class="btn btn-light mt-3 mb-3">
+ <button class="btn btn-light">
   <%= link_to "🏠", root_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
   </button>
   <button class="btn btn-light">
   <%= link_to "👤", current_user ? user_path(current_user) : login_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
   </button>
-  <button class="btn btn-light mt-3 mb-3">
-    <%= link_to "✍️", current_user ? zen_path(current_user) : login_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
+  <button class="btn btn-light">
+    <%= link_to "✏️", current_user ? zen_path(current_user) : login_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
   </button>
-  <button class="btn btn-light mt-3 mb-3">
+  <!--<button class="btn btn-light">
    <%= link_to "👀", microposts_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
-  </button>
-  <button class="btn btn-light mt-3 mb-3">
+  </button>-->
+  <button class="btn btn-light">
    <%= link_to "📖", blog_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
   </button>
-  <button class="btn btn-light mt-3 mb-3">
+  <button class="btn btn-light">
    <%= link_to "📱", app_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
   </button>
-  <button class="btn btn-light mt-3 mb-3">
+  <button class="btn btn-light">
   <%= link_to "?", question_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
   </button>
-</div>
+</div></div>
  <% end %>
 
 
