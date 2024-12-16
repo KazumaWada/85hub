@@ -32,9 +32,12 @@ class HomeController < ApplicationController
   def about
   end
   def app
+    @user = current_user#navbarのuser_path(@user)が/appで探せなくなるから。
   end
   def question
+    @user = current_user#navbarのuser_path(@user)が/questionで探せなくなるから。
   end
   def blog
+    @user = current_user#navbarのuser_path(@user)が/blogで探せなくなるから。
   end
 end
