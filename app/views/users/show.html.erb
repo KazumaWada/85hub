@@ -134,10 +134,16 @@
 
 
 <button class="btn btn-light">
-<%= link_to "🧘 zen mode", zen_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
+<%= link_to "🧘", zen_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
 </button>
 <button class="btn btn-light">
-<%= link_to "📸 手書き英文を読み込む", root_path, class: "submit-button text-dark text-decoration-none" %>
+<%= link_to "📸", root_path, class: "submit-button text-dark text-decoration-none" %>
+</button>
+<button class="btn btn-light">
+<%= link_to "📝", draft_path(current_user), class: "submit-button text-dark text-decoration-none" %>
+</button>
+<button class="btn btn-light">
+<%= link_to "🔖", root_path, class: "submit-button text-dark text-decoration-none" %>
 </button>
   <section class="micropost_form">
   <%= render 'shared/micropost_form' %>

@@ -18,21 +18,21 @@ module SessionsHelper
         cookies.permanent[:remember_token] = user.remember_token
     end
     #router.rbに定義していなくても、<%= link_to "Write", current_user %>のように使える。
-    def current_user
-        #session,cookieが発行済み
-        if(user_id = session[:user_id])
-            #userをDBから見つけて来る
-            @current_user ||= User.find_by(id: user_id)
-        #初回ログインcookie発行
-        elsif (user_id = cookies.signed[:user_id])
-         user = User.find_by(id: user_id)
-         #cookie発行
-         if user&& user.authenticated?(cookies[:remember_token])
-            log_in user
-            @current_user = user
-         end
-        end
-     end
+    # def current_user
+    #     #session,cookieが発行済み
+    #     if(user_id = session[:user_id])
+    #         #userをDBから見つけて来る
+    #         @current_user ||= User.find_by(id: user_id)
+    #     #初回ログインcookie発行
+    #     elsif (user_id = cookies.signed[:user_id])
+    #      user = User.find_by(id: user_id)
+    #      #cookie発行
+    #      if user&& user.authenticated?(cookies[:remember_token])
+    #         log_in user
+    #         @current_user = user
+    #      end
+    #     end
+    #  end
 
     def logged_in?
         !current_user.nil?

@@ -9,6 +9,24 @@ class MicropostsController < ApplicationController
       @user = User.find_by(slug: params[:slug])   
     end
 
+    def draft
+    @user = User.find_by(slug: params[:slug])   
+    @microposts = @user.microposts
+    end
+    def draft_create
+      @user = User.find_by(slug: params[:slug]) 
+      @micropost = @user.microposts.build(micropost_params)
+
+      if @micropost.save
+        flash[:success] = "draft saved"
+        redirect_to user_path(@user)
+      else
+        flash[:danger] = "⚠️heads up! English only!!⚠️"
+        flash[:danger] = @micropost.errors.full_messages.join(", ")
+        redirect_to user_path(@user)
+      end
+    end
+
     def index
       #単数: model, 複数: DBのテーブル名
       #@microposts = Micropost.all
@@ -58,9 +76,19 @@ class MicropostsController < ApplicationController
         Rails.logger.debug "Params content: #{params.inspect}"
         puts "----- Debug: Params End -----"
         #@user.microposts.build(content: "This is a new micropost")引数も渡すことができる。
-        if @micropost.save
+        if params[:draft]
+          @micropost.status = 'draft'
+        else
+          @micropost.status = 'published'
+        end
+
+        if @micropost.save && @micropost.status == "published"
           flash[:success] = "nice. you did it!"
           redirect_to user_path(@user)
+        elsif@micropost.save && @micropost.status == "draft"
+          flash[:success] = "draft saved. 戻る👈"
+          redirect_to draft_path(@user)
+
         else
           flash[:danger] = "⚠️heads up! English only!!⚠️"
           flash[:danger] = @micropost.errors.full_messages.join(", ")

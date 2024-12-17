@@ -59,6 +59,9 @@ gem "ruby-openai"
 #.envでopenAPI keyを読み込むため
 gem 'dotenv-rails', groups: [:development]
 
+#cron job(cold start防止のために定期的にリクエストを送る)
+gem 'whenever', require: false
+
 
 #gem 'webpacker'これは使わずに、railsのimport mapsを使う。(node.jsのimportみたいなやつ。デプロイに手間がかからないから。)
 

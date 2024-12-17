@@ -1,16 +1,30 @@
- <% @microposts.each do |micropost| %>
+<% @microposts.published.each do |micropost| %>
+  <!-- Twitter Card用のcontent_for(helperメソッド。ここで定義するが、別の場所で利用する場合。) -->
+  <% content_for :title, micropost.content.truncate(50) %>
+  <% content_for :meta_description, micropost.content.truncate(150) %>
+  <% content_for :twitter_image, asset_url("logo01.png") %>
+
+  <!-- 表示部分 -->
   <div class="diary-container">
-        <div class="diary-entries">
-            <ul id="entriesList" class="list-group">
-          <p>
-            <%= micropost.content %>
-            <%= micropost.created_at.strftime("%Y-%m-%d") %>
-            <%= button_to "🗑️", micropost_path(slug: @user.slug, id: micropost.id), method: :delete %> 
-          </p>
-          </ul>
-          </div>
+    <div class="diary-entries">
+      <ul id="entriesList" class="list-group">
+        <li class="list-group-item">
+          <!-- コンテンツ部分 -->
+          <p><%= micropost.content %> <span class="text-muted"><%= micropost.created_at.strftime("%Y-%m-%d") %></span></p>
+          
+
+          <!-- 削除ボタン -->
+          <%= button_to "🗑️", micropost_path(slug: @user.slug, id: micropost.id), method: :delete, class: "btn btn-sm" %>
+          <!-- Xでシェアするボタン -->
+          <%= link_to "X",
+            "https://twitter.com/intent/tweet?text=#{CGI.escape("✏️ " + micropost.content + "\n")}%0A#{CGI.escape('https://eigopencil.com')}",
+            target: "_blank",
+            rel: "noopener",
+            class: "btn btn-dark text-white btn-sm" %>
+        </li>
+      </ul>
+    </div>
   </div>
-    
 <% end %>
 
 

@@ -149,9 +149,9 @@ class UsersController < ApplicationController
   #   end
   # end
 
-  def current_user#pathでは使えない。cookieで保存されているのはuser_idのみ。cookie.signedにuser.nameも保存すれば、current_userが便利に使えるようになる。
-    @current_user ||= User.find_by(id: cookies.signed[:user_id])
-    logger.debug "👷👷👷👷👷@current_user: #{@current_user.inspect}" 
-  end
+  # def current_user#pathでは使えない。cookieで保存されているのはuser_idのみ。cookie.signedにuser.nameも保存すれば、current_userが便利に使えるようになる。
+  #   @current_user ||= User.find_by(id: cookies.signed[:user_id])
+  #   logger.debug "👷👷👷👷👷@current_user: #{@current_user.inspect}" 
+  # end
   
 end 

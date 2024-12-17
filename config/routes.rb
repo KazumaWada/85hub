@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   get '/:slug', to: 'users#show', as: :user, constraints: { slug: /[a-zA-Z0-9\-_]+/ }#たまにidを読み込もうとするから。
   #.com/user.name/posts/1
   scope '/:slug' do
+    get 'bookmark', to: 'microposts#bookmark', as: 'bookmark'
+    get 'draft', to: 'microposts#draft', as: 'draft'
     get 'zen', to: 'microposts#zen_new', as: 'zen' #zen_path(slug: 'example-slug')
     post 'zen/microposts', to: 'microposts#zen_create'
     #post送信用のurl
