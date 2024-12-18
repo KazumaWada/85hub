@@ -1,35 +1,19 @@
 class UsersController < ApplicationController
-  # #edit,updateをさせる前に、def logged_in_userを実行
-  # before_action :logged_in_user, only: [:edit, :update]
-  # before_action :correct_user, only: [:edit, :update]
-  #before_action :authenticate_user!
   before_action :require_login, only: [:show]
 
 
   def index
-    #UserはmodelのUser
-    #@users = User.all
   end
 
   def show
-    #active_recordから見つけてきている。== これはSQL文
-    #paramsはurlから取得している
-    #com/users/1->find("1")
-    #⭐️だからこの↓書き方だと、/profileとかにしたら、paramsはidを見つけられない!!
-    #↑だからcurrent_userメソッドでid以外に取得できる方法を使う！
-    # @user = User.find(params[:id])
-    #@user = current_user
-    #@user = User.friendly.find(params[:slug]) # routingが/user.nameなので、slug(user.name)を使って探す。
     @user = User.find_by(slug: params[:slug])   
     @microposts = @user.microposts
     @posted_days_sum = @user.microposts.count
     @total_posts_characters = @user.microposts.sum { |post| post.content.length }
-    #@micropost = current_user.microposts.build if logged_in?
-
     
     start_date = Date.today.beginning_of_month.beginning_of_week(:sunday)
     end_date = Date.today.end_of_month.end_of_week(:sunday)
-    #end_date = start_date + 13 
+    #end_date = start_date + 13 #(2 weeks ver)
 
     @today = Date.today
     @current_month = Date::MONTHNAMES[Time.now.month]
@@ -39,46 +23,6 @@ class UsersController < ApplicationController
     #これがcreated_atの配列になる。
     @posted_dates = @user.microposts.pluck(:created_at).map(&:to_date).map { |date| date.day }
     logger.debug "👷👷👷👷👷@posted_dates: #{@posted_dates.inspect}" 
-    # Micropost Pluck (1.6ms)  SELECT "microposts"."created_at" FROM "microposts" WHERE "microposts"."user_id" = $1 ORDER BY "microposts"."created_at" DESC  [["user_id", 34]]
-    # => [Fri, 13 Dec 2024]
-    #↓
-    #irb(main):006> user.microposts.pluck(:created_at).map(&:to_date).map { |date| date.day } 
-    #Micropost Pluck (30.0ms)  SELECT "microposts"."created_at" FROM "microposts" WHERE "microposts"."user_id" = $1 ORDER BY "microposts"."created_at" DESC  [["user_id", 34]]
-    #=> [13]
-    # OpenAI APIのクライアントを初期化
-  # client = OpenAI::Client.new(
-  #   access_token: ENV["OPENAI_API_KEY"],
-  #   log_errors: true
-  # )
-
-  # retry_count = 0
-  # begin
-  #   response = client.chat(
-  #     parameters: {
-  #       model: "gpt-3.5-turbo", # 推奨される新しいモデル
-  #       messages: [
-  #         { role: "system", content: "あなたはRubyの専門家です。" },
-  #         { role: "user", content: "Rubyでの文字列操作方法について教えて" }
-  #       ],
-  #       max_tokens: 100
-  #     }
-  #   )
-  #   @ai_response = response.dig("choices", 0, "message", "content")
-  # rescue Faraday::Error => e
-  #   if e.message.include?("status 429") && retry_count < 3
-  #     retry_count += 1
-  #     sleep(2 ** retry_count) # 再試行までの待機時間を指数的に増加
-  #     retry
-  #   else
-  #     logger.error "OpenAI APIのリクエスト中にエラーが発生しました: #{e.message}"
-  #     @ai_response = "エラーが発生しました。後ほど再度お試しください。"
-  #   end
-  # end
-  
-  
-  
-  
-
   end
 
   def new
@@ -92,11 +36,11 @@ class UsersController < ApplicationController
     if @user.save
       #log_in @user#signupした後に再度loginさせる手間を省く。(後に実装予定)
       redirect_to login_path
-      flash[:success] = "Welcome #{@user.name}! please login"
+      flash[:success] = "Welcome #{@user.name}! next step, please login"
     else
       puts @user.errors.full_messages
-      flash.now[:danger] = "invalid ..."
-      redirect_to root_path 
+      flash[:danger] = "#{@user.errors.full_messages}"
+      redirect_to signup_path 
     end 
   end
 

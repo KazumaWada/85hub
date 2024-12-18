@@ -159,7 +159,11 @@
 </div>
 
 
-
+<%= form_with url: '/ocr/recognize', method: :post, local: true, multipart: true do |f| %>
+  <%= f.label :image, "手書き画像をアップロード" %>
+  <%= f.file_field :image %>
+  <%= f.submit "文字認識" %>
+<% end %>
 
 
 

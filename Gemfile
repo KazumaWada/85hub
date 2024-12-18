@@ -62,6 +62,9 @@ gem 'dotenv-rails', groups: [:development]
 #cron job(cold start防止のために定期的にリクエストを送る)
 gem 'whenever', require: false
 
+#写真から文字認識(OCR optical character recognition)
+gem 'rtesseract'
+
 
 #gem 'webpacker'これは使わずに、railsのimport mapsを使う。(node.jsのimportみたいなやつ。デプロイに手間がかからないから。)
 

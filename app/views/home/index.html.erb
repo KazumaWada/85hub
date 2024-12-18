@@ -30,7 +30,7 @@
  <div class="text-center mt-3" id="nav-section">
  <% if current_user.nil? %>
    hey, ゲストさん! 
-   <%= link_to "ログイン", login_path, class: "text-primary text-decoration-none" %>
+   <%= link_to "ログイン", login_path, class: " text-decoration-none" %>
  <% else %>
    hey, <%= current_user.name %>!
  <% end %>

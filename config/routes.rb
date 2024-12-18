@@ -5,11 +5,11 @@ Rails.application.routes.draw do
   get '/about',to: 'home#about', as: 'about'
   get '/signup', to: 'users#new', as: 'signup'
   post '/signup', to: 'users#create'
-
   get '/login', to: 'sessions#new', as: 'login'
   post '/login', to: 'sessions#create', as: 'login_with_cookie'
   delete '/logout', to: 'sessions#destroy', as: 'logout'
   get '/app', to: 'home#app', as: 'app'
+  post '/ocr/recognize', to: 'ocr#recognize'
   resources :sessions, only: [:create]#paramsで見つけられるように。
   
   get '/question', to: 'home#question', as: 'question'

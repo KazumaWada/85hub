@@ -1,9 +1,16 @@
 # ベースイメージとして公式のRubyイメージを使用
 FROM ruby:3.2.6
 
-# 必要なパッケージをインストール
+# 必要なパッケージとTesseract OCRをインストール
 RUN apt-get update -qq && \
-    apt-get install -y build-essential libpq-dev postgresql-client cron && \
+    apt-get install -y --no-install-recommends \
+        build-essential \
+        libpq-dev \
+        postgresql-client \
+        cron \
+        tesseract-ocr \
+        libtesseract-dev \
+        imagemagick && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Bundler と Whenever をインストール

@@ -4,16 +4,15 @@ class User < ApplicationRecord
     attr_accessor :remember_token
     #user.rb: データのロジックを書く時に使われる。(他のmodel, controller,DB)
     #user_helper: 主にviewで使う時に使われる。
+    validates :name, presence: true, uniqueness: true
+    validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+    validates :password, presence: true, length: { minimum: 6 }, confirmation: true
+    validates :password_confirmation, presence: true
+
 
     ##.com/user.name
     extend FriendlyId
     friendly_id :name, use: :slugged
-
-    #slug(name)がupdateされたらuserのリンクも変わるようにする(後に実装)  
-    # def should_generate_new_friendly_id?
-    #  name_changed? || super
-    # end
-    ##
 
     #self: 現在のuser
     before_save { self.email = email.downcase }
@@ -61,6 +60,7 @@ class User < ApplicationRecord
     def forget
         update_attribute(:remember_digest, nil)
     end
+
 end
 
 #User.create(name: "Michael Hartl", email: "mhartl@example.com", password: "foobar", password_confirmation: "foobar")
