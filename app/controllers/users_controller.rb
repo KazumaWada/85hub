@@ -8,9 +8,9 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by(slug: params[:slug])   
     @microposts = @user.microposts
-    @posted_days_sum = @user.microposts.count
-    @total_posts_characters = @user.microposts.sum { |post| post.content.length }
-    
+    @posted_days_sum = @user.microposts.published.count
+    @total_posts_characters = @user.microposts.published.sum { |post| post.content.length }
+    @drafts_sum = @user.microposts.draft.count
     start_date = Date.today.beginning_of_month.beginning_of_week(:sunday)
     end_date = Date.today.end_of_month.end_of_week(:sunday)
     #end_date = start_date + 13 #(2 weeks ver)

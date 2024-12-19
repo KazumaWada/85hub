@@ -27,6 +27,37 @@ class MicropostsController < ApplicationController
       end
     end
 
+    def draft_edit
+      fixed_params = { micropost: { content: params[:content] } }
+      params.merge!(fixed_params)
+      @user = User.find_by(slug: params[:slug]) 
+      @micropost = @user.microposts.find(prams[:id])
+      Rails.logger.debug "🛠️🛠️🛠️🛠️🛠️🛠️🛠️🛠️🛠️🛠️🛠️🛠️🛠️🛠️🛠️🛠️Params: #{micropost_params.inspect}" # パラメータの中身をログに表示
+    end
+    def draft_update
+      @user = User.find_by(slug: params[:slug]) 
+      @micropost = @user.micropost.find(params[:id])
+
+      if params[:draft]
+        @micropost.status = 'draft'
+      else
+        @micropost.status = 'published'
+      end
+
+      if @micropost.save && @micropost.status == "published"
+        flash[:success] = "nice. you did it!"
+        redirect_to user_path(@user)
+      elsif@micropost.save && @micropost.status == "draft"
+        flash[:success] = "draft saved. go check 📝"
+        redirect_to user_path(@user)
+
+      else
+        flash[:danger] = "⚠️heads up! English only!!⚠️"
+        flash[:danger] = @micropost.errors.full_messages.join(", ")
+        redirect_to user_path(@user)
+      end
+    end
+
     def index
       #単数: model, 複数: DBのテーブル名
       #@microposts = Micropost.all
@@ -86,8 +117,8 @@ class MicropostsController < ApplicationController
           flash[:success] = "nice. you did it!"
           redirect_to user_path(@user)
         elsif@micropost.save && @micropost.status == "draft"
-          flash[:success] = "draft saved. 戻る👈"
-          redirect_to draft_path(@user)
+          flash[:success] = "draft saved. go check 📝"
+          redirect_to user_path(@user)
 
         else
           flash[:danger] = "⚠️heads up! English only!!⚠️"
@@ -99,8 +130,13 @@ class MicropostsController < ApplicationController
     def destroy
       @user = User.friendly.find(params[:slug])
       @micropost = Micropost.find(params[:id])
-      if @micropost.destroy
-        redirect_to @user, notice: "Post was successfully deleted."
+
+      if @micropost.destroy && @micropost.status == "draft"
+        flash[:succeess] = "✅🗑️"
+        redirect_to draft_path(@user)
+      elsif @micropost.destroy && @micropost.status == "published"
+        flash[:succeess] = "✅🗑️"
+        redirect_to user_path(@user)
       else
         redirect_to current_user, alert: "something went wrong post still there"
     end

@@ -77,7 +77,7 @@
   <!--<%= gravatar_for @user %>--> 
   <h4><%= @user.name %></h4>
   <skip_before_action>
-  <p><%= @posted_days_sum %> posts completed, shared <%= @total_posts_characters %> words. yay!!</p>
+  <p>total <%= @posted_days_sum %> posts published, shared <%= @total_posts_characters %> words. yay!!</p>
 </div>
 
 </div>
@@ -137,13 +137,13 @@
 <%= link_to "🧘", zen_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
 </button>
 <button class="btn btn-light">
-<%= link_to "📸", root_path, class: "submit-button text-dark text-decoration-none" %>
+<%= link_to "📸", user_path(@user), class: "submit-button text-dark text-decoration-none" %>
 </button>
 <button class="btn btn-light">
 <%= link_to "📝", draft_path(current_user), class: "submit-button text-dark text-decoration-none" %>
 </button>
 <button class="btn btn-light">
-<%= link_to "🔖", root_path, class: "submit-button text-dark text-decoration-none" %>
+<%= link_to "🔖", user_path(@user), class: "submit-button text-dark text-decoration-none" %>
 </button>
   <section class="micropost_form">
   <%= render 'shared/micropost_form' %>

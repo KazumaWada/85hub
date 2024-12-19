@@ -1,14 +1,12 @@
-<!--ここでは、@userを意識する必要はない。rendered by users/show -->
 <div class="diary-container">
   <div class="diary-entries">
 
 <!-- irb(main):001> app.microposts_path(slug: "a")=> "/a/microposts" -->
 
-<%= form_with(model: @micropost, url: "/#{@user.slug}/microposts", method: :post, local: true, html: { class: "micropost-form" }) do |f| %>
+<%= form_with(model: @micropost, url: draft_update_path(@micropost), method: :post, local: true, html: { class: "micropost-form" }) do |f| %>
   <!-- 入力フィールド -->
   <div class="field">
     <%= f.text_area :content, 
-      placeholder: "i dont think anything is hard. it just takes time.", 
       class: "form-control diary-textarea",
       style: "border: none; box-shadow: none;" %>
   </div>

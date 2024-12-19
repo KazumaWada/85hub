@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   root "home#index"
   get '/about',to: 'home#about', as: 'about'
@@ -20,8 +19,11 @@ Rails.application.routes.draw do
   get '/:slug', to: 'users#show', as: :user, constraints: { slug: /[a-zA-Z0-9\-_]+/ }#たまにidを読み込もうとするから。
   #.com/user.name/posts/1
   scope '/:slug' do
+    get 'drafts/index', to: 'drafts#index', as: 'draft'
+    get 'drafts/:id/edit', to: 'drafts#edit', as: 'draft_edit'
+    patch 'drafts/:id/update', to: 'drafts#update', as: 'draft_update'
     get 'bookmark', to: 'microposts#bookmark', as: 'bookmark'
-    get 'draft', to: 'microposts#draft', as: 'draft'
+    #get 'draft', to: 'microposts#draft', as: 'draft'
     get 'zen', to: 'microposts#zen_new', as: 'zen' #zen_path(slug: 'example-slug')
     post 'zen/microposts', to: 'microposts#zen_create'
     #post送信用のurl
@@ -29,14 +31,6 @@ Rails.application.routes.draw do
     resources :microposts, only: [:create, :destroy, :new] #, path: 'posts'
     
   end
-
-
-
-  get 'home/show'
-  get 'home/create'
-  get 'home/edit'
-  get 'home/update'
-  get 'home/destroy'
   
   # Defines the root path route ("/")
   # root "articles#index"
