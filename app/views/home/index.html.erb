@@ -27,6 +27,7 @@
     </style>
 </head>
 <body>
+
  <div class="text-center mt-3" id="nav-section">
  <% if current_user.nil? %>
    hey, ゲストさん! 
@@ -36,8 +37,9 @@
  <% end %>
  </p>
 
+ 
  <%= render template: "microposts/index" %>
-  
+ 
 <figure class="text-center mt-2">
 <!--自動で、app/assets/imagesを参照-->
   <%#<%= image_tag(@random_image, class: "img-fluid") %>

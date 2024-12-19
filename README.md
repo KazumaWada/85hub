@@ -1,31 +1,40 @@
-# README
+# eigopencil.com 🎉
+![alt text](image.png)
+# 概要
+<a href="https://eigopencil.com" tag_blank>eigopencil.com</a>とは、英語学習者の皆さんが英語を文章でアウトプットできる場を提供するサービスです。 誰かのために、自分のために英語日記や新しく覚えたフレーズを文章にして共有しましょう。
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# 開発背景
+自分の英語力を上げるためにアウトプットの場を作ろうと思った。
 
-Things you may want to cover:
+# 開発に使用した技術
 
-* CRUD機能
+フロントエンド: HTML/CSS/Bootstrap<br>
+バックエンド: Ruby on Rails<br>
+データベース: PostgreSQL<br>
+インフラ: Docker<br>
+デプロイに使用したソフトウェア: Render
 
-* 下書き保存機能
+# 関連記事
+# 機能一覧
+- CRUD機能
+
+- 下書き保存、edit、update機能
 enumを使用して、Postテーブルにstatusの枠をDBに追加し、enumを使って数値で0:draft,1:publishedとし、"下書き保存"のformが送信されたらpost.draftとし、"投稿"のformが送信されたらpost.publishedとし、/draftでpost.draftをループし、userの投稿ページでpost.publishedをループしました。
+
 * zen mode(集中執筆モード)
-新しいファイルにinputのみのページを作成しました。
-* 手書き英文認識機能
 
 * 投稿日をカレンダーで確認
-１ヶ月の日付を定義し、ループさせて表示させました。投稿したらそのループ内で✅が付きます。
+１ヶ月の日付を定義し、ループさせて表示させました。投稿日に✅が付きます。
 * xシェア機能
-apiを使用せずにURLで実装しました。
+
+# これから実装する機能
+- 手書き認識機能
+- AI添削
+- stripe
+
+# こだわったところ
+- デフォルトではrouterがeigopencil.com/user.name/:idだが、見栄えを良くするためにgemのfriendly_idを使ってeigopencil.com/user.nameと表示されるようにした。
+
+- ユーザーが投稿に集中できるように文字ではなく、それを表す絵文字を使って文字数を少なくしてみた。(navbarやuserページ)
 
 
-
-こだわったところ
-デフォルトでは.com/user/:idだが、friendly_idを使って.com/kazumaと表示されるようにした。
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...

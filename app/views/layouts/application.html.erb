@@ -109,9 +109,9 @@
     <% flash.each do |message_type, message| %>
       <div class="alert alert-<%= message_type %>"><%= message %></div>
     <% end %>
-
+    <div class="container">
     <%= yield %>
-
+    </div>
     <%# devise用↓ %>
     <% if notice %>
       <p><%= notice %></p>

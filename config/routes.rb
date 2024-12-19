@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get '/app', to: 'home#app', as: 'app'
   post '/ocr/recognize', to: 'ocr#recognize'
   resources :sessions, only: [:create]#paramsで見つけられるように。
-  
+  post 'handwriting/analyze', to: 'users#analyze', as: 'analyze_handwriting'#文字認識機能
   get '/question', to: 'home#question', as: 'question'
   get '/blog', to: "home#blog", as: 'blog'
   resources :microposts, only: [:index]#slugで先に影響されないように。/micropostsは危ないから。

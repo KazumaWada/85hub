@@ -5,7 +5,6 @@
    <!--<%= image_tag("logo01.png") %>-->
    <%= link_to "eigopencil.com", root_path, class: "text-decoration-none text-dark" %>
   <!-- <%= link_to "eigo-toen.online", root_path, class: "text-decoration-none text-dark" %>-->
-
  </h1>
  <p>言葉にするたび、英語があなたのものになる。</p>
 </div>
@@ -13,13 +12,20 @@
 
 <div class="about mt-5 ml-3 mr-3">
 
+<div class="row">
+
+<div class="col-md-6">
 <h5 class="text-left">ようこそ！🎉</h5>
 <p class="text-muted text-left mt-4">
 eigopencilとは、英語学習者の皆さんが英語を文章でアウトプットできる場を提供するサービスです。 誰かのために、自分のために英語日記や新しく覚えたフレーズを文章にして共有しましょう。
 </p>
+</div>
 
+<div class="col-md-6">
 <div class="text-center mt-4">
 <%= image_tag("q01.webp", class: "img-fluid", style: "max-width: 320px; height: auto; border-radius: 8px;") %>
+</div>
+</div>
 </div>
 
 <h5 class="mt-5">書いて身に付く英語力✏️</h5>
@@ -30,13 +36,24 @@ yay!
 <p class="text-muted text-left mt-4">
 zenmode
 </p>
-<h5 class="mt-4">アプリのように使ってみよう📱</h5>
+
+<div class="row mt-3">
+
+<div class="col-md-6">
 <div class="text-center mt-4">
-  <%= image_tag("q03.webp", class: "img-fluid", style: "max-width: 320px; height: auto; border-radius: 8px;") %>
+  <%= image_tag("q02.webp", class: "img-fluid", style: "max-width: 320px; height: auto; border-radius: 8px;") %>
 </div>
+</div>
+
+<div class="col-md-6">
+<h5 class="mt-4">アプリのように使ってみよう📱</h5>
 <p class="text-muted text-left mt-4">
 スマホのアプリからこのウェブサイトを開くことができます。詳しくは<%= link_to "こちら", app_path, class: "", data: { turbo: false } %>
 </p>
+</div>
+
+</div>
+
 <h5 class="text-left mt-4">アップデート予定の機能🗓️</h5>
 <p class="text-muted text-left">
 AIによる添削機能<br>
@@ -46,10 +63,23 @@ AIによる添削機能<br>
 140字を超える英文を投稿可能<br>
 Discordを使ったコミュニティー運営<br>
 </p>
+
+<div class="row mt-3">
+
+<div class="col-md-6">
 <h5 class="mt-4">SNSで英語を広めよう🔗</h5>
 <p class="text-muted mt-4">
 yay!
 </p>
+</div>
+
+<div class="col-md-6">
+<div class="text-center mt-4">
+  <%= image_tag("q06.webp", class: "img-fluid", style: "max-width: 320px; height: auto; border-radius: 8px;") %>
+</div>
+</div>
+
+
 <h5 class="mt-4">eigopencilのビジョン🌍</h5>
 <p class="text-muted mt-4">
 
@@ -70,5 +100,5 @@ eigopencilは、Amazon.co.jpを宣伝しリンクすることによってサイ�
 
 </div>
 
-</div>
+</div></div>
 

@@ -5,6 +5,33 @@ class UsersController < ApplicationController
   def index
   end
 
+  def analyze
+    # 画像ファイルを受け取る
+    uploaded_file = params[:image]
+
+    if uploaded_file.nil?
+      flash[:alert] = "画像をアップロードしてください。"
+      redirect_to root_path
+      return
+    end
+
+    # 一時保存
+    file_path = Rails.root.join('tmp', uploaded_file.original_filename)
+    File.open(file_path, 'wb') do |file|
+      file.write(uploaded_file.read)
+    end
+
+    # OCRを実行
+    recognized_text = HandwritingRecognizer.recognize(file_path)
+
+    # 結果を表示
+    render json: { text: recognized_text }
+  ensure
+    # 一時ファイルを削除
+    File.delete(file_path) if File.exist?(file_path)
+  end
+
+
   def show
     @user = User.find_by(slug: params[:slug])   
     @microposts = @user.microposts
