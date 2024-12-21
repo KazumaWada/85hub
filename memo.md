@@ -398,3 +398,98 @@ https://github.com/tesseract-ocr/tesseract
 -「traineddata」ファイルを取り込んで(学習データ)実行する必要がある。
 それでも変わらなかったら、
 - 他のORMを探す
+
+
+
+home#index.html
+
+```ruby
+<div class="text-center" id="nav-section">
+
+<% @microposts.published.each do |micropost| %>
+     <div class="diary-container">
+        <div class="diary-entries">
+            <ul id="entriesList" class="list-group">
+          
+      
+            <div class="all-posts-section">
+  <li style="list-style: none; display: flex; justify-content: space-between; align-items: center;">
+    <span><strong class=""><%= micropost.user.name %></strong>: <%= micropost.content %></span>
+    <span class="text-right text-muted" style="font-size: 0.9em;"><%= micropost.created_at.strftime("%Y/%m/%d") %></span>
+  </li>
+</div>
+
+    
+    </ul>
+    </div>
+</div>
+
+  <% end %>
+</div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  
+```
+_micropost_form.html.erb
+
+```ruby
+<!--ここでは、@userを意識する必要はない。rendered by users/show -->
+<div class="diary-container">
+  <div class="diary-entries">
+
+<!-- irb(main):001> app.microposts_path(slug: "a")=> "/a/microposts" -->
+
+<%= form_with(model: @micropost, url: "/#{@user.slug}/microposts", method: :post, local: true, html: { class: "micropost-form" }) do |f| %>
+  <!-- 入力フィールド -->
+  <div class="field">
+    <%= f.text_area :content, 
+      placeholder: "i dont think anything is hard. it just takes time.", 
+      class: "form-control diary-textarea",
+      style: "border: none; box-shadow: none;" %>
+  </div>
+
+  <!-- 送信ボタン -->
+  <div class="actions text-right">
+    <%= f.submit "下書き保存", name:"draft", class: "btn btn-light diary-submit-btn" %>
+    <%= link_to "🤖", user_path(@user), class: "btn btn-light submit-button" %>
+    <%= f.submit "post", class: "btn btn-light diary-submit-btn" %>
+  </div>
+<% end %>
+
+
+  </div>
+</div>
+```
+
+_micropost.html.erb
+```ruby
+<% @microposts.published.each do |micropost| %>
+  <!-- Twitter Card用のcontent_for(helperメソッド。ここで定義するが、別の場所で利用する場合。) -->
+  <% content_for :title, micropost.content.truncate(50) %>
+  <% content_for :meta_description, micropost.content.truncate(150) %>
+  <% content_for :twitter_image, asset_url("logo01.png") %>
+
+  <!-- 表示部分 -->
+  <div class="diary-container">
+    <div class="diary-entries">
+      <ul id="entriesList" class="list-group">
+        <li class="list-group-item">
+          <!-- コンテンツ部分 -->
+          <p><%= micropost.content %> <span class="text-muted"><%= micropost.created_at.strftime("%Y-%m-%d") %></span></p>
+          
+       <% if current_user == @user %>
+          <!-- 削除ボタン -->
+          <%= button_to "🗑️", micropost_path(slug: @user.slug, id: micropost.id), method: :delete, class: "btn btn-sm" %>
+          <!-- Xでシェアするボタン -->
+          <%= link_to "X",
+            "https://twitter.com/intent/tweet?text=#{CGI.escape("✏️ " + micropost.content + "\n")}%0A#{CGI.escape('https://eigopencil.com')}",
+            target: "_blank",
+            rel: "noopener",
+            class: "btn btn-dark text-white btn-sm" %>
+        <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+<% end %>
+```

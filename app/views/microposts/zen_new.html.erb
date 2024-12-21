@@ -1,6 +1,3 @@
-<div class="col-md-12 mt-3">
-<div class="diary-container">
-  <div class="diary-entries">
 
 
 
@@ -9,20 +6,18 @@
   <div class="field">
     <%= f.text_area :content, 
       placeholder: "I have pen, I have an apple Uh! Apple-pen", 
-      class: "form-control diary-textarea",
-      style: "border: none; box-shadow: none;" %>
+      class: "mt-5 p-4 rounded border shadow-md hover:shadow-lg transition-shadow duration-300 flex items-center w-full h-40",
+      style: ";" %>
   </div>
 
   <!-- 送信ボタン -->
-  <div class="actions text-right">
+  <div class="actions text-right mt-2">
+    <%= f.submit "下書き保存", name:"draft", class: "btn btn-light diary-submit-btn" %>
+    <%= link_to "🤖", user_path(@user), class: "btn btn-light submit-button" %>
     <%= f.submit "post", class: "btn btn-light diary-submit-btn" %>
   </div>
 <% end %>
 
-  </div>
-</div>
 
 
 
-
-</div>

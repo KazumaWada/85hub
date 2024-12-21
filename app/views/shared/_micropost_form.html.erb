@@ -1,26 +1,27 @@
 <!--ここでは、@userを意識する必要はない。rendered by users/show -->
-<div class="diary-container">
-  <div class="diary-entries">
+
 
 <!-- irb(main):001> app.microposts_path(slug: "a")=> "/a/microposts" -->
 
 <%= form_with(model: @micropost, url: "/#{@user.slug}/microposts", method: :post, local: true, html: { class: "micropost-form" }) do |f| %>
   <!-- 入力フィールド -->
   <div class="field">
-    <%= f.text_area :content, 
-      placeholder: "i dont think anything is hard. it just takes time.", 
-      class: "form-control diary-textarea",
-      style: "border: none; box-shadow: none;" %>
-  </div>
 
-  <!-- 送信ボタン -->
-  <div class="actions text-right">
+  <%= f.text_area :content, 
+  placeholder: "i dont think anything is hard. it just takes time.", 
+  class: "mt-2 p-4 rounded border shadow-md hover:shadow-lg transition-shadow duration-300 flex items-center w-full h-40",
+  style: ";" %>
+
+  <div class="mt-2 actions text-right">
     <%= f.submit "下書き保存", name:"draft", class: "btn btn-light diary-submit-btn" %>
     <%= link_to "🤖", user_path(@user), class: "btn btn-light submit-button" %>
     <%= f.submit "post", class: "btn btn-light diary-submit-btn" %>
   </div>
+
+  </div>
+
+  <!-- 送信ボタン -->
+  
 <% end %>
 
 
-  </div>
-</div>

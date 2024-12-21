@@ -132,6 +132,7 @@
 </div>
 
 
+<% if current_user == @user %>
 
 <button class="btn btn-light">
 <%= link_to "🧘", zen_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
@@ -150,6 +151,8 @@
   <%= render 'shared/micropost_form' %>
   <%= button_to "Logout", logout_path, method: :delete, class: "button-to-link-style" %>
   </section>
+
+<% end %>
 
 <% if @user.microposts.any? %>
   <!--<h3>History (<%= @user.microposts.count %>)</h3>-->

@@ -1,26 +1,16 @@
-<div class="text-center" id="nav-section">
-
-<% @microposts.published.each do |micropost| %>
-     <div class="diary-container">
-        <div class="diary-entries">
-            <ul id="entriesList" class="list-group">
-          
-      
-            <div class="all-posts-section">
-  <li style="list-style: none; display: flex; justify-content: space-between; align-items: center;">
-    <span><strong class=""><%= micropost.user.name %></strong>: <%= micropost.content %></span>
-    <span class="text-right text-muted" style="font-size: 0.9em;"><%= micropost.created_at.strftime("%Y/%m/%d") %></span>
-  </li>
-</div>
-
-    
-    </ul>
-    </div>
-</div>
-
-  <% end %>
-</div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
+<% @microposts.published.each do |micropost| %>   
+<div class="mt-2 p-4 rounded border shadow-md hover:shadow-lg transition-shadow duration-300">
+  <!-- Username and date on the first line -->
+  <div class="flex items-center text-left font-bold">
+    <span><%= micropost.user.name %></span>
+    <span class="text-gray-500 text-sm ml-2"><%= micropost.created_at.strftime("%Y/%m/%d") %></span>
+  </div>
   
+  <!-- Content on the second line -->
+  <div class="text-left mt-2">
+    <%= micropost.content %>
+  </div>
+</div>
+<% end %>
+
 

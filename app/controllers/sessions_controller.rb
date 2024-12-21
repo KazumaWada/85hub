@@ -22,7 +22,7 @@ class SessionsController < ApplicationController
         secure: Rails.env.production?
       }
 
-    flash[:success] = "ようこそ🎉!#{user.name}さん"
+    flash[:success] = "ようこそ🎉! #{user.name}さん"
     redirect_to question_path
     
     # user = User.find_by(name: session_params[:name])

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   post '/ocr/recognize', to: 'ocr#recognize'
   resources :sessions, only: [:create]#paramsで見つけられるように。
   get '/question', to: 'home#question', as: 'question'
+  get 'tutorial', to: 'home#tutorial', as: 'tutorial'
   get '/blog', to: "home#blog", as: 'blog'
   #📸
   post 'handwriting/analyze', to: 'users#analyze', as: 'analyze_handwriting'#文字認識機能

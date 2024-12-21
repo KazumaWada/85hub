@@ -1,6 +1,6 @@
 require 'rtesseract'
 class UsersController < ApplicationController
-  before_action :require_login, only: [:show]
+  before_action :require_login, only: [:index, :analyze, :edit, :update]
 
 
   def index
@@ -71,7 +71,7 @@ class UsersController < ApplicationController
     if @user.save
       #log_in @user#signupした後に再度loginさせる手間を省く。(後に実装予定)
       redirect_to login_path
-      flash[:success] = "Welcome #{@user.name}! next step, please login"
+      flash[:success] = "Hi #{@user.name}! next step, please login"
     else
       puts @user.errors.full_messages
       flash[:danger] = "#{@user.errors.full_messages}"
