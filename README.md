@@ -1,5 +1,5 @@
 # eigopencil.com 
-![alt text](image.png)
+![alt text](./app/assets/images/readme/image.png)
 # 概要
 <a href="https://eigopencil.com" tag_blank>eigopencil.com</a>とは、英語学習者の皆さんが英語を文章でアウトプットできる場を提供するサービスです。 誰かのために、自分のために英語日記や新しく覚えたフレーズを文章にして共有することができます。カレンダー機能でユーザーの投稿頻度や、投稿文字数を見ることができます。
 
