@@ -33,13 +33,14 @@
    hey, ゲストさん! 
    <%= link_to "ログイン", login_path, class: " text-decoration-none" %>
  <% else %>
-   hey, <%= current_user.name %>!
+   hey, <%= current_user.name %> 👋
  <% end %>
  </p>
 
- 
+ <div class="mt-5">
  <%= render template: "microposts/index" %>
- 
+ </div>
+
 <figure class="text-center mt-2">
 <!--自動で、app/assets/imagesを参照-->
   <%#<%= image_tag(@random_image, class: "img-fluid") %>

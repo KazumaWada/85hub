@@ -137,7 +137,7 @@
 <%= link_to "🧘", zen_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
 </button>
 <button class="btn btn-light">
-<%= link_to "📸", user_path(@user), class: "submit-button text-dark text-decoration-none" %>
+<%= link_to "📸", camera_path(@user), class: "submit-button text-dark text-decoration-none" %>
 </button>
 <button class="btn btn-light">
 <%= link_to "📝", draft_path(current_user), class: "submit-button text-dark text-decoration-none" %>
@@ -145,8 +145,10 @@
 <button class="btn btn-light">
 <%= link_to "🔖", user_path(@user), class: "submit-button text-dark text-decoration-none" %>
 </button>
+
   <section class="micropost_form">
   <%= render 'shared/micropost_form' %>
+  <%= button_to "Logout", logout_path, method: :delete, class: "button-to-link-style" %>
   </section>
 
 <% if @user.microposts.any? %>
@@ -155,20 +157,11 @@
     <%= render partial: 'microposts/micropost'%>
   </ol>
 <% end %>
-    <%= button_to "Logout", logout_path, method: :delete, class: "button-to-link-style" %>
 </div>
 
 
-<h1>手書き文字認識</h1>
-<%= form_with(url: analyze_handwriting_path, method: :post, local: true, html: { multipart: true }) do |f| %>
-  <div>
-    <%= f.label :image, "手書き文字の画像をアップロードしてください" %>
-    <%= f.file_field :image %>
-  </div>
-  <div>
-    <%= f.submit "分析する" %>
-  </div>
-<% end %>
+
+
 
 
 

@@ -20,6 +20,9 @@ RUN gem install whenever --no-document
 # 作業ディレクトリを指定
 WORKDIR /app
 
+# OCRのmini~用に画像を一時保存するpathの権限を与える。
+RUN mkdir -p /app/tmp && chmod -R 777 /app/tmp
+
 # 依存関係のインストールを効率化するため、GemfileとGemfile.lockを先にコピー
 COPY Gemfile Gemfile.lock ./
 

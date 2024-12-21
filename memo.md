@@ -349,4 +349,52 @@ _micropost.html.erb
 # current_userを省いて、friendlyを使う。完成させてからsessionをfriendlyに追加していく。
 
 # 続き
-- カレンダー機能の実装done!
+- 手書き認識機能の実装
+formでcontrollerに画像を投げる
+controllerで処理する。
+
+```ruby
+  def analyze
+    # formから画像ファイルを受け取る
+    uploaded_file = params[:image]
+
+    if uploaded_file.nil?
+      flash[:alert] = "画像をアップロードしてください。"
+      redirect_to root_path
+      return
+    end
+
+    # tmpに一時保存
+    file_path = Rails.root.join('tmp', uploaded_file.original_filename)
+    #開いて、何かを実行している。
+    File.open(file_path, 'wb') do |file|
+      file.write(uploaded_file.read)
+    end
+
+    # OCRを実行
+    recognized_text = HandwritingRecognizer.recognize(file_path)
+
+    # 結果を表示
+    render json: { text: recognized_text }
+  ensure
+    # 一時ファイルを削除
+    File.delete(file_path) if File.exist?(file_path)
+  end
+```
+
+problem: 結果が全然違う文字列が出力された。
+
+ruby公式
+https://github.com/dannnylo/rtesseract
+公式の公式
+https://github.com/tesseract-ocr/tesseract
+
+
+- 処理前に精度を高くしてみる。
+ 今: rubyにminimagicというimagemagickを取り込むツールが用意されている。(https://github.com/minimagick/minimagick)
+
+
+
+-「traineddata」ファイルを取り込んで(学習データ)実行する必要がある。
+それでも変わらなかったら、
+- 他のORMを探す

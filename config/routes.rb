@@ -10,15 +10,18 @@ Rails.application.routes.draw do
   get '/app', to: 'home#app', as: 'app'
   post '/ocr/recognize', to: 'ocr#recognize'
   resources :sessions, only: [:create]#paramsで見つけられるように。
-  post 'handwriting/analyze', to: 'users#analyze', as: 'analyze_handwriting'#文字認識機能
   get '/question', to: 'home#question', as: 'question'
   get '/blog', to: "home#blog", as: 'blog'
+  #📸
+  post 'handwriting/analyze', to: 'users#analyze', as: 'analyze_handwriting'#文字認識機能
   resources :microposts, only: [:index]#slugで先に影響されないように。/micropostsは危ないから。
   
   #frieendly_id
   get '/:slug', to: 'users#show', as: :user, constraints: { slug: /[a-zA-Z0-9\-_]+/ }#たまにidを読み込もうとするから。
   #.com/user.name/posts/1
   scope '/:slug' do
+    #📸
+    get '/camera', to: 'users#camera', as: 'camera'
     get 'drafts/index', to: 'drafts#index', as: 'draft'
     get 'drafts/:id/edit', to: 'drafts#edit', as: 'draft_edit'
     patch 'drafts/:id/update', to: 'drafts#update', as: 'draft_update'

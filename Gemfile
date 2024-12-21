@@ -63,7 +63,10 @@ gem 'dotenv-rails', groups: [:development]
 gem 'whenever', require: false
 
 #写真から文字認識(OCR optical character recognition)
-gem 'rtesseract'
+gem "rtesseract"
+
+# OCRの処理前に画像の精度を上げる
+gem "mini_magick"
 
 
 #gem 'webpacker'これは使わずに、railsのimport mapsを使う。(node.jsのimportみたいなやつ。デプロイに手間がかからないから。)

@@ -1,3 +1,4 @@
+require 'rtesseract'
 class UsersController < ApplicationController
   before_action :require_login, only: [:show]
 
@@ -6,30 +7,37 @@ class UsersController < ApplicationController
   end
 
   def analyze
-    # 画像ファイルを受け取る
     uploaded_file = params[:image]
-
+  
     if uploaded_file.nil?
       flash[:alert] = "画像をアップロードしてください。"
-      redirect_to root_path
+      redirect_to current_user
       return
     end
 
-    # 一時保存
-    file_path = Rails.root.join('tmp', uploaded_file.original_filename)
-    File.open(file_path, 'wb') do |file|
+    #app/tmpにユーザー画像を保存
+    saved_tmp_path = Rails.root.join('tmp', uploaded_file.original_filename).to_s
+    File.open(saved_tmp_path, 'wb') do |file|
       file.write(uploaded_file.read)
     end
 
-    # OCRを実行
-    recognized_text = HandwritingRecognizer.recognize(file_path)
-
-    # 結果を表示
-    render json: { text: recognized_text }
-  ensure
-    # 一時ファイルを削除
-    File.delete(file_path) if File.exist?(file_path)
+    #処理するファイルのpathを定義 app/tmp
+    tmp_path = Rails.root.join('tmp', "processed_#{SecureRandom.hex(8)}.png").to_s
+    processed_image_path = HandwritingRecognizer.preprocess_image(saved_tmp_path, tmp_path)
+    
+    #lib/handwriting_recognizer.rbでpre処理(RTesseractで画像を処理しやすくする)
+    image = RTesseract.new(processed_image_path, lang: 'eng')
+    ocr_result = image.to_s
+    #render json: { text: ocr_result } 
+    #render html: "<p>#{ocr_result}</p>".html.safe
+    redirect_to camera_path(slug: current_user.slug, ocr_result: ocr_result)
   end
+
+  def camera
+    @user = User.find_by(slug: params[:slug])  
+    @ocr_result = params[:ocr_result]
+  end
+  
 
 
   def show
