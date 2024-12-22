@@ -75,9 +75,21 @@
 <% provide(:title, @user.name) %>
 <div class="text-center mt-5">
   <!--<%= gravatar_for @user %>--> 
-  <h4><%= @user.name %></h4>
+  <h4><%= @user.name %></h4>   
+
   <skip_before_action>
-  <p>total <%= @posted_days_sum %> posts published, shared <%= @total_posts_characters %> words. yay!!</p>
+ 
+ 
+<p class="mt-3 bg-yellow-200 text-brown-600 px-4 py-2 rounded-full text-sm border border-yellow-300 shadow-md inline-block">
+  Total <%= @posted_days_sum %> posts published, shared <%= @total_posts_characters %> words. yay!!<span>🎉</span>
+</p>
+
+
+
+
+
+
+
 </div>
 
 </div>
@@ -87,49 +99,82 @@
 <div id="requests">
 <div class="container">
 
-
-<div class = "text-left">
-<h6><%= @today.strftime("%m/%d") %></h6>
-</div>
+    <!--<span>🗓️ <%= @today.strftime("%m/%d") %></span>-->
 
 
-  <div class="row text-center font-weight-bold">
-    <div class="col">Sun</div>
-    <div class="col">Mon</div>
-    <div class="col">Tue</div>
-    <div class="col">Wed</div>
-    <div class="col">Thu</div>
-    <div class="col">Fri</div>
-    <div class="col">Sat</div>
-  </div>
-  <!--1ヶ月分の日付を7つずつweekでloop-->
+<div class="grid grid-cols-7 gap-0 text-center border border-gray-300 rounded-md">
+  <!-- 曜日部分 -->
+  <div class="py-2 bg-gray-200 text-gray-700 font-bold border-r">Sun</div>
+  <div class="py-2 bg-gray-200 text-gray-700 font-bold border-r">Mon</div>
+  <div class="py-2 bg-gray-200 text-gray-700 font-bold border-r">Tue</div>
+  <div class="py-2 bg-gray-200 text-gray-700 font-bold border-r">Wed</div>
+  <div class="py-2 bg-gray-200 text-gray-700 font-bold border-r">Thu</div>
+  <div class="py-2 bg-gray-200 text-gray-700 font-bold border-r">Fri</div>
+  <div class="py-2 bg-gray-200 text-gray-700 font-bold">Sat</div>
+
+  <!-- 日付部分 -->
   <% @calendar_days.each_slice(7) do |week| %>
-    <div class="row">
-    <!--weekをさらにdateでloop-->
-      <% week.each do |date| %>
-        <div class="col border text-center" style="height: 40px; font-size: 1em;">
-          
-        <% if @posted_dates.include?(date.day) %><!--Data型と数値で方が違うからこう書く-->
-          <div>
-          ✅<%= date.day %>
+    <% week.each do |date| %>
+      <div class="h-12 border-r border-b flex items-center justify-center">
+        <% if @posted_dates.include?(date.day) %>
+          <div class="font-bold">
+            ✅ <%= date.day %>
           </div>
-
-        <% elsif date ==  Date.today%><!--もし今日投稿していたら、.はスキップ-->
-          <div class ="bg-light">
-           <%= date.day %>.
+        <% elsif date == Date.today %>
+          <div class="bg-green-100 text-gray-800 font-semibold rounded">
+            <%= date.day %>
           </div>
-
-       <% else %>
-         <div>
-          <%= date.day %>
-        </div>
-
-          <% end %>
-        </div>
+        <% else %>
+          <div class="text-gray-600">
+            <%= date.day %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+    <% if week.size < 7 %>
+      <% (7 - week.size).times do %>
+        <div class="h-12 border-r"></div>
       <% end %>
-    </div>
+    <% end %>
   <% end %>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <% if current_user == @user %>
@@ -147,9 +192,12 @@
 <%= link_to "🔖", user_path(@user), class: "submit-button text-dark text-decoration-none" %>
 </button>
 
+
+
+
+
   <section class="micropost_form">
   <%= render 'shared/micropost_form' %>
-  <%= button_to "Logout", logout_path, method: :delete, class: "button-to-link-style" %>
   </section>
 
 <% end %>
