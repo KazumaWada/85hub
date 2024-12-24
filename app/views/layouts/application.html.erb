@@ -4,6 +4,8 @@
     <title>eigopencil</title>
     <%= favicon_link_tag "favicon.ico" %>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- TailwindCSSのdoeロップダウン用 -->
+    <script src="https://unpkg.com/flowbite@1.6.5/dist/flowbite.min.js"></script>
 
     <!-- Twitter Card設定 -->
     <meta name="twitter:card" content="summary_large_image">
@@ -60,11 +62,46 @@
 .nav-section .nav-links button {
   margin: 0 0.25rem; /* 各ボタン間の余白を調整 */
 }
+
+.floating-circle {
+  position: fixed;
+  bottom: 20px; /* 画面の下から20pxの位置 */
+  left: 20px; /* 画面の左から20pxの位置 */
+  width: 60px;
+  height: 60px;
+  background-color: #eaad42;
+  color: white;
+  border-radius: 50%; /* 丸くする */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 軽いシャドウ効果 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 1000; /* 他の要素の上に表示 */
+  transition: background-color 0.3s ease;
+}
+.floating-circle:hover {
+  background-color: #e2a234; /* ホバー時の色 */
+}
+.no-underline {
+    text-decoration: none; /* 下線を無効化 */
+  }
+
+  .no-underline:hover {
+    text-decoration: none; /* ホバー時も下線を無効化 */
+  }
+button:focus {
+    outline: none;
+  }
+
 #tailwind CSS (https://tailwindcss.com/docs/guides/ruby-on-rails)
 </style>
   </head>
 
   <body>
+
+
 
 <div class="d-flex align-items-center justify-content-between" id="nav-section">
    <!-- ロゴ -->
@@ -73,29 +110,86 @@
     <%= image_tag("logo01.png", class: "logo") %>
    <% end %>
   </div>
- 
-   <!-- ナビゲーションボタン -->
-   <div class="nav-links text-center">
-     <button class="btn btn-light p-3">
-       <%= link_to "🏠", root_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
-     </button>
-     <button class="btn btn-light p-3">
-       <%= link_to "👤", current_user ? current_user : login_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
-     </button>
-     <button class="btn btn-light p-3">
-       <%= link_to "🧘‍♂️", current_user ? zen_path(current_user) : login_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
-     </button>
-     <button class="btn btn-light p-3">
-       <%= link_to "📖", blog_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
-     </button>
-     <button class="btn btn-light p-3">
-       <%= link_to "?", question_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
-     </button>
-   </div>
+
+
+  <div class="relative ml-auto">
+    <!-- Dropdownトリガーボタン -->
+    <button id="dropdownButton" data-dropdown-toggle="dropdownMenu" class="px-4 py-2 bg-white-600 rounded-md focus:ring-0">
+     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+     <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+     </svg>  
+    </button>
+
+    <!-- Dropdownメニュー -->
+    <div id="dropdownMenu" class="hidden z-10 w-30 bg-white rounded-md shadow-lg">
+      <ul class="py-1 text-gray-700">
+        <li>
+        <button class="btn btn-light p-3">
+        <%= link_to root_path, class: "text-dark text-decoration-none d-flex align-items-center", data: { turbo: false } do %>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+       <path fill-rule="evenodd" d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z" clip-rule="evenodd" />
+       </svg>
+        <% end %>
+       </button>
+        </li>
+
+        <li>
+        <button class="btn btn-light p-3">
+        <%= link_to current_user ? current_user : login_path, class: "text-dark text-decoration-none", data: { turbo: false } do %>
+       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
+       <path d="M10 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM3.465 14.493a1.23 1.23 0 0 0 .41 1.412A9.957 9.957 0 0 0 10 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 0 0-13.074.003Z" />
+       </svg>
+       <% end %>
+      </button>
+        </li>
+
+        <li>
+        <button class="btn btn-light p-3">
+    <%= link_to blog_path, class: "text-dark text-decoration-none", data: { turbo: false } do %>
+     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
+       <path d="M11.25 4.533A9.707 9.707 0 0 0 6 3a9.735 9.735 0 0 0-3.25.555.75.75 0 0 0-.5.707v14.25a.75.75 0 0 0 1 .707A8.237 8.237 0 0 1 6 18.75c1.995 0 3.823.707 5.25 1.886V4.533ZM12.75 20.636A8.214 8.214 0 0 1 18 18.75c.966 0 1.89.166 2.75.47a.75.75 0 0 0 1-.708V4.262a.75.75 0 0 0-.5-.707A9.735 9.735 0 0 0 18 3a9.707 9.707 0 0 0-5.25 1.533v16.103Z" />
+     </svg>
+   <% end %>
+  </button>
+        </li>
+
+        <li>
+        <button class="btn btn-light p-3">
+        <%= link_to question_path, class: "text-dark text-decoration-none", data: { turbo: false } do %>
+       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
+       <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 0 1-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 0 1-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 0 1-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584ZM12 18a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clip-rule="evenodd" />
+       </svg>
+       <% end %>
+       </button>
+        </li>
+
+        <% if current_user %>
+        <li>
+        <%= button_to logout_path, method: :delete, class: "p-3 btn btn-light text-dark text-decoration-none", form: { style: "display: inline;" },  data: { confirm: "ログアウトしますか？" } do %>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
+  <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.72 6.97a.75.75 0 1 0-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06L12 13.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L13.06 12l1.72-1.72a.75.75 0 1 0-1.06-1.06L12 10.94l-1.72-1.72Z" clip-rule="evenodd" />
+</svg>
+       <% end %>
+        
+        </li>
+         <% end %>
+
+      </ul>
+    </div>
+  </div>
+
+
+
  
    <!-- 空スペース -->
    <div class="spacer"></div>
  </div>
+
+
+ <div class="floating-circle">
+  <%= link_to "+", current_user ? zen_path(current_user) : login_path, class: "text-white no-underline", data: { turbo: false } %>
+ </div>
+
  
 
 
