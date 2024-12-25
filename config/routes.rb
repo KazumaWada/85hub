@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get '/question', to: 'home#question', as: 'question'
   get 'tutorial', to: 'home#tutorial', as: 'tutorial'
   get '/blog', to: "home#blog", as: 'blog'
+  get '/how_i_use', to: "home#how_i_use", as: 'how_i_use'
   #📸
   post 'handwriting/analyze', to: 'users#analyze', as: 'analyze_handwriting'#文字認識機能
   resources :microposts, only: [:index]#slugで先に影響されないように。/micropostsは危ないから。

@@ -493,3 +493,28 @@ _micropost.html.erb
   </div>
 <% end %>
 ```
+
+# 開発者流eigopencilの使い方
+
+僕がeigopencilを使うときは、日頃英語のコンテンツをブログやkindleなどの文章やYouTubeの動画コンテンツを見たり聞いたりしている時に、「かっこいい言い方だな」「これよく聞くけどどういう意味なんだろう」と疑問に思った時に、そのフレーズを書き留めます。自分なりの文章に変えたいと思った時はそのフレーズや単語の意味を後から見直したときにわかるように記録し、その後オリジナルフレーズを書いておきます。
+-- -- -- -- -- -- -- 
+kazuma
+2024/12/25
+原文: My ridiculous intake of over six cups of coffee daily definitely pushed me over the edge, but it was only the catalyst, not the cause.(URL:https://levels.io/reset-your-life/) 
+
+覚える単語/フレーズとその意味: pushed me over the edge: The phrase "pushed me over the edge" typically means that something caused a person to reach their breaking point emotionally, mentally, or in terms of patience. It suggests that the person was already close to their limit, and the event or action pushed them beyond their capacity to cope or remain composed. 
+
+自作英文: coding 8h straight literally pushed me over the edge..
+
+-- -- -- -- -- -- --
+
+そしてそのまま覚えたい時はそのフレーズをそのまま書いて投稿しておきます。
+-- -- -- -- -- -- -- 
+i dont think anything is hard. it just takes time.
+(url: youtube.com/hogehoge)
+-- -- -- -- -- -- -- 
+
+
+僕のテンプレートはここから使う事ができます。
+そして、urlを共有することで、英語学習のコンテンツをみんなで共有する事ができます。
+もちろん、ユーザーの皆さんの独自のやり方でもできるように、投稿するときはテンプレートを選択する事ができます。

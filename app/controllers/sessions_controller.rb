@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
      cookies.signed[:user_data] = {
         value: { user_id: user.id, slug: user.slug },
         httponly: true,
-        secure: Rails.env.production?
+        secure: Rails.env.production?,
         expires: 1.month.from_now#指定しなければ、セッションが終わればcookieがなくなる。
       }
 
