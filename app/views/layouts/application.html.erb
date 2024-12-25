@@ -7,12 +7,12 @@
     <!-- TailwindCSSのdoeロップダウン用 -->
     <script src="https://unpkg.com/flowbite@1.6.5/dist/flowbite.min.js"></script>
 
-    <!-- Twitter Card設定 -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="eigopencil.comで英語をアウトプットしよう！">
-    <meta name="twitter:description" content="このページの説明文をここに追加">
-    <meta name="twitter:image" content="<%= asset_url('q01.webp') %>">
-    <meta name="twitter:url" content="https://eigopencil.com/question">
+    <%# Twitterカード用のメタタグ %>
+    <meta name="twitter:card" content="summary_large_image"> <%# カードの種類を指定 %>
+    <meta name="twitter:title" content="<%= content_for?(:title) ? yield(:title) : '✏️eigopencil' %>"> <%# カードのタイトル %>
+    <meta name="twitter:description" content="✏️eigopencil.comで英語をアウトプットしよう!">
+    <meta name="twitter:image" content="<%= content_for?(:image) ? yield(:image) : asset_path('q01.webp') %>"> <%# カードの画像 %>
+  
     
     <style>
       * {

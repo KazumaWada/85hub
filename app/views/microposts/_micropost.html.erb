@@ -1,7 +1,4 @@
 <% @microposts.published.each do |micropost| %>
-  <% content_for :title, micropost.content.truncate(50) %>
-  <% content_for :meta_description, micropost.content.truncate(150) %>
-  <% content_for :twitter_image, asset_url("logo01.png") %>
 
   <!-- 表示部分 -->
   <div class="mt-2 p-4 rounded border shadow-md hover:shadow-lg transition-shadow duration-300">
@@ -17,10 +14,12 @@
           <%= button_to "🗑️", micropost_path(slug: @user.slug, id: micropost.id), method: :delete, class: "btn btn-sm" %>
           <!-- Xでシェアするボタン -->
           <%= link_to "X",
-            "https://twitter.com/intent/tweet?text=#{CGI.escape("✏️ " + micropost.content + "\n")}%0A#{CGI.escape('https://eigopencil.com')}",
+            "https://twitter.com/intent/tweet?text=#{CGI.escape("✏️ #{micropost.content}\n\nhttps://eigopencil.com")}",
             target: "_blank",
-            rel: "noopener",
-            class: "btn btn-dark text-white btn-sm" %>
+            rel: "noopener noreferrer",
+            class: "btn btn-dark text-white btn-sm",
+            aria: { label: "Share this post on X" } %>
+
         </div>
         
       <% end %>

@@ -5,10 +5,7 @@
 
 
 <% @microposts.draft.each do |micropost| %>
-    <!-- Twitter Card用のcontent_for(helperメソッド。ここで定義するが、別の場所で利用する場合。) -->
-    <% content_for :title, micropost.content.truncate(50) %>
-    <% content_for :meta_description, micropost.content.truncate(150) %>
-    <% content_for :twitter_image, asset_url("logo01.png") %>
+ 
   
     <!-- 表示部分 -->
     <div class="diary-container">

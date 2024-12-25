@@ -1,7 +1,7 @@
 
 
-
-<%= form_with(model: @micropost, url: "/#{current_user.name}/zen/microposts", method: :post, local: true, html: { class: "micropost-form" }) do |f| %>
+<!--post '/zen_create', to: 'microposts#zen_create', as: 'zen_create'-->
+<%= form_with(model: @micropost, url: zen_create_path(slug: @user.slug), method: :post, local: true, html: { class: "micropost-form" }) do |f| %>
   <!-- 入力フィールド -->
   <div class="field">
     <%= f.text_area :content, 

@@ -43,7 +43,8 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by(slug: params[:slug])   
     @microposts = @user.microposts
-    @posted_days_sum = @user.microposts.published.count
+    @posted_sum = @user.microposts.published.count
+    @draft_sum = @user.microposts.draft.count
     @total_posts_characters = @user.microposts.published.sum { |post| post.content.length }
     @drafts_sum = @user.microposts.draft.count
     start_date = Date.today.beginning_of_month.beginning_of_week(:sunday)
@@ -56,7 +57,8 @@ class UsersController < ApplicationController
     # １ヶ月分の日付を配列に
     @calendar_days = (start_date..end_date).to_a
     #これがcreated_atの配列になる。
-    @posted_dates = @user.microposts.pluck(:created_at).map(&:to_date).map { |date| date.day }
+    @posted_dates = @user.microposts.published.pluck(:created_at).map(&:to_date).map { |date| date.day }
+    @posted_dates_sum = @posted_dates.uniq.count
     logger.debug "👷👷👷👷👷@posted_dates: #{@posted_dates.inspect}" 
   end
 

@@ -76,16 +76,37 @@ class MicropostsController < ApplicationController
     end
 
     def zen_create 
+      puts "reach to zen_create✅"
       # fixed_params = { micropost: { content: params[:content] } }
       # params.merge!(fixed_params)  
       Rails.logger.debug "🛠️🛠️🛠️🛠️🛠️🛠️🛠️🛠️🛠️🛠️🛠️🛠️🛠️🛠️🛠️🛠️Params: #{params.inspect}" # パラメータの中身をログに表示
 
       @user = User.find_by(slug: params[:slug])
+      #has_manyを扱っているから複数形
       @micropost = @user.microposts.build(micropost_params)
 
-      if @micropost.save
-        flash[:success] = "posted from zen mode!"
+      if params[:draft]
+        @micropost.status = 'draft'
+      else
+        @micropost.status = 'published'
+      end
+
+      # if @micropost.save
+      #   flash[:success] = "posted!"
+      #   redirect_to user_path(@user)
+      # else
+      #   flash[:danger] = "⚠️heads up! English only!!⚠️"
+      #   flash[:danger] = @micropost.errors.full_messages.join(", ")
+      #   redirect_to user_path(@user)
+      # end
+
+      if @micropost.save && @micropost.status == "published"
+        flash[:success] = "nice. you did it!"
         redirect_to user_path(@user)
+      elsif@micropost.save && @micropost.status == "draft"
+        flash[:success] = "draft saved. go check 📝"
+        redirect_to user_path(@user)
+
       else
         flash[:danger] = "⚠️heads up! English only!!⚠️"
         flash[:danger] = @micropost.errors.full_messages.join(", ")

@@ -79,9 +79,21 @@
 
   <skip_before_action>
  
- 
-<p class="mt-3 bg-yellow-200 text-brown-600 px-4 py-2 rounded-full text-sm border border-yellow-300 shadow-md inline-block">
-  Total <%= @posted_days_sum %> posts published, shared <%= @total_posts_characters %> words. yay!!<span>🎉</span>
+
+<p class="mt-3 text-brown-600 px-4 py-2 text-white rounded-full border border-yellow-300 shadow-md inline-block" style="background-color: #eaad42;">
+  <%= @posted_sum %> posts published🚀
+</p>
+
+<p class="text-brown-600 px-4 py-2 text-white rounded-full border border-yellow-300 shadow-md inline-block" style="background-color: #eaad42;">
+  shared <%= @total_posts_characters %> words. yay!!<span>🎉</span>
+</p>
+
+<p class="text-brown-600 px-4 py-2 text-white rounded-full border border-yellow-300 shadow-md inline-block" style="background-color: #eaad42;">
+<%= @draft_sum %> posts sleep in draft😴
+</p>
+
+<p class="text-brown-600 px-4 py-2 text-white rounded-full border border-yellow-300 shadow-md inline-block" style="background-color: #eaad42;">
+consistent for a <%= @posted_dates_sum %> days😤
 </p>
 
 
@@ -104,13 +116,13 @@
 
 <div class="grid grid-cols-7 gap-0 text-center border border-gray-300 rounded-md">
   <!-- 曜日部分 -->
-  <div class="py-2 bg-gray-200 text-gray-700 font-bold border-r">Sun</div>
-  <div class="py-2 bg-gray-200 text-gray-700 font-bold border-r">Mon</div>
-  <div class="py-2 bg-gray-200 text-gray-700 font-bold border-r">Tue</div>
-  <div class="py-2 bg-gray-200 text-gray-700 font-bold border-r">Wed</div>
-  <div class="py-2 bg-gray-200 text-gray-700 font-bold border-r">Thu</div>
-  <div class="py-2 bg-gray-200 text-gray-700 font-bold border-r">Fri</div>
-  <div class="py-2 bg-gray-200 text-gray-700 font-bold">Sat</div>
+  <div class="py-2 bg-gray-100 text-gray-500 font-bold border-r">Sun</div>
+  <div class="py-2 bg-gray-100 text-gray-500 font-bold border-r">Mon</div>
+  <div class="py-2 bg-gray-100 text-gray-500 font-bold border-r">Tue</div>
+  <div class="py-2 bg-gray-100 text-gray-500 font-bold border-r">Wed</div>
+  <div class="py-2 bg-gray-100 text-gray-500 font-bold border-r">Thu</div>
+  <div class="py-2 bg-gray-100 text-gray-500 font-bold border-r">Fri</div>
+  <div class="py-2 bg-gray-100 text-gray-500 font-bold">Sat</div>
 
   <!-- 日付部分 -->
   <% @calendar_days.each_slice(7) do |week| %>
@@ -118,7 +130,7 @@
       <div class="h-12 border-r border-b flex items-center justify-center">
         <% if @posted_dates.include?(date.day) %>
           <div class="font-bold">
-            ✅ <%= date.day %>
+          ✅  <%= date.day %>
           </div>
         <% elsif date == Date.today %>
           <div class="bg-green-100 text-gray-800 font-semibold rounded">

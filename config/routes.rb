@@ -29,7 +29,7 @@ Rails.application.routes.draw do
     get 'bookmark', to: 'microposts#bookmark', as: 'bookmark'
     #get 'draft', to: 'microposts#draft', as: 'draft'
     get 'zen', to: 'microposts#zen_new', as: 'zen' #zen_path(slug: 'example-slug')
-    post 'zen/microposts', to: 'microposts#zen_create'
+    post '/zen_create', to: 'microposts#zen_create', as: 'zen_create'
     #post送信用のurl
     #post '/zen/microposts', to: 'microposts#create', as: :zen_microposts
     resources :microposts, only: [:create, :destroy, :new] #, path: 'posts'
