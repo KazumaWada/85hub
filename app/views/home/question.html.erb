@@ -6,7 +6,8 @@
    <%= link_to "eigopencil.com", root_path, class: "text-decoration-none text-dark" %>
   <!-- <%= link_to "eigo-toen.online", root_path, class: "text-decoration-none text-dark" %>-->
  </h1>
- <p>言葉にするたび、英語があなたのものになる。</p>
+ <!--<p>言葉にするたび、英語があなたのものになる。</p>-->
+     <p>英語のアウトプットを、あなたの方法で、あなたのペースで。</p>
 </div>
 
 
@@ -16,11 +17,16 @@
 <div class="row">
 
 <div class="col-md-6">
-<h5 class="text-left">ようこそ！🎉</h5>
+<h4 class="text-left">🎉ようこそ！</h4>
 <p class="text-muted text-left mt-4">
-eigopencilとは、英語学習者の皆さんが英語を文章でアウトプットできる場を提供するサービスです。 誰かのために、自分のために英語日記や新しく覚えたフレーズを文章にして共有しましょう。
-<%= link_to "使い方ガイド📚", tutorial_path, class: "text-primary" %>
+英語を学ぶ理由も、学び方も、人それぞれにスタイルがあります。だからこそ、eigopencilはあなた自身が自由に英語をアウトプットできるスペースを提供します。
 </p>
+
+
+
+
+
+
 </div>
 
 <div class="col-md-6">
@@ -31,49 +37,49 @@ eigopencilとは、英語学習者の皆さんが英語を文章でアウトプ�
 
 
 <div class="col-md-6">
-<h5 class="mt-5">書いて身に付く英語力✏️</h5>
-<p class="text-muted text-left">
-eigopencilは開発者自身が英語学習に伸び悩んだ経験から生まれました。このサイトでは学習内容を記録し、モチベーションを保ちながら学ぶことができます。あなたも日々の英語学習にこのアプリを取り入れて新しい学びの形を始めてみませんか？
+<h4 class="mt-5">👨‍🎨自由自在に装飾ができる投稿エディタ</h4>
+<p class="text-muted text-left mt-4">
+文字を太くしたり、画像やリンクを貼ったり、シンプルな英語日記を書いたり。eigopencilの使い方はあなた次第です。
 </p>
 </div>
 
 <div class="col-md-6">
 <div class="text-center mt-4">
-<%= image_tag("q002.png", class: "img-fluid", style: "max-width: 320px; height: auto; border-radius: 8px;") %>
+<%= image_tag("trix.png", class: "img-fluid", style: "max-width: 320px; height: auto; border-radius: 8px;") %>
 </div>
 </div>
+
 
 <div class="col-md-6">
-<h5 class="mt-4">アプリのように使ってみよう📱</h5>
-<p class="text-muted text-left">
-スマホのアプリからこのウェブサイトを開くことができます。詳しくは<%= link_to "こちら", app_path, class: "", data: { turbo: false } %>
-</p>
+<h4 class="mt-5">📚Learn more</h4>
+
+<div class="mt-4 hover:bg-gray-100 text-center">
+<%= link_to how_i_use_path, class: "no-underline text-black block border border-gray-300 rounded-md p-4 bg-transparent transition", data: { turbo: false } do %>
+   <h6 class="text-muted">開発者のeigopencil活用法</h6>
+ <% end %>
 </div>
 
-<div class="col-md-6">
-<div class="text-center mt-4">
-<%= image_tag("q003.png", class: "img-fluid", style: "max-width: 320px; height: auto; border-radius: 8px;") %>
-</div>
+<div class="mt-4 hover:bg-gray-100 text-center">
+ <%= link_to how_i_use_path, class: "no-underline text-black block border border-gray-300 rounded-md p-4 bg-transparent hover:bg-gray-300 transition", data: { turbo: false } do %>
+   <h6 class="text-muted">投稿エディタの使い方</h6>
+<% end %>
 </div>
 
-<div class="col-md-6">
-<h5 class="">開発者流eigopencilの使い方</h5>
-<p class="text-muted">
-このサイトは、開発者の英語学習方法を再現したものです。その方法を下記のリンクにまとめました。
-
-<%= link_to "こちら", how_i_use_path, class: "", data: { turbo: false } %><p>
 
 </div>
 
 <div class="col-md-6">
 <div class="text-center mt-4">
-<%= image_tag("q005.png", class: "img-fluid", style: "max-width: 320px; height: auto; border-radius: 8px;") %>
+<%= image_tag("learn_more.png", class: "img-fluid", style: "max-width: 320px; height: auto; border-radius: 8px;") %>
 </div>
 </div>
+
+
+
 
 
 <div class="col-md-6">
-<h5 class="mt-4">お問い合わせ📩</h5>
+<h4 class="mt-4">お問い合わせ📩</h4>
 <p class="text-muted mt-4">
 あなたののフィードバックが、eigopencilをもっと便利で使いやすいサービスにしていきます。不具合やもっとこうした方がいいなどの声はぜひこちらまでお聞かせください。<br> ✉️: eigopencil@gmail.com
 </p>
@@ -91,7 +97,7 @@ eigopencilは開発者自身が英語学習に伸び悩んだ経験から生ま�
 
 
 
-<h5 class="mt-4">利用規約とプライバシーポリシー📜</h5>
+<h4 class="mt-4">利用規約とプライバシーポリシー📜</h4>
 <p class="text-muted mt-4">
 * アマゾンリンクについて<br>
 eigopencilは、Amazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラム、Amazonアソシエイト・プログラムの参加者です。
