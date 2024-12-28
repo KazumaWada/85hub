@@ -1,110 +1,114 @@
-<div class="container">
+<div class="mx-auto px-4 max-w-5xl">
 
-<div class="text-center mt-3" id="nav-section">
-<h1>
-   <!--<%= image_tag("logo01.png") %>-->
-   <%= link_to "eigopencil.com", root_path, class: "text-decoration-none text-dark" %>
-  <!-- <%= link_to "eigo-toen.online", root_path, class: "text-decoration-none text-dark" %>-->
- </h1>
- <!--<p>言葉にするたび、英語があなたのものになる。</p>-->
-     <p>英語のアウトプットを、あなたの方法で、あなたのペースで。</p>
+  <div class="text-center mt-5">
+    <h1 class="text-4xl font-medium">eigopencil.com</h1>
+    <p class="fonr-bold mt-3">英語のアウトプットを、あなたの方法で、あなたのペースで。</p>
+  </div>
+
+<div>
+  <div class="text-center mt-4">
+    <%= image_tag("mascot.png", class: "mx-auto max-w-[320px] h-auto rounded-lg") %>
+  </div>
 </div>
 
+  <div class="about mt-5 mx-3">
 
-<div class="about mt-5 ml-3 mr-3">
+    <!-- Tailwind のグリッドレイアウト: 1列 -> MD以上で2列 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
 
+      <!-- 1カラム目 -->
+      <div class="mt-5 p-7">
+        <h4 class="text-left text-xl font-medium">🎉ようこそ！</h4>
+        <p class="text-gray-500 text-left mt-4">
+          英語を学ぶ理由も、学び方も、人それぞれにスタイルがあります。  
+          だからこそ、eigopencilはあなた自身が自由に英語をアウトプットできるスペースを提供します。
+        </p>
+      </div>
 
-<div class="row">
+     
 
-<div class="col-md-6">
-<h4 class="text-left">🎉ようこそ！</h4>
-<p class="text-muted text-left mt-4">
-英語を学ぶ理由も、学び方も、人それぞれにスタイルがあります。だからこそ、eigopencilはあなた自身が自由に英語をアウトプットできるスペースを提供します。
-</p>
+      <!-- 3カラム目 -->
+      <div class="p-7 mt-5">
+        <h4 class="text-left text-xl font-medium">👨‍🎨自由自在に装飾ができる投稿エディタ</h4>
+        <p class="text-gray-500 text-left mt-4">
+          文字を太くしたり、画像やリンクを貼ったり、シンプルな英語日記を書いたり。  
+          eigopencilの使い方はあなた次第です。
+        </p>
+      </div>
 
+   
 
+    
+      <!-- 5カラム目 -->
+      <div class="p-7 mt-5">
+      <h4 class="text-left text-xl font-medium">📚Learn more</h4>
+        <div class="mt-4 hover:bg-yellow-500 text-center">
+          <%= link_to how_i_use_path,
+                      class: "no-underline text-black block border border-gray-300 rounded-md p-4 bg-transparent transition",
+                      data: { turbo: false } do %>
+            <h6 class="text-gray-500">開発者のeigopencil活用法</h6>
+          <% end %>
+        </div>
+        
+        <div class="mt-4 hover:bg-yellow-500 text-center">
+          <%= link_to how_i_use_path,
+                      class: "no-underline text-black block border border-gray-300 rounded-md p-4 bg-transparent transition",
+                      data: { turbo: false } do %>
+            <h6 class="text-gray-500">投稿エディタの使い方</h6>
+          <% end %>
+        </div>
+      </div>
 
+      
 
+      <!-- 7カラム目 -->
+      <div class="p-7 mt-5">
+        <h4 class="text-left text-xl font-medium">お問い合わせ📩</h4>
+        <p class="text-gray-500 mt-4">
+          あなたのフィードバックが、eigopencilをもっと便利で使いやすいサービスにしていきます。  
+          不具合やもっとこうした方がいいなどの声はぜひこちらまでお聞かせください。<br>
+          ✉️: eigopencil@gmail.com
+        </p>
+      </div>
 
+      <!-- 8カラム目（画像） -->
+      <div>
+        <div class="text-center mt-4">
+          <%= image_tag("q004.png", class: "mx-auto max-w-[320px] h-auto rounded-lg") %>
+        </div>
+      </div>
 
-</div>
+      <!-- 2カラム目（画像） -->
+      <div class="p-5">
+        <div class="text-center">
+          <%= image_tag("q001.png", class: "mx-auto max-w-[320px] h-auto rounded-lg") %>
+        </div>
+      </div>
 
-<div class="col-md-6">
-<div class="text-center mt-4">
-<%= image_tag("q001.png", class: "img-fluid", style: "max-width: 320px; height: auto; border-radius: 8px;") %>
-</div>
-</div>
+      <!-- 4カラム目（画像） -->
+      <div>
+        <div class="text-center mt-4">
+          <%= image_tag("trix.png", class: "mx-auto max-w-[320px] h-auto rounded-lg") %>
+        </div>
+      </div>
 
+      <!-- 6カラム目（画像） -->
+      <div class="p-7">
+        <div class="text-center mt-4">
+          <%= image_tag("learn_more.png", class: "mx-auto max-w-[320px] h-auto rounded-lg") %>
+        </div>
+      </div>
 
-<div class="col-md-6">
-<h4 class="mt-5">👨‍🎨自由自在に装飾ができる投稿エディタ</h4>
-<p class="text-muted text-left mt-4">
-文字を太くしたり、画像やリンクを貼ったり、シンプルな英語日記を書いたり。eigopencilの使い方はあなた次第です。
-</p>
-</div>
+    </div> <!-- grid -->
 
-<div class="col-md-6">
-<div class="text-center mt-4">
-<%= image_tag("trix.png", class: "img-fluid", style: "max-width: 320px; height: auto; border-radius: 8px;") %>
-</div>
-</div>
+    <!-- 下部の利用規約・プライバシーポリシー -->
+    <div class="p-7 mt-5">
+    <h4 class="text-left text-xl font-medium">利用規約とプライバシーポリシー📜</h4>
+    <p class="text-gray-500 mt-4">
+      * アマゾンリンクについて  
+      eigopencilは、Amazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラム、Amazonアソシエイト・プログラムの参加者です。
+    </p>
+    </div>
 
-
-<div class="col-md-6">
-<h4 class="mt-5">📚Learn more</h4>
-
-<div class="mt-4 hover:bg-gray-100 text-center">
-<%= link_to how_i_use_path, class: "no-underline text-black block border border-gray-300 rounded-md p-4 bg-transparent transition", data: { turbo: false } do %>
-   <h6 class="text-muted">開発者のeigopencil活用法</h6>
- <% end %>
-</div>
-
-<div class="mt-4 hover:bg-gray-100 text-center">
- <%= link_to how_i_use_path, class: "no-underline text-black block border border-gray-300 rounded-md p-4 bg-transparent hover:bg-gray-300 transition", data: { turbo: false } do %>
-   <h6 class="text-muted">投稿エディタの使い方</h6>
-<% end %>
-</div>
-
-
-</div>
-
-<div class="col-md-6">
-<div class="text-center mt-4">
-<%= image_tag("learn_more.png", class: "img-fluid", style: "max-width: 320px; height: auto; border-radius: 8px;") %>
-</div>
-</div>
-
-
-
-
-
-<div class="col-md-6">
-<h4 class="mt-4">お問い合わせ📩</h4>
-<p class="text-muted mt-4">
-あなたののフィードバックが、eigopencilをもっと便利で使いやすいサービスにしていきます。不具合やもっとこうした方がいいなどの声はぜひこちらまでお聞かせください。<br> ✉️: eigopencil@gmail.com
-</p>
-</div>
-
-<div class="col-md-6">
-<div class="text-center mt-4">
-<%= image_tag("q004.png", class: "img-fluid", style: "max-width: 320px; height: auto; border-radius: 8px;") %>
-</div>
-</div>
-
-</div><!--row-->
-
-
-
-
-
-<h4 class="mt-4">利用規約とプライバシーポリシー📜</h4>
-<p class="text-muted mt-4">
-* アマゾンリンクについて<br>
-eigopencilは、Amazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラム、Amazonアソシエイト・プログラムの参加者です。
-</p>
-
-
-</div>
-
-</div></div>
-
+  </div><!-- about -->
+</div><!-- container -->

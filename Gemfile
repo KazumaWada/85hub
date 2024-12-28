@@ -16,7 +16,7 @@ gem "pg", "~> 1.1"
 gem "puma", "~> 5.0"
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
-gem "importmap-rails"
+gem "importmap-rails", "~> 1.1"
 
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
 gem "turbo-rails"
@@ -68,6 +68,9 @@ gem "rtesseract"
 # OCRの処理前に画像の精度を上げる
 gem "mini_magick"
 
+#action_textの画像処理(https://railsguides.jp/v7.0/active_storage_overview.html#%E8%A6%81%E4%BB%B6)
+gem "image_processing", ">= 1.2"
+
 
 #gem 'webpacker'これは使わずに、railsのimport mapsを使う。(node.jsのimportみたいなやつ。デプロイに手間がかからないから。)
 
@@ -103,4 +106,4 @@ group :test do
 
 end
 
-gem "tailwindcss-rails", "~> 3.0"
+

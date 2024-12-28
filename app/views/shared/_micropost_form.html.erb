@@ -6,6 +6,7 @@
 <%= form_with(model: @micropost, url: "/#{@user.slug}/microposts", method: :post, local: true, html: { class: "micropost-form" }) do |f| %>
   <!-- 入力フィールド -->
   <div class="field">
+  <button type="button" onclick="makeBold()" class="btn btn-light">B</button>
 
   <%= f.text_area :content, 
   placeholder: "i dont think anything is hard. it just takes time.", 

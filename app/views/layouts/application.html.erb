@@ -1,11 +1,38 @@
 <!DOCTYPE html>
 <html>
-  <head>
+  <head> 
+  <!-- Importmap -->
+  <!--<%= javascript_importmap_tags %>-->
+  <!--<script type="module" src="/assets/application.js"></script>-->
+  <!-- Stylesheets -->
+  <!--<%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>-->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     <title>eigopencil</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
     <%= favicon_link_tag "favicon.ico" %>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- TailwindCSSのdoeロップダウン用 -->
-    <script src="https://unpkg.com/flowbite@1.6.5/dist/flowbite.min.js"></script>
+  <!-- Rails7推奨のやり方ではできなかったからCDNで読み込む -->
+  <script src="https://unpkg.com/@hotwired/stimulus/dist/stimulus.umd.js"></script>
+
+ 
+  
+  <!-- TailwindCSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Flowbite -->
+  <script src="https://unpkg.com/flowbite@1.6.5/dist/flowbite.min.js"></script>
+
+  
+
+<!--google font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&family=Lexend:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+
 
     <%# Twitterカード用のメタタグ %>
     <meta name="twitter:card" content="summary_large_image"> <%# カードの種類を指定 %>
@@ -13,13 +40,20 @@
     <meta name="twitter:description" content="✏️eigopencil.comで英語をアウトプットしよう!">
     <meta name="twitter:image" content="<%= content_for?(:image) ? yield(:image) : asset_path('q01.webp') %>"> <%# カードの画像 %>
   
-    
+  </head>
     <style>
       * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
       }
+.nunito-<uniquifier> {
+  font-family: "Nunito", serif;
+  font-optical-sizing: auto;
+  font-weight: <weight>;
+  font-style: normal;
+}
+
       .links ul {
         list-style-type: none; /* 点を消す */
         padding: 0; /* 左側の余白を削除 */
@@ -39,31 +73,26 @@
       .diary-entries {
         margin-top: 20px;
       }
-    .nav-section {
+
+.floating-circle-upper {
+  position: fixed;
+  bottom: 90px; /* 画面の下から20pxの位置 */
+  left: 30px; /* 画面の左から20pxの位置 */
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  color: white;
+  border-radius: 50%; /* 丸くする */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 軽いシャドウ効果 */
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0.5rem 1rem; /* ナビゲーションバーの余白 */
+  justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 1000; /* 他の要素の上に表示 */
+  transition: background-color 0.3s ease;
 }
-
-.nav-section .logo {
-  height: 35px; /* ロゴのサイズ調整 */
-}
-
-.nav-section .nav-links {
-  flex: 1; /* ナビゲーションリンクを中央に寄せるための調整 */
-  text-align: center;
-}
-
-.nav-section .spacer {
-  flex: 1; /* 空のスペースでロゴとナビゲーションのバランスを取る */
-}
-
-.nav-section .nav-links button {
-  margin: 0 0.25rem; /* 各ボタン間の余白を調整 */
-}
-
-.floating-circle {
+.floating-circle-buttom {
   position: fixed;
   bottom: 20px; /* 画面の下から20pxの位置 */
   left: 20px; /* 画面の左から20pxの位置 */
@@ -97,136 +126,33 @@ button:focus {
 
 #tailwind CSS (https://tailwindcss.com/docs/guides/ruby-on-rails)
 </style>
-  </head>
+
+<body data-turbo="false">
+<script>
+// グローバル変数 Stimulus が UMD版で参照できる
+const application = Stimulus.Application.start()
+
+// 例: hello_controller
+application.register("hello", class extends Stimulus.Controller {
+  connect() {
+    console.log("Hello from Stimulus via <script> tag on Rails 7!")
+  }
+})
+</script>
+
+<div data-controller="hello">
+</div>
+
+
+<%= render 'layouts/header' %>
+<%= render 'layouts/bottom_btns' %>
+
+<%= yield %>
+  
+
+
+
+
 
   <body>
-
-
-
-<div class="d-flex align-items-center justify-content-between" id="nav-section">
-   <!-- ロゴ -->
-   <div class="logo-container ml-1">
-   <%= link_to root_path, class: "logo-link" do %>
-    <%= image_tag("logo01.png", class: "logo") %>
-   <% end %>
-  </div>
-
-
-  <div class="relative ml-auto">
-    <!-- Dropdownトリガーボタン -->
-    <button id="dropdownButton" data-dropdown-toggle="dropdownMenu" class="px-4 py-2 bg-white-600 rounded-md focus:ring-0">
-     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-     <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-     </svg>  
-    </button>
-
-    <!-- Dropdownメニュー -->
-    <div id="dropdownMenu" class="hidden z-10 w-30 bg-white rounded-md shadow-lg">
-      <ul class="py-1 text-gray-700">
-        <li>
-        <button class="btn btn-light p-3">
-        <%= link_to root_path, class: "text-dark text-decoration-none d-flex align-items-center", data: { turbo: false } do %>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
-       <path fill-rule="evenodd" d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z" clip-rule="evenodd" />
-       </svg>
-        <% end %>
-       </button>
-        </li>
-
-        <li>
-        <button class="btn btn-light p-3">
-        <%= link_to current_user ? current_user : login_path, class: "text-dark text-decoration-none", data: { turbo: false } do %>
-       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="size-5">
-       <path d="M10 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM3.465 14.493a1.23 1.23 0 0 0 .41 1.412A9.957 9.957 0 0 0 10 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 0 0-13.074.003Z" />
-       </svg>
-       <% end %>
-      </button>
-        </li>
-
-        <li>
-        <button class="btn btn-light p-3">
-    <%= link_to blog_path, class: "text-dark text-decoration-none", data: { turbo: false } do %>
-     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
-       <path d="M11.25 4.533A9.707 9.707 0 0 0 6 3a9.735 9.735 0 0 0-3.25.555.75.75 0 0 0-.5.707v14.25a.75.75 0 0 0 1 .707A8.237 8.237 0 0 1 6 18.75c1.995 0 3.823.707 5.25 1.886V4.533ZM12.75 20.636A8.214 8.214 0 0 1 18 18.75c.966 0 1.89.166 2.75.47a.75.75 0 0 0 1-.708V4.262a.75.75 0 0 0-.5-.707A9.735 9.735 0 0 0 18 3a9.707 9.707 0 0 0-5.25 1.533v16.103Z" />
-     </svg>
-   <% end %>
-  </button>
-        </li>
-
-        <li>
-        <button class="btn btn-light p-3">
-        <%= link_to question_path, class: "text-dark text-decoration-none", data: { turbo: false } do %>
-       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
-       <path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 0 1-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 0 1-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 0 1-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584ZM12 18a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clip-rule="evenodd" />
-       </svg>
-       <% end %>
-       </button>
-        </li>
-
-        <% if current_user %>
-        <li>
-        <%= button_to logout_path, method: :delete, class: "p-3 btn btn-light text-dark text-decoration-none", form: { style: "display: inline;" },  data: { confirm: "ログアウトしますか？" } do %>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-5">
-  <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-1.72 6.97a.75.75 0 1 0-1.06 1.06L10.94 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06L12 13.06l1.72 1.72a.75.75 0 1 0 1.06-1.06L13.06 12l1.72-1.72a.75.75 0 1 0-1.06-1.06L12 10.94l-1.72-1.72Z" clip-rule="evenodd" />
-</svg>
-       <% end %>
-        
-        </li>
-         <% end %>
-
-      </ul>
-    </div>
-  </div>
-
-
-
- 
-   <!-- 空スペース -->
-   <div class="spacer"></div>
- </div>
-
-
- <div class="floating-circle">
-  <%= link_to "+", current_user ? zen_path(current_user) : login_path, class: "text-white no-underline", data: { turbo: false } %>
- </div>
-
- 
-
-
-    <% flash.each do |message_type, message| %>
-      <div class="alert alert-<%= message_type %>"><%= message %></div>
-    <% end %>
-    <div class="container">
-    <%= yield %>
-    </div>
-    <%# devise用↓ %>
-    <% if notice %>
-      <p><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p><%= alert %></p>
-    <% end %>
-
-    <!--
-    <%= render 'layouts/footer' %>
-    <%= debug(params) if Rails.env.development? %>
-    -->
-
-
-
-
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
 </html>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- tuboを一時的に無効化 deleteが機能しないから -->
-     <%= javascript_include_tag 'application', 'data-turbo-track': 'reload', defer: true %>
-     <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
-     <%= stylesheet_link_tag "application", media: 'all', "data-turbo-track": "reload" %>
-    <!-- これが全てのbootstrapのデザイン(navbar,form)を支えている。↓ -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-     <%= javascript_importmap_tags %> 

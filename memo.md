@@ -1,3 +1,42 @@
+# tailwind css
+## font
+font-thin (100)
+font-extralight (200)
+font-light (300)
+font-normal (400)
+font-medium (500)
+font-semibold (600)
+font-bold (700) eaad42
+font-extrabold (800)
+font-black (900)
+## font-size
+text-xs	
+text-sm	
+text-base
+text-lg	
+text-xl	
+text-2xl	
+text-3xl	
+text-4xl	
+text-5xl	
+text-6xl		
+text-7xl	
+text-8xl	
+text-9xl
+
+# meta
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- tuboを一時的に無効化 deleteが機能しないから -->
+     <%= javascript_include_tag 'application', 'data-turbo-track': 'reload', defer: true %>
+     <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+     <%= stylesheet_link_tag "application", media: 'all', "data-turbo-track": "reload" %>
+    <!-- これが全てのbootstrapのデザイン(navbar,form)を支えている。↓ -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+     <%= javascript_importmap_tags %> 
+     
 ユーザーを登録する(gem deviseを使用する)
 ↓
 文字をpostして、
@@ -518,3 +557,89 @@ i dont think anything is hard. it just takes time.
 僕のテンプレートはここから使う事ができます。
 そして、urlを共有することで、英語学習のコンテンツをみんなで共有する事ができます。
 もちろん、ユーザーの皆さんの独自のやり方でもできるように、投稿するときはテンプレートを選択する事ができます。
+
+
+# Hotwire(turbo, stimulus)
+- なぜ学ぶ必要があるのか?
+ユーザーエクスペリエンスを向上させるためにSPAを実装する。そこでvue,reactを一から学ぶか、hotwireを学ぶか。
+## stimulus(https://stimulus.hotwired.dev/)
+JSのコードが多くなった時に、controllerで複数のファイルに分けて開発することができる。特定の動作に関連するコードを見つけやすくする。
+
+htmlもclassにdata-*と書いて分けるので、どこにJSの影響が出ているのか見やすくなる。
+
+- 通常
+```html
+<button id="myButton">クリック</button>
+<p id="myText">こんにちは</p>
+
+<script>
+  document.getElementById("myButton").addEventListener("click", () => {
+    document.getElementById("myText").textContent = "こんにちは、世界！";
+  });
+</script>
+
+```
+
+- stimulus
+railsのバックエンドの処理と似ている。
+```html
+<div data-controller="example">
+  <button data-action="click->example#updateText">クリック</button>
+  <p data-example-target="text">こんにちは</p>
+</div>
+
+<script>
+// app/javascript/controllers/example_controller.js
+import { Controller } from "@hotwired/stimulus";
+
+export default class extends Controller {
+  static targets = ["text"];
+
+  updateText() {
+    this.textTarget.textContent = "こんにちは、世界！";
+  }
+}
+</script>
+```
+
+stimulusインストール手順
+```ruby
+gem "stimulus-rails"
+```
+```ruby: app/javascript/application.js
+import "controllers";
+```
+```shell
+rails g stimulus example
+```
+↓ generated from command above.
+```ruby: app/javascript/controllers/example_controller.js
+import { Controller } from "@hotwired/stimulus";
+
+export default class extends Controller {
+  connect() {
+    console.log("Hello, Stimulus! This is the Example controller.");
+  }
+}
+```
+↓registerd atomatically after rails g~ at controller/index.js
+```ruby: javascript/controller/index.js
+import { application } from "./application";
+
+import ExampleController from "./example_controller";
+application.register("example", ExampleController);
+```
+呼び出す時
+```ruby
+<div data-controller="example">
+  <p>Hello, Stimulus!</p>
+</div>
+```
+
+portがかぶっていたら、こうやって避けることができる.
+bin/devは、Railsに必要な複数のプロセス(Railsサーバー、アセットビルダー、CSSコンパイラーなど)を一括管理するツール。
+```shell
+PORT=3002 bin/dev
+```
+
+## turbo(https://www.hotrails.dev/)<- not official but creater is one of the committer of rails-turbo.

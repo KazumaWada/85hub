@@ -153,30 +153,11 @@ consistent for a <%= @posted_dates_sum %> days😤
 
 
 <% if current_user == @user %>
-
-
-<button class="btn btn-light">
-<%= link_to "🧘", zen_path, class: "text-dark text-decoration-none", data: { turbo: false } %>
-</button>
-<button class="btn btn-light">
-<%= link_to "📸", camera_path(@user), class: "submit-button text-dark text-decoration-none" %>
-</button>
-<button class="btn btn-light">
-<%= link_to "📝", draft_path(current_user), class: "submit-button text-dark text-decoration-none" %>
-</button>
-<button class="btn btn-light">
-<%= link_to "🔖", user_path(@user), class: "submit-button text-dark text-decoration-none" %>
-</button>
-
-
-
-
-
-  <section class="micropost_form">
-  <%= render 'shared/micropost_form' %>
-  </section>
-
+  <button class="btn btn-light">
+    <%= link_to "📝draft", draft_path(current_user), class: "submit-button text-dark text-decoration-none" %>
+  </button>
 <% end %>
+
 
 <% if @user.microposts.any? %>
   <!--<h3>History (<%= @user.microposts.count %>)</h3>-->

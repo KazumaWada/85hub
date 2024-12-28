@@ -1,7 +1,12 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
-import "@hotwired/turbo-rails"
-import "popper"
-import "bootstrap"
-import "stripe"
-import "@fortawesome/fontawesome-free/js/all";
-import "controllers"
+///!!!!アプリ全体ののエントリーポイント!!!!!///stimulusのエントリーポイントはcontroller/index
+
+import "@hotwired/turbo-rails";
+//import Turbo from '@hotwired/turbo-rails';
+//import "popper"
+import "controllers/example_controller"; //stimulus. $ rails g stimulus example
+//↑app/javascript/controllers/index.jsを参照している。
+
+//bin/rails assets:clobber && bin/rails assets:precompile
+
+

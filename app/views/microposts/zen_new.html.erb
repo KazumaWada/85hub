@@ -1,23 +1,64 @@
+<div id="post" class="mt-5 m-2">
+
+<div class="bold">
+<button class="px-4 py-2 rounded-md">
+B
+</button>
+</div>
 
 
 <!--post '/zen_create', to: 'microposts#zen_create', as: 'zen_create'-->
-<%= form_with(model: @micropost, url: zen_create_path(slug: @user.slug), method: :post, local: true, html: { class: "micropost-form" }) do |f| %>
+<%= form_with(model: @micropost, url: zen_create_path(slug: @user.slug), method: :post , local: true, html: { class: "micropost-form" }) do |f| %>
   <!-- 入力フィールド -->
   <div class="field">
-    <%= f.text_area :content, 
-      placeholder: "I have pen, I have an apple Uh! Apple-pen", 
-      class: "mt-5 p-4 rounded border shadow-md hover:shadow-lg transition-shadow duration-300 flex items-center w-full h-40",
-      style: ";" %>
+
+  <%= f.text_area :content, 
+  placeholder: "I have pen, I have an apple Uh! Apple-pen", 
+  class: "p-4 rounded border shadow-md hover:shadow-lg transition-shadow duration-300 flex items-center w-full h-[400px]",
+  style: ";" %> 
+   
+
   </div>
 
   <!-- 送信ボタン -->
   <div class="actions text-right mt-2">
-    <%= f.submit "下書き保存", name:"draft", class: "btn btn-light diary-submit-btn" %>
-    <%= link_to "🤖", user_path(@user), class: "btn btn-light submit-button" %>
-    <%= f.submit "post", class: "btn btn-light diary-submit-btn" %>
+
+  <button
+  class="px-4 py-2 bg-gray-200 text-gray-500 border border-gray-300 
+         rounded-md cursor-not-allowed
+         disabled:hover:bg-gray-200 disabled:opacity-50"
+  disabled
+>
+🤖AI
+</button>
+  <!--<%= link_to "🤖", user_path(@user), class: "px-4 py-2 bg-gray-200 border border-gray-300 text-gray-800 
+  hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 
+  focus:ring-gray-400 rounded-md" %> -->
+
+<button class="hover:bg-yellow-500 px-4 py-2 bg-gray-100 border border-gray-300 text-gray-700 
+               hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 
+               focus:ring-gray-300 rounded-md">
+<%= link_to "📸 手書きを読み取る", camera_path(@user), class: "submit-button text-dark text-decoration-none" %>
+</button>
+
+    <%= f.submit "📝 下書き保存", name:"draft", class: "hover:bg-yellow-500 px-4 py-2 bg-gray-200 border border-gray-300 text-gray-800 
+               hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 
+               focus:ring-gray-400 rounded-md" %>
+   
+    <%= f.submit "post", class: "hover:bg-yellow-500 px-4 py-2 bg-gray-200 border border-gray-300 text-gray-800 
+               hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 
+               focus:ring-gray-400 rounded-md" %>
+    
   </div>
 <% end %>
 
 
 
 
+<%#= f.text_area :content, 
+placeholder: "I have pen, I have an apple Uh! Apple-pen", 
+class: "mt-5 p-4 rounded border shadow-md hover:shadow-lg transition-shadow duration-300 flex items-center w-full h-40",
+style: ";" %> 
+
+
+</div><!--post-->

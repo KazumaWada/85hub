@@ -67,7 +67,7 @@
 
 # デフォルトポートは10000だが、RenderのPORT環境変数に従う
 port ENV.fetch("PORT") { 3000 }
-
+bind "tcp://0.0.0.0:#{ENV.fetch('PORT', 3000)}" # 0.0.0.0で外部からのアクセスを許可
 # スレッド数の設定 (適宜調整)
 threads_count = ENV.fetch("RAILS_MAX_THREADS") { 5 }.to_i
 threads threads_count, threads_count
