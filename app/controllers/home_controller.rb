@@ -43,4 +43,8 @@ class HomeController < ApplicationController
   def how_i_use
     @user = current_user#navbarのuser_path(@user)が/blogで探せなくなるから。
   end
+  def scientific_evidence
+    @user = current_user
+  end
 end
+

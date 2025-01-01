@@ -14,61 +14,52 @@
   <div class="about mt-5 mx-3">
 
     <!-- Tailwind のグリッドレイアウト: 1列 -> MD以上で2列 -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!--<div class="grid grid-cols-1 md:grid-cols-2 gap-6">-->
+    <div class="grid grid-cols-1 gap-6 p-7">
+
 
       <!-- 1カラム目 -->
-      <div class="mt-5 p-7">
+      <div class="mt-5 p-1">
         <h4 class="text-left text-xl font-medium">🎉ようこそ！</h4>
         <p class="text-gray-500 text-left mt-4">
-          英語を学ぶ理由も、学び方も、人それぞれにスタイルがあります。  
+          英語を学ぶ理由も、学び方も、人それぞれ異なります。  
           だからこそ、eigopencilはあなた自身が自由に英語をアウトプットできるスペースを提供します。
-          <br>eigopencilは、リマインダーを飛ばしたりする事はありません。あなたのペースで続けて行ってください。
         </p>
       </div>
 
       <!-- 1カラム目 -->
-      <div class="mt-5 p-7">
-        <h4 class="text-left text-xl font-medium">☀️「英語を書く」ことで得られるメリット</h4>
+      <div class="mt-3 p-1">
+        <h4 class="text-left text-xl font-medium">🌟英語アウトプットするメリット</h4>
         <p class="text-gray-500 text-left mt-4">
-        英語を書くことは、英語力をしっかり身につけるためにとても効果的です。書くことで、新しい単語や文法を実際に使う練習ができ、記憶に残りやすくなります。また、文章を作る過程で考える力が養われ、自然と英語に慣れていきます。自分の考えを英語で表現することで、語彙力や表現力も向上し、自信がつきます。定期的に英語を書く習慣を続けると、学んだことが頭にしっかり定着し、会話やリスニングの際にも役立ちます。eigopencilを使って楽しく英語を書くことで、学習が続けやすくなり、効果的に英語力を高めることができます。
+        英語を書く(アウトプットする)ことは、英語力を身に付けるためにとても効果的です。書くことで新しい単語や文法を実際に使う練習ができ、記憶に残りやすくなります。
         </p>
       </div>
-
-      <!-- 2カラム目 -->
-      <div class="p-7 mt-5">
-        <h4 class="text-left text-xl font-medium">✏️eigopencilでできること</h4>
-        <p class="text-gray-500 text-left mt-4">
-        <li>これ</li>
-        <li>これ</li>
-        <li>これ</li>
-          文字を太くしたり、画像やリンクを貼ったり、シンプルな英語日記を書いたり。  
-          eigopencilの使い方はあなた次第です。
-        </p>
-      </div>
-     
 
       <!-- 3カラム目 -->
-      <div class="p-7 mt-5">
-        <h4 class="text-left text-xl font-medium">👨‍🎨自由自在に装飾ができる投稿エディタ</h4>
+      <div class="p-1 mt-3">
+        <h4 class="text-left text-xl font-medium">👨‍🎨手書き対応！使いやすい投稿エディタ</h4>
         <p class="text-gray-500 text-left mt-4">
-          文字を太くしたり、画像やリンクを貼ったり、シンプルな英語日記を書いたり。  
-          eigopencilの使い方はあなた次第です。
+        <li class="text-gray-500">改行や太字に対応</li>
+        <li class="text-gray-500">手書きの英文も読み取り可能</li>
+        <li class="text-gray-500">最大1000文字まで入力OK！</li>
         </p>
       </div>
 
       <!-- 2カラム目 -->
-      <div class="p-7 mt-5">
+      <div class="p-1 mt-3">
         <h4 class="text-left text-xl font-medium">🔥eigopencilを使い込んで英語力を上げよう</h4>
         <p class="text-gray-500 text-left mt-4">
-          文字を太くしたり、画像やリンクを貼ったり、シンプルな英語日記を書いたり。  
-          eigopencilの使い方はあなた次第です。
+        継続して英語をアウトプットすることで、確実にスキルは向上します。eigopencilはそのための環境をあなたに提供します。
         </p>
       </div>
 
-      <div class="mt-5 p-7">
-        <h4 class="text-left text-xl font-medium">🧗eigopencilに追加される予定の機能</h4>
+      <div class="mt-3 p-1">
+        <h4 class="text-left text-xl font-medium">🛠️eigopencilに追加される予定の機能</h4>
         <p class="text-gray-500 text-left mt-4">
-        eigopencilは誕生したばかりのサイトです。皆さんの意見も聞きながら一緒にいいものにしていきましょう。
+        <li class="text-gray-500">AI添削機能</li>
+        <li class="text-gray-500">画像の挿入を可能にする</li>
+        <li class="text-gray-500">あなた専用の単語/フレーズ帳</li>
+        <li class="text-gray-500">英語コンテンツのURL共有</li>
         </p>
       </div>
 
@@ -76,36 +67,35 @@
 
     
       <!-- 5カラム目 -->
-      <div class="p-7 mt-5">
+      <div class="p-1 mt-3">
       <h4 class="text-left text-xl font-medium">📚Learn more</h4>
       <div class="mt-4 hover:bg-yellow-500 text-center">
-      <%= link_to how_i_use_path,
+      <%= link_to evidence_path,
                   class: "no-underline text-black block border border-gray-300 rounded-md p-4 bg-transparent transition",
                   data: { turbo: false } do %>
-        <h6 class="text-gray-500">「英語を書く」ことの科学的根拠</h6>
+        <h6 class="text-gray-500">「英語を書く」ことの科学的根拠はこちら</h6>
       <% end %>
     </div>
         <div class="mt-4 hover:bg-yellow-500 text-center">
           <%= link_to how_i_use_path,
                       class: "no-underline text-black block border border-gray-300 rounded-md p-4 bg-transparent transition",
                       data: { turbo: false } do %>
-            <h6 class="text-gray-500">開発者のeigopencil活用法</h6>
-          <% end %>
-        </div>
-        
-        <div class="mt-4 hover:bg-yellow-500 text-center">
-          <%= link_to how_i_use_path,
-                      class: "no-underline text-black block border border-gray-300 rounded-md p-4 bg-transparent transition",
-                      data: { turbo: false } do %>
-            <h6 class="text-gray-500">投稿エディタの使い方</h6>
+            <h6 class="text-gray-500">開発者はこうやってeigopencilを使っています</h6>
           <% end %>
         </div>
       </div>
 
+
+      <!-- 6カラム目（画像） -->
+      <div class="p-1 mt-3">
+        <div class="text-center mt-4">
+          <%= image_tag("learn_more.png", class: "mx-auto max-w-[320px] h-auto rounded-lg") %>
+        </div>
+      </div>
       
 
       <!-- 7カラム目 -->
-      <div class="p-7 mt-5">
+      <div class="p-1 mt-3">
         <h4 class="text-left text-xl font-medium">お問い合わせ📩</h4>
         <p class="text-gray-500 mt-4">
           あなたのフィードバックが、eigopencilをもっと便利で使いやすいサービスにしていきます。  
@@ -121,37 +111,12 @@
         </div>
       </div>
 
-      <!-- 2カラム目（画像） -->
-      <div class="p-5">
-        <div class="text-center">
-          <%= image_tag("q001.png", class: "mx-auto max-w-[320px] h-auto rounded-lg") %>
-        </div>
-      </div>
+     
 
-      <!-- 4カラム目（画像） -->
-      <div>
-        <div class="text-center mt-4">
-          <%= image_tag("trix.png", class: "mx-auto max-w-[320px] h-auto rounded-lg") %>
-        </div>
-      </div>
-
-      <!-- 6カラム目（画像） -->
-      <div class="p-7">
-        <div class="text-center mt-4">
-          <%= image_tag("learn_more.png", class: "mx-auto max-w-[320px] h-auto rounded-lg") %>
-        </div>
-      </div>
 
     </div> <!-- grid -->
 
-    <!-- 下部の利用規約・プライバシーポリシー -->
-    <div class="p-7 mt-5">
-    <h4 class="text-left text-xl font-medium">利用規約とプライバシーポリシー📜</h4>
-    <p class="text-gray-500 mt-4">
-      * アマゾンリンクについて  
-      eigopencilは、Amazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラム、Amazonアソシエイト・プログラムの参加者です。
-    </p>
-    </div>
+  
 
   </div><!-- about -->
 </div><!-- container -->
