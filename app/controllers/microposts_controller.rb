@@ -48,7 +48,7 @@ class MicropostsController < ApplicationController
         flash[:success] = "nice. you did it!"
         redirect_to user_path(@user)
       elsif@micropost.save && @micropost.status == "draft"
-        flash[:success] = "draft saved. go check 📝"
+        flash[:success] = "draft saved. go check 📝draft"
         redirect_to user_path(@user)
 
       else

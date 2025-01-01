@@ -1,64 +1,179 @@
 <div id="post" class="mt-5 m-2">
-
-<div class="bold">
-<button class="px-4 py-2 rounded-md">
-B
-</button>
-</div>
-
-
-<!--post '/zen_create', to: 'microposts#zen_create', as: 'zen_create'-->
-<%= form_with(model: @micropost, url: zen_create_path(slug: @user.slug), method: :post , local: true, html: { class: "micropost-form" }) do |f| %>
-  <!-- 入力フィールド -->
-  <div class="field">
-
-  <%= f.text_area :content, 
-  placeholder: "I have pen, I have an apple Uh! Apple-pen", 
-  class: "p-4 rounded border shadow-md hover:shadow-lg transition-shadow duration-300 flex items-center w-full h-[400px]",
-  style: ";" %> 
-   
-
+  
+  <!-- ツールバー -->
+  <div class="toolbar mb-2 flex justify-between items-center">
+    <div class="flex space-x-2">
+      <button class="px-4 py-2 rounded-md" id="bold-button">
+        <strong>B</strong>
+      </button>
+      <!--<button class="px-4 py-2 rounded-md" id="image-button">
+        🖼️
+      </button>-->
+      <!-- 他のフォーマットボタンもここに追加可能 -->
+    </div>
+    <div class="text-sm text-gray-600" id="char-count">0 / 1000</div>
   </div>
-
-  <!-- 送信ボタン -->
-  <div class="actions text-right mt-2">
-
-  <button
-  class="px-4 py-2 bg-gray-200 text-gray-500 border border-gray-300 
-         rounded-md cursor-not-allowed
-         disabled:hover:bg-gray-200 disabled:opacity-50"
-  disabled
->
-🤖AI
-</button>
-  <!--<%= link_to "🤖", user_path(@user), class: "px-4 py-2 bg-gray-200 border border-gray-300 text-gray-800 
-  hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 
-  focus:ring-gray-400 rounded-md" %> -->
-
-<button class="hover:bg-yellow-500 px-4 py-2 bg-gray-100 border border-gray-300 text-gray-700 
-               hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 
-               focus:ring-gray-300 rounded-md">
-<%= link_to "📸 手書きを読み取る", camera_path(@user), class: "submit-button text-dark text-decoration-none" %>
-</button>
-
-    <%= f.submit "📝 下書き保存", name:"draft", class: "hover:bg-yellow-500 px-4 py-2 bg-gray-200 border border-gray-300 text-gray-800 
-               hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 
-               focus:ring-gray-400 rounded-md" %>
-   
-    <%= f.submit "post", class: "hover:bg-yellow-500 px-4 py-2 bg-gray-200 border border-gray-300 text-gray-800 
-               hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 
-               focus:ring-gray-400 rounded-md" %>
-    
-  </div>
-<% end %>
-
-
-
-
-<%#= f.text_area :content, 
-placeholder: "I have pen, I have an apple Uh! Apple-pen", 
-class: "mt-5 p-4 rounded border shadow-md hover:shadow-lg transition-shadow duration-300 flex items-center w-full h-40",
-style: ";" %> 
-
-
+  
+  <!-- 非表示のファイル入力 -->
+  <input type="file" id="image-input" accept="image/*" style="display: none;" />
+  
+  <!-- フォーム -->
+  <%= form_with(model: @micropost, url: zen_create_path(slug: @user.slug), method: :post, local: true, html: { class: "micropost-form" }) do |f| %>
+    <!-- 編集エリア -->
+    <div class="field">
+      <div
+        id="editor"
+        contenteditable="true"
+        class="p-4 rounded border shadow-md hover:shadow-lg transition-shadow duration-300 w-full h-[400px]"
+        data-placeholder="I have pen, I have an apple Uh! Apple-pen"
+        style="min-height: 100px; overflow-y: auto;"
+      >
+        I have pen, I have an apple Uh! Apple-pen
+      </div>
+      <!-- 隠しフィールド（フォーム送信時にエディタの内容を保存） -->
+      <%= f.hidden_field :content, id: "hidden_content" %>
+    </div>
+  
+    <!-- 送信ボタン -->
+    <div class="actions text-right mt-2">
+      <button
+        class="px-4 py-2 bg-gray-200 text-gray-500 border border-gray-300 
+               rounded-md cursor-not-allowed
+               disabled:hover:bg-gray-200 disabled:opacity-50"
+        disabled
+      >
+        🤖AI
+      </button>
+  
+      <button class="hover:bg-yellow-500 px-4 py-2 bg-gray-100 border border-gray-300 text-gray-700 
+                     hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 
+                     focus:ring-gray-300 rounded-md">
+        <%= link_to "📸 手書きを読み取る", camera_path(@user), class: "submit-button text-dark text-decoration-none" %>
+      </button>
+  
+      <%= f.submit "📝 下書き保存", name:"draft", class: "hover:bg-yellow-500 px-4 py-2 bg-gray-200 border border-gray-300 text-gray-800 
+                 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 
+                 focus:ring-gray-400 rounded-md" %>
+  
+      <%= f.submit "post", class: "hover:bg-yellow-500 px-4 py-2 bg-gray-200 border border-gray-300 text-gray-800 
+                 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 
+                 focus:ring-gray-400 rounded-md" %>
+    </div>
+  <% end %>
+  
+  <!-- プレースホルダー用のCSS -->
+  <style>
+    [data-placeholder]:empty::before {
+      content: attr(data-placeholder);
+      color: #aaa;
+      pointer-events: none;
+    }
+  </style>
+  
 </div><!--post-->
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const boldButton = document.getElementById('bold-button');
+    const imageButton = document.getElementById('image-button');
+    const imageInput = document.getElementById('image-input');
+    const editor = document.getElementById('editor');
+    const hiddenContent = document.getElementById('hidden_content');
+    const form = editor.closest('form');
+    const charCount = document.getElementById('char-count');
+    const MAX_CHARS = 1000;
+
+    // 編集エリアの内容を隠しフィールドに同期
+    function syncContent() {
+      hiddenContent.value = editor.innerHTML;
+    }
+
+    // 文字数をカウントして表示
+    function updateCharCount() {
+      // innerText を使用してプレーンテキストの文字数を取得
+      let text = editor.innerText || "";
+      let currentCount = text.length;
+      
+      // 1000文字を超えている場合の処理
+      if (currentCount > MAX_CHARS) {
+        charCount.textContent = `${MAX_CHARS} / ${MAX_CHARS}`;
+        charCount.classList.add('text-red-500');
+        // 超えた場合は追加の文字を削除する
+        // 以下のコードはオプションです。ユーザーが1000文字以上入力できないようにします。
+        // ただし、HTMLタグを含む場合は適切な処理が必要です。
+        editor.innerText = text.substring(0, MAX_CHARS);
+        currentCount = MAX_CHARS;
+      } else {
+        charCount.textContent = `${currentCount} / ${MAX_CHARS}`;
+        charCount.classList.remove('text-red-500');
+      }
+    }
+
+    // ボタンのクリックイベント
+    boldButton.addEventListener('click', function(event) {
+      event.preventDefault();
+      document.execCommand('bold', false, null);
+      syncContent();
+      updateCharCount();
+    });
+
+    // 画像挿入ボタンのクリックイベント
+    imageButton.addEventListener('click', function(event) {
+      event.preventDefault();
+      imageInput.click();
+    });
+
+    // 画像ファイルが選択されたときの処理
+    imageInput.addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const img = document.createElement('img');
+          img.src = e.target.result;
+          img.alt = 'Inserted Image';
+          img.style.maxWidth = '100%'; // 画像がエディタの幅を超えないように調整
+          img.style.height = 'auto';
+          insertImage(img);
+          syncContent();
+          updateCharCount();
+        }
+        reader.readAsDataURL(file);
+      }
+      // ファイル入力をリセット
+      imageInput.value = '';
+    });
+
+    // 画像をエディタに挿入する関数
+    function insertImage(img) {
+      const selection = window.getSelection();
+      if (!selection.rangeCount) return;
+
+      const range = selection.getRangeAt(0);
+      range.collapse(false); // カーソルを選択範囲の後ろに移動
+
+      range.insertNode(img);
+
+      // カーソルを画像の後ろに移動
+      range.setStartAfter(img);
+      range.collapse(true);
+      selection.removeAllRanges();
+      selection.addRange(range);
+    }
+
+    // フォーム送信時に内容を同期
+    form.addEventListener('submit', function() {
+      syncContent();
+    });
+
+    // 編集エリアの入力イベント時にも同期（リアルタイム）
+    editor.addEventListener('input', function() {
+      syncContent();
+      updateCharCount();
+    });
+
+    // 初期文字数カウントの更新
+    updateCharCount();
+  });
+</script>
