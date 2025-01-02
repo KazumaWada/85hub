@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get '/blog', to: "home#blog", as: 'blog'
   get '/how_i_use', to: "home#how_i_use", as: 'how_i_use'
   get '/scientific_evidence', to: "home#scientific_evidence", as: 'evidence'
+  get '/birth-story', to: "home#birth", as: 'birth'
   #📸
   post 'handwriting/analyze', to: 'users#analyze', as: 'analyze_handwriting'#文字認識機能
   resources :microposts, only: [:index]#slugで先に影響されないように。/micropostsは危ないから。

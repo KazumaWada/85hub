@@ -46,5 +46,8 @@ class HomeController < ApplicationController
   def scientific_evidence
     @user = current_user
   end
+  def birth
+    @user = current_user
+  end
 end
 
