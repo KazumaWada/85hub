@@ -74,7 +74,9 @@
 
     // 編集エリアの内容を隠しフィールドに同期
     function syncContent() {
-      hiddenContent.value = editor.innerHTML;
+      //htmlタグが、余計に加算されて文字数が多く計算されている可能性がある。
+      //hiddenContent.value = editor.innerHTML;
+      hidden_content.value = editor.innerText.trim();
     }
 
     // 文字数をカウントして表示
