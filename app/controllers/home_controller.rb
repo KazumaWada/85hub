@@ -49,5 +49,18 @@ class HomeController < ApplicationController
   def birth
     @user = current_user
   end
+  def books
+    @user = current_user
+  end
+
+  def the_brave_little_sparrow
+  end
+
+  def the_journey_to_the_hidden_valley
+  end
+  def the_shadow_of_eldoria
+  end
+  def the_eternal_labyrinth
+  end
 end
 

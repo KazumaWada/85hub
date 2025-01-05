@@ -13,6 +13,18 @@ Rails.application.routes.draw do
   get '/question', to: 'home#question', as: 'question'
   get 'tutorial', to: 'home#tutorial', as: 'tutorial'
   get '/blog', to: "home#blog", as: 'blog'
+
+  get '/books', to: "home#books", as: 'books'
+  
+  scope '/books' do
+    get '/the_brave_little_sparrow', to: "home#the_brave_little_sparrow", as: 'the-brave_little_sparrow'
+    get '/the_journey_to_the_hidden_valley', to: "home#the_journey_to_the_hidden_valley", as: 'the_journey_to_the_hidden_valley'
+    get '/the_shadow_of_eldoria', to: "home#the_shadow_of_eldoria", as: 'the_shadow_of_eldoria'
+    get '/the_eternal_labyrinth', to: "home#the_eternal_labyrinth", as: 'the_eternal_labyrinth'
+  end
+
+
+
   get '/how_i_use', to: "home#how_i_use", as: 'how_i_use'
   get '/scientific_evidence', to: "home#scientific_evidence", as: 'evidence'
   get '/birth-story', to: "home#birth", as: 'birth'

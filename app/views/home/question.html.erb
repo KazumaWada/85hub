@@ -49,6 +49,15 @@
         </p>
       </div>
 
+      <!-- 3カラム目 -->
+      <div class="p-1 mt-3">
+        <h4 class="text-left text-xl font-medium">🎁英語学習コンテンツを提供します</h4>
+        <p class="text-gray-500 text-left mt-4">
+        「英語を書いてアウトプットしたいけど、何を参考にすればいいの？」と迷っている方へ。eigopencilでは、英語学習に役立つ物語をご用意しました。物語の中から覚えたい単語やフレーズを見つけ、楽しく学習を進めることができます。
+        <p><%= link_to "物語を読む", books_path, data: { turbo: false }, style: "color: #FF8800;" %></p>
+        </p>
+      </div>
+
       <!-- 2カラム目 -->
       <div class="p-1 mt-3">
         <h4 class="text-left text-xl font-medium">🔥eigopencilを使い込んで英語力を上げよう</h4>
@@ -84,13 +93,6 @@
           <% end %>
         </div>
 
-        <div class="mt-4 hover:bg-yellow-500 text-center">
-        <%= link_to birth_path,
-                    class: "no-underline text-black block border border-gray-300 rounded-md p-4 bg-transparent transition",
-                    data: { turbo: false } do %>
-          <h6 class="text-gray-500">eigopencilの誕生秘話</h6>
-        <% end %>
-      </div>
 
       <div class="mt-4 hover:bg-yellow-500 text-center">
       <%= link_to evidence_path,
