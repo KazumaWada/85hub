@@ -9,7 +9,7 @@ Rails.application.configure do
   config.action_dispatch.trusted_proxies = nil
   
   #cookieが本番環境で動作するための書き方。
-  #config.session_store :cokkie_store, key: "onedayoneline.onrender.com", secure: Rails.env.production?
+  config.session_store :cokkie_store, key: "_session_key", secure: Rails.env.production?
   
 #   config.hosts << ENV['RAILS_ALLOWED_HOST'] if ENV['RAILS_ALLOWED_HOST']
 # config.hosts << "onedayoneline.onrender.com"

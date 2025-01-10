@@ -1,3 +1,9 @@
+<style>
+.content {
+  white-space: pre-wrap; /* htmlのデフォルトでは、/nもbrもまとめられているから。 */
+}
+
+</style>
 <div class="w-full">
   <% @microposts.published.each do |micropost| %>
     <!-- 表示部分 -->
@@ -5,14 +11,16 @@
 
       <!-- コンテンツ部分 -->
       <span class="text-gray-500 text-sm block"><%= micropost.created_at.strftime("%Y-%m-%d") %></span>
-      <p class="mb-2"><%= simple_format(micropost.content) %></p>
+      <div class="">
+      <%= simple_format(sanitize(micropost.content, tags: %w[b strong i em u br p], attributes: %w[class style])) %>
+      </div>
       <% if current_user == @user %>
         <div class="text-right mt-2">
           <!-- 削除ボタン -->
           <%= button_to "🗑️", micropost_path(slug: @user.slug, id: micropost.id), method: :delete, class: "text-red-500 hover:text-red-700 bg-transparent border-none cursor-pointer" %>
           <!-- Xでシェアするボタン -->
           <%= link_to "X",
-            "https://twitter.com/intent/tweet?text=#{CGI.escape("✏️ #{micropost.content}\n\nhttps://eigopencil.com")}",
+          "https://twitter.com/intent/tweet?text=#{CGI.escape("✏️ #{micropost.content[0, 100]}... \n\n#eigopencil https://eigopencil.com")}",
             target: "_blank",
             rel: "noopener noreferrer",
             class: "text-white bg-gray-800 hover:bg-gray-700 px-2 py-1 rounded text-sm",
