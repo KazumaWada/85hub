@@ -8,8 +8,8 @@ Rails.application.configure do
   #renderでエラーになる原因の解明↓
   config.action_dispatch.trusted_proxies = nil
   
-  #cookieが本番環境で動作するための書き方。
-  config.session_store :cokkie_store, key: "_session_key", secure: Rails.env.production?
+  #cookieが本番環境で動作するための書き方。_session_keyと言う名前は、かぶらなければなんでもいい。
+  config.session_store :cookie_store, key: "_session_key", secure: Rails.env.production?
   
 #   config.hosts << ENV['RAILS_ALLOWED_HOST'] if ENV['RAILS_ALLOWED_HOST']
 # config.hosts << "onedayoneline.onrender.com"
