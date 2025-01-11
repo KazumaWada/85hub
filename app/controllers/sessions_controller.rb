@@ -24,7 +24,7 @@ class SessionsController < ApplicationController
       }
 
     flash[:success] = "ようこそ🎉! #{user.name}さん"
-    redirect_to question_path
+    redirect_to about_path
     
     # user = User.find_by(name: session_params[:name])
 
