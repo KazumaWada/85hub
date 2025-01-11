@@ -1,71 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>One-Line English Diary</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-.header{
-    
-}
-# .links{
-#     background-color: #f2f2f2; 
-#     #hsl(0, 0%, 95%),rgb(242, 242, 242)
-# }
-.image-with-shadow {
-    border: 2px solid #f2f2f2; /* 優しいグレーの枠線 */
-    border-radius: 15px;
-  
-}
-.links ul {
-  list-style-type: none; /* 点を消す */
-  padding: 0; /* 左側の余白を削除 */
-  margin: 0; /* 外側の余白を削除（必要に応じて） */
-}
-
-    </style>
-</head>
-<body>
-
-
-
- <div class="text-center mt-3" id="nav-section">
- <% if current_user.nil? %>
-   hey, ゲストさん! 
-   <%= link_to "ログイン", login_path, class: " text-decoration-none" %>
- <% else %>
-<div class="flex items-center justify-between w-full">
-  <span></span> <!-- 左側に空白を確保 -->
-  <span class="text-center flex-grow">
-    hey, <%= current_user.name %>👋
-  </span>
+<div class="text-center mt-3" id="nav-section">
+  <% if current_user.nil? %>
+    <p>hey, ゲストさん! 
+      <%= link_to "ログイン", login_path, class: "text-decoration-none" %>
+    </p>
+  <% else %>
+    <div class="flex items-center justify-between w-full">
+      <span></span> <!-- Left side empty space -->
+      <span class="text-center flex-grow">
+        hey, <%= current_user.name %>👋
+      </span>
+    </div>
+  <% end %>
 </div>
 
-
- <% end %>
- </p>
-
- <div class="mt-5">
- <%= render template: "microposts/index" %>
- </div>
-
-<figure class="text-center mt-2">
-<!--自動で、app/assets/imagesを参照-->
-  <%#<%= image_tag(@random_image, class: "img-fluid") %>
-  <%#<figcaption class="mt-2 mr-1 text-left text-muted">📍 <%= @location %></figcaption>
-</figure>
-
-</div>
-
-
-
-
-
-
-
-
-
+<div class="mt-5">
+<%= render template: "microposts/index" %>
 </div>
 
 
@@ -82,18 +31,7 @@
 
 
 
-    <script>
-        function addEntry() {
-            const entryText = document.getElementById("diaryEntry").value;
-            if (entryText.trim() === "") return;
 
-            const entryItem = document.createElement("li");
-            entryItem.className = "list-group-item";
-            entryItem.textContent = entryText;
 
-            document.getElementById("entriesList").appendChild(entryItem);
-            document.getElementById("diaryEntry").value = "";
-        }
-    </script>
-</body>
-</html>
+
+

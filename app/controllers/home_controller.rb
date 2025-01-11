@@ -29,12 +29,10 @@ class HomeController < ApplicationController
   def destroy
   end
 
-  def about
-  end
   def app
     @user = current_user#navbarのuser_path(@user)が/appで探せなくなるから。
   end
-  def question
+  def about
     @user = current_user#navbarのuser_path(@user)が/questionで探せなくなるから。
   end
   def blog
@@ -61,6 +59,11 @@ class HomeController < ApplicationController
   def the_shadow_of_eldoria
   end
   def the_eternal_labyrinth
+  end
+  def welcome
+    #application.html.erbの影響を消す。
+    render layout: false
+    
   end
 end
 
