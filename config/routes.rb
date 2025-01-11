@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   #📸
   post 'handwriting/analyze', to: 'users#analyze', as: 'analyze_handwriting'#文字認識機能
   resources :microposts, only: [:index]#slugで先に影響されないように。/micropostsは危ないから。
+  resources :users, only: [:index]
   
   #frieendly_id
   get '/:slug', to: 'users#show', as: :user, constraints: { slug: /[a-zA-Z0-9\-_]+/ }#たまにidを読み込もうとするから。
