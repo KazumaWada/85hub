@@ -37,7 +37,10 @@ consistent for a <%= @posted_dates_sum %> days😤
   <!--<h3>History (<%= @user.microposts.count %>)</h3>-->
     <div class="m-3">
     <!--<div class="mt-12" style="height: 30px;"></div>-->
-    <%= render partial: 'microposts/micropost'%>
+    <!--<%= render partial: 'microposts/micropost'%>-->
+    <!--local?を使う-->
+    <%= render partial: 'microposts/micropost', locals: { microposts: @user.microposts.published } %>
+
     </div>
 <% end %>
 

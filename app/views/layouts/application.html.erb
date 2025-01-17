@@ -2,10 +2,9 @@
 <html>
   <head> 
   <!-- Importmap -->
-  <!--<%= javascript_importmap_tags %>-->
-  <!--<script type="module" src="/assets/application.js"></script>-->
+  <%= javascript_importmap_tags %>
   <!-- Stylesheets -->
-  <!--<%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>-->
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,8 +14,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= favicon_link_tag "favicon.ico" %>
-  <!-- Rails7推奨のやり方ではできなかったからCDNで読み込む -->
-  <script src="https://unpkg.com/@hotwired/stimulus/dist/stimulus.umd.js"></script>
+
 
  
   
@@ -25,7 +23,6 @@
   <!-- Flowbite -->
   <script src="https://unpkg.com/flowbite@1.6.5/dist/flowbite.min.js"></script>
 
-  
 
 <!--google font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -44,6 +41,7 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7071950888210612"
      crossorigin="anonymous">
     </script>
+    <%= javascript_importmap_tags %>
   
   </head>
   <!-- Google tag (gtag.js) -->
@@ -141,21 +139,10 @@ button:focus {
 #tailwind CSS (https://tailwindcss.com/docs/guides/ruby-on-rails)
 </style>
 
-<body data-turbo="false">
-<script>
-// グローバル変数 Stimulus が UMD版で参照できる
-const application = Stimulus.Application.start()
+<body>
 
-// 例: hello_controller
-application.register("hello", class extends Stimulus.Controller {
-  connect() {
-    console.log("Hello from Stimulus via <script> tag on Rails 7!")
-  }
-})
-</script>
 
-<div data-controller="hello">
-</div>
+
 
 
 <%= render 'layouts/header' %>

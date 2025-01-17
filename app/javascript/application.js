@@ -4,9 +4,12 @@
 import "@hotwired/turbo-rails";
 //import Turbo from '@hotwired/turbo-rails';
 //import "popper"
+import "./controllers"
 import "controllers/example_controller"; //stimulus. $ rails g stimulus example
 //↑app/javascript/controllers/index.jsを参照している。
 
 //bin/rails assets:clobber && bin/rails assets:precompile
 
 
+import "@hotwired/turbo-rails"
+import "@hotwired/stimulus"

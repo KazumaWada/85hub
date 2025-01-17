@@ -51,6 +51,9 @@ class UsersController < ApplicationController
     start_date = Date.today.beginning_of_month.beginning_of_week(:sunday)
     end_date = Date.today.end_of_month.end_of_week(:sunday)
     #end_date = start_date + 13 #(2 weeks ver)
+    
+
+
 
     @today = Date.today
     @current_month = Date::MONTHNAMES[Time.now.month]

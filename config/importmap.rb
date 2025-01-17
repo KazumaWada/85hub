@@ -1,6 +1,6 @@
 # # Pin npm packages by running ./bin/importmap
 #外部からモジュールをimportしてくるファイル。
-pin "application", to: "https://ga.jspm.io/npm:application@0.1.4/index.js"
+pin "application", preload: true
 pin_all_from "app/javascript"
 pin "@hotwired/stimulus-loading", to: "stimulus-loading.js"
 #なんらかの原因で、pin_all_fromが実行できない。多分version?だから一つづピン留め。
@@ -12,7 +12,8 @@ pin "controllers/example_controller", to: "controllers/example_controller.js"
 
 
 # bin/importmap pin @hotwired/turbo-rails実行
-pin "@hotwired/stimulus", to: "stimulus.min.js"
+pin "@hotwired/stimulus", to: "stimulus.min.js", preload: true
+pin "@hotwired/stimulus-loading", to: "stimulus-loading.js", preload: true
 pin "@hotwired/turbo-rails", to: "https://ga.jspm.io/npm:@hotwired/turbo-rails@8.0.12/app/javascript/turbo/index.js"
 pin "@hotwired/turbo", to: "https://ga.jspm.io/npm:@hotwired/turbo@8.0.12/dist/turbo.es2017-esm.js"
 pin "@rails/actioncable/src", to: "https://ga.jspm.io/npm:@rails/actioncable@7.2.201/src/index.js"
@@ -157,3 +158,4 @@ pin "which-builtin-type", to: "https://ga.jspm.io/npm:which-builtin-type@1.2.1/i
 pin "which-collection", to: "https://ga.jspm.io/npm:which-collection@1.0.2/index.js"
 pin "which-typed-array", to: "https://ga.jspm.io/npm:which-typed-array@1.1.18/index.js"
 pin "xmlhttprequest", to: "https://ga.jspm.io/npm:xmlhttprequest@1.2.2/XMLHttpRequest.js"
+pin "@hotwired/turbo-rails", to: "turbo.min.js"

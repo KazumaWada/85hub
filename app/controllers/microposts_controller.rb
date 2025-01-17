@@ -89,6 +89,7 @@ class MicropostsController < ApplicationController
         @micropost.status = 'draft'
       else
         @micropost.status = 'published'
+        puts @micropost.content + "🎨🎨🎨🎨🎨🎨🎨🎨"
       end
 
       # if @micropost.save
@@ -171,7 +172,7 @@ class MicropostsController < ApplicationController
 
 
     def micropost_params
-      params.require(:micropost).permit(:content, :rich_content)
+      params.require(:micropost).permit(:content)
       #{"authenticity_token"=>"[FILTERED]", "content"=>"hh", "commit"=>"Post", "slug"=>"a"}
     end
 
