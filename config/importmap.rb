@@ -4,6 +4,9 @@ pin "@hotwired/stimulus", to: "stimulus.min.js"
 pin "@hotwired/stimulus-loading", to: "stimulus-loading.js"
 pin_all_from "app/javascript/controllers", under: "controllers"
 
+# rich text editor
+pin "quill", to: "https://ga.jspm.io/npm:quill@1.3.7/dist/quill.js"
+
 
 
 
@@ -163,3 +166,4 @@ pin "which-collection", to: "https://ga.jspm.io/npm:which-collection@1.0.2/index
 pin "which-typed-array", to: "https://ga.jspm.io/npm:which-typed-array@1.1.18/index.js"
 pin "xmlhttprequest", to: "https://ga.jspm.io/npm:xmlhttprequest@1.2.2/XMLHttpRequest.js"
 pin "@hotwired/turbo-rails", to: "turbo.min.js"
+

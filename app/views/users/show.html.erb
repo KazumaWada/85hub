@@ -29,18 +29,12 @@ consistent for a <%= @posted_dates_sum %> days😤
 <div class="flex justify-end mb-4">
   <%= link_to "draft📝", draft_path(current_user), class: "bg-gray-100 text-gray-800 rounded hover:bg-gray-200 transition duration-300 px-4 py-2 mr-4" %>
 </div>
-
 <% end %>
 
 
 <% if @user.microposts.any? %>
-  <!--<h3>History (<%= @user.microposts.count %>)</h3>-->
     <div class="m-3">
-    <!--<div class="mt-12" style="height: 30px;"></div>-->
-    <!--<%= render partial: 'microposts/micropost'%>-->
-    <!--local?を使う-->
-    <%= render partial: 'microposts/micropost', locals: { microposts: @user.microposts.published } %>
-
+    <%= render partial: 'microposts/micropost' %>
     </div>
 <% end %>
 

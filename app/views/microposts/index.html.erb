@@ -1,3 +1,25 @@
+<!-- Add specific styles for headers -->
+<style>
+  .ql-editor h1 {
+    font-size: 2em;
+    font-weight: bold;
+  }
+  .ql-editor h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+  .ql-editor h3 {
+    font-size: 1.17em;
+    font-weight: bold;
+  }
+  .ql-editor a{
+    color: #3b82f6; /* Tailwind's blue-500 */
+  }
+  .ql-editor {
+    padding: 0;  /* Remove default padding */
+    margin: 0;
+  }
+</style>
 <% @microposts.published.each do |micropost| %>   
 
 <div class="mt-2 p-4 ml-3 mr-3 rounded border shadow-md hover:shadow-lg transition-shadow duration-300">
@@ -9,9 +31,23 @@
   </div>
   
   <!-- Content on the second line -->
-  <div class="text-left mt-2">
-    <%= simple_format(micropost.content) %>
-  </div>
+  <div class="ql-editor">
+  <%= sanitize micropost.content, 
+    tags: %w(
+      p br h1 h2 h3 h4 h5 h6 
+      ul ol li 
+      strong em u s 
+      blockquote pre code 
+      span div img
+      a
+    ),
+    attributes: %w(
+      class style src alt href
+      data-* 
+    ) 
+  %>
+</div>
+ 
 
 </div>
 <% end %>

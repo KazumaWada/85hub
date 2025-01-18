@@ -1,118 +1,47 @@
-<!-- First, load Quill resources -->
-<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-<script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
-
-<div id="post" class="mt-5 m-2"> 
+<div id="post" class="mt-5 m-2" data-controller="quill"> 
   <%= form_with(model: @micropost, url: zen_create_path(slug: @user.slug), method: :post, local: true, data: { turbo: false } ) do |f| %>
-    <!--ベータ版↓-->
-    <!-- Add specific height and background to make editor visible -->
-    <h1>ベータ版↓</h1>
-    <div id="editor-container" class="mb-4">
-      <div id="editor" class="bg-white" style="height: 300px;"></div>
-    </div>
-    <%= f.hidden_field :content, id: "quill-content" %>
-    <!--ベータ版↑-->
-
-    <!--今使用しているinput↓-->
-    <div class="field">
-    <!-- 編集エリア -->
-    <h1>こっちに書いてください↓</h1>
-    <!-- 隠しフィールド（フォーム送信時にエディタの内容を保存） -->
-    <%= f.text_field :content, class: "p-4 rounded border shadow-md hover:shadow-lg transition-shadow duration-300 w-full h-[400px]" %>
-    </div>
-    <!--今使用しているinput↑-->
-
     
-    <!-- 送信ボタン -->
+    <!-- Quill editor container -->
+    <div data-quill-target="editor" class="min-h-[500px] h-auto"></div>
+
+    <!-- Hidden input to store Quill content -->
+    <%= f.hidden_field :content, data: { quill_target: "input" } %>
+    
+    <!-- Actions -->
     <div class="actions text-right mt-2">
-      <button
-        class="px-4 py-2 bg-gray-200 text-gray-500 border border-gray-300 
-               rounded-md cursor-not-allowed
-               disabled:hover:bg-gray-200 disabled:opacity-50"
-        disabled>
-        🤖AI
-      </button>
+    <button
+    class="px-4 py-2 bg-gray-200 text-gray-500 border border-gray-300 
+           rounded-md cursor-not-allowed
+           disabled:hover:bg-gray-200 disabled:opacity-50"
+    disabled>
+    🤖AI
+  </button>
 
-      <% unless current_page?(camera_path) %>
-        <button class="hover:bg-yellow-500 px-4 py-2 bg-gray-100 border border-gray-300 text-gray-700 
-                     hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 
-                     focus:ring-gray-300 rounded-md">
-          <%= link_to "📸 手書きを読み取る", camera_path(@user), class: "submit-button text-dark text-decoration-none" %>
-        </button>
-      <% end %>
+  <% unless current_page?(camera_path) %>
+    <button class="hover:bg-yellow-500 px-4 py-2 bg-gray-100 border border-gray-300 text-gray-700 
+                 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 
+                 focus:ring-gray-300 rounded-md">
+      <%= link_to "📸 手書きを読み取る", camera_path(@user), class: "submit-button text-dark text-decoration-none" %>
+    </button>
+  <% end %>
 
-      <%= f.submit "📝 下書き保存",  
-          id: "draft_submit_button", 
-          name: "draft", 
-          class: "hover:bg-yellow-500 px-4 py-2 bg-gray-200 border border-gray-300 text-gray-800 
-                 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 
-                 focus:ring-gray-400 rounded-md" %>
+  <%= f.submit "📝 下書き保存",  
+      id: "draft_submit_button", 
+      name: "draft", 
+      class: "hover:bg-yellow-500 px-4 py-2 bg-gray-200 border border-gray-300 text-gray-800 
+             hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 
+             focus:ring-gray-400 rounded-md" %>
 
-      <%= f.submit "post", 
-          id: "submit_button", 
-          class: "hover:bg-yellow-500 px-4 py-2 bg-gray-200 border border-gray-300 text-gray-800 
-                 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 
-                 focus:ring-gray-400 rounded-md" %>
+  <%= f.submit "post", 
+      id: "submit_button", 
+      class: "hover:bg-yellow-500 px-4 py-2 bg-gray-200 border border-gray-300 text-gray-800 
+             hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 
+             focus:ring-gray-400 rounded-md" %>
     </div>
   <% end %>
 </div>
 
-<style>
-#editor-container {
-  border: 1px solid #ccc;
-}
 
-.ql-toolbar {
-  border-top: none !important;
-  border-left: none !important;
-  border-right: none !important;
-  background-color: white !important;
-}
-
-.ql-container {
-  border: none !important;
-  background-color: white !important;
-}
-
-.ql-editor {
-  min-height: 200px !important;
-  background-color: white !important;
-}
-</style>
-
-<script>
-// Wait for everything to load
-window.addEventListener('load', function() {
-  // Initialize Quill only if it exists and hasn't been initialized yet
-  if (window.Quill && !window.quillInstance) {
-    window.quillInstance = new Quill('#editor', {
-      theme: 'snow',
-      placeholder: 'ここに記事を書いてください...',
-      modules: {
-        toolbar: [
-          ['bold', 'italic', 'underline'],
-          [{ 'header': [1, 2, 3, false] }],
-          ['list', 'bullet'],
-          ['clean']
-        ]
-      }
-    });
-
-    // Get form and content field
-    const form = document.querySelector('form');
-    const contentField = document.getElementById('quill-content');
-
-    // Handle form submission
-    if (form && contentField) {
-      form.addEventListener('submit', function(e) {
-        // Get the HTML content from Quill
-        const content = window.quillInstance.root.innerHTML;
-        console.log('Content being saved:', content); // Debug log
-        contentField.value = content;
-      });
-    }
-  } else {
-    console.error('Quill not loaded properly');
-  }
-});
-</script>
+<!-- Add Quill CSS and JS -->
+<link href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css" rel="stylesheet">
+<script src="https://cdn.quilljs.com/2.0.3/quill.js"></script>    
