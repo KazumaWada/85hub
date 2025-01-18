@@ -28,32 +28,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&family=Lexend:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-
-
-
-    <%# Twitterカード用のメタタグ %>
-    <meta name="twitter:card" content="summary_large_image"> <%# カードの種類を指定 %>
-    <meta name="twitter:title" content="<%= content_for?(:title) ? yield(:title) : '✏️eigopencil' %>"> <%# カードのタイトル %>
-    <meta name="twitter:description" content="eigopencil.comで英語をアウトプットしよう! ">
-    <meta name="twitter:image" content="<%= content_for?(:image) ? yield(:image) : asset_path('draft.webp') %>"> <%# カードの画像 %>
-
-    <!--google adsence-->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7071950888210612"
-     crossorigin="anonymous">
-    </script>
-    <%= javascript_importmap_tags %>
   
-  </head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-BM9NVX19L2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+</head>
 
-  gtag('config', 'G-BM9NVX19L2');
-</script>
-    <style>
+<style>
       * {
         margin: 0;
         padding: 0;
@@ -141,7 +119,7 @@ button:focus {
 
 <body>
 
-
+<div data-controller="example">hey</div>
 
 
 

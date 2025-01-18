@@ -1,10 +1,15 @@
 # # Pin npm packages by running ./bin/importmap
 #外部からモジュールをimportしてくるファイル。
+pin "@hotwired/stimulus", to: "stimulus.min.js"
+pin "@hotwired/stimulus-loading", to: "stimulus-loading.js"
+pin_all_from "app/javascript/controllers", under: "controllers"
+
+
+
+
 pin "application", preload: true
 pin_all_from "app/javascript"
-pin "@hotwired/stimulus-loading", to: "stimulus-loading.js"
 #なんらかの原因で、pin_all_fromが実行できない。多分version?だから一つづピン留め。
-#pin_all_from "app/javascript/controllers", under: "controllers"
 
 #これはローカルだから、手動でok toは、app/javascriptの相対path
 pin "controllers/example_controller", to: "controllers/example_controller.js"
@@ -12,7 +17,6 @@ pin "controllers/example_controller", to: "controllers/example_controller.js"
 
 
 # bin/importmap pin @hotwired/turbo-rails実行
-pin "@hotwired/stimulus", to: "stimulus.min.js", preload: true
 pin "@hotwired/stimulus-loading", to: "stimulus-loading.js", preload: true
 pin "@hotwired/turbo-rails", to: "https://ga.jspm.io/npm:@hotwired/turbo-rails@8.0.12/app/javascript/turbo/index.js"
 pin "@hotwired/turbo", to: "https://ga.jspm.io/npm:@hotwired/turbo@8.0.12/dist/turbo.es2017-esm.js"

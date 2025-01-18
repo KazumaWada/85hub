@@ -823,3 +823,11 @@ quillの内容をpostボタンを押す前に.contentに格納しておく必要
 - 送信前に格納
 
 postを押した時に、投稿しますか?はい、いいえと表示し、はいを押したら格納して、データベースに送信するという順番でできるかも。
+
+
+# quill
+javascriptを機能させるために、app/javascript/application.jsの書き方を確かめるorそもそもapplication.jsが必要なのかを確かめつ必要がある。
+
+どこにも載っていないから、とりあえず今は公式を見まくっている。
+https://hotwired.dev/
+https://railsguides.jp/v7.0/working_with_javascript_in_rails.html#import-maps%E3%81%A8javascript%E3%83%90%E3%83%B3%E3%83%89%E3%83%A9%E3%83%BC%E3%81%AE%E3%81%A9%E3%81%A1%E3%82%89%E3%82%92%E9%81%B8%E3%81%B6%E3%81%8B
