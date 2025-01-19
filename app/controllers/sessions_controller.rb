@@ -64,7 +64,8 @@ class SessionsController < ApplicationController
     }
     
     #session[:user_id] = user.id
-    redirect_to about_path, notice: 'ようこそ🎉あなたはテストユーザーです。'
+    flash[:success] = "ようこそ🎉あなたはテストユーザーです"
+    redirect_to about_path
   end
 
   def destroy

@@ -1,0 +1,91 @@
+<div class="relative flex justify-between items-center p-4 relative z-10">
+  <!-- ロゴ -->
+  <div class="logo-container">
+    <%= link_to root_path, class: "logo-link" do %>
+      <%= image_tag("logo01.png", class: "logo") %>
+    <% end %>
+  </div>
+
+  <!-- menubar -->
+  <div x-data="{ open: false }" class="fixed top-0 right-0 z-10 p-4">
+    <!-- 3本線 -->
+    <button @click="open = ! open" class="">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="size-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+        />
+      </svg>
+    </button>
+
+    <!-- home -->
+    <div x-show="open" @click.outside="open = false">
+      <%= link_to(
+          root_path, 
+          class: "text-dark text-decoration-none d-flex align-items-center text-3xl", 
+          data: { turbo: false }) do %>
+        🏠
+      <% end %>
+    </div>
+
+    <!-- user -->
+    <div x-show="open" @click.outside="open = false">
+      <%= link_to(
+          current_user ? current_user : login_path,
+          class: "text-dark text-decoration-none text-3xl",
+          data: { turbo: false }
+        ) do %>
+        🧍‍♂️
+      <% end %>
+    </div>
+
+    <!-- book -->
+    <div x-show="open" @click.outside="open = false">
+      <%= link_to(
+          books_path,
+          class: "text-dark text-decoration-none text-3xl",
+          data: { turbo: false }
+        ) do %>
+        📖
+      <% end %>
+    </div>
+
+    <!-- about -->
+    <div x-show="open" @click.outside="open = false">
+      <%= link_to(
+          about_path,
+          class: "text-dark text-decoration-none text-3xl text-blue-500",
+          data: { turbo: false }
+        ) do %>
+        ℹ️
+      <% end %>
+    </div>
+
+    <% if current_user %>
+    <!-- logout -->
+    <div x-show="open" @click.outside="open = false">
+      <%= button_to(
+        logout_path,
+        method: :delete,
+        class: "text-dark text-decoration-none text-3xl",
+        data: { turbo: false },
+        ) do %>
+        👋
+      <% end %>
+    </div>
+    <% end %>
+
+
+  </div>
+</div>
+
+
+

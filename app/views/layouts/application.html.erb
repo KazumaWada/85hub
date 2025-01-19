@@ -19,8 +19,10 @@
   
   <!-- TailwindCSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Flowbite -->
-  <script src="https://unpkg.com/flowbite@1.6.5/dist/flowbite.min.js"></script>
+
+  <!--Alpine.js nav用(https://alpinejs.dev/start-here#building-a-dropdown)-->
+  <script src="//unpkg.com/alpinejs" defer></script>
+
 
 
 <!--google font -->
@@ -119,10 +121,8 @@ button:focus {
 <body>
 
 
-
-
-
-<%= render 'layouts/header' %>
+<%= render 'layouts/flash_message' %>
+<%= render 'layouts/header_beta' %>
 <%= render 'layouts/bottom_btns' %>
 
 <%= yield %>
@@ -131,7 +131,7 @@ button:focus {
 
 
 
-  <div class="mt-12" style="height: 200px;"></div>
+  <div class="mt-12" style="height: 50px;"></div>
 
-  <body>
+</body>
 </html>
