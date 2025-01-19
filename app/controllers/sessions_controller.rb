@@ -52,6 +52,7 @@ class SessionsController < ApplicationController
 
   def guest
     user = User.find_or_create_by!(email: 'test@gmail.com') do |user|
+      user.name = 'test_user'
       user.password = 'password'
       user.password_confirmation = 'password'
     end
