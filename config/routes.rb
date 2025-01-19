@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get '/about', to: 'home#about', as: 'about'
   get 'tutorial', to: 'home#tutorial', as: 'tutorial'
   get '/blog', to: "home#blog", as: 'blog'
-
+  post 'guest_login', to: 'sessions#guest', as: 'guest_login'
   get '/books', to: "home#books", as: 'books'
  
   scope '/books' do

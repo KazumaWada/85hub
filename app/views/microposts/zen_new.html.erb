@@ -20,7 +20,7 @@
   <% unless current_page?(camera_path) %>
     <button class="hover:bg-yellow-500 px-4 py-2 bg-gray-100 border border-gray-300 text-gray-700 
                  hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 
-                 focus:ring-gray-300 rounded-md">
+                 focus:ring-gray-300 rounded-md <%= 'disable' if @user.name == 'test_user' %>"">
       <%= link_to "📸 手書きを読み取る", camera_path(@user), class: "submit-button text-dark text-decoration-none" %>
     </button>
   <% end %>
@@ -39,6 +39,8 @@
              focus:ring-gray-400 rounded-md" %>
     </div>
   <% end %>
+
+
 </div>
 
 

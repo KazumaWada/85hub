@@ -26,6 +26,9 @@ class SessionsController < ApplicationController
     flash[:success] = "ようこそ🎉! #{user.name}さん"
     redirect_to about_path
     
+
+    
+    
     # user = User.find_by(name: session_params[:name])
 
     # if user && user.authenticate(session_params[:password])
@@ -45,6 +48,22 @@ class SessionsController < ApplicationController
     #   redirect_to login_path 
     # end
 
+  end
+
+  def guest
+    user = User.find_or_create_by!(email: 'test@gmail.com') do |user|
+      user.password = 'password'
+      user.password_confirmation = 'password'
+    end
+    cookies.signed[:user_data] = {
+      value: { user_id: user.id, slug: user.slug },
+      httponly: true,
+      secure: Rails.env.production?,
+      expires: 1.month.from_now#指定しなければ、セッションが終わればcookieがなくなる。
+    }
+    
+    #session[:user_id] = user.id
+    redirect_to about_path, notice: 'ようこそ🎉あなたはテストユーザーです。'
   end
 
   def destroy

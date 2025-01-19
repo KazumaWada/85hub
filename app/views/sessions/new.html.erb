@@ -14,8 +14,12 @@
 
     <div class="flex items-center justify-center min-h-screen">
       <div class="w-full max-w-md p-8 bg-white rounded">
+
         <!-- タイトル -->
         <h1 class="mb-6 text-2xl font-bold text-center">Log in</h1>
+        <!-- テストユーザーでログイン -->
+        <%= button_to 'テストユーザーでログイン', guest_login_path, class: "w-full px-4 py-2 font-bold text-white transition-colors bg-yellow-500 rounded hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" %>
+
 
         <!-- Rails のフォーム -->
         <div class="row">
@@ -36,7 +40,6 @@
 
               <!-- ログインボタン -->
               <%= f.submit "Log in", class: "w-full px-4 py-2 font-bold text-white transition-colors bg-yellow-500 rounded hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" %>
-
             <% end %>
             
             <!-- サインアップへのリンク -->
@@ -44,6 +47,12 @@
               New user?
               <%= link_to "Sign up now!", signup_path, class: "text-blue-500 hover:underline" %>
             </p>
+
+
+
+
+            
+
           </div>
         </div>
       </div>
