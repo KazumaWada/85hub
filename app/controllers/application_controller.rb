@@ -19,6 +19,12 @@ class ApplicationController < ActionController::Base
         end
     end
 
+    #404
+    unless Rails.env.development?
+      rescue_from ActiveRecord::RecordNotFound, with: :render_not_found
+      rescue_from ActionController::RoutingError, with: :render_not_found
+    end
+
     private
 
     def logged_in_user
@@ -26,5 +32,10 @@ class ApplicationController < ActionController::Base
             store_location
             redirect_to login_url
         end
+    end
+
+    #404
+    def render_not_found
+      render 'errors/not_found', status: :not_found
     end
 end

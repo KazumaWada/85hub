@@ -14,6 +14,9 @@ module App
     #rails5以降、libは自動で読み込まれなくなったから。(OCR用)
     config.autoload_paths << Rails.root.join('lib')
 
+    #Railsのではなく、指定した404errors/not_foundを返すようにする。
+    config.exceptions_app = self.routes
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

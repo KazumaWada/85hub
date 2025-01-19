@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   root "home#index"
-  #get '/about',to: 'home#about', as: 'about'
   get '/signup', to: 'users#new', as: 'signup'
   post '/signup', to: 'users#create'
   get '/login', to: 'sessions#new', as: 'login'
@@ -49,8 +48,7 @@ Rails.application.routes.draw do
     post '/zen_create', to: 'microposts#zen_create', as: 'zen_create'
     #post送信用のurl
     #post '/zen/microposts', to: 'microposts#create', as: :zen_microposts
-    resources :microposts, only: [:create, :destroy, :new] #, path: 'posts'
-    
+    resources :microposts, only: [:create, :destroy, :new] #, path: 'posts'    
   end
   
   # Defines the root path route ("/")
@@ -70,17 +68,6 @@ Rails.application.routes.draw do
 
 
 end
-# GET	/users	index	users_path	すべてのユーザーを表示するページ
-# GET	/users/1	show	user_path(user)	特定のユーザーを表示するページ
-# GET	/users/new	new	new_user_path	ユーザーを新規作成するページ (ユーザー登録)
-# POST	/users	create	users_path	ユーザーを作成するアクション
-# GET	/users/1/edit	edit	edit_user_path(user)	id=1のユーザーを編集するページ
-# PATCH	/users/1	update	user_path(user)	ユーザーを更新するアクション
-# DELETE	/users/1	destroy	user_path(user)	ユーザーを削除するアクション
 
-#これについてあとで調べる
-# method: :delete の仕組み
-# Rails の link_to ヘルパーで method: :delete を使うと、JavaScript (@rails/ujs) が裏で動作して、DELETE メソッドのリクエストをサーバーに送信します。
 
-# もしこの JavaScript が読み込まれていない、または有効になっていない場合、ブラウザは GET リクエストを送信します。その結果、ルーティングエラーが発生します。
 
