@@ -92,17 +92,10 @@ class MicropostsController < ApplicationController
         puts @micropost.content + "🎨🎨🎨🎨🎨🎨🎨🎨"
       end
 
-      # if @micropost.save
-      #   flash[:success] = "posted!"
-      #   redirect_to user_path(@user)
-      # else
-      #   flash[:danger] = "⚠️heads up! English only!!⚠️"
-      #   flash[:danger] = @micropost.errors.full_messages.join(", ")
-      #   redirect_to user_path(@user)
-      # end
-
       if @micropost.save && @micropost.status == "published"
         flash[:success] = "nice. you did it!"
+        #ファイルにも記録しておく。
+        write_to_file(@micropost.content);
         redirect_to user_path(@user)
       elsif@micropost.save && @micropost.status == "draft"
         flash[:success] = "draft saved. go check 📝"
@@ -116,38 +109,38 @@ class MicropostsController < ApplicationController
 
     end
 
-    def create 
-      fixed_params = { micropost: { content: params[:content] } }
-      params.merge!(fixed_params)
+    # def create 
+    #   fixed_params = { micropost: { content: params[:content] } }
+    #   params.merge!(fixed_params)
     
      
-        @user = User.find_by(slug: params[:slug])
-        @micropost = @user.microposts.build(micropost_params)
-        #@microposts_by_date = @user.microposts.group_by { |post| post.created_at.to_date }
+    #     @user = User.find_by(slug: params[:slug])
+    #     @micropost = @user.microposts.build(micropost_params)
+    #     #@microposts_by_date = @user.microposts.group_by { |post| post.created_at.to_date }
 
-        puts "----- Debug: Params Start -----"
-        Rails.logger.debug "Params content: #{params.inspect}"
-        puts "----- Debug: Params End -----"
-        #@user.microposts.build(content: "This is a new micropost")引数も渡すことができる。
-        if params[:draft]
-          @micropost.status = 'draft'
-        else
-          @micropost.status = 'published'
-        end
+    #     puts "----- Debug: Params Start -----"
+    #     Rails.logger.debug "Params content: #{params.inspect}"
+    #     puts "----- Debug: Params End -----"
+    #     #@user.microposts.build(content: "This is a new micropost")引数も渡すことができる。
+    #     if params[:draft]
+    #       @micropost.status = 'draft'
+    #     else
+    #       @micropost.status = 'published'
+    #     end
 
-        if @micropost.save && @micropost.status == "published"
-          flash[:success] = "nice. you did it!"
-          redirect_to user_path(@user)
-        elsif@micropost.save && @micropost.status == "draft"
-          flash[:success] = "draft saved. go check 📝"
-          redirect_to user_path(@user)
+    #     if @micropost.save && @micropost.status == "published"
+    #       flash[:success] = "nice. you did it!"
+    #       redirect_to user_path(@user)
+    #     elsif@micropost.save && @micropost.status == "draft"
+    #       flash[:success] = "draft saved. go check 📝"
+    #       redirect_to user_path(@user)
 
-        else
-          flash[:danger] = "⚠️heads up! English only!!⚠️"
-          flash[:danger] = @micropost.errors.full_messages.join(", ")
-          redirect_to user_path(@user)
-        end
-    end
+    #     else
+    #       flash[:danger] = "⚠️heads up! English only!!⚠️"
+    #       flash[:danger] = @micropost.errors.full_messages.join(", ")
+    #       redirect_to user_path(@user)
+    #     end
+    # end
 
     def destroy
       @user = User.friendly.find(params[:slug])
@@ -169,11 +162,26 @@ class MicropostsController < ApplicationController
 
     private
 
-
-
     def micropost_params
       params.require(:micropost).permit(:content)
       #{"authenticity_token"=>"[FILTERED]", "content"=>"hh", "commit"=>"Post", "slug"=>"a"}
     end
+
+    def write_to_file(content)
+      file_name = "content_db.txt"
+      file_path = Rails.root.join('public', file_name)
+
+     begin
+      #aは、ファイルを開くという意味
+      File.open(file_path, 'a') do |file|
+        file.puts "#{Time.now}: #{content}"
+     end
+     rescue => e 
+      Rails.logger.error "Failed to write to file: #{e.message}"
+     end
+
+    end
+
+
 
 end
