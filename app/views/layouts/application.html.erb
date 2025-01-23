@@ -27,11 +27,12 @@
   <meta name="twitter:site" content="@imnotkatsuma">
   <meta name="twitter:title" content="EigoPencil - 英語学習のためのマイクロポスト">
   <meta name="twitter:description" content="✏️ マイクロポストの内容...">
-  <meta name="twitter:image" content="<%= Rails.env.production? ? "https://eigopencil.com#{asset_path('welcome.png')}" : asset_url('welcome.png') %>">
+  <meta name="twitter:image" content="<%= Rails.env.production? ? "https://eigopencil.com#{asset_path('welcome.png')}" : "https://eigopencil.com/path/to/your/welcome.png" %>">
+
 
   <meta property="og:title" content="EigoPencil - 英語学習のためのマイクロポスト">
   <meta property="og:description" content="✏️ マイクロポストの内容...">
-  <meta property="og:image" content="<%= Rails.env.production? ? "https://eigopencil.com#{asset_path('welcome.png')}" : asset_url('welcome.png') %>">
+  <meta property="og:image" content="<%= Rails.env.production? ? "https://eigopencil.com#{asset_path('welcome.png')}" : "https://eigopencil.com/path/to/your/welcome.png" %>">
   <meta property="og:url" content="<%= request.original_url %>">
 
 <!--google font -->
@@ -128,7 +129,6 @@ button:focus {
 </style>
 
 <body>
-
 
 <%= render 'layouts/flash_message' %>
 <%= render 'layouts/header_beta' %>
