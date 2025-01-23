@@ -23,7 +23,16 @@
   <!--Alpine.js nav用(https://alpinejs.dev/start-here#building-a-dropdown)-->
   <script src="//unpkg.com/alpinejs" defer></script>
 
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@imnotkatsuma">
+  <meta name="twitter:title" content="EigoPencil - 英語学習のためのマイクロポスト">
+  <meta name="twitter:description" content="✏️ マイクロポストの内容...">
+  <meta name="twitter:image" content="<%= Rails.env.production? ? "https://eigopencil.com#{asset_path('welcome.png')}" : asset_url('welcome.png') %>">
 
+  <meta property="og:title" content="EigoPencil - 英語学習のためのマイクロポスト">
+  <meta property="og:description" content="✏️ マイクロポストの内容...">
+  <meta property="og:image" content="<%= Rails.env.production? ? "https://eigopencil.com#{asset_path('welcome.png')}" : asset_url('welcome.png') %>">
+  <meta property="og:url" content="<%= request.original_url %>">
 
 <!--google font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">

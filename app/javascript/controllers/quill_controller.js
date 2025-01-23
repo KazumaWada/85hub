@@ -20,10 +20,14 @@ export default class extends Controller {
             ['link','image', 'blockquote']
           ]
         },
+        //多分、style ql-editorではなく、ここに書けるかも。
         formats: {
             link: {
                 //tailwind did dirty for link color tho :(
               class: 'text-blue-500 hover:text-blue-700 underline'
+            },
+            blockquote:{
+              class: "border-left: 4px solid #e2e8f0 padding-left: 1rem; color: #4a5568; font-style: italic; margin: 0;"
             }
           }
       })

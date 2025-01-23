@@ -1,3 +1,30 @@
+# xカードの実装
+metaタグ
+https://github.com/kpumuk/meta-tags
+ogp(open graph protocol) cardを表示させるための機能
+https://ogp.me/
+xドキュメント
+https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/abouts-cards
+https://developer.x.com/en/docs/x-for-websites/cards/overview/summary-card-with-large-image
+https://developer.x.com/en/docs/x-for-websites/cards/guides/getting-started
+
+is card verifyed??
+https://cards-dev.x.com/validator
+
+- ogpメタタグとlink_toの関係
+お互い直接通信しているわけでは無い。
+ogp: URLがシェアされた時に感知
+link_to: xへのリンクを生成するコード
+
+link_toでxへの投稿画面にデータを入力する
+↓
+ユーザーが投稿する。
+↓
+xがそのリンク先をクロールし、OGPメタタグを読み取る。
+それに基づいてxがリッチなプレビューカードを表示する。
+↓
+つまり、link_toでxの投稿画面に入力されたデータを、ogpが制御している。
+
 # 文字数、太字テキストエリア
 
 ```ruby

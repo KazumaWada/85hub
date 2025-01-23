@@ -43,10 +43,7 @@ gem 'stringio', '3.0.4'
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
 # Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap"
 gem "sassc-rails" #for bootstrap
-
-gem "font-awesome-sass"
 
 #.com/{@user.name}⭐️
 gem 'friendly_id', '~> 5.5.0'
@@ -59,8 +56,8 @@ gem "ruby-openai"
 #.envでopenAPI keyを読み込むため
 gem 'dotenv-rails', groups: [:development]
 
-#cron job(cold start防止のために定期的にリクエストを送る)
-gem 'whenever', require: false
+# x card
+gem 'meta-tags'
 
 #写真から文字認識(OCR optical character recognition)
 gem "rtesseract"
