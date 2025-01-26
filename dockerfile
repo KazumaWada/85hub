@@ -23,14 +23,16 @@ WORKDIR /app
 # OCRのmini~用に画像を一時保存するpathの権限を与える。
 RUN mkdir -p /app/tmp && chmod -R 777 /app/tmp
 
-# 依存関係のインストールを効率化するため、GemfileとGemfile.lockを先にコピー
+# この時点で、(dockerを実行する時点で)docker先コピーできるように先にローカルにgemfileを作っておく。
+#そうすることで、再ビルドした時にこの過程をスキップできてビルド時間を減らせる。
 COPY Gemfile Gemfile.lock ./
 
 # プラットフォームを指定してBundlerをインストール
 RUN bundle lock --add-platform x86_64-linux && \
     bundle install --jobs=4 --retry=3
 
-# アプリケーションコードをコピー
+# bundle installの後にcopyすることで、gemfileの変更がない限り、rebuildするときに依存関係の設定をキャッシュしているから飛ばせる。
+# けど、gemfileの変更が
 COPY . .
 
 # wheneverでcronタスクを生成（config/schedule.rbが存在する前提）
@@ -41,3 +43,5 @@ EXPOSE 3000
 
 # アプリケーションの起動とcronサービスの開始
 CMD ["sh", "-c", "service cron start && bin/rails db:migrate RAILS_ENV=production && rails server -b 0.0.0.0"]
+
+

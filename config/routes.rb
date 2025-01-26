@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   root "home#index"
+  get '/feature', to: 'home#feature', as: 'feature'
   get '/signup', to: 'users#new', as: 'signup'
   post '/signup', to: 'users#create'
   get '/login', to: 'sessions#new', as: 'login'

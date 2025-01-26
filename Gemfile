@@ -43,7 +43,7 @@ gem 'stringio', '3.0.4'
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
 # Reduces boot times through caching; required in config/boot.rb
-gem "sassc-rails" #for bootstrap
+gem 'bootsnap', '>= 1.4.4', require: false
 
 #.com/{@user.name}⭐️
 gem 'friendly_id', '~> 5.5.0'

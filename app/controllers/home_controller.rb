@@ -65,5 +65,8 @@ class HomeController < ApplicationController
     render layout: false
     
   end
-end
 
+  def feature
+  end
+
+end
