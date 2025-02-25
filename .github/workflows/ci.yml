@@ -1,0 +1,10 @@
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    steps:
+      - name: Display a message when a push happens
+        run: echo "A push event was triggered on the main branch!"
+    

@@ -93,7 +93,9 @@ class MicropostsController < ApplicationController
       end
 
       if @micropost.save && @micropost.status == "published"
+         MailgunService.send_simple_message(@user.name, @user.email, @micropost.content)
         flash[:success] = "nice. you did it!"
+       
         #ファイルにも記録しておく。
         write_to_file(@micropost.content);
         redirect_to user_path(@user)

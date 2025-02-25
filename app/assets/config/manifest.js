@@ -13,3 +13,5 @@
 //= link 404.png
 //= link editor.png
 //= link bike.svg
+//= link quill.png
+//= link email-box.webp

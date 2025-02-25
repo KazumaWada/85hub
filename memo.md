@@ -1,3 +1,271 @@
+ # root LP
+ ``` ruby
+
+<!-------what is eigopencil?--------------->
+<div class="min-h-screen">
+
+  <div class="text-center mt-6">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-9 mx-auto">
+  <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+  </svg>
+  <h1 class="text-2xl font-bold text-gray-800">
+  eigopencil.comとは？
+  </h1>
+  </div>
+
+  <div class="text-center mt-6">
+    <p class="m-2">
+    あなたが学習した英語の内容(英単語、フレーズ、短い文章からブログのような長文など)を投稿し、その内容が登録したメールアドレスへ後日送られるサービスです。
+    </p>
+  </div>
+
+ <div class="text-center m-6">
+ <%= image_tag("theme03.webp", class: "mx-auto max-w-[320px] h-auto rounded-lg") %>
+
+ </div>
+
+</div>
+
+
+
+<!-------users problem--------------->
+<div class="min-h-screen">
+
+  <div class="text-center mt-6">
+  <h1 class="text-2xl font-bold text-gray-800">
+  「せっかく時間をかけて英語を勉強したのに、いざ使おうとしたら単語が出てこない…」そんな経験、ありませんか？
+  </h1>
+  </div>
+
+<div class="text-left mt-6">
+  <ul>
+  <li>😥 仕事や学校に追われ自ら復習する気力がない</li>
+  <li>😥 どこを学習したのか、忘れてしまっている</li>
+  <li>😥 復習をしようと思っても、モチベーションが続かない</li>
+  <li>😥 復習する時間があったら、新しい内容を学びたい気持ちを抑えられない</li>
+  <li>😥 復習を習慣化できていない</li>
+  </ul>
+  </div>
+  <div class="text-center mt-6">
+    <p class="m-2">
+    「研究によると、人間は覚えたことの約70%を24時間以内に忘れてしまうと言われています。
+
+(**エビングハウスの忘却曲線:** https://en.wikipedia.org/wiki/Forgetting_curve)
+
+つまり、復習をしなければ、せっかく勉強した内容もほとんど無駄になってしまうのです。
+    </p>
+  </div>
+
+ <div class="text-center m-6">
+ <%= image_tag("theme03.webp", class: "mx-auto max-w-[320px] h-auto rounded-lg") %>
+ <p class="text-xl font-bold">では、どうすればいいのでしょうか?</p>
+ <p class="text-xl font-bold">
+ それは、適切なタイミングで復習を重ねることです。そうすることで、知識はしっかりと定着します！(間隔反復（Spaced Repetition: https://en.wikipedia.org/wiki/Spaced_repetition 学術論文: https://journals.sagepub.com/doi/10.1111/j.1467-9280.2008.02209.x 論文を引用したブログ: https://fs.blog/spacing-effect/ 本: https://www.amazon.com/Make-Stick-Science-Successful-Learning/dp/0674729013 ブログ: https://e-student.org/spaced-repetition/)
+ </p>
+ <p class="text-xl font-bold">
+ そこで、あなたが学習した内容を時間が経った後にリマインドしてくれるようなツールがあったら便利だと思いませんか?そこで、こんな人に向けて、eigopencilを作りました。
+ </p>
+ </div>
+
+</div>
+
+
+<!-------solution--------------->
+<div class="flex items-center justify-center min-h-screen">
+  <div class="text-center">
+    <h1 class="text-xl font-semibold text-gray-800 mb-2">
+    eigopencil.comは、あなたが投稿した学習内容を後日、自動でリマインドします。あなたはメールの通知をONにすればいいだけです！
+    </h1>
+  </div>
+</div>
+
+<!-------detail about app(price, how to use, )--------------->
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
+  <div class="text-center">
+    <h1 class="text-xl font-semibold text-gray-800 mb-2">
+    使い方は簡単！
+    </h1>
+    <p class="text-gray-500">
+    こうやって、こうやってこうやるんです!
+    </p>
+  </div>
+</div>
+
+
+<!-------action--------------->
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
+  <div class="text-center">
+    <h1 class="text-xl font-semibold text-gray-800 mb-2">
+    eigopencilを活用して、英語ができるかっこいい大人になろう！
+    </h1>
+    <p class="text-gray-500">
+    **￥**1000 / 月額
+
+    　　　　　　　　　　　　　サブスクリプション料金(税込)
+    
+    　　　　　　　　　　　　　　　　ボタンとかstripe
+    </p>
+  </div>
+</div>
+
+
+<!-------get in touch--------------->
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
+  <div class="text-center">
+    <p class="text-gray-500">
+    ニュースレターのwaitlist登録をもう一度ここで確認させる。
+    </p>
+  </div>
+</div>
+
+-----------------------------------------------------------------------
+
+<head>
+  <!-- TailwindCSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+<section class="min-h-screen flex flex-col justify-center items-center py-16 bg-blue-50">
+<div class="text-center mb-6">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="mx-auto w-16 h-16">
+    <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+  </svg>
+  <h1 class="text-2xl font-bold text-gray-800">eigopencil.com</h1>
+</div>
+
+<div class="text-center mb-6">
+  <h2 class="text-3xl font-bold text-gray-800 mb-2">
+    勉強した英語はもう<span style="color: #0057ff;">忘れない！</span>復習を自動化して<span style="color: #0057ff;">確実に</span>定着させよう。
+  </h2>
+  <p class="m-2 text-xl">
+    必要なのはスマホまたはPCのみ。あなたの学習した内容が後日メールへ届きます。
+  </p>
+</div>
+
+<div class="text-center mt-6">
+  <p class="text-gray-500">
+    eigopencil.comはただいま開発中です。リリース情報を受け取るために、下記フォームにメールアドレスを登録してください！
+  </p>
+</div>
+
+<!-- Email Sign-up Form -->
+<div class="mt-8">
+  <form class="flex justify-center gap-4">
+    <input type="email" placeholder="あなたのメールアドレス" class="px-4 py-2 rounded-full text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 w-72" required>
+    <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition">登録</button>
+  </form>
+</div>
+</section>
+
+
+  <!-- What is eigopencil? Section -->
+  <section class="min-h-screen bg-gray-100 py-16">
+    <div class="text-center mb-6">
+      <h2 class="text-3xl font-bold text-gray-800">eigopencil.comとは？</h2>
+    </div>
+
+    <div class="text-center max-w-2xl mx-auto mb-6">
+      <p class="text-lg text-gray-700">eigopencil.comは、あなたが学習した英語の内容を投稿し、その内容を後日自動でメールにてお届けするサービスです。あなたの学習を継続的にサポートします。</p>
+    </div>
+
+    <div class="text-center">
+      <img src="https://via.placeholder.com/320x200" alt="eigopencil screenshot" class="mx-auto max-w-[320px] rounded-lg shadow-lg">
+    </div>
+  </section>
+
+  <!-- Users' Problems Section -->
+  <section class="min-h-screen py-16 bg-white">
+    <div class="text-center mb-6">
+      <h2 class="text-3xl font-bold text-gray-800">「せっかく勉強したのに、いざ使おうとしたら単語が出てこない…」そんな経験、ありませんか？</h2>
+    </div>
+
+    <div class="max-w-2xl mx-auto text-left text-lg">
+      <ul class="space-y-4 text-gray-700">
+        <li>😥 仕事や学校に追われ自ら復習する気力がない</li>
+        <li>😥 どこを学習したのか、忘れてしまっている</li>
+        <li>😥 復習をしようと思っても、モチベーションが続かない</li>
+        <li>😥 復習する時間があったら、新しい内容を学びたい気持ちを抑えられない</li>
+        <li>😥 復習を習慣化できていない</li>
+      </ul>
+    </div>
+
+    <div class="text-center mt-8">
+      <p class="text-lg text-gray-600">人間は、覚えたことの約70%を24時間以内に忘れてしまうと言われています。<a href="https://en.wikipedia.org/wiki/Forgetting_curve" class="text-blue-600">エビングハウスの忘却曲線</a>をご覧ください。</p>
+    </div>
+
+    <div class="text-center mt-8">
+      <p class="text-xl font-bold">では、どうすればいいのでしょうか?</p>
+      <p class="text-xl font-semibold mt-4 text-gray-700">それは、適切なタイミングで復習を重ねることです！</p>
+      <p class="mt-4 text-lg text-gray-600">eigopencilは、あなたが学習した内容を効果的にリマインドし、記憶を定着させるお手伝いをします。</p>
+    </div>
+  </section>
+
+  <!-- Solution Section -->
+  <section class="min-h-screen bg-blue-50 py-16">
+    <div class="text-center mb-6">
+      <h2 class="text-3xl font-bold text-gray-800">eigopencil.comは、あなたの学習内容を後日リマインドします！</h2>
+      <p class="mt-4 text-lg text-gray-700">投稿した内容が自動でメールで届くので、復習を自動化できます。</p>
+    </div>
+
+    <div class="text-center">
+      <button class="px-6 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition">今すぐ始める</button>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="min-h-screen bg-gray-100 py-16">
+    <div class="text-center mb-6">
+      <h2 class="text-3xl font-bold text-gray-800">使い方は簡単！</h2>
+      <p class="text-lg text-gray-600 mt-4">あなたの学習内容を投稿するだけ！後は自動的にリマインドされます。</p>
+    </div>
+
+    <div class="text-center mt-8">
+      <h3 class="text-xl font-semibold text-gray-800">月額料金</h3>
+      <p class="text-2xl font-bold text-blue-600 mt-2">￥1000 / 月額（税込）</p>
+    </div>
+
+    <div class="text-center mt-8">
+      <button class="px-6 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition">今すぐ登録</button>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
+  <section class="min-h-screen bg-blue-600 py-16 text-white text-center">
+    <p>ニュースレターの最新情報を受け取るために、以下から再度登録してください。</p>
+
+    <div class="mt-8">
+      <form class="flex justify-center gap-4">
+        <input type="email" placeholder="あなたのメールアドレス" class="px-4 py-2 rounded-full text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 w-72" required>
+        <button type="submit" class="px-6 py-2 bg-blue-700 text-white rounded-full hover:bg-blue-800 transition">登録</button>
+      </form>
+    </div>
+  </section>
+
+</body>
+ ```
+ # home#index
+ ```ruby
+ <div class="text-center mt-3" id="nav-section">
+  <% if current_user.nil? %>
+    <p>hey, ゲストさん! 
+      <%= link_to "ログイン", login_path, class: "text-decoration-none text-blue-500" %>
+    </p>
+  <% else %>
+    <div class="flex items-center justify-between w-full">
+      <span></span> <!-- Left side empty space -->
+      <span class="text-center flex-grow">
+        hey, <%= current_user.name %>👋
+      </span>
+    </div>
+  <% end %>
+</div>
+
+<div class="mt-5">
+<%= render template: "microposts/index" %>
+</div>
+ ```
 # xカードの実装
 metaタグ
 https://github.com/kpumuk/meta-tags
