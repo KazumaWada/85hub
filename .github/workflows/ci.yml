@@ -4,6 +4,10 @@ on:
       - main
 jobs:
   build:
+    runs-on: ubuntu-latest
+    container:
+    # Dockerコンテナのイメージを指定する必要がある。そして、それはDockerHubを参考にするので、まず自分のimageをpushする必要がある。
+      image:  
     steps:
       - name: Display a message when a push happens
         run: echo "A push event was triggered on the main branch!"

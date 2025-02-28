@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  layout false, only: [:index]
+  # layout false, only: [:index]
 
   def index
     #@user = User.find(params[:id])#これはuser/1から取得している。rootだと探せない。
