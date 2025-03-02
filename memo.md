@@ -1,3 +1,20 @@
+ #今
+ 2.set_default_meta_tagsを修正して実行してみる。
+ 
+ # OGP
+
+  <!-- Twitter特有 -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="英語のアウトプットをあなたの方法で、あなたのペースで。">
+  <meta name="twitter:image" content="https://www.eigopencil.com/assets/welcome.png">
+   <!-- Open Graph X以外でも対応-->
+  <meta property="og:title" content="静的なページタイトル">
+  <meta property="og:description" content="このページの説明文をここに書きます。">
+  <meta property="og:image" content="http://example.com/images/default_image.jpg">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="http://example.com/">
+
+
  # root LP
  ``` ruby
 
