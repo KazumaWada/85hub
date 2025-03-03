@@ -45,6 +45,7 @@ Rails.application.routes.draw do
     patch 'drafts/:id/update', to: 'drafts#update', as: 'draft_update'
     get 'bookmark', to: 'microposts#bookmark', as: 'bookmark'
     #get 'draft', to: 'microposts#draft', as: 'draft'
+    get '/post/:id', to: 'microposts#show', as: 'post_id'
     get 'zen', to: 'microposts#zen_new', as: 'zen' #zen_path(slug: 'example-slug')
     post '/zen_create', to: 'microposts#zen_create', as: 'zen_create'
     #post送信用のurl
