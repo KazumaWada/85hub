@@ -12,7 +12,7 @@ quill
 すでにログインしていたら、/:slugにリダイレクト。
 
 
-1.rootを/aboutを置き換える->currentuser?/:slugにリダイレクト。そうでない場合は、rootへ。
+1.✅rootを/aboutを置き換える->✅currentuser?/:slugにリダイレクト。そうでない場合は、rootへ。
 2. slugに投稿画面を挿入する。
 
 とりあえずここまでやってみる。
