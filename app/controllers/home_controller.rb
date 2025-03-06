@@ -34,7 +34,14 @@ class HomeController < ApplicationController
   def app
     @user = current_user#navbarのuser_path(@user)が/appで探せなくなるから。
   end
-  def about
+  def about #THIS IS CURRENT ROOT!
+    if current_user
+      #redirect_to user_path(slug: current_user.name)こっちでも動作する。
+      redirect_to user_path(current_user.name)#/users/#{current_user.name}
+    else
+      #do nothing 
+    end
+    
     @user = current_user#navbarのuser_path(@user)が/questionで探せなくなるから。
   end
   def blog
