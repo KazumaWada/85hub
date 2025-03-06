@@ -3,7 +3,21 @@
   <div class="text-center mt-1">
     <h1 class="text-4xl font-medium">eigopencil.com</h1>
     <p class="fonr-bold mt-3">英語のアウトプットを、あなたの方法で、あなたのペースで。</p>
-    <%= image_tag("welcome.png", class: "mx-auto max-w-[320px] h-auto rounded-lg") %>
+
+    <!--<%= image_tag("welcome.png", class: "mx-auto max-w-[320px] h-auto rounded-lg") %>-->
+  
+  <div class="ml-10 mr-10">
+    <p class="relative inline-block">
+      <%= link_to login_path, data: { turbo: false }, class: "group relative inline-block rounded-lg overflow-hidden" do %>
+      
+        <div class="rounded-lg bg-gray-100 hover:bg-gray-200 transition duration-300 transform group-hover:scale-105 p-2">
+          <%= image_tag("welcome.png", class: "mx-auto max-w-[320px] h-auto rounded-lg") %>
+          <span class="font-extrabold text-3xl ">はじめる!</span>
+        </div>       
+
+      <% end %>
+    </p>
+    </div>
   </div>
 
 <div>

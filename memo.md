@@ -1,6 +1,340 @@
- #今
- 2.set_default_meta_tagsを修正して実行してみる。
- 
+## uiを変える。
+
+"/:slug"
+ユーザー名
+モチベーションが上がるポイント等
+[学習を開始する]
+quill
+ユーザーの投稿内容
+(これは、userのviewをrootに変えてしまった方がいい気がする。)
+
+
+すでにログインしていたら、/:slugにリダイレクト。
+
+
+1.rootを/aboutを置き換える->currentuser?/:slugにリダイレクト。そうでない場合は、rootへ。
+2. slugに投稿画面を挿入する。
+
+とりあえずここまでやってみる。
+
+なぜこれをやるか?
+→ただのアウトプット用ではなく、英単語、フレーズを覚えてくれるためのアプリだから、みんなの投稿画面はいらない。
+そして、画面を何個も用意するのではなく、一つで完結させた方がユーザーも理解しやすい。
+そしてクイズ画面も作るから、どんどんページを少なくした方がいい。
+
+とりあえずこのデザインの方が、ユーザーも自分もわかりやすいからそうやろうとしている。収益化も考えているから。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## 📷zennOGP動的に実装していく。(視覚的なマーケティング用)
+ ogpを作る理由。シェアした時にパッとogpが見えると、それだけで文字よりも圧倒的にアテンションを得られるから。
+
+
+そもそもogpは、なぜリンクを貼っただけで画像が表示されるのかというと、x側がリンクを認識した時点でそのリンク宛にhttpリクエストを送っているから。
+つまり、/post/:idに送られたらpost_controllerのshowアクションにアクセスが行くことになる。
+
+
+### 決定
+- post/:idページで、シェア画像を作成するボタンを押す。(こんな感じになりますという画像を表示する。)それが押されない限りOGPは作られない。
+
+
+そしたら動的になった場合、どうやってmetaタグに書けば良いのか、について軽く確認した後にminimagickを実装していく。
+
+
+
+```md
+ボタンを押したら、どうやってpost/:idコントローラへ行くようになるの??
+click -> generate_image_path(content)->色々と処理->画像が生成されたら、それをogpに動的に設置して、xを開かせる。(同期させてやらないと、urlをxに書いても処理できていない場合は表示されない。)
+
+post/:idというリンクがtwitter(以下x)に貼られたらx側が、post/:idに対してhttpリクエストを送られてくる。
+
+post/:idに対するコントローラー、つまりpost_controller内のshowが呼び出される。
+
+そして画像処理の関数(post.content)をその関数内に書く。
+その関数はどこかのhelperに存在して、その関数は画像処理と、画像の保存場所の指定と保存を実行して返す。
+
+
+どんな感じでgenerate_dynamic_ogpからshowコントローラーに移動させるんだろう??
+showに帰ってきたら、if文で、こんな感じにする
+
+if(画像が画像処理の関数で指定したpathに存在するか?)その画像をogpの動的なimageに設定する。つまりogpのimageには画像が生成されたpathを指定している。
+else 特に何もしない。
+
+こんな感じで、post/:idをx上で書けば、ユーザーが画像処理のボタンを押したら表示されて、押さなかったら、特に何も起こらないみたいな設定ができると思う??
+
+,,,ボタンを押したら、自動的にxに移動してリンクを貼って画像が表示されるようにする過程も足しておく。
+
+ってことは、画像を処理している間は時間がかかるから、ユーザーが何をやっているか認識できるようにする。
+
+画像処理でエラーが起こったら、失敗しましたのメッセージを出したりする。
+
+キャッシュ、非同期とか色んな課題があると思うけど、まずは
+
+ogpを実際に作成して、
+```
+関数とか、流れは書いた。次は、関数の中身を実装していく。
+↓
+
+### minimagick(imagemagickのwrapper)実装
+---
+doc:
+MiniMagick gives you access to all the command line options ImageMagick has(https://www.imagemagick.org/script/command-line-options.php)
+ってことはminimagickにコマンドがなくても、imagemagickにあれば使える。
+↓
+ImageMagick command-line tool has to be installed. You can check if you have it installed by running
+imagemagickがインストールされている必要がある。
+imagemagickはrubyではなく、もっと低レイヤの話なのかもしれない。
+↓
+Cで書かれていた。
+https://github.com/imagemagick/imagemagick
+↓
+ってことはdockerでimagemagickをダウンロードすることになりそう。
+
+```docker
+RUN apt-get update -qq && \
+    apt-get install -y --no-install-recommends \
+      省略
+        imagemagick && \
+      省略
+```
+無事追加。
+
+- 実際に使ってみる。
+minimagickの書き方が嫌だったら、imageMagickをこの書き方でそのまま実行できる。こっちの方がパフォーマンスが上がるからおすすめとも書いている。
+```ruby
+# https://github.com/minimagick/minimagick?tab=readme-ov-file#tools
+MiniMagick.convert do |convert|
+  convert << "input.jpg"
+  convert.resize("100x100")
+  convert.negate
+  convert << "output.jpg"
+end #=> `magick input.jpg -resize 100x100 -negate output.jpg`
+
+# OR
+
+convert = MiniMagick.convert
+convert << "input.jpg"
+convert.resize("100x100")
+convert.negate
+convert << "output.jpg"
+convert.call #=> `magick input.jpg -resize 100x100 -negate output.jpg`
+This
+```
+---
+
+
+```ruby
+  #これは文字列の調節だが、minimagickのdocには存在しなかった。多分imagemagick
+    result = base_image.combine_options do |config|
+      config.font 'YuGothic-Bold'
+      config.pointsize POINTSIZE フォント
+      config.kerning KERNING 文字の間隔
+      config.draw "text #{TITLE_POSITION} '#{title}'"
+    end
+```
+https://usage.imagemagick.org/text/#label
+https://github.com/minimagick/minimagick/issues/150
+分かりやすそう↓
+https://zenn.dev/redheadchloe/articles/1b7b04a8f984dc
+
+- combine_options使っている人多かった。
+- imagemagickがダウンロードされている必要がある
+
+
+では実際に文字列を写真の上に置いて、画像を加工するものを作ってみる。
+まずはimagemagickでその類のコマンドがあるか調べる。そして、上記のminimagick上でもimagemagickの書き方で実装していく。
+
+↓
+
+この記事いいかも。ちゃんとimageMagickの書き方しているし。
+https://zenn.dev/mybest_dev/articles/f731b4fc0c3c4f
+
+↓
+
+どうやらdrawメソッドがいいらしい。docを探す。
+起点とする位置情報などはgravity
+
+draw:
+https://usage.imagemagick.org/draw/
+その中のこの2つのセクションを見るといいかも。
+https://usage.imagemagick.org/draw/#text
+https://imagemagick.org/script/command-line-options.php?#draw
+
+gravity
+https://imagemagick.org/script/command-line-options.php#gravity
+
+```
+-draw "text 100,100 'Works like magick!'"
+```
+
+↓
+色々と一気にやるとあれなので、まずはbase_imageをそのままogpとして出力できるかやってみよう。
+
+```md
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## zenn OGPキャッシュの問題
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## 🙆🏻‍♂️eigopencilサービス核
+核を決めた方がいい。「書いたフレーズを何回も復習して自分のものにするサービス」これが核で、それ以外の機能は捨てて、まずはこれに集中した方がいい。
+
+みんなの投稿が見れる画面は必要ないよね。->ログインしていたら、userページに飛ばす。
+
+duolingoみたいに、総合ポイントで順位をつけて、eigopencilのhomeにはる
+userページに「投稿」「みんなの投稿を見る」ボタンをつけて、みんなの投稿が見れるのはプレミアム。下書きもプレミアム。
+
+アクセスが集まってきたら、自分のアプリ内に広告をつけれる箇所を設置して売る。
+
+eigopencil
+
+アウトプットは、他でもできるじゃん。サイトを作るなら、クイズとかの付加価値をつけないと。アウトプットではなく、自分の身に付けたいから、それを実装する。自分はどうやって覚えたいか考える。これは就職するまではプレミアム会員にする。
+
+↑
+
+これらの構造をzennにまとめる。
+
+root
+開始ボタンで、今まで自分で書いたやつのフラッシュカードとかを作る。
+まるばつで自分で判断してもらって、
+何か科学的な記憶のやつに基づいて何回正解したらオッケーとかにする。
+各投稿に何回正解したかのカードとかを設置する。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
  # OGP
 
   <!-- Twitter特有 -->

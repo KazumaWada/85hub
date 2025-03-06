@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-  root "home#index"
+  root "home#about" #was home#index
+  #get '/about', to: 'home#about', as: 'about'
   get '/feature', to: 'home#feature', as: 'feature'
   get '/signup', to: 'users#new', as: 'signup'
   post '/signup', to: 'users#create'
@@ -11,7 +12,6 @@ Rails.application.routes.draw do
   get '/welcome', to: 'home#welcome', as: 'welcome'
   post '/ocr/recognize', to: 'ocr#recognize'
   resources :sessions, only: [:create]#paramsで見つけられるように。
-  get '/about', to: 'home#about', as: 'about'
   get 'tutorial', to: 'home#tutorial', as: 'tutorial'
   get '/blog', to: "home#blog", as: 'blog'
   post 'guest_login', to: 'sessions#guest', as: 'guest_login'
@@ -45,7 +45,8 @@ Rails.application.routes.draw do
     patch 'drafts/:id/update', to: 'drafts#update', as: 'draft_update'
     get 'bookmark', to: 'microposts#bookmark', as: 'bookmark'
     #get 'draft', to: 'microposts#draft', as: 'draft'
-    get '/post/:id', to: 'microposts#show', as: 'post_id'
+    get '/post/:id', to: 'microposts#show', as: 'post'
+    post '/post/:id', to:'microposts#generate_dynamic_ogp', as: 'generate_dynamic_ogp'
     get 'zen', to: 'microposts#zen_new', as: 'zen' #zen_path(slug: 'example-slug')
     post '/zen_create', to: 'microposts#zen_create', as: 'zen_create'
     #post送信用のurl

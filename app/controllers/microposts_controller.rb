@@ -115,40 +115,9 @@ class MicropostsController < ApplicationController
       @user = User.find_by(slug: params[:slug])
       @micropost = Micropost.find(params[:id])
       puts "👨‍🎨👨‍🎨👨‍🎨👨‍🎨👨‍🎨url:" + request.original_url
+
+
     end
-
-    # def create 
-    #   fixed_params = { micropost: { content: params[:content] } }
-    #   params.merge!(fixed_params)
-    
-     
-    #     @user = User.find_by(slug: params[:slug])
-    #     @micropost = @user.microposts.build(micropost_params)
-    #     #@microposts_by_date = @user.microposts.group_by { |post| post.created_at.to_date }
-
-    #     puts "----- Debug: Params Start -----"
-    #     Rails.logger.debug "Params content: #{params.inspect}"
-    #     puts "----- Debug: Params End -----"
-    #     #@user.microposts.build(content: "This is a new micropost")引数も渡すことができる。
-    #     if params[:draft]
-    #       @micropost.status = 'draft'
-    #     else
-    #       @micropost.status = 'published'
-    #     end
-
-    #     if @micropost.save && @micropost.status == "published"
-    #       flash[:success] = "nice. you did it!"
-    #       redirect_to user_path(@user)
-    #     elsif@micropost.save && @micropost.status == "draft"
-    #       flash[:success] = "draft saved. go check 📝"
-    #       redirect_to user_path(@user)
-
-    #     else
-    #       flash[:danger] = "⚠️heads up! English only!!⚠️"
-    #       flash[:danger] = @micropost.errors.full_messages.join(", ")
-    #       redirect_to user_path(@user)
-    #     end
-    # end
 
     def destroy
       @user = User.friendly.find(params[:slug])
@@ -166,6 +135,23 @@ class MicropostsController < ApplicationController
   end
 
 
+   def generate_dynamic_ogp
+      @user = User.friendly.find(params[:slug])
+      @micropost = Micropost.find(params[:id])
+
+      #画像加工pathの設定
+      base_image_path = Rails.root.join('app', 'assets', 'images', 'base.png').to_s
+      output_path = Rails.root.join('tmp', "processed_#{SecureRandom.hex(8)}.png").to_s
+      #画像加工保存
+      TextImageProcessor.process_dynamic_ogp(base_image_path, output_path, @micropost.content)
+      #ogpの動的な設定 setDynamicOGP
+
+      flash[:success] = "🌠シェア用のサムネ画像が生成されました。" +
+      view_context.link_to("Xでシェアする", "https://twitter.com/intent/tweet?text=#{CGI.escape(request.original_url)}", 
+      target: "_blank", class: "text-white bg-gray-800 hover:bg-gray-700 px-2 py-1 rounded text-medium")
+
+      redirect_to post_path
+   end
 
 
     private
@@ -175,6 +161,7 @@ class MicropostsController < ApplicationController
       #{"authenticity_token"=>"[FILTERED]", "content"=>"hh", "commit"=>"Post", "slug"=>"a"}
     end
 
+  
     def write_to_file(content)
       file_name = "content_db.txt"
       file_path = Rails.root.join('public', file_name)

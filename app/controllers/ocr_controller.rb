@@ -1,4 +1,3 @@
-# app/controllers/ocr_controller.rb
 class OcrController < ApplicationController
     require 'rtesseract'
   
