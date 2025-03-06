@@ -5,6 +5,7 @@
  //= link application.js
 
  //= link welcome.png
+  //= link base.png
  //= link write.png
  //= link rocket.png
 //= link goal.png

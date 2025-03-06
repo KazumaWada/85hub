@@ -24,7 +24,7 @@ class UsersController < ApplicationController
 
     #処理するファイルのpathを定義 app/tmp
     tmp_path = Rails.root.join('tmp', "processed_#{SecureRandom.hex(8)}.png").to_s
-    processed_image_path = HandwritingRecognizer.preprocess_image(saved_tmp_path, tmp_path)
+    processed_image_path = TextImageProcessor.preprocess_image(saved_tmp_path, tmp_path)
     
     #lib/handwriting_recognizer.rbでpre処理(RTesseractで画像を処理しやすくする)
     image = RTesseract.new(processed_image_path, lang: 'eng')

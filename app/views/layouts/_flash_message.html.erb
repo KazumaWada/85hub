@@ -21,6 +21,7 @@
     %>
   
     <div class="<%= css_classes %>">
-      <%= message %>
+      <%= raw message %>
     </div>
+    <!--rawにしたのは、micropost_controllerのgenerate_dynamic_ogアクションのため-->
   <% end %>
