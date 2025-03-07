@@ -1,8 +1,10 @@
+<%= link_to '←', :back, class:"font-bold text-2xl" %>
 <div id="post" class="mt-5 m-2" data-controller="quill"> 
   <%= form_with(model: @micropost, url: zen_create_path(slug: @user.slug), method: :post, local: true, data: { turbo: false } ) do |f| %>
-   <p class="bg-yellow-100 text-yellow-800 p-4 rounded-lg text-sm max-w-prose">
-    ⚠️ べータ版: 最大1000文字までです。1枚の写真を入れると1000文字分を超過してしまいます。調節中です🙇‍♂️
-   </p>
+   
+   <!-- <p class="bg-yellow-100 text-yellow-800 p-4 rounded-lg text-sm max-w-prose">
+    ⚠️ べータ版: 最大1000文字までです。
+   </p>-->
 
 
     <!-- Quill editor container -->
@@ -12,7 +14,7 @@
     <%= f.hidden_field :content, data: { quill_target: "input" } %>
     
     <!--単語カード用-->
-    <%= render 'flash_card_input' %>
+    <%#<%= render 'flash_card_input' %>
     
 
     <!-- Actions -->

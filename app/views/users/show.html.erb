@@ -30,6 +30,28 @@ consistent for a <%= @posted_dates_sum %> days😤
 </div>
 <% end %>
 
+<!--投稿フォーム-->
+<!--Micropost.newへ送信する。(このパージの場合は、@user.micropostへ送信)-->
+<!--送信先はmicroposts_controllerのzencreate_path.今ここuserだけど、このurl指定でmicropostにちゃんと飛ぶ.-->
+
+<%
+=begin %>
+<div class="text-center m-5">
+<%= form_with(model: @microposts, url: zen_create_path(slug: @user.slug), method: :post, local: true, data: { turbo: false } ) do |f| %>
+  <%= f.text_area :content, 
+      size: "70x5",
+      data: { quill_target: "input" },
+      class: "m-2 p-3 border-2 border-gray-20 duration-200"%>
+  <div>
+  <%= f.submit "投稿",
+      class: "text-right" %>
+  </div>
+<% end %>
+</div>
+<!--投稿フォーム-->
+<%
+=end %>
+
 
 <% if @user.microposts.any? %>
     <div class="m-3">
@@ -37,10 +59,10 @@ consistent for a <%= @posted_dates_sum %> days😤
     </div>
 <% end %>
 
+<%= render 'layouts/bottom_btns' %> 
+
+
 </div>
-
-
-
 
 
 
