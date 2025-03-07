@@ -17,7 +17,7 @@ export default class extends Controller {
           toolbar: [
             [{ 'header': [1, 2, 3, false] }], 
             ['bold', 'italic', 'underline'],
-            ['link','image', 'blockquote']
+            ['link', 'blockquote']
           ]
         },
         //多分、style ql-editorではなく、ここに書けるかも。

@@ -44,26 +44,19 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by(slug: params[:slug])   
     @microposts = @user.microposts
-    @posted_sum = @user.microposts.published.count
-    @draft_sum = @user.microposts.draft.count
-    @total_posts_characters = @user.microposts.published.sum { |post| post.content.length }
-    @drafts_sum = @user.microposts.draft.count
-    start_date = Date.today.beginning_of_month.beginning_of_week(:sunday)
-    end_date = Date.today.end_of_month.end_of_week(:sunday)
+    # @posted_sum = @user.microposts.published.count
+    # @draft_sum = @user.microposts.draft.count
+    # @total_posts_characters = @user.microposts.published.sum { |post| post.content.length }
+    # @drafts_sum = @user.microposts.draft.count
+    # start_date = Date.today.beginning_of_month.beginning_of_week(:sunday)
+    # end_date = Date.today.end_of_month.end_of_week(:sunday)
     #end_date = start_date + 13 #(2 weeks ver)
-    
-
-
-
-    @today = Date.today
-    @current_month = Date::MONTHNAMES[Time.now.month]
-
-    # １ヶ月分の日付を配列に
-    @calendar_days = (start_date..end_date).to_a
-    #これがcreated_atの配列になる。
-    @posted_dates = @user.microposts.published.pluck(:created_at).map(&:to_date).map { |date| date.day }
-    @posted_dates_sum = @posted_dates.uniq.count
-    logger.debug "👷👷👷👷👷@posted_dates: #{@posted_dates.inspect}" 
+    # @today = Date.today
+    # @current_month = Date::MONTHNAMES[Time.now.month]
+    # @calendar_days = (start_date..end_date).to_a
+    # @posted_dates = @user.microposts.published.pluck(:created_at).map(&:to_date).map { |date| date.day }
+    # @posted_dates_sum = @posted_dates.uniq.count
+    # logger.debug "👷👷👷👷👷@posted_dates: #{@posted_dates.inspect}" 
   end
 
   def new

@@ -10,7 +10,8 @@
       
       <%= sanitize micropost.content, 
         tags: %w(p br h1 h2 h3 h4 h5 h6 ul ol li strong em u s blockquote pre code span div img a),
-        attributes: %w(class style src alt href data-*) 
+        attributes: %w(class style src alt href data-*),
+        class: "text-xl text-gray-700 font-medium"
       %>
       
       <% if current_user == @user %>
