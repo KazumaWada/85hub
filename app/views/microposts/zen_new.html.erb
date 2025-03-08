@@ -19,17 +19,11 @@
 
     <!-- Actions -->
     <div class="actions text-right mt-2">
-    <button
-    class="px-4 py-2 bg-gray-200 text-gray-500 border border-gray-300 
-           rounded-md cursor-not-allowed
-           disabled:hover:bg-gray-200 disabled:opacity-50"
-    disabled>
-    🤖AI
-  </button>
+
 
   <% unless current_page?(camera_path) %>
-    <button class="hover:bg-yellow-500 px-4 py-2 bg-gray-100 border border-gray-300 text-gray-700 
-                 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 
+    <button class="hover:bg-blue-500 px-4 py-2 bg-blue-400 border border-gray-300 text-white 
+                 focus:outline-none focus:ring-2 focus:ring-offset-2 
                  focus:ring-gray-300 rounded-md <%= 'disable' if @user.name == 'test_user' %>"">
       <%= link_to "📸 手書きを読み取る", camera_path(@user), class: "submit-button text-dark text-decoration-none" %>
     </button>
@@ -38,14 +32,14 @@
   <%= f.submit "📝 下書き保存",  
       id: "draft_submit_button", 
       name: "draft", 
-      class: "hover:bg-yellow-500 px-4 py-2 bg-gray-200 border border-gray-300 text-gray-800 
-             hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 
+      class: "hover:bg-blue-500 px-4 py-2 bg-blue-400 border border-gray-300 text-white 
+             focus:outline-none focus:ring-2 focus:ring-offset-2 
              focus:ring-gray-400 rounded-md" %>
 
-  <%= f.submit "✅投稿", 
+  <%= f.submit "投稿", 
       id: "submit_button", 
-      class: "hover:bg-yellow-500 px-4 py-2 bg-gray-200 border border-gray-300 text-gray-800 
-             hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 
+      class: "hover:bg-blue-500 px-4 py-2 bg-blue-400 border border-gray-300 text-white 
+             focus:outline-none focus:ring-2 focus:ring-offset-2 
              focus:ring-gray-400 rounded-md" %>
     </div>
   <% end %>

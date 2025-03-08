@@ -1,0 +1,45 @@
+<% @microposts.published.sample(5).each do |micropost| %>
+<div id="container">
+
+<div id="flashcardContainer" class="m-4 p-3 border-2 border-gray-200 rounded-2xl duration-200" data-controller="flashcards">
+
+   <!-- 覚えたいフレーズ -->
+   <div id="content" class="m-2 p-3 border-2 border-gray-200 rounded-2xl duration-200">
+     <h1>
+     <%= sanitize micropost.content, 
+     tags: %w(p br h1 h2 h3 h4 h5 h6 ul ol li strong em u s blockquote pre code span div img a),
+     attributes: %w(class style src alt href data-*),
+     class: "text-xl text-gray-700 font-medium"
+   %>
+     </h1>
+       <div class="text-right">
+       <p>2/5</p>
+       </div>
+    </div>
+
+    <div id="openAnswerAndJudge" class="text-center">
+        <button class="bg-gray-100 text-gray-800 rounded hover:bg-gray-200 transition duration-300 px-4 py-2 mr-4">👀</button>
+    </div>
+
+<div id="answerAndJudge">
+
+  <div id="answer" class="m-2 p-3 border-2 border-gray-200 rounded-2xl duration-200">
+  <%= sanitize micropost.content, 
+  tags: %w(p br h1 h2 h3 h4 h5 h6 ul ol li strong em u s blockquote pre code span div img a),
+  attributes: %w(class style src alt href data-*),
+  class: "text-xl text-gray-700 font-medium"
+%>
+  </div>
+
+  <div id="judge" class="text-center">
+    <button id="incorrect" class="bg-gray-100 text-gray-800 rounded hover:bg-gray-200 transition duration-300 px-4 py-2 mr-4">💀</button> 
+    <button id="correct" class="bg-gray-100 text-gray-800 rounded hover:bg-gray-200 transition duration-300 px-4 py-2 mr-4">✅</button>
+  </div>
+
+</div>
+
+</div><!--flashcardContainer-->
+
+</div>
+    
+<% end %>

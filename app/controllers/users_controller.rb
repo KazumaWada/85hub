@@ -7,40 +7,6 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  def analyze
-    uploaded_file = params[:image]
-  
-    if uploaded_file.nil?
-      flash[:alert] = "画像をアップロードしてください。"
-      redirect_to current_user
-      return
-    end
-
-    #app/tmpにユーザー画像を保存
-    saved_tmp_path = Rails.root.join('tmp', uploaded_file.original_filename).to_s
-    File.open(saved_tmp_path, 'wb') do |file|
-      file.write(uploaded_file.read)
-    end
-
-    #処理するファイルのpathを定義 app/tmp
-    tmp_path = Rails.root.join('tmp', "processed_#{SecureRandom.hex(8)}.png").to_s
-    processed_image_path = TextImageProcessor.preprocess_image(saved_tmp_path, tmp_path)
-    
-    #lib/handwriting_recognizer.rbでpre処理(RTesseractで画像を処理しやすくする)
-    image = RTesseract.new(processed_image_path, lang: 'eng')
-    ocr_result = image.to_s
-    #render json: { text: ocr_result } 
-    #render html: "<p>#{ocr_result}</p>".html.safe
-    redirect_to camera_path(slug: current_user.slug, ocr_result: ocr_result)
-  end
-
-  def camera
-    @user = User.find_by(slug: params[:slug])  
-    @ocr_result = params[:ocr_result]
-  end
-  
-
-
   def show
     @user = User.find_by(slug: params[:slug])   
     @microposts = @user.microposts
@@ -101,11 +67,42 @@ class UsersController < ApplicationController
     flash[:succeess] = 'deleted!'
   end
 
-  # def current_user
-  #   @current_user ||= User.find_by(id: session[:user_id])
-  #   #@current_user ||= User.find(params[:id])
-  #   #user == current_user
-  # end
+  def analyze
+    uploaded_file = params[:image]
+  
+    if uploaded_file.nil?
+      flash[:alert] = "画像をアップロードしてください。"
+      redirect_to current_user
+      return
+    end
+
+    #app/tmpにユーザー画像を保存
+    saved_tmp_path = Rails.root.join('tmp', uploaded_file.original_filename).to_s
+    File.open(saved_tmp_path, 'wb') do |file|
+      file.write(uploaded_file.read)
+    end
+
+    #処理するファイルのpathを定義 app/tmp
+    tmp_path = Rails.root.join('tmp', "processed_#{SecureRandom.hex(8)}.png").to_s
+    processed_image_path = TextImageProcessor.preprocess_image(saved_tmp_path, tmp_path)
+    
+    #lib/handwriting_recognizer.rbでpre処理(RTesseractで画像を処理しやすくする)
+    image = RTesseract.new(processed_image_path, lang: 'eng')
+    ocr_result = image.to_s
+    #render json: { text: ocr_result } 
+    #render html: "<p>#{ocr_result}</p>".html.safe
+    redirect_to camera_path(slug: current_user.slug, ocr_result: ocr_result)
+  end
+
+  def camera
+    @user = User.find_by(slug: params[:slug])  
+    @ocr_result = params[:ocr_result]
+  end
+
+  def flashcards
+    @user = User.find_by(slug: params[:slug])
+    @microposts = @user.microposts
+  end
 
   private
 
@@ -119,17 +116,4 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
-
-  # def logged_in_user
-  #   unless logged_in?
-  #     flash[:danger] = "please log in."
-  #     redirect_to login_url
-  #   end
-  # end
-
-  # def current_user#pathでは使えない。cookieで保存されているのはuser_idのみ。cookie.signedにuser.nameも保存すれば、current_userが便利に使えるようになる。
-  #   @current_user ||= User.find_by(id: cookies.signed[:user_id])
-  #   logger.debug "👷👷👷👷👷@current_user: #{@current_user.inspect}" 
-  # end
-  
 end 
