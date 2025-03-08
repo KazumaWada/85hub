@@ -40,6 +40,7 @@ Rails.application.routes.draw do
   scope '/:slug' do
     #📸
     get '/camera', to: 'users#camera', as: 'camera'
+    get '/flashcards', to: 'users#flashcards', as: 'flashcards'
     get 'drafts/index', to: 'drafts#index', as: 'draft'
     get 'drafts/:id/edit', to: 'drafts#edit', as: 'draft_edit'
     patch 'drafts/:id/update', to: 'drafts#update', as: 'draft_update'

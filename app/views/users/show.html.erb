@@ -19,6 +19,7 @@
 
 <p class="text-brown-600 px-4 py-2 text-white rounded-full border border-yellow-300 shadow-md inline-block" style="background-color: #eaad42;">
 consistent for a <%= @posted_dates_sum %> days😤
+  <%= link_to "学習を開始する", flashcards_path, class: "bg-gray-100 text-gray-800 rounded hover:bg-gray-200 transition duration-300 px-4 py-2 mr-4" %>
 </p>
 -->
 
@@ -26,8 +27,10 @@ consistent for a <%= @posted_dates_sum %> days😤
 
 <% if current_user == @user %>
 <div class="flex justify-end mb-4">
+  <%= link_to "フラッシュカードβ版", flashcards_path, class: "bg-gray-100 text-gray-800 rounded hover:bg-gray-200 transition duration-300 px-4 py-2 mr-4" %>
   <%= link_to "draft📝", draft_path(current_user), class: "bg-gray-100 text-gray-800 rounded hover:bg-gray-200 transition duration-300 px-4 py-2 mr-4" %>
 </div>
+
 <% end %>
 
 <!--投稿フォーム-->
@@ -59,7 +62,6 @@ consistent for a <%= @posted_dates_sum %> days😤
     </div>
 <% end %>
 
-<%= render 'layouts/bottom_btns' %> 
 
 
 </div>

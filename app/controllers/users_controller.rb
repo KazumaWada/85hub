@@ -101,6 +101,11 @@ class UsersController < ApplicationController
     flash[:succeess] = 'deleted!'
   end
 
+  def flashcards
+    @user = User.find_by(slug: params[:slug])
+    @microposts = @user.microposts
+  end
+
   # def current_user
   #   @current_user ||= User.find_by(id: session[:user_id])
   #   #@current_user ||= User.find(params[:id])
