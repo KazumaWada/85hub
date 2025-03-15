@@ -2,17 +2,27 @@
   <%= link_to post_path(id: micropost.id) do %> 
 
     <!-- 表示部分 -->
-    <div class="m-2 p-3 border-2 border-gray-200 rounded-2xl duration-200">
+    <div class="m-4 p-3 border-2 border-gray-200 rounded-2xl duration-200">
 
       <!-- コンテンツ部分 -->
       <span class="text-gray-500 text-sm block"><%= micropost.created_at.strftime("%Y-%m-%d") %></span>
 
-      
+      <div class="m-2">
       <%= sanitize micropost.content, 
         tags: %w(p br h1 h2 h3 h4 h5 h6 ul ol li strong em u s blockquote pre code span div img a),
         attributes: %w(class style src alt href data-*),
         class: "text-xl text-gray-700 font-medium"
       %>
+      </div>
+      
+      <div class="border-2 border-dashed"></div>
+
+      <div class="m-2 text-gray-400">
+      <%= sanitize micropost.answer, 
+        tags: %w(p br h1 h2 h3 h4 h5 h6 ul ol li strong em u s blockquote pre code span div img a),
+        attributes: %w(class style src alt href data-*)
+      %>
+      </div>
       
       <% if current_user == @user %>
         <div class="text-right">

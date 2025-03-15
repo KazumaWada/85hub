@@ -1,8 +1,11 @@
 ## 今やってること
-- answerを追加する。(なくてもいい。)
-- userページに、answerも一緒に表示する。
-- flashcardをcontentとanswerで分ける。
+- answerを追加する。(なくてもいい。)done!
+- inputにanswerを追加する。done!
+- userページに、answerも一緒に表示する。done!
+- flashcardをcontentとanswerで分ける。done!
 - 何回正解したか見えるようにする。同期させる。
+ - バッジをデザインする。
+ - countをDBに加える。
 
 
 
