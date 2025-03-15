@@ -1,3 +1,5 @@
+<%= render 'users/profile' %>
+
 <div id="container" data-controller="flashcards">
 
 <% @microposts.published.sample(5).each do |micropost| %>
@@ -46,7 +48,7 @@
  <% end %>
 
  <div id="congratulationsCard" class="text-center w-full h-screen m-2 p-3 border-2 border-gray-200 rounded-2xl duration-200">
- 
+
  <h1 class="font-bold text-3xl">ナイスです!</h1>
  <div class="flex justify-center p-5 m-5">
  <%= link_to "もう一度", flashcards_path, class: "bg-gray-50 text-gray-800 rounded hover:bg-gray-200 transition duration-300 m-2 p-2" %>

@@ -24,36 +24,36 @@ consistent for a <%= @posted_dates_sum %> days😤
 -->
 
 
-
-<% if current_user == @user %>
-<div class="flex justify-end mb-4">
-  <%= link_to "フラッシュカードβ版", flashcards_path, class: "bg-gray-100 text-gray-800 rounded hover:bg-gray-200 transition duration-300 px-4 py-2 mr-4" %>
-  <%= link_to "draft📝", draft_path(current_user), class: "bg-gray-100 text-gray-800 rounded hover:bg-gray-200 transition duration-300 px-4 py-2 mr-4" %>
-</div>
-
-<% end %>
-
 <!--投稿フォーム-->
 <!--Micropost.newへ送信する。(このパージの場合は、@user.micropostへ送信)-->
 <!--送信先はmicroposts_controllerのzencreate_path.今ここuserだけど、このurl指定でmicropostにちゃんと飛ぶ.-->
 
-<%
-=begin %>
-<div class="text-center m-5">
+
+<div class="flashcardContainer m-4 p-3 border-2 border-gray-200 rounded-2xl duration-200">
+
 <%= form_with(model: @microposts, url: zen_create_path(slug: @user.slug), method: :post, local: true, data: { turbo: false } ) do |f| %>
+
+<div id="inputWrapper" class="text-gray-500">
+覚えたい単語、フレーズ
   <%= f.text_area :content, 
-      size: "70x5",
-      data: { quill_target: "input" },
-      class: "m-2 p-3 border-2 border-gray-20 duration-200"%>
-  <div>
-  <%= f.submit "投稿",
-      class: "text-right" %>
-  </div>
+      class: "m-2 p-3 border-2 border-gray-200 duration-200 rounded-2xl w-full"
+%>
+日本語訳/解説など *optional
+<%= f.text_area :content, 
+      class: "m-2 p-3 border-2 border-gray-200 duration-200 rounded-2xl w-full"
+%>
+</div>
+
+<div>
+  <%= f.submit "フラッシュカードを登録",
+      class: "bg-gray-100 text-gray-800 rounded hover:bg-gray-200 transition duration-300 px-4 py-2 mr-4" %>
+</div>
+
+
 <% end %>
 </div>
 <!--投稿フォーム-->
-<%
-=end %>
+
 
 
 <% if @user.microposts.any? %>
