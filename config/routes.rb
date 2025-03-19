@@ -41,6 +41,8 @@ Rails.application.routes.draw do
     #📸
     get '/camera', to: 'users#camera', as: 'camera'
     get '/flashcards', to: 'users#flashcards', as: 'flashcards'
+    get '/quiz', to: 'users#quiz_correct_num_edit', as: 'quiz' 
+    patch '/quiz_correct_num_update', to: 'users#quiz_correct_num_update', as: 'quiz_correct_num_update'
     get 'drafts/index', to: 'drafts#index', as: 'draft'
     get 'drafts/:id/edit', to: 'drafts#edit', as: 'draft_edit'
     patch 'drafts/:id/update', to: 'drafts#update', as: 'draft_update'

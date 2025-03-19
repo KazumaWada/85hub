@@ -1,5 +1,5 @@
 <%= render 'users/profile' %>
-
+<span class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-blue-700/10 ring-inset">正解数</span>
 <div id="container" data-controller="flashcards">
 
 <% @microposts.published.sample(5).each do |micropost| %>
@@ -15,8 +15,9 @@
       class: "text-xl text-gray-700 font-medium"
     %>
       </h1>
+
         <div class="text-right">
-        <p>2/5</p>
+        <span class="correct_num inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-blue-700/10 ring-inset"> <%= micropost.correct_num %>/10</span>
         </div>
      </div>
  
