@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_03_15_091508) do
+ActiveRecord::Schema[7.0].define(version: 2025_03_19_123401) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,6 +32,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_03_15_091508) do
     t.datetime "updated_at", null: false
     t.integer "status"
     t.text "answer"
+    t.integer "correct_num", default: 0
     t.index ["user_id", "created_at"], name: "index_microposts_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_microposts_on_user_id"
   end

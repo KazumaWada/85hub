@@ -1,16 +1,102 @@
+## fetch
+- そもそもなぜfetchを使う必要があるのか。
+フロント側で全て取得したDOMのデータ内に、DOMの操作後に変更されているデータがある。
+それはバックエンドにも反映させたいから、DOM操作後に変更されたデータを送信する必要がある。
+
+fetchを学んでみたいという動機もある。
+
+
+
+### fetchAPI, fetch() (https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
+- promiseベース:
+「これから結果がやってくる予定だよ」、保留、実行中、拒否されたなどがある。
+- モダンwebの特徴であるCORSに統合されている。
+- fetch自体がpromiseを返すため、promiseで使われているthenやcatchを使う。
+
+### CORS
+違うポート、プロトコルからリソースをリクエストする際にそのリクエストを許可するかどうかを制御する仕組み。
+
+###　どこのrouterに送ればいいか。
+静的に簡単に送る:そこで@userの影響とかを送ればいい。
+動的に初めから送る: バックエンド側で簡単にできるbut fetchURLを動的にするのが面倒い
+↓
+fetchAPIを動的にしよう。
+
+### ✅countをどうやって定義して取得、更新をするか。
+DOMで変更した内容を、PATCHで送信して、バックエンド側でも受け取って、それをcontrollerで、post.updateと打って更新する。
+
+### 今どうやって、countのidをフロントとバックエンドで同期させるか。
+- まず、fetchを使うやり方を使わずにできるのか考える。
+puts "📚📚📚📚📚" , @microposts.published.sample(5).count
+これで取れたけど、countは備え付けのcountになっているから、correct_numとかに変えたほうがいい。
+
+###　↑そもそも全部stimulusで実装できるかもしれない。
+1. stimulusを使って、データをフロントエンドに送信してみる。
+2. 
+
+いや@correct_numを使ったら、それをDOMで操作するだけじゃない?
+
+- DOMで変数の値を変更することができるか?
+- データはフロントにあるが、DOMでどうやって持ってくるのか
+turbo streamでサーバーの変数の値を変更&&通信
+turbo streamsを使って通信して反映させることができる。
+- turboの通信結果は、updateアクションに書く必要があるかも。
+
+↓
+turboのことを学ぶより、fetchでやってしまったほうがいいかも。こんがらがっている気がするから。学習コストのこともあるから。
+
+# 👑ステルスのformを作ってそれを更新処理の送信をすればいいんじゃない?
+
+1. correct_numを作って表示する
+2. hidden_fieldをview側に作ってDOMのなんらかのアクションで送信
+それをバックエンドで処理する。(stimulus or turboを使わないといちいちロードする羽目)
+{id:correct_num}でやって、最後まで行ったらこのhashmapをもとにformで送信して処理したほうが、早い気がする。たくさん通信するより。
+
+でも簡単なのは、turboで逐一非同期で通信させることかもしれないけど。
+(↑まずはこれでやってみる)
+
+- 仕様
+2. 各フラッシュカード内にhidden_fieldを作って、turboでいちいち通信していく。
+correct_numを作る。
+変数の値をDOMで取得。
+マルが押されたら、hidden_form、にcount++して送信。(まるボタンが送信ボタン)
+(まるを押したら、formとsubmitがどちらも飛ぶ?
+それとも👀の時点でformでcount++しておいて、マルが押されたら送信)
+↓
+丸ボタンが押された時点で押された時点でバックエンドでformの内容設定をしておけばformと送信両方ともできる。
+
+# まず、turboとstimulusのdocかビデオとかをみて一通り理解してから進める。
+
+
+
+
+
+
 ## 今やってること
-- answerを追加する。(なくてもいい。)done!
-- inputにanswerを追加する。done!
-- userページに、answerも一緒に表示する。done!
-- flashcardをcontentとanswerで分ける。done!
 - 何回正解したか見えるようにする。同期させる。
- - バッジをデザインする。
- - countをDBに加える。
+ - バッジをデザインする。done
+ - countをDBに加える。done!
+ - javascriptの結果を反映させてcount++させる。
+  - 本当にfetchでいいのか確かめる。
+  - Railsの変数で
 
 
 
 
+- draftからscrapsへ変える。
 
+
+
+### zenn fetch
+- 何がベストプラクティスなのか。
+"Railsの変数をJavascriptへ渡して、処理が終わったらその変数を返す。"
+- railsがどうやってフロントへデータを送信するのか
+- railsがどのタイミングでデータを送信するのか
+- javascript側でボタンが押されたら送信する。
+- それをどこで受け取ってどこで処理するのか(postリクエストでそれ用のcontrollerとrouter?)
+
+
+- micropost.countのidを受け取り、それをDOM内で編集してボタンを押されたらそれをRails側に送信して更新する。
 
 
 

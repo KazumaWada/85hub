@@ -38,25 +38,14 @@ class UsersController < ApplicationController
     @user = User.find_by(slug: params[:slug])  
     @ocr_result = params[:ocr_result]
   end
-  
-
 
   def show
     @user = User.find_by(slug: params[:slug])   
     @microposts = @user.microposts
-    # @posted_sum = @user.microposts.published.count
-    # @draft_sum = @user.microposts.draft.count
-    # @total_posts_characters = @user.microposts.published.sum { |post| post.content.length }
-    # @drafts_sum = @user.microposts.draft.count
-    # start_date = Date.today.beginning_of_month.beginning_of_week(:sunday)
-    # end_date = Date.today.end_of_month.end_of_week(:sunday)
-    #end_date = start_date + 13 #(2 weeks ver)
-    # @today = Date.today
-    # @current_month = Date::MONTHNAMES[Time.now.month]
-    # @calendar_days = (start_date..end_date).to_a
-    # @posted_dates = @user.microposts.published.pluck(:created_at).map(&:to_date).map { |date| date.day }
-    # @posted_dates_sum = @posted_dates.uniq.count
-    # logger.debug "👷👷👷👷👷@posted_dates: #{@posted_dates.inspect}" 
+    #showにわざわざcountを定義する必要はない。なぜなら結局user.microposts側でloopさせるから。
+    #必要なのは、Micropostのshowアクション内で各idのcountに対してcount++させていく必要がある。
+    #countを定義するために、micropost.countを定義する必要がある。
+    #@microposts = @user.micropost[index].countみたいな
   end
 
   def new
@@ -104,6 +93,7 @@ class UsersController < ApplicationController
   def flashcards
     @user = User.find_by(slug: params[:slug])
     @microposts = @user.microposts
+    puts "📚📚📚📚📚" , @microposts.published.sample(5).count
   end
 
   # def current_user

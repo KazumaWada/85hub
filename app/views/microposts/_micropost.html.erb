@@ -1,11 +1,18 @@
-  <% @microposts.published.each do |micropost| %>
+<div class="text-left pl-4">
+<span class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-blue-700/10 ring-inset">正解数</span>
+</div>
+  
+<% @microposts.published.each do |micropost| %>
   <%= link_to post_path(id: micropost.id) do %> 
 
     <!-- 表示部分 -->
     <div class="m-4 p-3 border-2 border-gray-200 rounded-2xl duration-200">
 
       <!-- コンテンツ部分 -->
-      <span class="text-gray-500 text-sm block"><%= micropost.created_at.strftime("%Y-%m-%d") %></span>
+      <div class="flex m-2">
+      <span class="text-gray-500 text-sm block pr-2"><%= micropost.created_at.strftime("%Y-%m-%d") %></span>
+      <span class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-blue-700/10 ring-inset"> <%= (micropost.correct_num) %>/10</span>
+      </div>
 
       <div class="m-2">
       <%= sanitize micropost.content, 
