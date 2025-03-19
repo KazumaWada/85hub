@@ -21,6 +21,12 @@ export default class extends Controller{
   const incorrects = document.querySelectorAll(".incorrect");
   const countBadges = document.querySelectorAll(".countBadge");
   const congratulation = document.getElementById("congratulationsCard");
+  const correct_nums = document.querySelectorAll(".correct_num");
+
+  correct_nums.forEach((correct_num, index) =>{
+    console.log(correct_num.textContent.split('/')[0])//"/"の最初[0]の部分
+  })
+
   //フラッシュカードの回答を全て終えたら、「congratulation要素」を表示させたいので最初はhidden
   congratulation.hidden = true;
 

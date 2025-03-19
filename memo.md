@@ -1,3 +1,24 @@
+なぜ、毎回    micropost = @user.microposts.find(params[:id])
+なのか。    micropost = @user.micropost.find(params[:id])
+だと必ずエラーになる。その理由は複数user modelで絡んでいるから。
+
+なぜmodelを指定して送らないとエラーになるのか。
+
+<#%<%= form_with(model: micropost ,url: quiz_correct_num_update_path(id: micropost.id), method: :patch, id: "hiddenForm", local: true, hidden: true) do |form| %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## fetch
 - そもそもなぜfetchを使う必要があるのか。
 フロント側で全て取得したDOMのデータ内に、DOMの操作後に変更されているデータがある。
@@ -65,7 +86,8 @@ correct_numを作る。
 ↓
 丸ボタンが押された時点で押された時点でバックエンドでformの内容設定をしておけばformと送信両方ともできる。
 
-# まず、turboとstimulusのdocかビデオとかをみて一通り理解してから進める。
+# 今
+hotwireよりもfetchで実装したほうが凡庸性がある。だから
 
 
 

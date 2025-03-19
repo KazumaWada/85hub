@@ -96,6 +96,27 @@ class UsersController < ApplicationController
     puts "📚📚📚📚📚" , @microposts.published.sample(5).count
   end
 
+  def quiz_correct_num_edit #router quiz_path
+    @user = User.find_by(slug: params[:slug])
+    @microposts = @user.microposts
+  end
+
+  def quiz_correct_num_update#SQL文と考えたほうがスッと入る
+    @user = User.find_by(slug: params[:slug]) 
+    puts "🔧 params: #{params.inspect}"
+    micropost = @user.microposts.find(params[:id])
+
+    if micropost.update(correct_num: params[:correct_num]) 
+      puts "UPDATEしました！"
+    else
+      puts "NNNNNNNNNNNNN?!"
+    end
+    #saveでpatchリクエストが更新される if saveできたら、 else カードの正解数の集計ができませんでした。
+    
+    redirect_to quiz_path
+  end
+
+
   # def current_user
   #   @current_user ||= User.find_by(id: session[:user_id])
   #   #@current_user ||= User.find(params[:id])
