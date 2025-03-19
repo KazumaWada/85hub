@@ -1,63 +1,49 @@
 import { Controller } from "@hotwired/stimulus"
 
-//id:オリジナルのみ。(仕様上だからいけるけれども、、)class: 複数でもいける
-//classの最初の要素を取得する方法がある。↓
-//document.queryselector('class名)
-//全て取得してその中から選択することもできる
-//elements = document.querySelectorAll(~)->elements[0]
-
-//一つは選択できる。だから消えてはいく。
-//しかし、最初から全てのカードを閉じていたい場合、どうやって
-
-//まずidではなく、classにしてqueryselectにしたらどうなっていくのかみてみる。
-//あ、そっかブラウザでは消えているけど、js上では消えていないんだ。
-//hiddenではなく、本当に消せばいいんじゃない?
-
-////////////////////////続き///////////////////////////
-//javascript DOMで検索してアルゴリズムを考える。
-
 export default class extends Controller{
  connect(){
-  //そもそもrailsが出力したhtml要素にjavascriptで実装していくということだから、
-  //すでにrails側で要素を5回loopしたやつはブラウザ上に5個表示されている。
-  //それに対してjavascriptでDOMを操作していくということ。
-  //だから、すでに5つある要素に対して実行していく。
-  //だから、containerを基準にする必要がある。
-
 ///////////////////////////////////////////////////////////////
-//コメントはzenn用に残しておく。
+  //仕様//
+  //flashcardの問題が最初に表示されており、
+  //「答えを見るボタン」「答え」「マルボタン」「バツボタン」が非表示(hidden=true)になっている
 
-///////////////////////////////////////////////////////////////
-  //0.Rails側で、HTML要素がすでにループされているものがフロントに届く。
-  //1.まず0をフロント側でも全てloopさせて、配列に記録しておく。
-  //2.今度はそのメモリ(配列)から色々と実行していく。loopなり配列なり。
+  //0.Rails側で、HTML要素がすでにループされているものがブラウザに届く。
+  //1.まず0のソースコードをフロント側(DOM)でも全てloopさせて、配列として変数に格納しておく。
+  //2.今度はそのメモリ(配列)をDOM側でloopをして色々と実行していく。
 //////////////////////////////////////////////////////////////
 
- //  1.まず0をフロント側でも全てloopさせて、配列(というかNodeList)に記録しておく。
+ //  1.まず0をフロント側で要素を取得し、配列(メモリ)に記録しておく。
   const flashcardContainers = document.querySelectorAll(".flashcardContainer");
-  const opens = document.querySelectorAll(".open");  //配列ではなく、単一で返してきている。
-  const answers = document.querySelectorAll(".answer");  //5*5になってしまっているけど、querySelectorで取得した5つはそれぞれまとまっていないから配列にしても何故かloopが一回しかできない。最初に取得された要素のみ。
+  const opens = document.querySelectorAll(".open");  
+  const answers = document.querySelectorAll(".answer");  
   const judges = document.querySelectorAll(".judge");
-  console.log(opens)
+  const corrects = document.querySelectorAll(".correct");
+  const incorrects = document.querySelectorAll(".incorrect");
+  const countBadges = document.querySelectorAll(".countBadge");
   const congratulation = document.getElementById("congratulationsCard");
-
+  //フラッシュカードの回答を全て終えたら、「congratulation要素」を表示させたいので最初はhidden
   congratulation.hidden = true;
 
+  //userがどのフラッシュカードやボタンをクリックしたのか識別するために{要素: index}でメモリに保管しておくために初期化。
   let flashcardContainersHashmap = {};//全体
-  let answersHashmap = {};//答え
-  let judgesHashmap = {};//まるばつ
+  let answersHashmap = {};//flashcardの答え
+  let judgesHashmap = {};//マルかバツかをuserが押せるボタンのcontainer要素
 
-  //コンテナの全体
+  //flashcard全体の要素
   flashcardContainers.forEach((flashcardContainer, index) =>{
+   //userが最後まで回答したら、「flashcard要素」を非表示にし「congratulation要素」を表示したいので最初はhiddenをfalseに。
    flashcardContainer.hidden = false;
+   //回答し終わったflashcardはhiddenをtrueにしたいので、「どのカードをuserが操作したのか」を認識するためにindexを付けておく。
    flashcardContainersHashmap[index] = flashcardContainer
   })
-  //答えを全て隠しておく。ついでに各要素ごとにindexを記録
+
+  //answers: 「flashcardの答えが書かれている要素」こちらもindexを取得しておく。
   answers.forEach((answer, index) =>{
    answer.hidden = true;
    answersHashmap[index] = answer
   })
-  //判定を隠しておく。ついでに各要素ごとにindexを記録
+
+  //judges:「userが合っていたかどうかを自分で判断するマルバツのボタン」判定を隠しておく。ついでに各要素ごとにindexを記録
   judges.forEach((judge, index) =>{
    judge.hidden = true;
    judgesHashmap[index] = judge
@@ -66,55 +52,53 @@ export default class extends Controller{
 
  //openがクリックされたら、その同じ要素内(つまり同じindex内)にあるanswerとjudgeの要素を
  //取得したいので、上記で登録しておいた{要素:index}をここで使う。
+
+ //opens: 「flashcardの答えが表示されるボタン」
+ //このボタンが押されたら、先ほどメモリに格納しておいた配列のindexから探し、「flashcardの答えが書かれている要素」のhiddenをfalseにして表示する。
+ //さらに、「userが合っていたかどうかを自分で判断するマルバツのボタン」もindexから探し、hiddenをfalseにして表示する。
   opens.forEach((open, index) => {
    open.addEventListener('click', () => {
-     //このopenのindexに対応するanswerJudgeの要素をhidden=falseにする。
      answersHashmap[index].hidden = false
      judgesHashmap[index].hidden = false
    });
  });
 
- let count = 0;
- //マルバツを押したら、containerが消える。
- judges.forEach((judge, index) => {
-  judge.addEventListener('click', () => {
-    flashcardContainersHashmap[index].hidden = true;
-    count++;
-    //フラッシュカード.lengthになった == 全部消えている
-    if(count == flashcardContainers.length)congratulationsCard();
+//correct: 「userが合っていたかどうかを自分で判断するマルバツのボタン」のマルボタン
+corrects.forEach((correct, index) => {
+  correct.addEventListener('click', () => {
+    //追加機能: フラッシュカードの正解数をcount++して、その変数の値をバックエンドへ送信。
+    console.log("you are correct!!!");
   });
 });
 
-///////////////////////////////////////////////////////////
-//こっからは、アニメーションの世界に入るから、zennは区切れる。
-///////////////////////////////////////////////////////////////
-//"無くなったら"をどうやって判断するのか。
-//全てhidden=trueになっていたら
-//hashmapで追跡して、indeOfで一気に探して判定する。
-//hiddenされる度に、countしていって、containerの大きさと同じになったら、//これ！
+//incorrect: 「userが合っていたかどうかを自分で判断するマルバツのボタン」のバツボタン
+incorrects.forEach((incorrect, index) => {
+  incorrect.addEventListener('click', () => {
+    //do nothing (for now)
+    console.log("you are incorrect!!!");
+  });
+});
 
-//そのアクションが起こったら、どうしたいのか.
-//アニメーション(わー+userページに戻るorもう一度やる)//これをunlimitedにできるのがプレミア。一日1回が無料ユーザー。
+let countCard = 0;
 
-//アニメーションにしたい。何を参考にする?->progateとか?
-//progateみたいに、どこからでもいいからニョキっとcardを出す。
-//https://dubdesign.net/javascript/animationend-anime/
+//「userが合っていたかどうかを自分で判断するマルバツのボタン」を囲うcontainer要素
+//userがマルバツどちらかをクリックしたら、そのflashcardの要素を非表示にする。
+//最後のflashcardをuserが回答し終わったら、そのflashcardも同じように非表示にし、congratulation要素を表示する。
+//「最後かどうか」は毎回各flashcard全体の要素が非表示になるたびにcountしていき、flashcard.lengthとcountが一致したら「最後」と認識させる。
+judges.forEach((judge, index) => {
+ judge.addEventListener('click', () => {
+   flashcardContainersHashmap[index].hidden = true;
+   countCard++;
+   //フラッシュカード.lengthになった == 全部消えている
+   if(countCard == flashcardContainers.length)congratulationsCard();
+ });
+});
 
-/////////これでいく。方法01.
-//hidden trueの個数と、containerの個数が一致したら、
-//新たな要素がinnerHTMLを使って作成される。
-//カードを表示させる。「もう一度やる」をクリックしたら、リロードしてデータを反映させて、もう一度表示させる。
-//↓
-//5回一致したら、まずは簡単な文字列をブラウザに表示させてみる。
-
+//flashcardを全て回答し終わったらcongratulation要素を表示させる。
 function congratulationsCard(){
   console.log("yay!");
   congratulation.hidden = false;
 }
- }
- 
-
- //
-
 }
 
+}
