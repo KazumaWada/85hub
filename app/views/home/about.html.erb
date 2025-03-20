@@ -1,102 +1,166 @@
-<div class="mx-auto max-w-5xl">
+<!DOCTYPE html>
+<html>
+  <head> 
+  <!-- Importmap -->
+  <%= javascript_importmap_tags %>
+  <!-- Stylesheets -->
 
-  <div class="text-center mt-1">
-    <h1 class="text-4xl font-medium">eigopencil.com</h1>
-    <p class="fonr-bold mt-3">英語のアウトプットを、あなたの方法で、あなたのペースで。</p>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <!--<%= image_tag("welcome.png", class: "mx-auto max-w-[320px] h-auto rounded-lg") %>-->
+    <title>eigopencil</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= favicon_link_tag "favicon.ico" %>
+
+   <!-- Twitter Cards Meta Tags -->
+   <%= display_meta_tags(set_default_meta_tags) %>
+ 
   
-  <div class="ml-3 mr-3">
-    <p class="relative inline-block">
-      <%= link_to login_path, data: { turbo: false }, class: "group relative inline-block rounded-lg overflow-hidden" do %>
-      
-        <div class="rounded-lg bg-gray-100 hover:bg-blue-400 hover:text-white transition duration-300 transform group-hover:scale-105 p-2">
-          <%= image_tag("welcome.png", class: "mx-auto max-w-[320px] h-auto rounded-lg") %>
-          <span class="font-extrabold text-3xl ">今すぐはじめる!</span>
-        </div>       
+  <!-- TailwindCSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-      <% end %>
-    </p>
-    </div
+  <!--Alpine.js nav用(https://alpinejs.dev/start-here#building-a-dropdown)-->
+  <!--<script src="//unpkg.com/alpinejs" defer></script>-->
+
+ 
+
+
+
+<!--google font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&family=Lexend:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+  
+</head>
+<!--Alpine.js を使用。-->
+<div class="relative flex justify-between items-center p-4 relative z-10">
+  <!-- ロゴ -->
+  <div class="logo-container flex w-6">
+    <%= image_tag("blue-pen.png") %>
+    <span class="font-bold text-base">eigopencil</span>
   </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<div class="mx-auto max-w-5xl">-->
+
+  <div id="title-description" class="text-center mt-1">
+   <div class="text-center">
+    <%= image_tag("blue-pen.png", class: "mx-auto max-w-[150px]") %>
+    <!--<p class="font-extrabold text-xl text-blue-700">eigopencil.com</p>-->
+   </div>
+   <div class="text-center mt-9">
+   <!--<h1 class="text-4xl font-bold">覚えたい英単語、フレーズもう忘れない!</h1>-->
+    <h1 class="text-4xl font-bold">覚えたい英単語やフレーズをしっかり記録、定着させる</h1>
+   </div>
+  </div>
+    
+  <div id="signup" class="text-center m-6">
+     <p class="relative inline-block">
+      <%= link_to login_path, data: { turbo: false }, class: "group relative inline-block rounded-lg overflow-hidden" do %>
+        <div class="rounded-lg bg-blue-400 transition duration-300 transform group-hover:scale-105 p-6 hover:bg-blue-500">
+          <span class="font-extrabold text-3xl text-white">今すぐ無料ではじめる!</span>
+        </div>       
+      <% end %>
+     </p>
+   </div>
+
+</div>
 
 <div>
 
-<!--welcome-->
-  <div class="text-center m-2 border border-gray-50 rounded-lg shadow p-6 hover:shadow-md">
-
-    <!-- 1カラム目 -->
-      <div class="">
-        <h4 class="text-left text-xl text-gray-700 font-medium">🎉ようこそ！</h4>
-        <!--<p class="border-b border-gray-300"></p>-->
-        <p class="text-gray-500 text-left mt-4">
-        eigopencilは、あなたへ英語のアウトプットができるスペースを提供します。
-        英語日記、覚えたいフレーズや単語、短い文章からブログのような長文など、目的やスタイルを問わず自分らしい英語の表現を磨いていきましょう。
-        </p>
-      </div>
-
-   </div>
-
-<!--editor-->
-<div class="text-center m-2 border border-gray-50 rounded-lg shadow p-6 hover:shadow-md">
-
-  <div class="">
-    <h4 class="text-left text-xl text-gray-700 font-medium">🖋️手書き対応！使いやすい投稿エディタ</h4>
-    <div class="text-gray-500 text-left mt-4">
-    <p class="text-gray-500">改行,太字,見出し,引用やリンク挿入に対応</p>
-    <p class="text-gray-500">手書きの英文も読み取り可能</p>
-    <p class="text-gray-500">最大1000文字まで入力OK！</p>
-    <p class="text-gray-500">下書きに保存して後で書くこともできます。</p>
-   </div>
-    <div class="mt-2 mx-auto max-w-[340px] bg-gray-50 border border-gray-100 rounded-lg p-4 shadow-sm">
-     <%= image_tag("editor.png", class: "mx-auto max-w-[320px] h-auto rounded-lg") %>
-    </div>   
-  </div>
-
-</div>
-
-
-<!--simple-->
-<div class="text-center m-2 border border-gray-50 rounded-lg shadow p-6 hover:shadow-md">
-
-  <div class="text-center">
-    <div class="p-1 mt-3">
-    <h4 class="text-left text-xl text-gray-700 font-medium">シンプルなデザイン</h4>
-        <p class="text-gray-500 text-left">
-        皆さんが「書く」ことに集中できるように、シンプルな見た目を心がけました。
-        </p>
-      </div>
-  </div>
-</div>
-
-<!--features-->
-<div class="text-center m-2 border border-gray-50 rounded-lg shadow p-6 hover:shadow-md">
-
-  <div class="text-left">
-    <div class="p-1 mt-3">
-    <h4 class="text-left text-xl text-gray-700 font-medium">🛠️今後、追加が予定されている機能</h4>
-    <li class="text-gray-500">画像の挿入を可能にする</li>
-    <li class="text-gray-500">AIによるあなた専用の単語/フレーズ帳の作成</li>
-    <li class="text-gray-500">英語コンテンツのURL共有</li>
-      </div>
-  </div>
-</div>
-
-<!--lets use this app-->
-
-<div class="text-center m-2 border border-gray-50 rounded-lg shadow p-6 hover:shadow-md">
-
-  <div class="text-left">
-    <div class="p-1 mt-3">
-    <h4 class="text-left text-xl text-gray-700 font-medium">🔥eigopencilを使い込んで英語力を上げよう!</h4>
-    <%= image_tag("goal.png", class: "mx-auto max-w-[320px] h-auto rounded-lg") %>
-    <p class="text-gray-500 text-left mt-4">
-      継続して英語をアウトプットすることで、確実にスキルは向上します。eigopencilはそのための環境をあなたに提供します。まずは短い一文から始めてみませんか？
+<!-- what is eigopencil -->
+<div class="text-left mx-auto mt-6 max-w-3xl my-12">
+  <div class="mt-6 p-7 rounded-lg transition-all duration-300">
+    <h1 class="text-gray-700 text-3xl font-extrabold mb-6">eigopencilとは</h1>
+    <p class="text-gray-500 text-lg leading-relaxed">
+    みなさんの英語学習を助けるサイトです。覚えたい英単語やフレーズを記録しておくことができたり、それを元にフラッシュカードを作成して何度も繰り返し学習ができます。
     </p>
-    <p class="mt-4"><%= link_to "はじめる", signup_path, data: { turbo: false }, class: "text-gray-600 hover:bg-yellow-500 border border-gray-400 hover:border-gray-800 rounded-full px-4 py-2 transition-colors" %></p>
-      </div>
   </div>
 </div>
+
+
+<!-- what is eigopencil -->
+<div class="text-left mx-auto mt-6 max-w-3xl my-12">
+  <div class="mt-6 p-7 rounded-lg transition-all duration-300">
+    <h1 class="text-gray-700 text-3xl font-extrabold mb-6">🔑 単語やフレーズの記録ができる </h1>
+    <p class="text-gray-500 text-lg leading-relaxed">
+    <%= image_tag("about-card.png", class: "max-w-[400px] rounded-lg") %>
+    </p>
+  </div>
+</div>
+
+
+<!-- welcome -->
+<div class="text-left mx-auto max-w-3xl my-12">
+  <div class="p-8 bg-white rounded-lg transition-all duration-300">
+    <h1 class="text-gray-700 text-3xl font-extrabold mb-6">🔁 フラッシュカードで何度も学習することができる </h1>
+    <p class="text-gray-500 text-lg leading-relaxed">
+    <!--<p>⚫️ 正解数のカウント</p>-->
+    <%= image_tag("about-flashcard.png", class: "max-w-[400px] rounded-lg") %>
+    </p>
+  </div>
+</div>
+
+</div>
+
+<!-- welcome -->
+<div class="text-left mx-auto max-w-3xl">
+  <div class="p-8 bg-white rounded-lg transition-all duration-300">
+    <h1 class="text-gray-700 text-3xl font-extrabold mb-8">こんなこと、悩んでいませんか？？</h1>
+    <h4 class="text-xl text-gray-700 font-medium mb-6">☑️ 覚えたい単語やフレーズをどこにメモしたか忘れてしまう。</h4>
+    <h4 class="text-xl text-gray-700 font-medium mb-6">☑️ 海外ドラマで見かけたかっこいい表現を覚えたいけど、どう管理すればいいか分からない</h4>
+    <h4 class="text-xl text-gray-700 font-medium mb-6">☑️ 単語帳を作るのは面倒だし、復習のタイミングもつかめない。</h4>
+  </div>
+</div>
+
+<div class="text-center">
+<h1 class="text-4xl font-black">↓</h1>
+</div>
+
+<!-- welcome -->
+<div class="text-left mx-auto max-w-3xl">
+  <div class="p-8 bg-white rounded-lg transition-all duration-300">
+    <h1 class="text-gray-700 text-3xl font-extrabold mb-8">
+    eigopencilでは、覚えたい英単語やフレーズを簡単に記録・管理でき、フラッシュカードを使って何度も復習ができます。
+    </h1>
+    
+  </div>
+</div>
+
+
+
+<!-- welcome -->
+<div class="text-left mx-auto max-w-3xl my-12">
+  <div class="p-8 bg-white rounded-lg transition-all duration-300">
+    <h1 class="text-gray-700 text-2xl font-bold mb-6">eigopencilは英語学習者をサポートするためのツールを提供します。まずは短い一文から書いてみませんか？</h1>
+    <p class="text-gray-500 text-lg leading-relaxed">
+    <%= link_to login_path, data: { turbo: false }, class: "group relative inline-block rounded-lg overflow-hidden" do %>
+      <div class="text-center rounded-lg bg-blue-400 transition duration-300 transform group-hover:scale-105 p-6 hover:bg-blue-500">
+        <span class="font-extrabold text-3xl text-white">はじめる！</span>
+      </div>       
+    <% end %>
+    </p>
+  </div>
+</div>
+
+</div>
+
 
 <!--learn more-->
 
@@ -104,21 +168,21 @@
 
   <div class="text-left">
     <div class="p-1 mt-3">
-    <h4 class="text-left text-xl text-gray-700 font-medium">📚Learn more</h4>
+    <h4 class="text-left text-xl text-gray-500 font-medium">📚Learn more</h4>
 
-    <div class="mt-4 hover:bg-yellow-500 text-center">
-          <%= link_to how_i_use_path,
+    <div class="mt-4 hover:bg-blue-400 text-center">
+          <%= link_to root_path,
                       class: "no-underline text-black block border border-gray-300 rounded-md p-4 bg-transparent transition",
                       data: { turbo: false } do %>
-            <h6 class="text-gray-500">開発者のeigopencil使い方</h6>
+            <h6 class="text-gray-500 hover:text-white">開発者のeigopencil使い方</h6>
           <% end %>
     </div>
 
-    <div class="mt-4 hover:bg-yellow-500 text-center">
-      <%= link_to evidence_path,
+    <div class="mt-4 hover:bg-blue-400 text-center">
+      <%= link_to root_path,
                   class: "no-underline text-black block border border-gray-300 rounded-md p-4 bg-transparent transition",
                   data: { turbo: false } do %>
-        <h6 class="text-gray-500">科学が示す「英語を書くこと」の効果</h6>
+        <h6 class="text-gray-500 hover:text-white">科学が示す反復の効果</h6>
       <% end %>
     </div>
     </div>

@@ -4,6 +4,8 @@
  //= link controllers/application.js
  //= link controllers/index.js
  //= link application.js
+ //= link about-card.png
+  //= link about-flashcard.png
 
  //= link welcome.png
   //= link base.png
