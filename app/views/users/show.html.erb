@@ -5,9 +5,8 @@
   <skip_before_action>
  
 
-
-
-<!--投稿フォーム-->
+<% if current_user == @user %>
+  <!--投稿フォーム-->
 <div class="flashcardContainer m-4 p-3 border-2 border-gray-200 rounded-2xl duration-200">
 
 <%= form_with(model: @microposts, url: zen_create_path(slug: @user.slug), method: :post, local: true, data: { turbo: false } ) do |f| %>
@@ -29,6 +28,8 @@
 
 </div>
 <!--投稿フォーム-->
+<% end %>
+
 
 
 
