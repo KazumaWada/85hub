@@ -103,9 +103,9 @@ class UsersController < ApplicationController
 
   def quiz_correct_num_update#SQL文と考えたほうがスッと入る
     @user = User.find_by(slug: params[:slug]) 
-    puts "🔧 params: #{params.inspect}"
+    puts "🔧 params: #{params[:correct_num]}"
     micropost = @user.microposts.find(params[:id])
-
+      
     if micropost.update(correct_num: params[:correct_num]) 
       puts "UPDATEしました！"
     else
@@ -114,6 +114,12 @@ class UsersController < ApplicationController
     #saveでpatchリクエストが更新される if saveできたら、 else カードの正解数の集計ができませんでした。
     
     redirect_to quiz_path
+  end
+
+  def done_quiz
+    @user = User.find_by(slug: params[:slug]) 
+    flash[:succeess] = 'ナイス🎉'
+    redirect_to root_path
   end
 
 

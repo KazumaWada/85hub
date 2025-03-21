@@ -71,6 +71,7 @@ class MicropostsController < ApplicationController
       @micropost = Micropost.new#空のインスタンスを作成(userとはつながっていない)
     end
     def zen_new
+      @hide_post_button = true
       @user = User.find_by(slug: params[:slug])
       @micropost = Micropost.new#空のインスタンスを作成(userとはつながっていない)
     end

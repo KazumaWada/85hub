@@ -7,6 +7,9 @@
   <% end %>  
 </div>-->
 
-<div class="floating-circle-buttom bg-blue-400">
+
+<% unless @hide_post_button %>
+<div class="floating-circle-buttom bg-blue-600">
 <%= link_to "+", current_user ? zen_path(current_user) : login_path, class: "font-bold text-white no-underline", data: { turbo: false } %>
 </div>
+<% end %>

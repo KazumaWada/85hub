@@ -1,10 +1,9 @@
 <% if current_user == @user %>
-<div class="flex justify-end mb-4">
-  <%= link_to "終了する", root_path, class: "bg-gray-100 text-gray-800 rounded hover:bg-gray-200 transition duration-300 px-4 py-2 mr-4" %>
+<div class="flex justify-start mb-4 pl-4">
+  <%= link_to "終了する", done_quiz_path, class: "bg-gray-100 text-gray-800 rounded hover:bg-gray-200 transition duration-300 px-4 py-2 mr-4" %>
 </div>
 <% end %>
 
-<span class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-blue-700/10 ring-inset">正解数</span>
 <div id="container" data-controller="quiz">
 
 <% @microposts.published.sample(1).each do |micropost| %>
