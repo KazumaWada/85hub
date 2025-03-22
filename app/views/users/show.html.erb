@@ -1,14 +1,7 @@
-<div class="profile-sectiob">
 
   <div class="text-center"><%= render 'users/profile' %></div>
 
   <skip_before_action>
- 
-
-<% if current_user == @user %>
-<% end %>
-
-
 
 <% if @user.microposts.any? %>
     <div class="col-span-1 col-start-1">

@@ -18,7 +18,7 @@
        ✅
     <% end %>
     <!-- タグ defaultで入力されなくてもなんらかしらの形で存在してしまっているから変な無地のボタンが残るんだと思う。defaulでnullとかにしてみる。-->
-    <% unless !micropost.tags %>
+    <% if micropost.tags.present? %>
      <span class="rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-gray-500/10 ring-inset">
      <%= micropost.tags %>
      </span>
