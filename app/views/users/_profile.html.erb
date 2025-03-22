@@ -17,29 +17,36 @@
 
 <!--投稿フォーム-->
 <div id="flashcard-input" class="flashcardContainer m-4 p-3 border-2 border-gray-200 rounded-2xl duration-200">
+  <%= form_with(model: @microposts, url: zen_create_path(slug: @user.slug), method: :post, local: true, data: { turbo: false }) do |f| %>
+    <div id="inputWrapper" class="text-gray-500">
+      <label for="content">覚えたい単語、フレーズ</label>
+      <%= f.text_area :content, 
+          class: "m-2 p-3 border-2 border-gray-200 duration-200 rounded-2xl w-full" %>
 
-<%= form_with(model: @microposts, url: zen_create_path(slug: @user.slug), method: :post, local: true, data: { turbo: false } ) do |f| %>
-<div id="inputWrapper" class="text-gray-500">
-覚えたい単語、フレーズ
-  <%= f.text_area :content, 
-      class: "m-2 p-3 border-2 border-gray-200 dur\ation-200 rounded-2xl w-full"
-%>
-日本語訳/解説など *optional
-<%= f.text_area :answer, 
-      class: "m-2 p-3 border-2 border-gray-200 duration-200 rounded-2xl w-full"
-%>
+      <label for="answer">日本語訳/解説など *optional</label>
+      <%= f.text_area :answer, 
+          class: "m-2 p-3 border-2 border-gray-200 duration-200 rounded-2xl w-full" %>
+    </div>
+
+    <!-- 新しいタグ入力欄と登録ボタンを横並びにするためのグリッド -->
+    <div class="grid grid-cols-2 gap-4 mt-4">
+      <!-- タグ入力欄 -->
+      <div>
+        <label for="tags" class="block text-gray-600">タグ（1つのみ）</label>
+        <%= f.text_field :tags, 
+            class: "m-2 p-3 border-2 border-gray-200 duration-200 rounded-2xl w-full" %>
+      </div>
+
+      <!-- 登録ボタン -->
+      <div class="flex justify-end items-center">
+        <%= f.submit "カードを登録", 
+            class: "bg-gray-100 text-gray-800 rounded hover:bg-gray-200 transition duration-300 px-4 py-2" %>
+      </div>
+    </div>
+  <% end %>
 </div>
-<div class="text-right">
-  <%= f.submit "カードを登録",
-      class: "bg-gray-100 text-gray-800 rounded hover:bg-gray-200 transition duration-300 px-4 py-2 mr-4" %>
-</div>
+
 <% end %>
-
-</div>
-<!--投稿フォーム-->
-
-<% end %>
-
 
 <script>
 const flashcardInput = document.getElementById("flashcard-input");
@@ -49,4 +56,9 @@ flashcardInput.hidden = true;
 flashcardOpenButton.addEventListener("click", ()=>{
   flashcardInput.hidden = false;
 })
+
+
+//tagsの値"dog, cat, hello, hhhhsss"
+//,を2つまで検出し、あとは文字列の最後から取得。(ここは曖昧でいい。)
+
 </script>
