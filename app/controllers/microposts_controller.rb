@@ -115,6 +115,7 @@ class MicropostsController < ApplicationController
     def show
       @user = User.find_by(slug: params[:slug])
       @micropost = Micropost.find(params[:id])
+
       
       
 
@@ -158,7 +159,7 @@ class MicropostsController < ApplicationController
     private
 
     def micropost_params
-      params.require(:micropost).permit(:content, :answer, :correct_num, :id)
+      params.require(:micropost).permit(:content, :answer, :correct_num, :id, :tags)
       #{"authenticity_token"=>"[FILTERED]", "content"=>"hh", "commit"=>"Post", "slug"=>"a"}
     end
 

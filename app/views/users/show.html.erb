@@ -11,9 +11,10 @@
 
 
 <% if @user.microposts.any? %>
-      <div class="col-span-1 col-start-1">
-        <%= render partial: 'microposts/micropost' %>
-      </div>
+    <div class="col-span-1 col-start-1">
+       <%= render partial: 'microposts/content_navs' %>
+      <%= render partial: 'microposts/micropost' %>
+    </div>
     </div>
 <% end %>
 
