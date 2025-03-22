@@ -115,7 +115,6 @@ class MicropostsController < ApplicationController
     def show
       @user = User.find_by(slug: params[:slug])
       @micropost = Micropost.find(params[:id])
-
       
       
 
@@ -134,6 +133,11 @@ class MicropostsController < ApplicationController
       else
         redirect_to current_user, alert: "something went wrong post still there"
     end
+  end
+
+  def tags
+    @user = User.friendly.find(params[:slug])
+    @microposts = @user.microposts
   end
 
 

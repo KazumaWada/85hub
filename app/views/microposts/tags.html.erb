@@ -1,0 +1,57 @@
+<div class="text-center"><%= render 'users/profile' %></div>
+<%= render partial: 'microposts/content_navs' %>
+
+
+<!-- where: tagの要素の中でも、params[:tags]に当てはまる内容を取得してくる。-->
+<!--    get '/posts/:tags',←この":tags"からparamsが探している to: 'microposts#tags', as: 'tag'-->
+
+<% @microposts.published.where(tags: params[:tags]).each do |micropost| %>
+ <!-- 一番外側 -->
+<div class="m-4 p-3 border-2 border-gray-200 rounded-2xl duration-200">
+<!--<%= link_to post_path(id: micropost.id) do %> -->
+
+<!-- コンテンツ部分 -->
+<div class="flex m-2">
+  <!-- 日付 -->
+    <span class="text-gray-500 text-sm block pr-2">
+    <%= micropost.created_at.strftime("%Y-%m-%d") %>
+    </span>
+  <!-- 正解数 -->
+  <% if micropost.correct_num < 10 %>
+    <span class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-blue-700/10 ring-inset"> 
+    <%= micropost.correct_num %>/10
+    </span>
+  <% else %>
+     ✅
+  <% end %>
+</div>
+
+<!--content-->
+    <div class="m-2">
+      <%= sanitize micropost.content, 
+      tags: %w(p br h1 h2 h3 h4 h5 h6 ul ol li strong em u s blockquote pre code span div img a),
+      attributes: %w(class style src alt href data-*),
+      class: "text-xl text-gray-700 font-medium"
+      %>
+    </div>
+    
+    <div class="border-2 border-dashed"></div>
+
+<!--answer-->
+    <div class="m-2 text-gray-400">
+      <%= sanitize micropost.answer, 
+        tags: %w(p br h1 h2 h3 h4 h5 h6 ul ol li strong em u s blockquote pre code span div img a),
+        attributes: %w(class style src alt href data-*)
+      %>
+    </div>
+    
+  <!--削除-->
+      <div class="text-right">
+        <!-- 削除ボタン -->
+        <%= button_to "🗑️", micropost_path(slug: @user.slug, id: micropost.id), method: :delete, class: "text-red-500 hover:text-red-700 bg-transparent border-none cursor-pointer pr-1" %>
+      </div>
+
+<!--<% end %><!--link-->
+</div><!--コンテンツ外側-->
+
+<% end %><!--loop-->

@@ -1,10 +1,22 @@
 <div class="text-left pl-6">
 
+<!--"全て"タグ-->
+<%= link_to root_path do%>
+ <span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-gray-500/10 ring-inset">
+ 全て
+ </span>
+ <% end %>
+
+ <!--javascriptでtagをhashmapに入れて、存在していたらスキップとかして、ユニークなものだけ入れることができる-->
 <% @microposts.each do |micropost| %>
  <% if micropost.tags.present? %>
+
+ <%= link_to tag_path(tags: micropost.tags) do%><!--動的linkを生成するときに、routerで定義した:tagsを渡してあげる必要がある。paramsはcontrollerのみへの受け渡しなので使われない。https://railsdoc.com/page/link_to-->
  <span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-gray-500/10 ring-inset">
  # <%= micropost.tags %>
  </span>
+ <% end %>
+
  <% end %>
 <% end %>
 

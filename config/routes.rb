@@ -51,6 +51,7 @@ Rails.application.routes.draw do
     #get 'draft', to: 'microposts#draft', as: 'draft'
     get '/post/:id', to: 'microposts#show', as: 'post'
     post '/post/:id', to:'microposts#generate_dynamic_ogp', as: 'generate_dynamic_ogp'
+    get '/posts/:tags', to: 'microposts#tags', as: 'tag'
     get 'zen', to: 'microposts#zen_new', as: 'zen' #zen_path(slug: 'example-slug')
     post '/zen_create', to: 'microposts#zen_create', as: 'zen_create'
     #post送信用のurl
