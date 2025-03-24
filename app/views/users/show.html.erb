@@ -1,11 +1,13 @@
 
-  <div class="text-center"><%= render 'users/profile' %></div>
+ <div class="text-center mb-2"><%= render 'users/profile' %></div>
 
   <skip_before_action>
 
 <% if @user.microposts.any? %>
     <div class="col-span-1 col-start-1">
-       <%= render partial: 'microposts/content_navs' %>
+    <% if current_user == @user %>
+      <%= render partial: 'microposts/content_navs' %>
+    <% end %>
       <%= render partial: 'microposts/micropost' %>
     </div>
     </div>

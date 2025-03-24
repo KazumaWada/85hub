@@ -23,7 +23,7 @@ class SessionsController < ApplicationController
         expires: 1.month.from_now#指定しなければ、セッションが終わればcookieがなくなる。
       }
 
-    flash[:success] = "ようこそ🎉! #{user.name}さん! さっそくペンのボタンから覚えたい単語、フレーズを登録しよう！"
+    flash[:success] = "ようこそ🎉! #{user.name}さん!"
     redirect_to root_path
     
 
@@ -71,7 +71,7 @@ class SessionsController < ApplicationController
   def destroy
     Rails.logger.info "Destroy action called"
     cookies.delete(:user_data)
-    flash[:success] = "successfuly logged out"
+    #flash[:success] = "successfuly logged out"
     redirect_to root_path
   end
 end
