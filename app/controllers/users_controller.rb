@@ -132,7 +132,7 @@ class UsersController < ApplicationController
 
   def done_quiz
     @user = User.find_by(slug: params[:slug]) 
-    flash[:succeess] = 'ナイス🎉'
+    flash[:succeess] = 'おつかれさまでした'
     redirect_to root_path
   end
 
