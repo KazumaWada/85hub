@@ -42,6 +42,20 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by(slug: params[:slug])   
     @microposts = @user.microposts
+
+    @uniq_tags = @microposts.map(&:tags).flatten.uniq 
+    puts "🔑🔑🔑🔑🔑🔑🔑🔑", @uniq_tags
+
+    
+    
+
+    #タグはかぶるから、ユニークなタグのみをここで変数に定義して、loopさせる。
+
+
+
+
+
+
     #showにわざわざcountを定義する必要はない。なぜなら結局user.microposts側でloopさせるから。
     #必要なのは、Micropostのshowアクション内で各idのcountに対してcount++させていく必要がある。
     #countを定義するために、micropost.countを定義する必要がある。
