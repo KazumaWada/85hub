@@ -5,6 +5,11 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by(name: session_params[:name])
+  
+    
+    
+    
+
 
     if user.nil?
       flash[:danger] = '👻 ユーザーが見つかりません 👻'
@@ -23,7 +28,18 @@ class SessionsController < ApplicationController
         expires: 1.month.from_now#指定しなければ、セッションが終わればcookieがなくなる。
       }
 
+
+
+    #initial_cardの作成. initial_cardのカラムを作成したけど、結局必要なかった。
+    initial_post = user.microposts.first
+
+    if !initial_post
+    initial_card = user.microposts.create(content: "Hello, world!", answer: "こんにちは、世界！", status: 1, tags: "sample", initial_card: true);#1回きりの必要がある。
+    initial_card.save
+    end    
+    
     flash[:success] = "ようこそ🎉! #{user.name}さん!"
+    
     redirect_to root_path
     
 
