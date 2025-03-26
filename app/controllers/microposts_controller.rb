@@ -115,9 +115,28 @@ class MicropostsController < ApplicationController
     def show
       @user = User.find_by(slug: params[:slug])
       @micropost = Micropost.find(params[:id])
-      
-      
+    end
 
+    # def destroy
+    #   @user = User.find_by(slug: params[:slug])
+    #   @micropost = Micropost.find(params[:id])
+    #   @micropost.destroy
+    #   redirect_to root_path
+    # end
+
+    def edit
+      @user = User.find_by(slug: params[:slug])
+      @micropost = Micropost.find(params[:id])
+    end
+
+    def update
+      @user = User.find_by(slug: params[:slug]) 
+      @micropost = @user.microposts.find(params[:id])
+      
+      @micropost.update(micropost_params)#メモリに反映
+      @micropost.save#DBに反映
+      flash[:success] = "フラッシュカードの内容を更新しました"
+      redirect_to user_path(@user)
     end
 
     def destroy
@@ -129,7 +148,7 @@ class MicropostsController < ApplicationController
         redirect_to draft_path(@user)
       elsif @micropost.destroy && @micropost.status == "published"
         flash[:succeess] = "✅🗑️"
-        redirect_to user_path(@user)
+        redirect_to user_path(@user), status: :see_other
       else
         redirect_to current_user, alert: "something went wrong post still there"
     end

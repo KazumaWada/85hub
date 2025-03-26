@@ -47,7 +47,10 @@ Rails.application.routes.draw do
     get 'drafts/index', to: 'drafts#index', as: 'draft'
     get 'drafts/:id/edit', to: 'drafts#edit', as: 'draft_edit'
     patch 'drafts/:id/update', to: 'drafts#update', as: 'draft_update'
+    get 'post/:id/edit', to: 'microposts#edit', as: "edit_micropost"
+    patch 'post/:id/update', to: 'microposts#update', as: "update_micropost"
     get 'bookmark', to: 'microposts#bookmark', as: 'bookmark'
+    
     #get 'draft', to: 'microposts#draft', as: 'draft'
     get '/post/:id', to: 'microposts#show', as: 'post'
     post '/post/:id', to:'microposts#generate_dynamic_ogp', as: 'generate_dynamic_ogp'

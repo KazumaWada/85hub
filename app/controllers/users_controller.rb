@@ -69,15 +69,17 @@ class UsersController < ApplicationController
   #ここはUserをDBに登録のみ->loginへ(sessions#createcookieの実装を行う)
   def create 
     @user = User.new(user_params)
+    puts "⚠️⚠️", @user.name
 
-    if @user.save
+    #friend_idで日本語を入力すると、slugでエラーになるからユーザー名はひとまずアルファベットに統一#
+    if @user.name.each_char.all? { |char| char =~ /^[A-Za-z0-9\s.,!?'"()\-]$/ }#all?全てtrueか確かめている。
+      @user.save
       #log_in @user#signupした後に再度loginさせる手間を省く。(後に実装予定)
       redirect_to login_path
       flash[:success] = "Hi #{@user.name}! next step, please login"
     else
-      puts @user.errors.full_messages
-      flash[:danger] = "#{@user.errors.full_messages}"
-      redirect_to signup_path 
+      flash[:danger] = "ユーザー名をアルファベットにしていますか? パスワードは正しく入力されていますか?"
+      redirect_to signup_path
     end 
   end
 

@@ -46,9 +46,11 @@
       
     <!--削除-->
         <% if current_user == @user %>
-        <div class="text-right">
+        <div class="flex justify-end">
           <!-- 削除ボタン -->
+          <%= button_to "✍️", edit_micropost_path(slug: @user.slug, id: micropost.id), method: :get, class: "text-red-500 hover:text-red-700 bg-transparent border-none cursor-pointer pr-1" %>
           <%= button_to "🗑️", micropost_path(slug: @user.slug, id: micropost.id), method: :delete, class: "text-red-500 hover:text-red-700 bg-transparent border-none cursor-pointer pr-1" %>
+
         </div>
         <% end %>
 
