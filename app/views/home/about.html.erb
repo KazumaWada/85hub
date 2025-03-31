@@ -1,230 +1,116 @@
 <!DOCTYPE html>
-<html>
-  <head> 
-  <!-- Importmap -->
-  <%= javascript_importmap_tags %>
-  <!-- Stylesheets -->
-
+<html lang="ja">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
-    <title>eigopencil</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-   <!-- Twitter Cards Meta Tags -->
-   <%= display_meta_tags(set_default_meta_tags) %>
- 
-  
-  <!-- TailwindCSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <!--Alpine.js nav用(https://alpinejs.dev/start-here#building-a-dropdown)-->
-  <!--<script src="//unpkg.com/alpinejs" defer></script>-->
-
- 
-
-
-
-<!--google font -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&family=Lexend:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-  
+    <title>eigoPencil - 英語学習を簡単に</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+    </style>
 </head>
-<!--Alpine.js を使用。-->
-<div class="relative flex justify-between items-center p-4 relative z-10">
-  <!-- ロゴ -->
-  <div class="logo-container flex w-6">
-    <%= image_tag("blue-pen.png") %>
-    <span class="font-bold text-base">eigopencil</span>
-  </div>
-  </div>
-</div>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+            <a href="/" class="text-gray-700 hover:text-blue-600"><span class="text-xl font-bold text-blue-600">eigoPencil</span></a>
+            </div>
+            <div class="space-x-4">
+                <a href="#features" class="text-gray-700 hover:text-blue-600">機能</a>
+                <a href="#problem" class="text-gray-700 hover:text-blue-600">解決する課題</a>
+                <%= link_to login_path, data: { turbo: false }, class: "bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition" do %>
+                    無料で始める
+                <% end %>
+            </div>
+        </div>
+    </nav>
 
+    <!-- Hero Section -->
+    <header class="pt-24 pb-16 text-center bg-gradient-to-b from-blue-50 to-white">
+        <div class="container mx-auto px-4">
+            <h1 class="text-4xl font-bold text-gray-800 mb-4">英語学習を、もっと簡単に</h1>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
+                覚えたい英単語やフレーズを簡単に管理し、効果的に学習できるプラットフォーム
+            </p>
+            <!--<%= link_to login_path, data: { turbo: false }, class: "bg-blue-500 text-white text-xl px-8 py-3 rounded-lg hover:bg-blue-600 transition shadow-lg" do %>
+                今すぐ無料で始める
+            <% end %>-->
 
+          <div class="mt-10 flex justify-center">
+            <div class="relative transform transition-all duration-300 hover:scale-105 hover:shadow-2xl rounded-2xl overflow-hidden">
+            <%= image_tag "root_img.png", class: "w-[600px] object-cover rounded-2xl" %>
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent to-white opacity-30"></div>
+          </div>
+        </div>
+    </header>
 
+    <!-- Features Section -->
+    <section id="features" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">eigoPencilの特徴</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-blue-50 p-6 rounded-lg text-center">
+                    <div class="text-4xl mb-4">🏷️</div>
+                    <h3 class="font-bold text-xl mb-4">タグ管理</h3>
+                    <p class="text-gray-600">単語やフレーズをカテゴリー別に整理</p>
+                </div>
+                <div class="bg-blue-50 p-6 rounded-lg text-center">
+                    <div class="text-4xl mb-4">📇</div>
+                    <h3 class="font-bold text-xl mb-4">フラッシュカード</h3>
+                    <p class="text-gray-600">繰り返し学習で効果的に記憶</p>
+                </div>
+                <div class="bg-blue-50 p-6 rounded-lg text-center">
+                    <div class="text-4xl mb-4">📊</div>
+                    <h3 class="font-bold text-xl mb-4">学習進捗</h3>
+                    <p class="text-gray-600">正解数と学習状況を可視化</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Problem Section -->
+    <section id="problem" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">こんな悩みありませんか？</h2>
+            <div class="max-w-2xl mx-auto space-y-6">
+                <div class="bg-white p-6 rounded-lg shadow-md flex items-start">
+                    <span class="text-2xl mr-4">✅</span>
+                    <p class="text-gray-700">単語やフレーズをどこにメモしたか忘れてしまう</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md flex items-start">
+                    <span class="text-2xl mr-4">✅</span>
+                    <p class="text-gray-700">海外ドラマで見かけたかっこいい表現を覚えたいけど管理方法が分からない</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md flex items-start">
+                    <span class="text-2xl mr-4">✅</span>
+                    <p class="text-gray-700">単語帳作成や復習が面倒で続かない</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- CTA Section -->
+    <section class="py-16 bg-blue-500 text-white text-center">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-6">すぐに始められる英語学習</h2>
+            <p class="text-xl mb-8">まずは無料で、気軽に英語学習を始めましょう</p>
+            <%= link_to login_path, data: { turbo: false }, class: "bg-white text-blue-600 text-xl px-10 py-4 rounded-lg hover:bg-gray-100 transition" do %>
+                学習を始める
+            <% end %>
+        </div>
+    </section>
 
-
-
-
-
-
-
-
-
-<!--<div class="mx-auto max-w-5xl">-->
-
-  <div id="title-description" class="text-center mt-1">
-   <div class="text-center">
-    <%= image_tag("blue-pen.png", class: "mx-auto max-w-[150px]") %>
-    <!--<p class="font-extrabold text-xl text-blue-700">eigopencil.com</p>-->
-   </div>
-   <div class="text-center mt-9">
-   <!--<h1 class="text-4xl font-bold">覚えたい英単語、フレーズもう忘れない!</h1>-->
-    <h1 class="text-4xl font-bold">覚えたい英単語やフレーズをしっかり管理、定着させる</h1>
-   </div>
-  </div>
-    
-  <div id="signup" class="text-center m-6">
-     <p class="relative inline-block">
-      <%= link_to login_path, data: { turbo: false }, class: "group relative inline-block rounded-lg overflow-hidden" do %>
-        <div class="rounded-lg bg-blue-400 transition duration-300 transform group-hover:scale-105 p-6 hover:bg-blue-500">
-          <span class="font-extrabold text-3xl text-white">今すぐ無料ではじめる!</span>
-        </div>       
-      <% end %>
-     </p>
-   </div>
-
-</div>
-
-<div>
-
-<!-- what is eigopencil -->
-<div class="text-left mx-auto mt-6 max-w-3xl my-12">
-  <div class="mt-6 p-7 rounded-lg transition-all duration-300">
-    <h1 class="text-gray-700 text-3xl font-extrabold mb-6">eigopencilとは</h1>
-    <p class="text-gray-500 text-lg leading-relaxed">
-    覚えたい英単語やフレーズと、その日本語訳を書きとめて、フラッシュカードで学習できるサイトです。たくさんフラッシュカードが溜まってきたらタグ別に分けて管理することもできます。
-    </p>
-  </div>
-</div>
-
-
-<!-- what is eigopencil -->
-<div class="text-left mx-auto mt-6 max-w-3xl my-12">
-  <div class="mt-6 p-7 rounded-lg transition-all duration-300">
-    <h1 class="text-gray-700 text-3xl font-extrabold mb-6">🔑 単語やフレーズをタグ別で管理 </h1>
-    <p class="text-gray-500 text-lg leading-relaxed">
-    - タグでフラッシュカードを管理<br>
-    - フラッシュカードの正解数も確認できます
-    </p>
-    <p class="text-gray-500 text-lg leading-relaxed">
-    <%= image_tag("about-card.png", class: "max-w-[400px] rounded-lg") %>
-    </p>
-    </p>
-  </div>
-</div>
-
-
-<!-- welcome -->
-<div class="text-left mx-auto max-w-3xl my-12">
-  <div class="p-8 bg-white rounded-lg transition-all duration-300">
-    <h1 class="text-gray-700 text-3xl font-extrabold mb-6">🔁 フラッシュカードで何度も学習することができる </h1>
-    <p class="text-gray-500 text-lg leading-relaxed">
-    <!--<p>⚫️ 正解数のカウント</p>-->
-    <%= image_tag("about-flashcard.png", class: "max-w-[400px] rounded-lg") %>
-    </p>
-  </div>
-</div>
-
-</div>
-
-<!-- welcome -->
-<div class="text-left mx-auto max-w-3xl">
-  <div class="p-8 bg-white rounded-lg transition-all duration-300">
-    <h1 class="text-gray-700 text-3xl font-extrabold mb-8">こんなこと、悩んでいませんか？？</h1>
-    <h4 class="text-xl text-gray-700 font-medium mb-6">☑️ 覚えたい単語やフレーズをどこにメモしたか忘れてしまう。</h4>
-    <h4 class="text-xl text-gray-700 font-medium mb-6">☑️ 海外ドラマで見かけたかっこいい表現を覚えたいけど、どう管理すればいいか分からない</h4>
-    <h4 class="text-xl text-gray-700 font-medium mb-6">☑️ 単語帳を作るのは面倒だし、復習のタイミングもつかめない。</h4>
-  </div>
-</div>
-
-<div class="text-center">
-<h1 class="text-4xl font-black">↓</h1>
-</div>
-
-<!-- welcome -->
-<div class="text-left mx-auto max-w-3xl">
-  <div class="p-8 bg-white rounded-lg transition-all duration-300">
-    <h1 class="text-gray-700 text-3xl font-extrabold mb-8">
-    eigopencilでは、覚えたい英単語やフレーズを管理でき、フラッシュカードを使って何度も復習ができます。
-    </h1>
-    
-  </div>
-</div>
-
-
-
-<!-- welcome -->
-<div class="text-left mx-auto max-w-3xl my-12">
-  <div class="p-8 bg-white rounded-lg transition-all duration-300">
-    <h1 class="text-gray-700 text-2xl font-bold mb-6">eigopencilは英語学習者をサポートするためのツールを提供しています。まずは短い一文から書いてみませんか？</h1>
-    <p class="text-gray-500 text-lg leading-relaxed">
-    <%= link_to login_path, data: { turbo: false }, class: "group relative inline-block rounded-lg overflow-hidden" do %>
-      <div class="text-center rounded-lg bg-blue-400 transition duration-300 transform group-hover:scale-105 p-6 hover:bg-blue-500">
-        <span class="font-extrabold text-3xl text-white">はじめる！</span>
-      </div>       
-    <% end %>
-    </p>
-  </div>
-</div>
-
-</div>
-
-
-<!--learn more-->
-<!--
-<div class="text-center m-2 border border-gray-50 rounded-lg shadow p-6 hover:shadow-md">
-
-  <div class="text-left">
-    <div class="p-1 mt-3">
-    <h4 class="text-left text-xl text-gray-500 font-medium">📚Learn more</h4>
-
-    <div class="mt-4 hover:bg-blue-400 text-center">
-          <%= link_to root_path,
-                      class: "no-underline text-black block border border-gray-300 rounded-md p-4 bg-transparent transition",
-                      data: { turbo: false } do %>
-            <h6 class="text-gray-500 hover:text-white">開発者のeigopencil使い方</h6>
-          <% end %>
-    </div>
-
-    <div class="mt-4 hover:bg-blue-400 text-center">
-      <%= link_to root_path,
-                  class: "no-underline text-black block border border-gray-300 rounded-md p-4 bg-transparent transition",
-                  data: { turbo: false } do %>
-        <h6 class="text-gray-500 hover:text-white">科学が示す反復の効果</h6>
-      <% end %>
-    </div>
-    </div>
-  </div>
-</div>
--->
-
-<!--contact-->
-<!--
-
-<div class="text-center m-2 border border-gray-50 rounded-lg shadow p-6 hover:shadow-md">
-  <div class="text-left">
-    <div class="p-1 mt-3">
-    <h4 class="text-left text-xl text-gray-700 font-medium">✉️お問い合わせ</h4>
-    <p class="text-gray-500 text-left mt-4">
-    あなたのフィードバックが、eigopencilをもっと便利で使いやすいサービスにしていきます。  
-          不具合やもっとこうした方がいいなどの声はぜひこちらまでお聞かせください。<br>
-          ✉️: eigopencil@gmail.com
-    </p>
-      </div>
-  </div>
-</div>
---> 
-
-
-
-<!--me-->
-<!--
-<div class="text-center mt-4">
-  <p class="text-gray-400 flex items-center justify-center space-x-2">
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 21v-7.5a.75.75 0 0 1 .75-.75h3a.75.75 0 0 1 .75.75V21m-4.5 0H2.36m11.14 0H18m0 0h3.64m-1.39 0V9.349M3.75 21V9.349m0 0a3.001 3.001 0 0 0 3.75-.615A2.993 2.993 0 0 0 9.75 9.75c.896 0 1.7-.393 2.25-1.016a2.993 2.993 0 0 0 2.25 1.016c.896 0 1.7-.393 2.25-1.015a3.001 3.001 0 0 0 3.75.614m-16.5 0a3.004 3.004 0 0 1-.621-4.72l1.189-1.19A1.5 1.5 0 0 1 5.378 3h13.243a1.5 1.5 0 0 1 1.06.44l1.19 1.189a3 3 0 0 1-.621 4.72M6.75 18h3.75a.75.75 0 0 0 .75-.75V13.5a.75.75 0 0 0-.75-.75H6.75a.75.75 0 0 0-.75.75v3.75c0 .414.336.75.75.75Z" />
-    </svg>
-    <a href="/kazuma" class="border-b border-dotted border-gray-400 text-gray-400 hover:text-gray-600">
-      kazuma
-    </a>が運営中
-  </p>
-</div>
---> 
-
-
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; <%= Date.current.year %> eigoPencil. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

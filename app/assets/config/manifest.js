@@ -6,7 +6,7 @@
  //= link application.js
  //= link about-card.png
   //= link about-flashcard.png
-
+ //= link root_img.png
  //= link welcome.png
   //= link base.png
  //= link write.png
