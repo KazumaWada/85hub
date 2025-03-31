@@ -22,6 +22,8 @@
 だからユーザーにアルファベットの入力を強制させて、日本語が入力された時の例外処理を追加する。
 
 # LP
+これ参考:https://santa.alc.co.jp/?pid=ALC&c=EJ&af_adset=la
+
 https://votars.ai/ja/?gad_source=1&gclid=Cj0KCQjwhYS_BhD2ARIsAJTMMQZtsLcr13tBQKdUevDcjEAY2CBTwai867eLQVZ5aiSZBES94n8bntAaAt3TEALw_wcB
 ↑このサイトの色を参考にする。
 覚えたい英単語やフレーズと、その日本語訳を書きとめて、フラッシュカードで学習できるサイトです。
