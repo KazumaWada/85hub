@@ -74,6 +74,7 @@ class MicropostsController < ApplicationController
       @hide_post_button = true
       @user = User.find_by(slug: params[:slug])
       @micropost = Micropost.new#空のインスタンスを作成(userとはつながっていない)
+      @microposts = @user.microposts
     end
 
     def zen_create 
@@ -182,7 +183,7 @@ class MicropostsController < ApplicationController
     private
 
     def micropost_params
-      params.require(:micropost).permit(:content, :answer, :correct_num, :id, :tags)
+      params.require(:micropost).permit(:content, :answer, :correct_num, :id, :tags, :original)
       #{"authenticity_token"=>"[FILTERED]", "content"=>"hh", "commit"=>"Post", "slug"=>"a"}
     end
 
