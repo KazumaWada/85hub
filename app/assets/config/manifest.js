@@ -22,4 +22,3 @@
 //= link phone-mockup.png
 //= link pc-mockup.png
 //= link logo.png
-//= link favicon.ico
