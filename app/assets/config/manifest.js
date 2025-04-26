@@ -19,3 +19,7 @@
 //= link bike.svg
 //= link quill.png
 //= link email-box.webp
+//= link phone-mockup.png
+//= link pc-mockup.png
+//= link logo.png
+//= link favicon.ico

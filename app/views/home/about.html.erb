@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>eigoPencil - 英語学習を簡単に</title>
+    <title>eigoPencil</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,46 +14,63 @@
         }
     </style>
 </head>
-<body class="bg-gray-50">
+<body class="">
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
-        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center space-x-3">
-            <a href="/" class="text-gray-700 hover:text-blue-600"><span class="text-xl font-bold text-blue-600">eigoPencil</span></a>
-            </div>
-            <div class="space-x-4">
-                <a href="#features" class="text-gray-700 hover:text-blue-600">機能</a>
-                <a href="#problem" class="text-gray-700 hover:text-blue-600">解決する課題</a>
-                <%= link_to login_path, data: { turbo: false }, class: "bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition" do %>
-                    無料で始める
-                <% end %>
-            </div>
-        </div>
-    </nav>
+    <nav class="top-0 left-0 right-0 bg-white shadow-md z-50 h-16">
+    <div class="container mx-auto px-4 h-full flex justify-between items-center">
+      <div class="flex items-center space-x-3 h-full">
+        <a href="/" class="flex items-center h-full">
+          <%= image_tag "logo.png", class: "h-24 object-contain" %>
+        </a>
+      </div>
+      <div class="space-x-4">
+        <%= link_to login_path, data: { turbo: false }, class: "bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition" do %>
+          無料で始める
+        <% end %>
+      </div>
+    </div>
+  </nav>
+  
 
     <!-- Hero Section -->
-    <header class="pt-24 pb-16 text-center bg-gradient-to-b from-blue-50 to-white">
+    <!--<header class="w-full h-screen p-10 text-center bg-gradient-to-b">-->
+    <header class="pt-10 text-center bg-gradient-to-b">
         <div class="container mx-auto px-4">
-            <h1 class="text-4xl font-bold text-gray-800 mb-4">覚えたフレーズを使い、英文を書く。フレーズはもうあなたのもの</h1>
-            <p class="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
-                覚えたい英単語やフレーズを管理し、効果的に学習できるプラットフォーム.フラッシュカードで覚えるより、自分で能動的に使ったほうが定着します。
-            </p>
-            <!--<%= link_to login_path, data: { turbo: false }, class: "bg-blue-500 text-white text-xl px-8 py-3 rounded-lg hover:bg-blue-600 transition shadow-lg" do %>
+        <h1 class="text-5xl font-extrabold text-left md:text-left text-gray-800 mb-4">
+  覚えたい単語やフレーズを、<span class="text-blue-600">eigopencil</span>にメモしておこう
+</h1>
+
+        <!--<%= link_to login_path, data: { turbo: false }, class: "bg-blue-500 text-white text-xl px-8 py-3 rounded-lg hover:bg-blue-600 transition shadow-lg" do %>
                 今すぐ無料で始める
             <% end %>-->
 
-          <div class="mt-10 flex justify-center">
-            <div class="relative transform transition-all duration-300 hover:scale-105 hover:shadow-2xl rounded-2xl overflow-hidden">
-            <%= image_tag "root_img.png", class: "w-[600px] object-cover rounded-2xl" %>
-            <div class="absolute inset-0 bg-gradient-to-r from-transparent to-white opacity-30"></div>
+            <div class="mt-10 flex justify-center">
+            <!-- スマホモックアップ -->
+            <div class="relative w-full max-w-[300px] transform transition-all duration-300 rounded-2xl overflow-hidden">
+              <%= image_tag "phone-mockup.png", class: "w-full object-cover rounded-2xl" %>
+              <div class="absolute inset-0 bg-gradient-to-r from-transparent to-white opacity-30"></div>
+            </div>
+      
+            <!-- PCモックアップ -->
+            <div class="relative w-full max-w-[600px] transform transition-all duration-300 rounded-2xl overflow-hidden hidden md:block">
+              <%= image_tag "pc-mockup.png", class: "w-full object-cover rounded-2xl" %>
+              <div class="absolute inset-0 bg-gradient-to-r from-transparent to-white opacity-30"></div>
+            </div>
           </div>
-        </div>
     </header>
+
+    <div id="title" class="w-full h-screen flex flex-col items-center justify-center text-center pt-10">
+  <div class="p-4">
+    <h1 class="text-5xl text-left sm:text-center font-extrabold text-gray-900 mb-4">シンプルな<span class="text-blue-600">単語帳アプリ</span></h1>
+    <%= image_tag "root_img.png", class: "h-[60vh] object-cover mx-auto" %>
+  </div>
+</div>
+
 
     <!-- Features Section -->
     <section id="features" class="py-16 bg-white">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">eigoPencilの特徴</h2>
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">eigopencilの特徴</h2>
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="bg-blue-50 p-6 rounded-lg text-center">
                     <div class="text-4xl mb-4">🏷️</div>
