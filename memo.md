@@ -1,3 +1,214 @@
+```erb
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eigoPencil</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+    </style>
+</head>
+<body class="">
+
+    <!-- Navigation -->
+    <nav class="top-0 left-0 right-0 bg-white shadow-md z-50 h-16">
+    <div class="container mx-auto px-4 h-full flex justify-between items-center">
+      <div class="flex items-center space-x-3 h-full">
+        <a href="/" class="flex items-center h-full">
+          <%= image_tag "logo.png", class: "h-24 object-contain" %>
+        </a>
+      </div>
+      <div class="space-x-4">
+        <%= link_to login_path, data: { turbo: false }, class: "bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition" do %>
+          無料で始める
+        <% end %>
+      </div>
+    </div>
+  </nav>
+
+  <!-- hero section -->
+  <header class="pt-10 text-center">
+  <div class="container mx-auto px-4">
+<h1 class="text-5xl font-extrabold text-left md:text-left text-gray-800 mb-4">
+覚えたい単語やフレーズは、<span class="text-blue-600">eigopencil</span>にメモしておこう
+</h1>
+      <div class="mt-10 flex justify-center">
+      <!-- スマホモックアップ -->
+      <div class="relative w-full max-w-[300px] transform transition-all duration-300 rounded-2xl overflow-hidden">
+        <%= image_tag "phone-mockup.png", class: "w-full object-cover rounded-2xl" %>
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent to-white opacity-30"></div>
+      </div>
+
+      <!-- PCモックアップ -->
+      <div class="relative w-full max-w-[600px] transform transition-all duration-300 rounded-2xl overflow-hidden hidden md:block">
+        <%= image_tag "pc-mockup.png", class: "w-full object-cover rounded-2xl" %>
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent to-white opacity-30"></div>
+      </div>
+    </div>
+  </header>
+
+
+
+
+    <div id="title" class="w-full h-screen flex flex-col items-center justify-center text-center pt-10">
+    <div class="p-4">
+    <h1 class="text-5xl text-left sm:text-center font-extrabold text-gray-900 mb-4">シンプルな<span class="text-blue-600">単語帳サイト</span></h1>
+    <div class="mt-8">
+    <p class="text-gray-600 text-lg font-bold text-left">✔️ 覚えたい単語やフレーズ、日本語訳、例文をまとめて管理！<br>✔️ タグをつけて管理しやすく<br>✔️ フラッシュカード機能でしっかり定着</p>
+    </div>
+    <%= image_tag "root_img.png", class: "h-[60vh] object-cover mx-auto" %>
+    </div>
+   </div>
+
+
+  <section id="why-eigopencil" class="w-full py-20">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-12">
+      <!--<h2 class="text-4xl font-extrabold text-gray-800 mb-4">こんなとき、<span class="text-blue-600">eigopencil</span>が役立ちます</h2>-->
+      <h1 class="text-5xl text-left sm:text-center font-extrabold text-gray-900 mb-4">こんなとき、eigopencilが<span class="text-blue-600">役立ちます</span></h1>
+
+      <div class="mt-5">
+      <!--<p class="text-gray-600 text-lg font-semibold">英語学習中に感じた「ちょっとした困りごと」、ありませんか？</p>-->
+      </div>
+    </div>
+    
+    <div class="max-w-4xl mx-auto space-y-10">
+      <!-- 悩みリスト -->
+      <div class="bg-white p-6 rounded-2xl shadow-md text-left">
+        <p class="text-gray-700 text-lg font-bold">🤦‍♂️🎬 映画や動画で出会ったフレーズを、どうやって管理すればいいかわからない。</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-2xl shadow-md text-left">
+        <p class="text-gray-700 text-lg font-bold">🤦‍♂️📓 ノートに書いたはずのフレーズが埋もれてしまい、探せない。</p>
+      </div>
+
+      <div class="bg-white p-6 rounded-2xl shadow-md text-left">
+        <p class="text-gray-700 text-lg font-bold">🤦‍♂️🔍 自分だけの単語帳を作りたいのに、しっくりくるサービスが見つからない。</p>
+      </div>
+
+      <!-- 解決 -->
+      <div class="text-center mt-16">
+        <p class="text-4xl font-extrabold text-blue-600 mb-4 relative inline-block">
+        ☝️この悩み、eigopencilで解決！
+        <span class="absolute left-0 bottom-[-6px] w-full h-1 bg-blue-300 opacity-50"></span>
+        </p>
+      </div>
+      
+
+
+    </div>
+  </div>
+</section>
+
+
+<div id="title" class="w-full h-screen flex flex-col items-center justify-center text-center pt-10">
+<div class="p-4">
+<h1 class="text-5xl text-left sm:text-center font-extrabold text-gray-900 mb-4">かんたん＆見やすいデザイン<span class="text-blue-600">💆🏻‍♂️</span></h1>
+<div class="mt-10">
+<p class="text-gray-600 text-lg font-bold text-left"></p>
+<p class="text-gray-600 text-lg font-bold text-left">「単語帳として使いたいだけなのに、なぜここまで複雑なんだろう」</p>
+<p class="text-gray-600 text-lg font-bold text-left">「もっとシンプルなものを作れるはずだ」</p><br>
+<p class="text-gray-600 text-lg font-bold text-left">このような開発者自身の悩みから、英語学習者を支えるためのサービスであるeigopencilが誕生しました。</p>
+<!--<p class="text-gray-600 text-lg font-bold text-left">僕もこのサービスの利用者の一人であるため、開発段階で実際に使い込みながらユーザーの目線で使いやすいようなデザインを目指しました。</p>-->
+<p class="text-gray-600 text-left">クリックで、{ページ名: 画像}のjsonで、全てのページをユーザーに見せる事ができるようにする。↓</p>
+</div>
+<%= image_tag "root_img.png", class: "h-[60vh] object-cover mx-auto" %>
+</div>
+</div>
+
+
+
+
+  <div id="title" class="w-full h-screen bg-blue-500 flex flex-col items-center justify-center text-center pt-10">
+  <div class="p-4">
+  <section class="rounded-md py-16" id="faq">
+  <div class="container mx-auto px-4">
+    <h2 class="text-4xl font-extrabold text-center text-white text-gray-800 mb-12">よくある質問</h2>
+    <div class="max-w-3xl mx-auto space-y-8">
+      
+      <div class="bg-white shadow-md rounded-lg p-6">
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">eigopencilは無料で使えますか？</h3>
+        <p class="text-gray-600">はい、基本機能は無料でご利用いただけます。ユーザーからの支援によってサーバーコストがまかなわれ、運営する事ができています。</p>
+      </div>
+
+      <div class="bg-white shadow-md rounded-lg p-6">
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">どんな単語やフレーズでも保存できますか？</h3>
+        <p class="text-gray-600">もちろんです！映画、ドラマ、読書中に出会った英語など、自由に保存・管理できます。</p>
+      </div>
+
+      <div class="bg-white shadow-md rounded-lg p-6">
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">スマホでも使えますか？</h3>
+        <p class="text-gray-600">はい、eigopencilはスマートフォンにも最適化されているため、快適にお使いいただけます。</p>
+      </div>
+
+      <div class="bg-white shadow-md rounded-lg p-6">
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">フラッシュカード機能とは何ですか？</h3>
+        <p class="text-gray-600">保存した単語やフレーズをクイズ形式で復習できる機能です。記憶の定着をサポートします。</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+  </div>
+ </div>
+
+
+    <!-- Features Section -->
+    <!--<section id="features" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">eigopencilの特徴</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-blue-50 p-6 rounded-lg text-center">
+                    <div class="text-4xl mb-4">🏷️</div>
+                    <h3 class="font-bold text-xl mb-4">タグ管理</h3>
+                    <p class="text-gray-600">単語やフレーズをカテゴリー別に整理</p>
+                </div>
+                <div class="bg-blue-50 p-6 rounded-lg text-center">
+                    <div class="text-4xl mb-4">📇</div>
+                    <h3 class="font-bold text-xl mb-4">フラッシュカード</h3>
+                    <p class="text-gray-600">繰り返し学習で効果的に記憶</p>
+                </div>
+                <div class="bg-blue-50 p-6 rounded-lg text-center">
+                    <div class="text-4xl mb-4">📊</div>
+                    <h3 class="font-bold text-xl mb-4">学習進捗</h3>
+                    <p class="text-gray-600">正解数と学習状況を可視化</p>
+                </div>
+            </div>
+        </div>
+    </section>-->
+
+
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-blue-700 text-white text-center">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold mb-6">すぐに始められる英語学習</h2>
+            <p class="text-xl mb-8">まずは無料で、気軽に英語学習を始めましょう</p>
+            <%= link_to login_path, data: { turbo: false }, class: "bg-white text-blue-600 text-xl px-10 py-4 rounded-lg hover:bg-gray-100 transition" do %>
+                学習を始める
+            <% end %>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-4">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; <%= Date.current.year %> eigopencil. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
+
+```
+
 # DBは、sqlitにしておけば、料金はかからないし、supabaseのpostgresを使えば、無料で使用することができる。
 # 単語、フレーズを登録。その後に、ホームにやることリストとして、その単語の自作英文を書こうというタスクを追加していく。そのやることリストを無くしていくことでユーザーのドーパミンをヒットさせて維持させていく。
 
