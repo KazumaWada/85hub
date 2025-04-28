@@ -1,3 +1,10 @@
+  <!-- 白→グレーの間に入れる波 -->
+<div class="w-full overflow-hidden leading-none rotate-180">
+  <svg viewBox="0 0 500 150" preserveAspectRatio="none" class="w-full h-[100px]">
+    <path d="M0.00,49.98 C150.00,150.00 350.00,-50.00 500.00,49.98 L500.00,0.00 L0.00,0.00 Z" class="fill-gray-50"></path>
+  </svg>
+</div>
+
 # こんな時eigopencilが役立ちますセクション
 ```html
 <section id="why-eigopencil" class="w-full py-20">

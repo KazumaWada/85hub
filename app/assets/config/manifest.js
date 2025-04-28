@@ -22,4 +22,7 @@
 //= link phone-mockup.png
 //= link pc-mockup.png
 //= link logo.png
-//= link about04.png
+//= link about05.png
+//= link edit.png
+//= link tango.png
+//= link quiz.png
