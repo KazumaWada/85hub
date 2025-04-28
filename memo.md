@@ -1,3 +1,48 @@
+# こんな時eigopencilが役立ちますセクション
+```html
+<section id="why-eigopencil" class="w-full py-20">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-12">
+      <h1 class="text-3xl sm:text-5xl text-left sm:text-center font-extrabold text-gray-900 mb-4">
+        こんなとき、eigopencilが<span class="text-blue-600">役立ちます</span>
+      </h1>
+      <div class="mt-5"></div>
+    </div>
+    
+    <div class="max-w-4xl mx-auto space-y-10">
+
+      <!-- 悩みリスト 1 -->
+      <div>
+        <div class="bg-white p-6 rounded-2xl shadow-md text-left">
+          <p class="text-gray-700 text-base font-semibold">🤦‍♂️覚えたいフレーズを、どこに書き留めておけば良いのか分からない。</p>
+        </div>
+        <p class="text-center text-md font-semibold">↓</p>
+        <p class="text-center text-blue-600 text-xl font-bold">✔️ 見つけたフレーズをサクッとメモして整理</p>
+      </div>
+
+      <!-- 悩みリスト 2 -->
+      <div>
+        <div class="bg-white p-6 rounded-2xl shadow-md text-left">
+          <p class="text-gray-700 text-base font-semibold">🤦‍♂️ノートに書いたはずのフレーズが埋もれてしまい、探せない。</p>
+        </div>
+        <p class="text-center text-md font-semibold">↓</p>
+        <p class="text-center text-blue-600 text-xl font-bold">✔️ フレーズをタグ管理して見つけられます</p>
+      </div>
+
+      <!-- 悩みリスト 3 -->
+      <div>
+        <div class="bg-white p-6 rounded-2xl shadow-md text-left">
+          <p class="text-gray-700 text-base font-semibold">🤦‍♂️自分だけの単語帳を作りたいけど、しっくりくるサービスが見つからない。</p>
+        </div>
+        <p class="text-center text-md font-semibold">↓</p>
+        <p class="text-center text-blue-600 text-xl font-bold">✔️ eigopencilならシンプルで使いやすい</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+```
+
 ```erb
 <!DOCTYPE html>
 <html lang="ja">
