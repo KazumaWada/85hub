@@ -129,13 +129,51 @@ button:focus {
 <%= render 'layouts/header_beta' %>
 <%= render 'layouts/flash_message' %>
 <%= yield %>
-  
-
 <%# <%= render 'layouts/bottom_btns' %> 
 
 
 
   <div class="mt-12" style="height: 50px;"></div>
 
+
+
+  <div id="bottom-bar" class="bg-blue-600/80 fixed bottom-0 w-full h-auto text-gray-900 shadow-md backdrop-blur-sm flex flex-col md:flex-row items-center justify-center px-6 py-4 z-50 space-y-1 md:space-y-0 md:space-x-4">
+  <!-- バツボタン -->
+<button id="delete" class="absolute top-2 right-2 text-white text-lg md:text-2xl ">
+×
+</button>
+
+<p class="text-white text-sm md:text-base text-center font-medium">
+✨スポンサーになりませんか？
+</p>
+
+<a href="/" class="w-full max-w-xs md:w-auto">
+  <!-- <div class="bg-gray-100 border border-gray-300 rounded-lg px-4 py-2 text-center shadow-sm hover:shadow-md transition duration-200 ease-in-out cursor-pointer">
+    <p class="text-sm md:text-base font-semibold text-gray-800">
+      📘 購入手続きへ進む<br>
+      <span class="text-blue-600 font-bold">スポンサーになると特典機能を利用できるようになります。</span>
+    </p>
+  </div> -->
+  <div class="bg-white border rounded-lg px-4 py-2 text-center shadow-sm hover:shadow-md transition duration-200 ease-in-out cursor-pointer">
+    <p class="text-sm md:text-base font-semibold text-blue-600">
+      <span class="text-blue-600 font-bold">詳しく見る</span>
+    </p>
+  </div>
+</a>
+</div>
+
 </body>
 </html>
+
+<script>
+const batsu = document.getElementById("delete");
+
+const bottom_bar = document.getElementById("bottom-bar");
+
+batsu.addEventListener("click", (event) => {
+  // ここにクリックされたときにやりたいことを書く
+  console.log("バツがクリックされた！");
+  bottom_bar.classList.add("hidden");//tailwindだとこうやってhiddenにさせる必要がある。
+});
+
+</script>

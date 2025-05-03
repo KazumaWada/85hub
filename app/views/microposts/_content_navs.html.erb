@@ -1,7 +1,7 @@
 <div class="text-left pl-6">
-<span class="text-gray-500"><%= @user.name %> |</span>
-<span class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-blue-700/10 ring-inset mr-2">クイズ正解数/10</span>|
 
+
+<div id="tags" class="sm:hidden">
 <!--"全て"タグ-->
 <%= link_to root_path do%>
  <span class="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-gray-500/10 ring-inset">
@@ -15,7 +15,6 @@
 <% @microposts.each do |micropost| %>
  <% tagsArr.push(micropost.tags) %>
 <% end %>
-
 
 <% uniqtags = tagsArr.to_set %>
 
@@ -40,6 +39,7 @@
 <% end %>
 
 <% end %>
+</div><!--tags-->
 
 </div>
 
