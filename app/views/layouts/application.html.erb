@@ -140,6 +140,8 @@ button:focus {
 
 
 <!---投稿フォーム--->
+<% if current_user.present? && @user.present? && current_user == @user %>
+
 <div id="post-modal" class="fixed inset-0 hidden z-50 bg-black bg-opacity-50 flex items-center justify-center">
   <!--<div class="bg-white rounded-lg shadow-lg w-11/12 max-w-6xl p-6">-->
   <div class="bg-white rounded-lg shadow-lg w-full sm:w-11/12 max-w-full sm:max-w-6xl p-2 sm:p-6">
@@ -180,8 +182,9 @@ button:focus {
 </div>
   </div>
 </div>
-
+<% end %>
 <!---投稿フォーム--->
+
 
 </body>
 </html>
