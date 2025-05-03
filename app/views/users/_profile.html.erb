@@ -3,67 +3,81 @@
 <% if current_user == @user %>
 
 
-<div class="flex justify-center mt-6">
-<!--<%= link_to "英語日記", zen_path(@user), class: "bg-blue-600 text-white rounded hover:bg-blue-700 transition duration-300 px-4 py-2 mr-4" %>-->
-<%= link_to "クイズ", quiz_path, class: "bg-blue-600 text-white rounded hover:bg-blue-700 transition duration-300 px-4 py-2 mr-4" %>
+<!--左側のカラム-->
+<div class="mt-10">
+<p class="text-gray-500 m-4 fixed bottom-0"><%= @user.name %></p>
 
-<button id="flashcard-open-button" class="bg-blue-600 text-white rounded hover:bg-blue-700 transition duration-300 px-4 py-2 mr-4">
-カード登録
+<div class="fixed bottom-20">
+  <div class="bg-blue-500 m-1 p-2 rounded">
+    <span class="text-xl text-white font-semibold">🤝スポンサー</span>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+<!--<%= link_to "英語日記", zen_path(@user), class: "px-4 py-2 mr-4" %>-->
+<button class="ml-3 mt-3">
+<%= link_to "🧠 クイズ", quiz_path, class: "px-2 py-1 text-lg font-semibold" %>
+</button><br>
+
+<button id="flashcard-open-button" class="ml-3 mt-3 rounded text-lg font-semibold px-2 py-1">
+💳 カード登録
 </button>
 
-</div>
+<span class="inline-flex items-center rounded-md bg-blue-50 ml-3 mt-3 p-3 text-xs font-medium text-blue-700 ring-1 ring-blue-700/10 ring-inset mr-2">クイズ正解数/10</span>
+
+<div class="border-b-2 border-gray-300 w-38 mt-4"></div>
 
 
-<!--投稿フォーム-->
-<div id="flashcard-input" class="flashcardContainer m-4 p-3 border-2 border-gray-200 rounded-2xl duration-200">
-  <%= form_with(model: @microposts, url: zen_create_path(slug: @user.slug), method: :post, local: true, data: { turbo: false }) do |f| %>
-    <div id="inputWrapper" class="text-gray-500">
-      <label for="content">覚えたい単語、フレーズ</label>
-      <%= f.text_area :content, 
-          class: "m-2 p-3 border-2 border-gray-200 duration-200 rounded-2xl w-full" %>
+<!-- tags -->
+<%= link_to root_path do%>
+  <p class="mt-5 px-2 py-1">🔖</p>
+  <p class="items-center px-2 py-1 text-medium font-medium">
+  全て
+  </p>
+ <% end %>
 
-      <label for="answer">日本語訳/解説など *optional</label>
-      <%= f.text_area :answer, 
-          class: "m-2 p-3 border-2 border-gray-200 duration-200 rounded-2xl w-full" %>
-
-      <label for="answer">自作英文 *後で入力してもok!</label>
-      <%= f.text_area :original, 
-          class: "m-2 p-3 border-2 border-gray-200 duration-200 rounded-2xl w-full" %>
+<% tagsArr = [] %>
+<% @microposts.each do |micropost| %>
+ <% tagsArr.push(micropost.tags) %>
+<% end %>
 
 
-    </div>
+<% uniqtags = tagsArr.to_set %>
 
-    <!-- 新しいタグ入力欄と登録ボタンを横並びにするためのグリッド -->
-    <div class="grid grid-cols-2 gap-4 mt-4">
-      <!-- タグ入力欄 -->
-      <div>
-        <label for="tags" class="block text-gray-600">タグ（1つのみ）</label>
-        <%= f.text_field :tags, 
-            class: "m-2 p-3 border-2 border-gray-200 duration-200 rounded-2xl w-full" %>
-      </div>
+<% uniqtags.each do |tag| %>
 
-      <!-- 登録ボタン -->
-      <div class="flex justify-end items-center">
-        <%= f.submit "カードを登録", 
-            class: "bg-gray-100 text-gray-800 rounded hover:bg-gray-200 transition duration-300 px-4 py-2" %>
-      </div>
-    </div>
-  <% end %>
-</div>
+<% if tag.present? %>
+ 
+ <%= link_to tag_path(tags: tag) do%><!--動的linkを生成するときに、routerで定義した:tagsを渡してあげる必要がある。paramsはcontrollerのみへの受け渡しなので使われない。https://railsdoc.com/page/link_to-->
+ 
+ <% if params[:tags] == tag %> 
+  <p class="tag items-center px-2 py-1 text-medium font-medium text-white">
+  # <%= tag %>
+  </p>
+ <% else %>
+  <p class="tag items-center px-2 py-1 text-medium font-medium text-gray-600">
+  # <%= tag %>
+  </p>
+<% end %>
 
 <% end %>
 
-<script>
-const flashcardInput = document.getElementById("flashcard-input");
-const flashcardOpenButton = document.getElementById("flashcard-open-button")
-flashcardInput.hidden = true;
+<% end %>
 
-flashcardOpenButton.addEventListener("click", ()=>{
-  flashcardInput.hidden = false;
-})
+<% end %>
+<!-- tags -->
+
+</div>
 
 
-//tagsの値"dog, cat, hello, hhhhsss"
-//,を2つまで検出し、あとは文字列の最後から取得。(ここは曖昧でいい。)
 
-</script>
+
+<% end %>
+

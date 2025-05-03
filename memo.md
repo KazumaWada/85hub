@@ -1,3 +1,24 @@
+   <div class="text-center mb-2"><%= render 'users/profile' %></div>
+
+  <skip_before_action>
+
+<% if @user.microposts.any? %>
+    <div class="col-span-1 col-start-1">
+    <% if current_user == @user %>
+      <%= render partial: 'microposts/content_navs' %>
+    <% end %>
+      <%= render partial: 'microposts/micropost' %>
+    </div>
+    </div>
+<% end %>
+
+</div>
+  
+  
+  
+  
+  -------------------
+  
   <!-- 白→グレーの間に入れる波 -->
 <div class="w-full overflow-hidden leading-none rotate-180">
   <svg viewBox="0 0 500 150" preserveAspectRatio="none" class="w-full h-[100px]">
