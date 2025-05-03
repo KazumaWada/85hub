@@ -8,86 +8,6 @@
   <!-- 右カラム（スマホでは余白なし） -->
   <div class="w-full sm:ml-[150px] overflow-y-auto">
 
-
-<!--投稿フォームweb-->
-<div id="flashcard-input" class="flashcardContainer m-4 p-3 border-2 border-gray-200 rounded-2xl duration-200">
-  <%= form_with(model: @microposts, url: zen_create_path(slug: @user.slug), method: :post, local: true, data: { turbo: false }) do |f| %>
-    <div id="inputWrapper" class="text-gray-500">
-      <label for="content">覚えたい単語、フレーズ</label>
-      <%= f.text_area :content, 
-          class: "m-2 p-3 border-2 border-gray-200 duration-200 rounded-2xl w-full" %>
-
-      <label for="answer">日本語訳/解説など *optional</label>
-      <%= f.text_area :answer, 
-          class: "m-2 p-3 border-2 border-gray-200 duration-200 rounded-2xl w-full" %>
-
-      <label for="answer">自作英文 *後で入力してもok!</label>
-      <%= f.text_area :original, 
-          class: "m-2 p-3 border-2 border-gray-200 duration-200 rounded-2xl w-full" %>
-
-
-    </div>
-
-    <!-- 新しいタグ入力欄と登録ボタンを横並びにするためのグリッド -->
-    <div class="grid grid-cols-2 gap-4 mt-4">
-      <!-- タグ入力欄 -->
-      <div>
-        <label for="tags" class="block text-gray-600">タグ（1つのみ）</label>
-        <%= f.text_field :tags, 
-            class: "m-2 p-3 border-2 border-gray-200 duration-200 rounded-2xl w-full" %>
-      </div>
-
-      <!-- 登録ボタン -->
-      <div class="flex justify-end items-center">
-        <%= f.submit "カードを登録", 
-            class: "bg-gray-100 text-gray-800 rounded hover:bg-gray-200 transition duration-300 px-4 py-2" %>
-      </div>
-    </div>
-  <% end %>
-</div>
-<!--投稿フォームweb-->
-
-<!--投稿フォームsmartphone-->
-<div id="flashcard-input02" class="flashcardContainer m-4 p-3 border-2 border-gray-200 rounded-2xl duration-200">
-  <%= form_with(model: @microposts, url: zen_create_path(slug: @user.slug), method: :post, local: true, data: { turbo: false }) do |f| %>
-    <div id="inputWrapper" class="text-gray-500">
-      <label for="content">覚えたい単語、フレーズ</label>
-      <%= f.text_area :content, 
-          class: "m-2 p-3 border-2 border-gray-200 duration-200 rounded-2xl w-full" %>
-
-      <label for="answer">日本語訳/解説など *optional</label>
-      <%= f.text_area :answer, 
-          class: "m-2 p-3 border-2 border-gray-200 duration-200 rounded-2xl w-full" %>
-
-      <label for="answer">自作英文 *後で入力してもok!</label>
-      <%= f.text_area :original, 
-          class: "m-2 p-3 border-2 border-gray-200 duration-200 rounded-2xl w-full" %>
-
-
-    </div>
-
-    <!-- 新しいタグ入力欄と登録ボタンを横並びにするためのグリッド -->
-    <div class="grid grid-cols-2 gap-4 mt-4">
-      <!-- タグ入力欄 -->
-      <div>
-        <label for="tags" class="block text-gray-600">タグ（1つのみ）</label>
-        <%= f.text_field :tags, 
-            class: "m-2 p-3 border-2 border-gray-200 duration-200 rounded-2xl w-full" %>
-      </div>
-
-      <!-- 登録ボタン -->
-      <div class="flex justify-end items-center">
-        <%= f.submit "カードを登録", 
-            class: "bg-gray-100 text-gray-800 rounded hover:bg-gray-200 transition duration-300 px-4 py-2" %>
-      </div>
-    </div>
-  <% end %>
-</div>
-<!--投稿フォームsmartphone-->
-
-
-
-
     <% if @user.microposts.any? %>
       <% if current_user == @user %>
         <%= render partial: 'microposts/content_navs' %>
@@ -101,23 +21,7 @@
 
 
 <script>
-//カード登録webここのファイル
-const flashcardInput = document.getElementById("flashcard-input");
-const flashcardOpenButton = document.getElementById("flashcard-open-button")
-flashcardInput.hidden = true;
 
-flashcardOpenButton.addEventListener("click", ()=>{
-  flashcardInput.hidden = false;
-})
-
-//カード登録smartphone _header_betaのメニュー
-const flashcardInput02 = document.getElementById("flashcard-input02");
-const flashcardOpenButton02 = document.getElementById("flashcard-open-button02")
-flashcardInput02.hidden = true;
-
-flashcardOpenButton02.addEventListener("click", ()=>{
-  flashcardInput02.hidden = false;
-})
 
 //tagsの値"dog, cat, hello, hhhhsss"
 //,を2つまで検出し、あとは文字列の最後から取得。(ここは曖昧でいい。)

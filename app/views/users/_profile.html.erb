@@ -23,12 +23,18 @@
 
 <!--<%= link_to "英語日記", zen_path(@user), class: "px-4 py-2 mr-4" %>-->
 <button class="ml-3 mt-3">
+<%= link_to "🏠 ホーム", root_path, class: "px-2 py-1 text-lg font-semibold" %>
+</button><br>
+<button class="ml-3 mt-3">
 <%= link_to "🧠 クイズ", quiz_path, class: "px-2 py-1 text-lg font-semibold" %>
 </button><br>
 
-<button id="flashcard-open-button" class="ml-3 mt-3 rounded text-lg font-semibold px-2 py-1">
-💳 カード登録
+<p>
+<button id="flashcard-open-button02"
+  class="open-post-modal ml-3 mt-3 rounded text-lg font-semibold px-2 py-1">
+  💳 単語登録
 </button>
+</p>
 
 <span class="inline-flex items-center rounded-md bg-blue-50 ml-3 mt-3 p-3 text-xs font-medium text-blue-700 ring-1 ring-blue-700/10 ring-inset mr-2">クイズ正解数/10</span>
 
