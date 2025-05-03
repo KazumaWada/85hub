@@ -3,7 +3,6 @@
   //= link controllers/flashcards_controller.js
  //= link controllers/application.js
  //= link controllers/index.js
- //= link controllers/menu_controller.js
  //= link application.js
  //= link about-card.png
   //= link about-flashcard.png
