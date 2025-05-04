@@ -45,7 +45,7 @@ class MicropostsController < ApplicationController
       end
 
       if @micropost.save && @micropost.status == "published"
-        flash[:success] = "新しいフラッシュカードを登録しました。"
+        flash[:success] = "新しいカードを登録しました。"
         redirect_to user_path(@user)
       elsif@micropost.save && @micropost.status == "draft"
         flash[:success] = "draft saved. go check 📝draft"
@@ -96,7 +96,7 @@ class MicropostsController < ApplicationController
 
       if @micropost.save && @micropost.status == "published"
          #MailgunService.send_simple_message(@user.name, @user.email, @micropost.content)
-        flash[:success] = "新しいフラッシュカードを登録しました。"
+        flash[:success] = "新しいカードを登録しました。"
        
         #ファイルにも記録しておく。
         write_to_file(@micropost.content);
@@ -136,7 +136,7 @@ class MicropostsController < ApplicationController
       
       @micropost.update(micropost_params)#メモリに反映
       @micropost.save#DBに反映
-      flash[:success] = "フラッシュカードの内容を更新しました"
+      flash[:success] = "カードの内容を更新しました"
       redirect_to user_path(@user)
     end
 
