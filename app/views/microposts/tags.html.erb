@@ -14,7 +14,9 @@
 <!-- where: tagの要素の中でも、params[:tags]に当てはまる内容を取得してくる。-->
 <!--    get '/posts/:tags',←この":tags"からparamsが探している to: 'microposts#tags', as: 'tag'-->
 
-<% @microposts.published.where(tags: params[:tags]).each do |micropost| %>
+
+<!--"/tags"の文字列に合致した部分を探してくる。pubulishedの中から-->
+<% @microposts.where(tags: params[:tags]).each do |micropost| %>
  <!-- 一番外側 -->
 <div class="m-4 p-3 border-2 border-gray-200 rounded-2xl duration-200">
 <!--<%= link_to post_path(id: micropost.id) do %> -->

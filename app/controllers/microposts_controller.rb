@@ -87,29 +87,43 @@ class MicropostsController < ApplicationController
       #has_manyを扱っているから複数形
       @micropost = @user.microposts.build(micropost_params)
 
-      if params[:draft]
-        @micropost.status = 'draft'
-      else
-        @micropost.status = 'published'
-        puts @micropost.content + "🎨🎨🎨🎨🎨🎨🎨🎨"
-      end
+      # if params[:draft]
+      #   @micropost.status = 'draft'
+      # else
+      #   @micropost.status = 'published'
+      #   puts @micropost.content + "🎨🎨🎨🎨🎨🎨🎨🎨"
+      # end
 
-      if @micropost.save && @micropost.status == "published"
-         #MailgunService.send_simple_message(@user.name, @user.email, @micropost.content)
-        flash[:success] = "新しいカードを登録しました。"
+      # if @micropost.save && @micropost.status == "published"
+      #    #MailgunService.send_simple_message(@user.name, @user.email, @micropost.content)
+      #   flash[:success] = "新しいカードを登録しました。"
        
-        #ファイルにも記録しておく。
-        write_to_file(@micropost.content);
-        redirect_to user_path(@user)
-      elsif@micropost.save && @micropost.status == "draft"
-        flash[:success] = "draft saved. go check 📝"
-        redirect_to user_path(@user)
+      #   #ファイルにも記録しておく。
+      #   write_to_file(@micropost.content);
+      #   redirect_to user_path(@user)
+      # elsif@micropost.save && @micropost.status == "draft"
+      #   flash[:success] = "draft saved. go check 📝"
+      #   redirect_to user_path(@user)
 
+      # else
+      #   flash[:danger] = "⚠️heads up! English only!!⚠️"
+      #   flash[:danger] = @micropost.errors.full_messages.join(", ")
+      #   redirect_to user_path(@user)
+      # end
+
+      ##rails8でenumの機能(下書きとかstatus)を一時的に停止したから、上記はコメントアウト
+
+      if @micropost.save
+       flash[:success] = "新しいカードを登録しました。"
+      
+       #ファイルにも記録しておく。
+       write_to_file(@micropost.content);
+       redirect_to user_path(@user)
       else
-        flash[:danger] = "⚠️heads up! English only!!⚠️"
-        flash[:danger] = @micropost.errors.full_messages.join(", ")
-        redirect_to user_path(@user)
-      end
+       flash[:danger] = "⚠️heads up! English only!!⚠️"
+       flash[:danger] = @micropost.errors.full_messages.join(", ")
+       redirect_to user_path(@user)
+     end
 
     end
 
@@ -144,15 +158,24 @@ class MicropostsController < ApplicationController
       @user = User.friendly.find(params[:slug])
       @micropost = Micropost.find(params[:id])
 
-      if @micropost.destroy && @micropost.status == "draft"
-        flash[:succeess] = "✅🗑️"
-        redirect_to draft_path(@user)
-      elsif @micropost.destroy && @micropost.status == "published"
-        flash[:succeess] = "✅🗑️"
-        redirect_to user_path(@user), status: :see_other
+      # if @micropost.destroy && @micropost.status == "draft"
+      #   flash[:succeess] = "✅🗑️"
+      #   redirect_to draft_path(@user)
+      # elsif @micropost.destroy && @micropost.status == "published"
+      #   flash[:succeess] = "✅🗑️"
+      #   redirect_to user_path(@user), status: :see_other
+      # else
+      #   redirect_to current_user, alert: "something went wrong post still there"
+      # end
+      if @micropost.destroy
+        flash[:succeess] = "✅正常に削除されました"
+        redirect_to user_path(@user)
       else
         redirect_to current_user, alert: "something went wrong post still there"
-    end
+      end
+
+
+
   end
 
   def tags

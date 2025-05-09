@@ -49,12 +49,13 @@
   </p>
  <% end %>
 
+<!--tagsの文字列を全部入れている-->
 <% tagsArr = [] %>
 <% @microposts.each do |micropost| %>
  <% tagsArr.push(micropost.tags) %>
 <% end %>
 
-
+<!--重複したやつを削除した配列にする-->
 <% uniqtags = tagsArr.to_set %>
 
 <% uniqtags.each do |tag| %>
