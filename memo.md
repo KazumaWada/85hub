@@ -1,3 +1,107 @@
+# 今やっていること
+## userの情報を管理する。
+- そもそもユーザー情報の管理方法
+今現在は、ログインしても誰がいるのかは自分のサイトのGUI上でしか管理する方法を知らない。
+これから運営するにあたって、どうやって管理していけばいいのか？
+そもそもなぜ管理するのか？
+->どれくらいユーザーがいるのか知りたい。不具合があった場合、その人へコンタクトが取れる。
+->誰が有料課金で誰が無償課金なのかとか。
+
+ユーザー管理機能として Auth0(IDaaSの一つ)
+
+まずは、自分でログインしたら、メールを送る、忘れたらメールアドレス宛に送る。の一連を車輪の再発明してやってみれば良いんじゃないかな？✨そこに到達できたら、ここに戻ってくるのが良いと思う。
+
+↓
+メールをユーザーに送信する。
+action mailer使うのか、外部のツールに頼るのか。
+Action Mailer: controllerのようにメールのロジックを書ける。(登録確認、お知らせ、パスワードの忘れ)
+このaction mailerで、有料ユーザーの確認はできるのかな？
+外部のツール: 
+
+
+✨そもそもメールアドレスがその人のものかを確認する必要がある。[Action Mailer]それを送信して、認証完了までいきたい。
+
+↓
+signupして、メール送信、メールのリンクを踏む、ログイン画面へ、ようこそ！
+(ちなみにdeviseは使用せずに手作りでやってきたらしい。)
+--------------------
+user.rbで色々と設定: user登録前に確認トークンを設定
+(
+  //userテーブルに鍵を設定(メールを送信するときに、このトークンを送る)
+  def set_confirmation_token
+  self.confirmation_token = SecureRandom.urlsafe_base64
+  end
+  //user mailerでこんな感じのトークンが発行される
+  @url = confirm_url(token: @user.confirmation_token)
+  "https://your-site.com/confirm?token=3ksdfJ84jfd-sdfJ34FdfD9"
+  //controller側で、そのトークンをuser.find_byで探して、当てはまってたら有効化してログインさせる
+)
+user_mailer.rbで、下記のメソッドで送るメールの内容を定義user.emailとかも
+users_contorlelrで、新規ユーザーをsaveしたら、deliver_later, redirectして
+「メールを確認してね」というメールを送る。
+
+
+ってことは、まとめると、
+userが作られたときにランダムなトークンを発行。DBに追加。(DBに追加するためにここでuser.save)
+user.email先に、そのトークンを含んだurlのメール内容を送信。(https://your-site.com/confirm?token=xxxxx)->routerの/confirmに飛ばしてそこのparams[:token] = xxxxになる。
+userがクリックしたら、そのuserのトークンをDBから探してきて該当してたら「ok!ログイン」のお知らせ
+userをログインさせる。
+
+userがログインしたら、トークンをその場で破棄して保存。
+だから1回目はtokenで確認してログインできて、2回目はトークンが消えているから、そのままログインできる。
+---------------------
+
+- googleログインの実装
+- googleログインに伴って、複数経路からのユーザーログイン情報の管理  
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
    <div class="text-center mb-2"><%= render 'users/profile' %></div>
 
   <skip_before_action>
