@@ -124,3 +124,7 @@ pushed me over the edge: "The phrase "pushed me over the edge" typically means t
 2025-05-03 10:32:28 +0000: s
 2025-05-04 07:35:05 +0000: v
 2025-05-04 07:36:20 +0000: s
+2025-05-04 16:25:54 +0000: mildly interesting to talk about
+2025-05-05 14:31:56 +0000: r
+2025-05-05 14:32:07 +0000: r
+2025-05-05 14:40:03 +0000: d

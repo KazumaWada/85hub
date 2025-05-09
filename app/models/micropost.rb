@@ -1,6 +1,9 @@
 class Micropost < ApplicationRecord
   belongs_to :user #->user.micropost.create
-  enum status: { draft:0, published:1 }#@post.draftで取得可
+  #published,draftで示された文字列をintegerで登録されているstatusへ格納するために0,1へ置き換えている。
+  # validates :status, presence: true
+  #enum status: { draft:0, published:1 } 
+  #enum post_status: { draft: 0, published: 1 } #rails7->8にしたことで、enumメソッドが変更されている可能性があるからコメントアウト。下書きは後で実装
   default_scope -> {order(created_at: :desc)}#新しい順にmicropostを表示
   validates :user_id, presence: true
   validates :content, presence: true, length: {maximum: 1000}
