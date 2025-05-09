@@ -34,11 +34,12 @@ class SessionsController < ApplicationController
     initial_post = user.microposts.first
 
     if !initial_post
-    initial_card = user.microposts.create(content: "Hello, world!", answer: "こんにちは、世界！", status: 1, tags: "sample", initial_card: true);#1回きりの必要がある。
+    initial_card = user.microposts.create(content: "Hello, world!", answer: "こんにちは、世界！", original: "Hello world! this is your own eigopencil site!", tags: "welcome!");#1回きりの必要がある。
+    initial_card = user.microposts.create(content: "覚えたい単語やフレーズはここへ！", answer: "日本語訳などがあればここへ！", original: "単語やフレーズを使った例文をここへ書いて定着させよう！", tags: "使い方", initial_card: true);#1回きりの必要がある。
     initial_card.save
     end    
     
-    flash[:success] = "ようこそ🎉! #{user.name}さん!"
+    flash[:success] = "ようこそ🎉! #{user.name}さん! さっそく「💳 単語登録」から覚えたい英語を登録してみよう！"
     
     redirect_to root_path
     
