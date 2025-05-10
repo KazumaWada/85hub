@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>eigoPencil</title>
+    <title>85pencil</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,12 +18,17 @@
 
     <!-- Navigation -->
     <nav class="top-0 left-0 right-0 bg-white z-50 h-16">
+
     <div class="container mx-auto px-4 h-full flex justify-between items-center">
-      <div class="flex items-center space-x-3 h-full">
-        <a href="/" class="flex items-center">
-          <%= image_tag "logo.png", class: "h-24 object-contain" %>eigopencil
-        </a>
-      </div>
+
+    <div class="flex items-center h-full">
+      <a href="/" class="flex items-center">
+        <%= image_tag "favicon.ico", class: "h-10 object-contain pt-1" %>
+        <p class="text-blue-600 font-bold text-2xl">5pencil</p>
+      </a>
+    </div>
+  
+
       <div class="space-x-4">
         <%= link_to login_path, data: { turbo: false }, class: "bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition" do %>
           はじめる
@@ -78,7 +83,7 @@
 <section id="title" class="w-full h-screen flex flex-col items-center justify-center text-center pt-10">
   <div class="p-4">
     <h1 class="text-3xl sm:text-5xl text-left sm:text-center font-extrabold text-gray-900 mb-4">
-      eigopencilは、シンプルな<span class="text-blue-600">単語帳サイト</span>
+      85pencilは、シンプルな<span class="text-blue-600">単語帳サイト</span>
     </h1>
 
     <div class="flex flex-col items-start mt-10 space-y-6 text-left">
@@ -169,7 +174,7 @@
     <div class="max-w-3xl mx-auto space-y-8">  
        
       <div class="bg-white shadow-md rounded-lg p-6">
-        <h3 class="text-xl font-semibold text-gray-800 mb-2">eigopencilは無料で使えますか？</h3>
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">85pencilは無料で使えますか？</h3>
         <p class="text-gray-600">はい、基本機能は無料でご利用いただけます。ユーザーからの支援によってサーバーコストがまかなわれ、運営する事ができています。</p>
        </div>
 
@@ -180,7 +185,7 @@
 
       <div class="bg-white shadow-md rounded-lg p-6">
         <h3 class="text-xl font-semibold text-gray-800 mb-2">スマホでも使えますか？</h3>
-        <p class="text-gray-600">はい、eigopencilはスマートフォンにも最適化されているため、快適にお使いいただけます。</p>
+        <p class="text-gray-600">はい、85pencilはスマートフォンにも最適化されているため、快適にお使いいただけます。</p>
       </div>
 
       <div class="bg-white shadow-md rounded-lg p-6">
@@ -203,7 +208,7 @@
     <section class="py-16 text-center">
         <div class="container mx-auto px-4">
             <h2 class="text-2xl font-bold mb-6">単語、フレーズ管理をもっとかんたんに</h2><br>
-            <!--<p class="text-xl mb-8">eigopencilでストレスフリーな英語学習を</p>-->
+            <!--<p class="text-xl mb-8">85pencilでストレスフリーな英語学習を</p>-->
             <%= link_to login_path, data: { turbo: false }, class: "bg-blue-500 text-white text-xl px-10 py-4 rounded-lg hover:bg-blue-600 transition" do %>
                 はじめる
             <% end %>
@@ -213,7 +218,7 @@
     <!-- Footer -->
     <footer class="py-4 border-solid border-t-2">
         <div class="container mx-auto px-4 text-center">
-            <p>&copy; <%= Date.current.year %> eigopencil. All rights reserved.</p>
+            <p>&copy; <%= Date.current.year %> 85pencil. All rights reserved.</p>
         </div>
     </footer>
 </body>

@@ -71,12 +71,16 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     puts "⚠️⚠️", @user.name
 
-    #friend_idで日本語を入力すると、slugでエラーになるからユーザー名はひとまずアルファベットに統一#
-    if @user.name.each_char.all? { |char| char =~ /^[A-Za-z0-9\s.,!?'"()\-]$/ }#all?全てtrueか確かめている。
+    #friend_idで日本語を入力すると、slugでエラーになるからユーザー名はひとまずアルファベットに統一##all?全てtrueか確かめている。
+    if @user.name.each_char.all? { |char| char =~ /^[A-Za-z0-9\s.,!?'"()\-]$/ }
+      #UserMailerのメソッドを使って、ユーザーへメールを送信。内容も定義済み。
+      #  UserMailer.confirmation_email(@user).deliver_now 
+
+     
       @user.save
       #log_in @user#signupした後に再度loginさせる手間を省く。(後に実装予定)
       redirect_to login_path
-      flash[:success] = "Hi #{@user.name}! next step, please login"
+      flash[:success] = "#{@user.name}さん、確認メールを送信しました。ご確認下さい。"
     else
       flash[:danger] = "ユーザー名をアルファベットにしていますか? パスワードは正しく入力されていますか?"
       redirect_to signup_path

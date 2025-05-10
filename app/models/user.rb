@@ -1,4 +1,26 @@
 class User < ApplicationRecord
+  ######認証メール用#############
+    #userデータが作り出される前に、ユーザーへメールアドレスが正しいか確かめるため認証メールを送る。そのメール内の認証リンクへ含めるトークンを発行。DBテーブルにこの欄は存在している。
+    before_create :set_confirmation_token
+
+    def confirm!
+      update(confirmed_at: Time.current, confirmation_token: nil)
+    end
+    
+    def confirmed?
+      confirmed_at.present?
+    end
+    
+    private
+    
+    def set_confirmation_token
+      self.confirmation_token = SecureRandom.urlsafe_base64
+    end
+  ######認証メール用#############
+
+
+
+
     has_many :microposts, dependent: :destroy#userが削除->micropostsも。
     #呼び出されたら、自動的にこれが実行される。(ユーザーがデータを作成してDBに格納する時に自動的に覚えてくれる機能。セッション,cookie)
     attr_accessor :remember_token
