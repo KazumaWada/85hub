@@ -72,4 +72,5 @@ Rails.application.configure do
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
   # deviseの設定(https://github.com/heartcombo/devise?tab=readme-ov-file#getting-started)
+
 end

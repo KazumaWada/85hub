@@ -37,7 +37,6 @@
 yarn-debug.log*
 .yarn-integrity
 
-#openAPI
 .env
 
 /app/assets/builds/*

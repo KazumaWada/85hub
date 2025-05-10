@@ -49,7 +49,63 @@ userをログインさせる。
 
 userがログインしたら、トークンをその場で破棄して保存。
 だから1回目はtokenで確認してログインできて、2回目はトークンが消えているから、そのままログインできる。
+
+[実装]
+mailerは封筒に入れるまでだけど、実際に送信するためには、外部のサービスを利用する必要がある。
+mailgun,sendgrid etc
+mailgunに入る前に、まずはmailerで実装できてからじゃない？
+↓
+# Action Mailerについて学ぶ
+今分かっていること:
+controllerと同じように書ける。
+メールを送信する機能は無く、それ以前の枠組みを設定する部分。でもプレビューできる。
+分からないこと:
+どのcontroller名にすればいいのか、
+
+学んだこと:
+Action Mailer: 送信する時に使う
+Action Mailbox: 受信する時に使う
+
+controller: 送信する時の値の変数を定義
+view: 実際に送信される文面を作成
+これらを、user_controller内のcreateアクションで実行する。
+また、consoleを使って確認することもできる。
+```ruby
+irb> user = User.first
+irb> UserMailer.with(user: user).welcome_email.deliver_later
+```
+- mailerのプレビュー
+test/mailers/previews/配下にプレビュー用のファイルを作る。
+UserMailerだったら、UserMailerPreviewというファイル名にする。
+UserMailerPreviewファイル内でUserMailerを呼び出すだけ。
+プレビューだから、ダミーのemail adressでも問題ない。
+```ruby
+class UserMailerPreview < ActionMailer::Preview
+  def welcome_email
+    UserMailer.with(user: User.first).welcome_email
+  end
+end
+#http://localhost:3000/rails/mailers/user_mailer/welcome_email へアクセスすれば閲覧可能
+```
+
+そもそもmailgunを使えば、railsからはAPIだけで良かった。
 ---------------------
+
+# mailgun
+controllerからapiを呼び出す
+(railsでは、mailerのclassに書くのが良いとされている user_controllerに直接書くのではなく。)
+↓
+mailgun httpで全て設定されたものを送信
+
+--------
+全体像:
+eigopencil.comを登録
+mailgunから指示されたDNSを追加登録(ドメインの本人確認のため. サブドメインの方が、サイトとメールサイトで分けられるからおすすめ。)
+APIを取得
+renderで環境変数を設定
+RailsにAPI設定のコードを書く(gem faradayでAPI通信)
+
+
 
 - googleログインの実装
 - googleログインに伴って、複数経路からのユーザーログイン情報の管理  
