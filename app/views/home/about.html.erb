@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>85pencil</title>
+    <title>easy85</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,13 +23,15 @@
 
     <div class="flex items-center h-full">
       <a href="/" class="flex items-center">
-        <%= image_tag "favicon.ico", class: "h-10 object-contain pt-1" %>
-        <p class="text-blue-600 font-bold text-2xl">5pencil</p>
+        easy85</p>
       </a>
     </div>
   
 
       <div class="space-x-4">
+      <!--<%= link_to blog_path, data: { turbo: false }, class: "font-bold text-blue-600 px-4 py-2 rounded-lg hover:text-blue-700 transition" do %>
+        ブログ
+      <% end %>-->
         <%= link_to login_path, data: { turbo: false }, class: "bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition" do %>
           はじめる
         <% end %>
@@ -44,12 +46,13 @@
 
     <!-- 左側：テキスト -->
     <div class="text-center md:text-left max-w-xl">
+
       <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900">
         覚えたい単語、フレーズを<span class="text-blue-600">しっかり管理</span>
       </h1>
       <div class="tags mt-10">
       <span class="inline-flex font-bold items-center rounded-md bg-blue-50 px-2 py-1 text-base text-blue-700 ring-1 ring-blue-700/10 ring-inset">
-      無料で使える
+      😄 無料で使える
       </span>
       <span class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-base font-bold text-blue-700 ring-1 ring-blue-700/10 ring-inset">
       🔖タグ管理機能
@@ -60,6 +63,13 @@
       <span class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-base font-bold text-blue-700 ring-1 ring-blue-700/10 ring-inset">
       💆🏻‍♂️見やすいデザイン
       </span>
+
+      <h1 class="sm:text-xl font-extrabold text-gray-900 pt-5">
+        👀 <%= link_to '使用例', 'https://eigopencil.com/kazuma', class: 'text-blue-600 border-b-2 border-blue-600', target: '_blank', rel: 'noopener' %>を見る
+      </h1>
+
+
+
       </div>
     </div>
 
@@ -83,7 +93,7 @@
 <section id="title" class="w-full h-screen flex flex-col items-center justify-center text-center pt-10">
   <div class="p-4">
     <h1 class="text-3xl sm:text-5xl text-left sm:text-center font-extrabold text-gray-900 mb-4">
-      85pencilは、シンプルな<span class="text-blue-600">単語帳サイト</span>
+      easy85は、シンプルな<span class="text-blue-600">単語帳サイト</span>
     </h1>
 
     <div class="flex flex-col items-start mt-10 space-y-6 text-left">
@@ -174,7 +184,7 @@
     <div class="max-w-3xl mx-auto space-y-8">  
        
       <div class="bg-white shadow-md rounded-lg p-6">
-        <h3 class="text-xl font-semibold text-gray-800 mb-2">85pencilは無料で使えますか？</h3>
+        <h3 class="text-xl font-semibold text-gray-800 mb-2">easy85は無料で使えますか？</h3>
         <p class="text-gray-600">はい、基本機能は無料でご利用いただけます。ユーザーからの支援によってサーバーコストがまかなわれ、運営する事ができています。</p>
        </div>
 
@@ -185,7 +195,7 @@
 
       <div class="bg-white shadow-md rounded-lg p-6">
         <h3 class="text-xl font-semibold text-gray-800 mb-2">スマホでも使えますか？</h3>
-        <p class="text-gray-600">はい、85pencilはスマートフォンにも最適化されているため、快適にお使いいただけます。</p>
+        <p class="text-gray-600">はい、easy85はスマートフォンにも最適化されているため、快適にお使いいただけます。</p>
       </div>
 
       <div class="bg-white shadow-md rounded-lg p-6">
@@ -208,7 +218,7 @@
     <section class="py-16 text-center">
         <div class="container mx-auto px-4">
             <h2 class="text-2xl font-bold mb-6">単語、フレーズ管理をもっとかんたんに</h2><br>
-            <!--<p class="text-xl mb-8">85pencilでストレスフリーな英語学習を</p>-->
+            <!--<p class="text-xl mb-8">easy85でストレスフリーな英語学習を</p>-->
             <%= link_to login_path, data: { turbo: false }, class: "bg-blue-500 text-white text-xl px-10 py-4 rounded-lg hover:bg-blue-600 transition" do %>
                 はじめる
             <% end %>
@@ -218,7 +228,7 @@
     <!-- Footer -->
     <footer class="py-4 border-solid border-t-2">
         <div class="container mx-auto px-4 text-center">
-            <p>&copy; <%= Date.current.year %> 85pencil. All rights reserved.</p>
+            <p>&copy; <%= Date.current.year %> easy85. All rights reserved.</p>
         </div>
     </footer>
 </body>

@@ -1,4 +1,59 @@
+85keeper.com
+85keep.com
+85pencil.com
+85space.com
+85lab.com
+85repo.com
+85stock.com
+
+easy85.com
+
 # 今やっていること
+## 新規登録したら、メッセージを送る。(内容はまだ適当でいい)
+---
+signupページから、userが作られる。
+ページを「メールを確認して下さいという表示にする。」
+name,email同様にtokenもその場で自動生成してDBに保存。
+mailgunのメール変数に上記tokenを設定する。
+userがメール(easy85.com/login?confirm_password)からクリックしたら、params[:confirmation_token]でDBと一致していたら、(tokenが同じか？有効期限内か？)
+合っていたら、validateをfalse->trueに変えて、loginPathへ通して、tokenをその場で消す。
+(validateのtrue,falseによって、signupを失敗してもloginしてしまうという事態を防げる。)
+
+違かったら、エラー文を表示してもう一度signupのサイトにログインさせるかな。
+---
+to do
+✅userのテーブルに、confrimation_token_emailと、validatedを付ける。
+✅confirmation_token_emailを生成する関数を書く。
+✅mailgunに変数としてそれをつけておく。
+(送信されました. /login?confirmation~にしておく)
+(ユーザーがクリックする)
+(ログインpathにきました)
+loginのコントローラーに来たら、(sessions#new)そこでvalidatedをtrueにする。
+のと、ここら辺でtokenを消しておく。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## userの情報を管理する。
 - そもそもユーザー情報の管理方法
 今現在は、ログインしても誰がいるのかは自分のサイトのGUI上でしか管理する方法を知らない。

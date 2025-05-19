@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   root "home#about" #was home#index
-  get '/hatena', to: 'home#hatena', as: 'hatena'
+  get '/blog', to: 'home#blog', as: 'blog'
   get '/feature', to: 'home#feature', as: 'feature'
   get '/signup', to: 'users#new', as: 'signup'
   post '/signup', to: 'users#create'
@@ -13,7 +13,6 @@ Rails.application.routes.draw do
   post '/ocr/recognize', to: 'ocr#recognize'
   resources :sessions, only: [:create]#paramsで見つけられるように。
   get 'tutorial', to: 'home#tutorial', as: 'tutorial'
-  get '/blog', to: "home#blog", as: 'blog'
   post 'guest_login', to: 'sessions#guest', as: 'guest_login'
   get '/books', to: "home#books", as: 'books'
  
@@ -24,6 +23,11 @@ Rails.application.routes.draw do
     get '/the_eternal_labyrinth', to: "home#the_eternal_labyrinth", as: 'the_eternal_labyrinth'
   end
 
+
+  # Mailgun
+  get 'messages/send_mail', to: 'messages#send_mail'
+  # ユーザー仮登録
+  get 'pre_signup', to: 'users#pre_signup'
 
 
   get '/how_i_use', to: "home#how_i_use", as: 'how_i_use'

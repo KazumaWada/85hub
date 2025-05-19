@@ -57,7 +57,7 @@ gem 'simple_calendar'
 
 gem "ruby-openai"
 
-#.envでopenAPI keyを読み込むため
+#.envを読み込むため
 gem 'dotenv-rails', groups: [:development]
 
 # x card

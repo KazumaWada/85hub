@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  layout false, only: [:about, :hatena, :blog]
+  layout false, only: [:about, :blog]
 
   def index
     #@user = User.find(params[:id])#これはuser/1から取得している。rootだと探せない。
@@ -19,7 +19,7 @@ class HomeController < ApplicationController
   def show
   end
 
-  def hatena
+  def blog
   end
 
   def create
@@ -47,9 +47,7 @@ class HomeController < ApplicationController
     
     @user = current_user#navbarのuser_path(@user)が/questionで探せなくなるから。
   end
-  def blog
-    @user = current_user#navbarのuser_path(@user)が/blogで探せなくなるから。
-  end
+
   def how_i_use
     @user = current_user#navbarのuser_path(@user)が/blogで探せなくなるから。
   end
