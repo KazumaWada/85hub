@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_09_134529) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_19_133740) do
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
@@ -48,6 +48,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_09_134529) do
     t.string "slug"
     t.string "confirmation_token"
     t.datetime "confirmed_at"
+    t.boolean "validated", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["slug"], name: "index_users_on_slug", unique: true
   end
