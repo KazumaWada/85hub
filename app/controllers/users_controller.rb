@@ -1,7 +1,7 @@
 require 'rtesseract'
 class UsersController < ApplicationController
   before_action :require_login, only: [:index, :analyze, :edit, :update]
-  layout false, only: [:pre_signup]
+  layout false, only: [:pre_signup, :index]
 
 
   def index
@@ -68,7 +68,20 @@ class UsersController < ApplicationController
   end
 
   def pre_signup
-    @user = User.new
+    @user = User.find_by(confirmation_token: params[:confirmation_token])
+    
+    # /pre_signupと/presignup?confirm=のリンクの違いで条件分岐できないかな？
+    if params[:confirmation_token].present?
+      if @user.confirmation_token == params[:confirmation_token]
+        flash[:success] = 'ユーザー認証が成功しました！🎉ログインして下さい。'
+        redirect_to login_path
+      else
+        puts "👷‍♂️ Token: #{@user.confirmation_token}"
+        flash[:danger] = '認証に失敗しました。もう一度ユーザーを登録してみてください。'
+        redirect_to signup_path
+      end
+    end
+
   end
 
   #ここはUserをDBに登録のみ->loginへ(sessions#createcookieの実装を行う)
@@ -90,17 +103,12 @@ class UsersController < ApplicationController
        puts "✅ User saved successfully #{@user.as_json}"
        ##confirmation_tokenの発行
        ## 新規ユーザーへのメール送信
-      #  MailgunService.send_template_email(
-      #   to: "#{@user.name} <#{@user.email}>",
-      #   subject: 'ようこそ！',
-      #   template: 'dear new user',
-      #   variables: {
-      #      "user_name" => @user.name,
-      #      "confirmation_token" => @user.confirmation_token
-      #   }
-      #  )
-      MailgunService.send_template_email(
-        to: 'Kazuma Wada <kazumawadaa@gmail.com>',
+      # app/services/mailgun_service.rb | ハードコードの修正to: "#{@user.name} <#{@user.email}>",
+      #,"confirmation_token" => @user.confirmation_token
+    begin
+
+      response = MailgunService.send_template_email(
+        to: @user.email,
         subject: 'ようこそ！',
         template: 'dear new user',
         variables: {
@@ -108,6 +116,10 @@ class UsersController < ApplicationController
            "confirmation_token" => @user.confirmation_token
         }
        )
+       puts "✅ Mailgun response: #{response.inspect}"
+    rescue => e
+        Rails.logger.error("❌ Mail sending failed: #{e.message}")
+    end #rescue(begin)のend
 
        redirect_to pre_signup_path
       else

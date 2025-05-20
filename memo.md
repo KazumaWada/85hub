@@ -27,9 +27,22 @@ to do
 ✅mailgunに変数としてそれをつけておく。
 (送信されました. /login?confirmation~にしておく)
 (ユーザーがクリックする)
-(ログインpathにきました)
+[ログインpathにきました]
+メールのリンクをクリックしたら、/pre_signup?token=""
+そこのpre_signupのコントローラーでtokenを照会して、okだったら
+loginへリダイレクト。
+(照会せずにログインしてもいける仕様に一応はしている。)
+✨続き: 色々と個々のロジックを考える。validatedで、ログインする資格があるかないか。
+
+- 認証完了の文字をtokenと一緒だったらメッセージを表示 sessions#new
+通常の/loginから来たら何も表示しないようにする。
+else
+
 loginのコントローラーに来たら、(sessions#new)そこでvalidatedをtrueにする。
 のと、ここら辺でtokenを消しておく。
+
+-　validatedをfalseからtrueにしておく。 
+- tokenを消す
 
 
 

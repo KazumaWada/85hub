@@ -1,6 +1,9 @@
 class SessionsController < ApplicationController
 
   def new
+    #ここで、認証完了のメッセージを表示する。
+
+    #でも次回から普通にログインする場合は、表示しない。
   end
 
   def create
