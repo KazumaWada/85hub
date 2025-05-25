@@ -69,12 +69,22 @@ class UsersController < ApplicationController
 
   def pre_signup
     @user = User.find_by(confirmation_token: params[:confirmation_token])
-    
-    # /pre_signupと/presignup?confirm=のリンクの違いで条件分岐できないかな？
+    @user.save #まだusers#createに行っていない可能性があるからここで保存
+
     if params[:confirmation_token].present?
       if @user.confirmation_token == params[:confirmation_token]
-        flash[:success] = 'ユーザー認証が成功しました！🎉ログインして下さい。'
+
+        if @user.save
+          puts "保存成功！"
+        else
+          puts "保存失敗！理由: #{@user.errors.full_messages.join(', ')}"
+        end
+        
+        @user.validated = true;
+        @user.save(validate: false)#user_paramsを全てチェックせずに、強制的に保存する。
+        flash[:success] = "#{@user.name}さん、ユーザー認証が成功しました！🎉ログインして下さい。"
         redirect_to login_path
+        
       else
         puts "👷‍♂️ Token: #{@user.confirmation_token}"
         flash[:danger] = '認証に失敗しました。もう一度ユーザーを登録してみてください。'

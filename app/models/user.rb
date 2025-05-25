@@ -6,8 +6,7 @@ class User < ApplicationRecord
     #user_helper: 主にviewで使う時に使われる。
     validates :name, presence: true, uniqueness: true
     validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
-    validates :password, presence: true, length: { minimum: 6 }, confirmation: true
-    validates :password_confirmation, presence: true
+    # validates :password, presence: true, length: { minimum: 6 }
 
 
     ##.com/user.name
@@ -26,7 +25,11 @@ class User < ApplicationRecord
     has_secure_password#(.authenticate, password_digest)
     #allow_nil:trueは、User情報をupdateするときにパスワードを必要としないから 
     #↑新規登録の時は、has_secure_passwordでpasswordが空欄だと引っかかるからok            
-    validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+    # validates :password, presence: true, length: { minimum: 6 }, allow_nil: true, confirmation: true
+    validates :password, length: { minimum: 6 }, confirmation: true, allow_nil: true
+    #if->password.present?は、新規登録のtoken認証リンククリックでpasswordは必要ない。その時のため。(passwordが存在したら、presence true)
+    validates :password_confirmation, presence: true, if: -> { password.present? }
+
     #↑
     #passwordをハッシュ化してDBに保存する。(has_secure_passwordによって)
     #DB内のpassword_digestというテーブルを作成しそこに保存するのが決まり(https://railstutorial.jp/chapters/modeling_users?version=4.2#sec-a_hashed_password)
