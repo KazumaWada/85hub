@@ -1,14 +1,8 @@
-85keeper.com
-85keep.com
-85pencil.com
-85space.com
-85lab.com
-85repo.com
-85stock.com
-
 easy85.com
 
-# 今やっていること
+# bugs
+- sqliteを開発と本番で一緒に使っていたら、困る。
+- 
 ## 新規登録したら、メッセージを送る。(内容はまだ適当でいい)
 ---
 signupページから、userが作られる。
