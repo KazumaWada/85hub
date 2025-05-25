@@ -9,14 +9,15 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(name: session_params[:name])
   
-    
-    
-    
-
-
     if user.nil?
-      flash[:danger] = '👻 ユーザーが見つかりません 👻'
+      flash[:danger] = '👻 ユーザーが見つかりません。'
       redirect_to login_path and return
+    end
+
+    unless user.validated?
+      flash[:danger] = '未認証のユーザーです。メールをご確認下さいませ。'
+      #returnする理由は、ここの条件が終わったら、下のロジックに移ってさらにredirect_to root_pathされてしまい、errorになるから。
+      redirect_to login_path and return 
     end
 
     if !user.authenticate(session_params[:password])
