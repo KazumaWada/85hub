@@ -4,7 +4,7 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: 5
-  host: <%= ENV["DATABASE_HOST"] || nil %> # hostが設定されていない場合はnil(render対策)
+  host: <%= ENV["DATABASE_HOST"] || 'db' %> # hostが設定されていない場合はnil(render対策)
 
 
 development:
