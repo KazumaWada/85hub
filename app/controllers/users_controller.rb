@@ -69,7 +69,6 @@ class UsersController < ApplicationController
 
   def pre_signup
     @user = User.find_by(confirmation_token: params[:confirmation_token])
-    @user.save #まだusers#createに行っていない可能性があるからここで保存
 
     if params[:confirmation_token].present?
       if @user.confirmation_token == params[:confirmation_token]
