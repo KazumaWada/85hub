@@ -5,7 +5,6 @@ RUN apt-get update -qq && \
     apt-get install -y --no-install-recommends \
         build-essential \
         libsqlite3-dev \
-        sqlite3 \
         cron \
         tesseract-ocr \
         libtesseract-dev \
