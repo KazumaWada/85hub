@@ -1,18 +1,32 @@
+#Railsアプリ内で使うDBの設定(アプリがDBに接続するための設定)(Railsアプリの視点)
+#docker-composは、Dockerのネットワーク内で使う。(dockerインフラの視点)
 default: &default
-  adapter: sqlite3
+  adapter: postgresql
+  encoding: unicode
   pool: 5
-  timeout: 5000
+  host: <%= ENV["DATABASE_HOST"] || nil %> # hostが設定されていない場合はnil(render対策)
+
 
 development:
   <<: *default
-  database: db/development.sqlite3
+  host: <%= ENV.fetch("DATABASE_HOST", "localhost") %>
+  username: <%= ENV.fetch("DATABASE_USER", "postgres") %>
+  password: <%= ENV.fetch("DATABASE_PASSWORD", "password") %>
+  database: <%= ENV.fetch("DATABASE_NAME", "myapp_development") %>
 
 test:
   <<: *default
-  database: db/test.sqlite3
+  host: <%= ENV.fetch("DATABASE_HOST", "localhost") %>
+  username: <%= ENV.fetch("DATABASE_USER", "postgres") %>
+  password: <%= ENV.fetch("DATABASE_PASSWORD", "password") %>
+  database: myapp_test
 
 production:
-  <<: *default
-  database: db/production.sqlite3
+  adapter: postgresql
+  encoding: unicode
+  database: <%= ENV["DATABASE_NAME"] %>
   pool: 5
-  timeout: 5000
+  username: <%= ENV["DATABASE_USER"] %>
+  password: <%= ENV["DATABASE_PASSWORD"] %>
+  host: <%= ENV["DATABASE_HOST"] %>
+  port: 5432
