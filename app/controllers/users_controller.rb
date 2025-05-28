@@ -128,6 +128,7 @@ class UsersController < ApplicationController
        puts "✅ Mailgun response: #{response.inspect}"
     rescue => e
         Rails.logger.error("❌ Mail sending failed: #{e.message}")
+        #puts "💥 エラー詳細: #{e.class.name} - #{e.message}"
     end #rescue(begin)のend
 
        redirect_to pre_signup_path
