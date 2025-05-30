@@ -73,6 +73,8 @@ gem "mini_magick"
 #action_textの画像処理(https://railsguides.jp/v7.0/active_storage_overview.html#%E8%A6%81%E4%BB%B6)
 gem "image_processing", ">= 1.2"
 
+#リンクをhtmlに変換してプレビュー表示してくれる。
+gem 'auto_html', '~> 2.2', '>= 2.2.1'
 
 #gem 'webpacker'これは使わずに、railsのimport mapsを使う。(node.jsのimportみたいなやつ。デプロイに手間がかからないから。)
 
