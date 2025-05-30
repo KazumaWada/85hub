@@ -74,6 +74,11 @@ GEM
       uri (>= 0.13.1)
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
+    auto_html (2.2.1)
+      gemoji (~> 4.0.0.rc2)
+      redcarpet (~> 3.5)
+      rexml (~> 3.3.9)
+      rinku (~> 2.0)
     base64 (0.2.0)
     bcrypt (3.1.20)
     benchmark (0.4.0)
@@ -117,6 +122,7 @@ GEM
     ffi (1.17.2-aarch64-linux-gnu)
     friendly_id (5.5.1)
       activerecord (>= 4.0.0)
+    gemoji (4.0.1)
     globalid (1.2.1)
       activesupport (>= 6.1)
     http-accept (1.7.0)
@@ -230,6 +236,7 @@ GEM
     rake (13.2.1)
     rdoc (6.13.1)
       psych (>= 4.0.0)
+    redcarpet (3.6.1)
     regexp_parser (2.10.0)
     reline (0.6.1)
       io-console (~> 0.5)
@@ -238,7 +245,8 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
-    rexml (3.4.1)
+    rexml (3.3.9)
+    rinku (2.0.6)
     rtesseract (3.1.4)
     ruby-openai (8.1.0)
       event_stream_parser (>= 0.3.0, < 2.0.0)
@@ -295,6 +303,7 @@ PLATFORMS
   aarch64-linux
 
 DEPENDENCIES
+  auto_html (~> 2.2, >= 2.2.1)
   bcrypt (~> 3.1.7)
   bootsnap (>= 1.4.4)
   capybara

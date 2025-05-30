@@ -91,9 +91,9 @@
 .floating-circle-buttom {
   position: fixed;
   bottom: 20px; /* 画面の下から20pxの位置 */
-  left: 20px; /* 画面の左から20pxの位置 */
-  width: 60px;
-  height: 60px;
+  left: 12px; /* 画面の左から20pxの位置 */
+  width: 30px;
+  height: 30px;
   background-color: #2563eb;
   color: white;
   border-radius: 50%; /* 丸くする */
@@ -101,7 +101,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
+  font-size: 19px;
   cursor: pointer;
   z-index: 1000; /* 他の要素の上に表示 */
   transition: background-color 0.3s ease;
@@ -129,7 +129,7 @@ button:focus {
 <%= render 'layouts/header_beta' %>
 <%= render 'layouts/flash_message' %>
 <%= yield %>
-<%# <%= render 'layouts/bottom_btns' %> 
+
 
 
 
@@ -152,11 +152,11 @@ button:focus {
       <%= f.text_area :content, 
           class: "m-2 p-3 border-2 border-gray-200 duration-200 rounded-2xl w-full" %>
 
-      <label for="answer">日本語訳/解説など *optional</label>
+      <label for="answer">日本語訳/解説など (optional)</label>
       <%= f.text_area :answer, 
           class: "m-2 p-3 border-2 border-gray-200 duration-200 rounded-2xl w-full" %>
 
-      <label for="answer">自作英文 *後で入力してもok!</label>
+      <label for="answer">自作英文  (optional)</label>
       <%= f.text_area :original, 
           class: "m-2 p-3 border-2 border-gray-200 duration-200 rounded-2xl w-full" %>
 
@@ -164,13 +164,30 @@ button:focus {
     </div>
 
     <!-- 新しいタグ入力欄と登録ボタンを横並びにするためのグリッド -->
-    <div class="grid grid-cols-2 gap-4 mt-4">
+    
+
+      <!-- リンク入力欄 -->
+      <div>
+      <label for="tags" class="block text-gray-600">🔗 関連リンク  (optional)</label>
+      <%= f.text_field :reference_link, 
+          placeholder: "https:// ~",
+          class: "m-2 p-3 border-2 border-gray-200 duration-200 rounded-2xl w-full" %>
+      </div>
+      <!-- リンクコメント欄 -->
+      <div>
+      <label for="tags" class="block text-gray-600">💬 ログ  (optional)</label>
+      <%= f.text_field :reference_link_comment, 
+          placeholder: "上記動画リンクの~分~秒部分、この本の~行目 etc",
+          class: "m-2 p-3 border-2 border-gray-200 duration-200 rounded-2xl w-full" %>
+      </div>
+     
+     <div class="grid grid-cols-2 gap-2 mt-4">
       <!-- タグ入力欄 -->
       <div>
-        <label for="tags" class="block text-gray-600">タグ（1つのみ）</label>
+        <label for="tags" class="block text-gray-600">タグ（1つのみ） (optional)</label>
         <%= f.text_field :tags, 
             class: "m-2 p-3 border-2 border-gray-200 duration-200 rounded-2xl w-full" %>
-      </div>
+     </div>
 
       <!-- 登録ボタン -->
       <div class="flex justify-end items-center">
@@ -178,10 +195,12 @@ button:focus {
             class: "bg-gray-100 text-gray-800 rounded hover:bg-gray-200 transition duration-300 px-4 py-2" %>
       </div>
     </div>
+
   <% end %>
 </div>
   </div>
 </div>
+
 <% end %>
 <!---投稿フォーム--->
 
@@ -194,6 +213,27 @@ button:focus {
 document.addEventListener('DOMContentLoaded', function() {
   const openBtns = document.querySelectorAll('.open-post-modal');
   const modal = document.getElementById('post-modal');
+
+  if (modal) {
+    openBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        console.log("clicked");
+        modal.classList.remove('hidden');
+      });
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.add('hidden');
+      }
+    });
+  }
+});
+
+//カード登録の表示
+document.addEventListener('DOMContentLoaded', function() {
+  const openBtns = document.querySelectorAll('.open-post-modal02');
+  const modal = document.getElementById('post-modal02');
 
   if (modal) {
     openBtns.forEach(btn => {

@@ -206,7 +206,7 @@ class MicropostsController < ApplicationController
     private
 
     def micropost_params
-      params.require(:micropost).permit(:content, :answer, :correct_num, :id, :tags, :original)
+      params.require(:micropost).permit(:content, :answer, :correct_num, :id, :tags, :original, :reference_link, :reference_link_comment)
       #{"authenticity_token"=>"[FILTERED]", "content"=>"hh", "commit"=>"Post", "slug"=>"a"}
     end
 

@@ -7,11 +7,11 @@
 <div class="mt-10">
 <p class="text-gray-500 m-4 fixed bottom-0"><%= @user.name %></p>
 
-<div class="fixed bottom-20">
+<!--<div class="fixed bottom-20">
   <div class="bg-blue-500 m-1 p-2 rounded">
     <span class="text-xl text-white font-semibold">🤝スポンサー</span>
   </div>
-</div>
+</div>-->
 
 
 
@@ -20,6 +20,12 @@
 
 
 
+<p>
+  <button id="flashcard-open-button02"
+    class="p-2 px-4 m-3 open-post-modal rounded-lg bg-blue-500 text-white text-lg font-semibold hover:bg-blue-600 transition">
+    投稿する
+  </button>
+</p>
 
 <!--<%= link_to "英語日記", zen_path(@user), class: "px-4 py-2 mr-4" %>-->
 <button class="ml-3 mt-3">
@@ -30,21 +36,15 @@
 <!--<%= link_to "🧠 クイズ", quiz_path, class: "px-2 py-1 text-lg font-semibold" %>-->
 </button><br>
 
-<p>
-<button id="flashcard-open-button02"
-  class="open-post-modal ml-3 mt-3 rounded text-lg font-semibold px-2 py-1">
-  💳 単語登録
-</button>
-</p>
+
 
 <span class="inline-flex items-center rounded-md bg-blue-50 ml-3 mt-3 p-3 text-xs font-medium text-blue-700 ring-1 ring-blue-700/10 ring-inset mr-2">クイズ正解数/10</span>
 
-<div class="border-b-2 border-gray-300 w-38 mt-4"></div>
 
 
 <!-- tags -->
 <%= link_to root_path do%>
-  <p class="mt-5 px-2 py-1">🔖</p>
+  <p class="mt-5 px-2 py-1 text-lg font-semibold">🔖タグ</p>
   <p class="items-center px-2 py-1 text-medium font-medium">
   全て
   </p>
