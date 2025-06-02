@@ -103,7 +103,6 @@
   justify-content: center;
   font-size: 19px;
   cursor: pointer;
-  z-index: 1000; /* 他の要素の上に表示 */
   transition: background-color 0.3s ease;
 }
 .floating-circle:hover {
@@ -204,6 +203,41 @@ button:focus {
 <% end %>
 <!---投稿フォーム--->
 
+<!-- hit me! -->
+<% if controller.controller_name == "users" && action_name == "show" && current_user.present? && @user.present? && current_user == @user %>
+<div class="text-left">
+<button id="tap-to-next">
+
+<div id="hit-me-modal" class="fixed inset-0 hidden z-50 bg-black bg-opacity-50 flex items-center justify-center">
+ <div class="bg-white rounded-lg shadow-lg w-full sm:w-11/12 max-w-full sm:max-w-6xl p-2 sm:p-6">
+  <div class="flashcardContainer m-4 p-3  rounded-2xl duration-200">
+   <div id="inputWrapper" class="text-gray-500">
+
+
+    
+
+
+      <% if @microposts.present? %>
+      <% @microposts.sample(5).each_with_index do |micropost, index| %>
+
+        <div class="hitme-items" style="display: <%= index == 0 ? 'block' : 'none' %>;"> 
+        <div class="font-extrabold text-6xl text-blue-500"><%= micropost.content %></div>
+        <br>
+        <%= micropost.answer %>
+        </div>      
+      <% end %>
+      <% end %>
+      <div id="tap-to-next-container" class="text-right"><p id="tap-to-next-string">🚰 tap to next 🚰</p></div>
+    
+   </div>
+  </div>
+ </div>
+</div>
+</button>
+</div>
+<% end %>
+<!-- hit me! -->
+
 
 </body>
 </html>
@@ -250,5 +284,57 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+
+//hit meの表示
+document.addEventListener('DOMContentLoaded', function() {
+  const openBtns = document.querySelectorAll('.open-hit-me-modal');
+  const modal = document.getElementById('hit-me-modal');
+
+  if (modal) {
+    openBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        console.log("clicked");
+        modal.classList.remove('hidden');
+      });
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.add('hidden');
+      }
+    });
+  }
+});
+
+//hit meの"tap to next"のカード機能
+document.addEventListener('DOMContentLoaded', function(){
+  const tapToNext = document.getElementById('tap-to-next')
+  const tapToNextValue = document.getElementById('tap-to-next-string')
+  const tapToNextContainer = document.getElementById('tap-to-next-container')
+  const hitmeItems = document.querySelectorAll('.hitme-items')
+
+  let currentIndex = 0;
+  
+  tapToNext.addEventListener('click', ()=>{
+    console.log("tap tap!")
+
+    if(currentIndex == 4){
+      tapToNextContainer.classList.add('text-center')
+      tapToNextContainer.classList.remove('text-right')
+      tapToNextValue.classList.add('font-semibold', 'text-6xl', 'text-black', 'text-center');
+      tapToNextValue.textContent = "✅done"
+      console.log("done")
+      location.reload();
+
+
+    }
+    hitmeItems[currentIndex].style.display = 'none';
+    hitmeItems[currentIndex+1].style.display = 'block';
+    currentIndex++;
+  })
+  
+})
+
+
 
 </script>
