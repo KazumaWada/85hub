@@ -27,3 +27,4 @@
 //= link tango.png
 //= link quiz.png
 //= link lp-main.png
+//= link main01.jpg

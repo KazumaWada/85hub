@@ -82,7 +82,7 @@
         <!--削除ボタン-->
     
         <!--参考リンク-->
-        <% if micropost.reference_link.present? %>
+        <% if micropost.reference_link.present? || micropost.reference_link_comment.present? %>
         <div x-data="{ open: false }" class="relative">
            
         <div class="">
@@ -100,14 +100,14 @@
            <%= link_to micropost.reference_link,
              method: :get,
              class: "" do %>
-             <%= truncate(micropost.reference_link, length: 21) %>
+             🔗 <%= truncate(micropost.reference_link, length: 21) %>
             <% end %>
           </div>
         
         
           <div class="block px-4 py-2 text-gray-700 hover:bg-gray-100 text-lg font-semibold">
             <%= link_to root_path do %>
-              💬<%= truncate(micropost.reference_link_comment, length: 21) %>
+              💬 <%= truncate(micropost.reference_link_comment, length: 50) %>
             <% end %>
           </div>
         </div>

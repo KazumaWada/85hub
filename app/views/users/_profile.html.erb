@@ -7,25 +7,35 @@
 <div class="mt-10">
 <p class="text-gray-500 m-4 fixed bottom-0"><%= @user.name %></p>
 
-<!--<div class="fixed bottom-20">
-  <div class="bg-blue-500 m-1 p-2 rounded">
-    <span class="text-xl text-white font-semibold">🤝スポンサー</span>
-  </div>
-</div>-->
-
-
-
-
-
-
-
-
 <p>
   <button id="flashcard-open-button02"
     class="p-2 px-4 m-3 open-post-modal rounded-lg bg-blue-500 text-white text-lg font-semibold hover:bg-blue-600 transition">
-    投稿する
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+      <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32L19.513 8.2Z" />
+    </svg>
   </button>
+
+  <!--hit me! -->
+  <button class="open-hit-me-modal p-2 px-4 ml-3 rounded-lg bg-blue-500 text-white text-lg font-semibold hover:bg-blue-600 transition">
+      Hit me!
+  </button>
+
+  <!--
+  <button class="flex open-hit-me-modal p-2 px-4 ml-3 mt-3 rounded-lg bg-blue-500 text-white text-lg font-semibold hover:bg-blue-600 transition">
+   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+   <path stroke-linecap="round" stroke-linejoin="round" d="m18.375 12.739-7.693 7.693a4.5 4.5 0 0 1-6.364-6.364l10.94-10.94A3 3 0 1 1 19.5 7.372L8.552 18.32m.009-.01-.01.01m5.699-9.941-7.81 7.81a1.5 1.5 0 0 0 2.112 2.13" />
+   </svg>
+   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+   <path stroke-linecap="round" stroke-linejoin="round" d="m18.375 12.739-7.693 7.693a4.5 4.5 0 0 1-6.364-6.364l10.94-10.94A3 3 0 1 1 19.5 7.372L8.552 18.32m.009-.01-.01.01m5.699-9.941-7.81 7.81a1.5 1.5 0 0 0 2.112 2.13" />
+   </svg>
+   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+   <path stroke-linecap="round" stroke-linejoin="round" d="m18.375 12.739-7.693 7.693a4.5 4.5 0 0 1-6.364-6.364l10.94-10.94A3 3 0 1 1 19.5 7.372L8.552 18.32m.009-.01-.01.01m5.699-9.941-7.81 7.81a1.5 1.5 0 0 0 2.112 2.13" />
+   </svg>
+  </button>
+  -->
 </p>
+
+<div class="border-2 mt-3 border"></div>
 
 <!--<%= link_to "英語日記", zen_path(@user), class: "px-4 py-2 mr-4" %>-->
 <button class="ml-3 mt-3">
@@ -40,6 +50,7 @@
 
 <span class="inline-flex items-center rounded-md bg-blue-50 ml-3 mt-3 p-3 text-xs font-medium text-blue-700 ring-1 ring-blue-700/10 ring-inset mr-2">クイズ正解数/10</span>
 
+<div class="border-2 mt-3 border"></div>
 
 
 <!-- tags -->

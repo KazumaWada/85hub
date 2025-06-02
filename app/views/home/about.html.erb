@@ -18,7 +18,7 @@
     <!-- Navigation -->
     <nav class="top-0 left-0 right-0 bg-white z-50 h-16">
 
-    <div class="container mx-auto px-4 h-full flex justify-between items-center">
+    <div class="container px-4 mx-auto h-full flex justify-between items-center">
 
     <div class="flex items-center h-full">
       <a href="/" class="flex items-center">
@@ -45,9 +45,10 @@
 
     <!-- 上部：テキスト -->
     <div class="text-center max-w-2xl">
-      <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900">
-        覚えたい単語、フレーズを<span class="text-blue-600">しっかり管理</span>
+      <h1 class="text-4xl text-left sm:text-5xl font-extrabold text-gray-900">
+        英語学習をもっと楽しく。<span class="text-blue-600"><br>スマートに。</span>
       </h1>
+      <!--覚えたい単語、フレーズを<span class="text-blue-600">しっかり管理</span>-->
 
       <div class="tags mt-10 flex flex-wrap justify-center gap-3">
         <span class="inline-flex font-bold items-center rounded-md bg-blue-50 px-2 py-1 text-base text-blue-700 ring-1 ring-blue-700/10 ring-inset">😄 無料で使える</span>
@@ -65,8 +66,12 @@
     </div>
 
     <!-- 下部：モックアップ画像 -->
-    <div class="w-full overflow-x-hidden border-2 border-gray-200 rounded-3xl shadow-lg bg-white">
+    <!--<div class="w-full overflow-x-hidden border-2 border-gray-200 rounded-3xl shadow-lg bg-white">
       <%= image_tag "lp-main.png", class: "w-full max-h-[800px] object-contain mx-auto" %>
+    </div>-->
+
+    <div class="w-full rounded-3xl bg-white">
+      <%= image_tag "main01.jpg", class: "w-full max-h-[800px] object-contain mx-auto" %>
     </div>
 
   </div>
@@ -81,7 +86,7 @@
 <section id="title" class="w-full h-screen flex flex-col items-center justify-center text-center pt-10">
   <div class="p-4">
     <h1 class="text-3xl sm:text-5xl text-left sm:text-center font-extrabold text-gray-900 mb-4">
-      85hubは、シンプルな<span class="text-blue-600">単語帳サイト</span>
+      あなた専用の<span class="text-blue-600">単語帳サイト</span>を作ろう。
     </h1>
 
     <div class="flex flex-col items-start mt-10 space-y-6 text-left">
@@ -105,6 +110,33 @@
   </div>
 </section>
 
+
+<section id="title" class="w-full h-screen flex flex-col items-center justify-center text-center pt-10">
+  <div class="p-4">
+    <h1 class="text-3xl sm:text-5xl text-left sm:text-center font-extrabold text-gray-900 mb-4">
+    リンクやメモで<span class="text-blue-600">記憶に定着。</span>
+    </h1>
+
+    <div class="flex flex-col items-start mt-10 space-y-6 text-left">
+      <div class="flex items-start">
+        <span class="text-blue-600 text-2xl font-extrabold mr-4">1.</span>
+        <p class="text-gray-600 text-lg font-bold">覚えたい単語やフレーズ、日本語訳、例文をまとめて管理！</p>
+      </div>
+
+      <div class="flex items-start">
+        <span class="text-blue-600 text-2xl font-extrabold mr-4">2.</span>
+        <p class="text-gray-600 text-lg font-bold">タグをつけて管理をしやすく</p>
+      </div>
+
+      <div class="flex items-start">
+        <span class="text-blue-600 text-2xl font-extrabold mr-4">3.</span>
+        <p class="text-gray-600 text-lg font-bold">フラッシュカードでしっかり定着</p>
+      </div>
+    </div>
+
+    <%= image_tag "about05.png", class: "h-[60vh] object-contain mx-auto" %>
+  </div>
+</section>
 
 
 
