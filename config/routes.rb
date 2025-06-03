@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   #📸
   post 'handwriting/analyze', to: 'users#analyze', as: 'analyze_handwriting'#文字認識機能
   resources :microposts, only: [:index]#slugで先に影響されないように。/micropostsは危ないから。
+  get '/clips', to: 'microposts#index', as: 'clips'
   resources :users, only: [:index]
   
   #frieendly_id

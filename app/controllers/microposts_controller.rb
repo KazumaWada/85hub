@@ -3,6 +3,7 @@ class MicropostsController < ApplicationController
   protect_from_forgery with: :null_session
   skip_before_action :verify_authenticity_token, only: [:create]
   before_action :require_login, only: [:zen_new]
+  # layout false, only: [:index]
 
   # calendar機能をつけて、ユーザーが投稿したら、印が付くような仕組みにする。
     def calendar

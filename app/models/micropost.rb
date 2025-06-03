@@ -1,5 +1,6 @@
 class Micropost < ApplicationRecord
   belongs_to :user #->user.micropost.create
+  #micropost.userでもいける！
   #published,draftで示された文字列をintegerで登録されているstatusへ格納するために0,1へ置き換えている。
   # validates :status, presence: true
   #enum status: { draft:0, published:1 } 
