@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
     protect_from_forgery with: :exception 
     helper_method :current_user
+    before_action #何度も使う関数を各defで使いまわせるように
     include SessionsHelper #rails7ではhelperに書いたら全てのviewに適応される仕様になっている。他のcontroller同士で使いまわしたい時はこうやって書く
 
     def current_user#ログイン系は全部ifでcurrent_userを使って条件分岐

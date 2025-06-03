@@ -43,11 +43,17 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by(slug: params[:slug])   
     @microposts = @user.microposts
-
     @uniq_tags = @microposts.map(&:tags).flatten.uniq 
     puts "🔑🔑🔑🔑🔑🔑🔑🔑", @uniq_tags
 
-    
+    #5以上だったら、5にして、それ以下だったらそのまま挿入
+    if @microposts.empty?
+      @tapmeLength == 0
+    elsif @microposts.length >= 5
+      @tapmeLength = 5;
+    else
+      @tapmeLength = @microposts.length;
+    end
     
 
     #タグはかぶるから、ユニークなタグのみをここで変数に定義して、loopさせる。

@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>85pencil</title>
+    <title>85hub</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -206,7 +206,7 @@ button:focus {
 <!-- hit me! -->
 <% if controller.controller_name == "users" && action_name == "show" && current_user.present? && @user.present? && current_user == @user %>
 <div class="text-left">
-<button id="tap-to-next">
+<button id="tap-to-next-container">
 
 <div id="hit-me-modal" class="fixed inset-0 hidden z-50 bg-black bg-opacity-50 flex items-center justify-center">
  <div class="bg-white rounded-lg shadow-lg w-full sm:w-11/12 max-w-full sm:max-w-6xl p-2 sm:p-6">
@@ -216,9 +216,16 @@ button:focus {
 
     
 
+      <!-- ここで、5以下だった場合のloopも記述する。
+      5以下だった場合でも、5以上だった場合でも、同じ変数に格納して、それをloopに記述する。
+      javascript側では、その変数の.textContentを取得して、それをcurrentIndexに設定する。
+      -->
+
+      <!--javascriptに渡す値-->
+      <p id="tapmeLength" class="hidden"><%= @tapmeLength %></p>
 
       <% if @microposts.present? %>
-      <% @microposts.sample(5).each_with_index do |micropost, index| %>
+      <% @microposts.sample(@tapmeLength).each_with_index do |micropost, index| %>
 
         <div class="hitme-items" style="display: <%= index == 0 ? 'block' : 'none' %>;"> 
         <div class="font-extrabold text-6xl text-blue-500"><%= micropost.content %></div>
@@ -227,7 +234,7 @@ button:focus {
         </div>      
       <% end %>
       <% end %>
-      <div id="tap-to-next-container" class="text-right"><p id="tap-to-next-string">🚰 tap to next 🚰</p></div>
+      <div id="tap-to-next-div" class="text-right"><p id="tap-to-next-value">🚰 tap to next 🚰</p></div>
     
    </div>
   </div>
@@ -308,26 +315,42 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //hit meの"tap to next"のカード機能
 document.addEventListener('DOMContentLoaded', function(){
-  const tapToNext = document.getElementById('tap-to-next')
-  const tapToNextValue = document.getElementById('tap-to-next-string')
   const tapToNextContainer = document.getElementById('tap-to-next-container')
+  const tapToNextDiv = document.getElementById('tap-to-next-div')
+  const tapToNextValue = document.getElementById('tap-to-next-value')
   const hitmeItems = document.querySelectorAll('.hitme-items')
+
+  const tapmeLength = document.getElementById('tapmeLength')
+  const tapmeLengthValue = tapmeLength.textContent
+  console.log("tapmeLengthValue: " + tapmeLengthValue);
+
+  //lengthがゼロだった場合も。(バグあり。機能していない。)
+  if(tapmeLengthValue == ""){
+    tapToNextDiv.classList.add('text-center')
+    tapToNextDiv.classList.remove('text-right')
+    tapToNextValue.classList.add('font-semibold', 'text-6xl', 'text', 'text-center');
+    tapToNextValue.textContent = "まずはフレーズを登録しよう！"
+  }
+
+
+
 
   let currentIndex = 0;
   
-  tapToNext.addEventListener('click', ()=>{
+  tapToNextContainer.addEventListener('click', ()=>{
     console.log("tap tap!")
 
-    if(currentIndex == 4){
-      tapToNextContainer.classList.add('text-center')
-      tapToNextContainer.classList.remove('text-right')
+   
+    //終了した場合
+    if(currentIndex == tapmeLengthValue-1){
+      tapToNextDiv.classList.add('text-center')
+      tapToNextDiv.classList.remove('text-right')
       tapToNextValue.classList.add('font-semibold', 'text-6xl', 'text-black', 'text-center');
       tapToNextValue.textContent = "✅done"
       console.log("done")
       location.reload();
-
-
     }
+
     hitmeItems[currentIndex].style.display = 'none';
     hitmeItems[currentIndex+1].style.display = 'block';
     currentIndex++;

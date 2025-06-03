@@ -81,6 +81,14 @@
       class: "block px-4 py-2 text-gray-700 hover:bg-gray-100 text-lg font-semibold" %>
   </p>
 
+  <p>
+    <%= link_to "🔗 みんなのクリップ集", clips_path,
+      class: "block px-4 py-2 text-gray-700 hover:bg-gray-100 text-lg font-semibold" %>
+  </p>
+
+  <!--ここを消してしまうと、なぜかクリップとゴミ箱がグレーになって戻らなくなってしまう。-->
+  <p class="px-2 py-1 text-lg font-semibold text-gray-500 cursor-not-allowed">🧠 クイズ</p>
+  </p>
 
 
   <p>
@@ -96,10 +104,6 @@
   </p>
 
   <p>
-  <p class="px-2 py-1 text-lg font-semibold text-gray-500 cursor-not-allowed">🧠 クイズ</p>
-    <!--<%= link_to "🧠 クイズ", quiz_path,
-      class: "block px-4 py-2 text-gray-700 hover:bg-gray-100 text-lg font-semibold" %>-->
-  </p>
 
   <div class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
     <%= button_to(logout_path,

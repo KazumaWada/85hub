@@ -1,65 +1,48 @@
-<!-- Add specific styles for headers -->
-<style>
-  .ql-editor h1 {
-    font-size: 2em;
-    font-weight: bold;
-  }
-  .ql-editor h2 {
-    font-size: 1.5em;
-    font-weight: bold;
-  }
-  .ql-editor h3 {
-    font-size: 1.17em;
-    font-weight: bold;
-  }
-  .ql-editor a{
-    color: #3b82f6; /* Tailwind's blue-500 */
-  }
+<div class="max-w-6xl mx-auto px-4 py-8">
+  <p class="mb-2 text-lg">📘 「英語を学習したいけど、いいコンテンツが見つからない？」</p>
+  <p class="mb-6 text-lg">📘 「みんながどんなコンテンツで英語に触れているのか知りたい！」、、、そんな時に手助けになる</p>
+  <h1 class="text-3xl font-bold text-blue-600 mb-4">みんなのクリップ集！</h1>
+  <!--https://github.com/luizpicolo/youtube_rails?tab=readme-ov-file-->
 
-  .ql-editor blockquote {
-    border-left: 4px solid #e2e8f0; /* Tailwindのgray-200 */
-    padding-left: 1rem;
-    color: #4a5568; /* Tailwindのgray-700 */
-    font-style: italic;
-    margin: 0;
-  }
-  
-  .ql-editor {
-    padding: 0;  /* Remove default padding */
-    margin: 0;
-  }
-</style>
-
-<% @microposts.published.each do |micropost| %>   
-<div class="border shadow-sm hover:shadow-md transition-shadow duration-200 p-4 bg-white">
-  <!-- ユーザー名と日付 -->
-  <div class="flex items-center text-gray-800 mb-2">
-    <span class="font-semibold"><%= micropost.user.name %></span>
-    <span class="text-gray-500 text-sm ml-2"><%= micropost.created_at.strftime("%Y/%m/%d") %></span>
+  <div class="flex items-center mb-4 text-sm text-gray-600">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1 text-blue-600" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" d="m18.375 12.739-7.693 7.693a4.5 4.5 0 0 1-6.364-6.364l10.94-10.94A3 3 0 1 1 19.5 7.372L8.552 18.32m.009-.01-.01.01m5.699-9.941-7.81 7.81a1.5 1.5 0 0 0 2.112 2.13" />
+  </svg>
+  に登録されたリンクがここに公開されます。(全て匿名にしているので安心して下さい。)
   </div>
-  
-  <!-- コンテンツ -->
-  <div class="ql-editor text-gray-700">
-    <%= sanitize micropost.content, 
-      tags: %w(
-        p br h1 h2 h3 h4 h5 h6 
-        ul ol li 
-        strong em u s 
-        blockquote pre code 
-        span div img
-        a
-      ),
-      attributes: %w(
-        class style src alt href
-        data-* 
-      ) 
-    %>
+
+  <p class="text-sm text-gray-500 mb-6">リンクの埋め込みは現在 YouTube のみ対応しています。それ以外のコンテンツは直リンクで表示されます。</p>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <% @microposts.each do |micropost| %>
+      <% if micropost.reference_link.present? %>
+        <div class="text-sm border-b pb-4">
+
+         <!--リンクが動画の途中から表示されていたら、うまく表示されないから時間のparamsをカットして表示-->
+         <% if micropost.reference_link.include?("&t=") %>
+         <!--https://docs.ruby-lang.org/ja/latest/method/String/i/sub.html-->
+         <% clean_url = micropost.reference_link.sub(/&t=.*/, '') %>
+         <%= clean_url %>
+         <% end %>
+
+         <!--watchがあるとframeが表示されないから、embedで表示。-->
+         <% if micropost.reference_link.start_with?("https://www.youtube.com") %>   
+            <% embed_url = micropost.reference_link.gsub("watch?v=", "embed/") %>
+            <iframe class="w-full" height="200" src="<%= embed_url %>" 
+              title="YouTube video player" frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              allowfullscreen></iframe>
+          <% else %>
+            <div class="text-blue-600 mb-2">
+              🔗 <a href="<%= micropost.reference_link %>" target="_blank" class="underline hover:text-blue-800">
+                <%= micropost.reference_link %>
+              </a>
+            </div>
+          <% end %>
+
+
+        </div>
+      <% end %>
+    <% end %>
   </div>
 </div>
-
- 
-
-</div>
-<% end %>
-
-
