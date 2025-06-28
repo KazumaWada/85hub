@@ -1,5 +1,7 @@
 //= link_tree ../images
- //= link controllers/quill_controller.js
+//= link_tree ../video
+
+//= link controllers/quill_controller.js
   //= link controllers/flashcards_controller.js
  //= link controllers/application.js
  //= link controllers/index.js
@@ -28,3 +30,11 @@
 //= link quiz.png
 //= link lp-main.png
 //= link main01.jpg
+//= link 85hub-home-lp.png
+//= link flashcard-func.png
+//= link clips.png
+//= link tapme.gif
+//= link clips-lp.png
+//= link logo08.png
+//= link logo08-footer.png
+//= link favicon-v2.ico
