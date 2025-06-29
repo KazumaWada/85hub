@@ -17,24 +17,36 @@
 <body class="">
 
  <!-- Navigation -->
- <nav class="top-0 left-0 right-0 bg-white z-50 h-16 fixed">
+ <!--<nav class="top-0 left-0 right-0 bg-white z-50 h-16 fixed">
 
     <div class="container px-4 mx-auto h-full flex justify-between items-center">
 
-    <div class="flex items-center h-full">
-    <%= image_tag "logo08.png", class: "text-blue-600 w-full max-h-[28px] object-contain mx-auto" %>
-    </div> 
+       <div class="flex items-center h-full">
+        <%= image_tag "logo08.png", class: "text-blue-600 w-full max-h-[28px] object-contain mx-auto" %>
+       </div> 
 
-      <div class="space-x-4">
-      <!--<%= link_to blog_path, data: { turbo: false }, class: "font-bold text-blue-600 px-4 py-2 rounded-lg hover:text-blue-700 transition" do %>
-        ブログ
-      <% end %>-->
-        <%= link_to login_path, data: { turbo: false }, class: "bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition" do %>
+       <div class="sm:space-x-4">
+         <%= link_to login_path, data: { turbo: false }, class: "bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition" do %>
           はじめる
-        <% end %>
-      </div>
+         <% end %>
+       </div>
+    
     </div>
-  </nav>
+
+  </nav>-->
+
+  <nav class="top-0 grid grid-cols-12 fixed w-full bg-white p-4">
+  <div class="col-span-6 text-left">
+    <%= image_tag "logo08.png", class: "text-blue-600 max-h-[28px] object-contain inline-block" %>
+  </div> 
+
+  <div class="col-span-6 text-right">
+    <%= link_to login_path, data: { turbo: false }, class: "bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition inline-block" do %>
+      はじめる
+    <% end %>
+  </div>
+</nav>
+
 
 
   <!-- hero section -->
