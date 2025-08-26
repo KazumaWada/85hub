@@ -1,0 +1,110 @@
+<!-- hit me! -->
+<% if controller.controller_name == "users" && action_name == "show" && current_user.present? && @user.present? && current_user == @user %>
+<div class="text-left">
+<button id="tap-to-next-container">
+
+<div id="hit-me-modal" class="fixed inset-0 hidden z-50 bg-black bg-opacity-50 flex items-center justify-center">
+ <div class="bg-white rounded-lg shadow-lg w-full sm:w-11/12 max-w-full sm:max-w-6xl p-2 sm:p-6">
+  <div class="flashcardContainer m-4 p-3  rounded-2xl duration-200">
+   <div id="inputWrapper" class="text-gray-500">
+
+
+    
+
+      <!-- ここで、5以下だった場合のloopも記述する。
+      5以下だった場合でも、5以上だった場合でも、同じ変数に格納して、それをloopに記述する。
+      javascript側では、その変数の.textContentを取得して、それをcurrentIndexに設定する。
+      -->
+
+      <!--javascriptに渡す値-->
+      <p id="tapmeLength" class="hidden"><%= @tapmeLength %></p>
+
+      <% if @microposts.present? %>
+      <% @microposts.sample(@tapmeLength).each_with_index do |micropost, index| %>
+
+        <div class="hitme-items" style="display: <%= index == 0 ? 'block' : 'none' %>;"> 
+        <div class="font-extrabold text-6xl text-blue-500"><%= micropost.content %></div>
+        <br>
+        <%= micropost.answer %>
+        </div>      
+      <% end %>
+      <% end %>
+      <div id="tap-to-next-div" class="text-right"><p id="tap-to-next-value">🚰 tap to next 🚰</p></div>
+    
+   </div>
+  </div>
+ </div>
+</div>
+</button>
+</div>
+<% end %>
+<!-- hit me! -->
+
+
+<script>
+//hit meの表示
+document.addEventListener('DOMContentLoaded', function() {
+  const openBtns = document.querySelectorAll('.open-hit-me-modal');
+  const modal = document.getElementById('hit-me-modal');
+
+  if (modal) {
+    openBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        console.log("clicked");
+        modal.classList.remove('hidden');
+      });
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.add('hidden');
+      }
+    });
+  }
+});
+
+//hit meの"tap to next"のカード機能
+document.addEventListener('DOMContentLoaded', function(){
+  const tapToNextContainer = document.getElementById('tap-to-next-container')
+  const tapToNextDiv = document.getElementById('tap-to-next-div')
+  const tapToNextValue = document.getElementById('tap-to-next-value')
+  const hitmeItems = document.querySelectorAll('.hitme-items')
+
+  const tapmeLength = document.getElementById('tapmeLength')
+  const tapmeLengthValue = tapmeLength.textContent
+  console.log("tapmeLengthValue: " + tapmeLengthValue);
+
+  //lengthがゼロだった場合も。(バグあり。機能していない。)
+  if(tapmeLengthValue == ""){
+    tapToNextDiv.classList.add('text-center')
+    tapToNextDiv.classList.remove('text-right')
+    tapToNextValue.classList.add('font-semibold', 'text-6xl', 'text', 'text-center');
+    tapToNextValue.textContent = "まずはフレーズを登録しよう！"
+  }
+
+
+
+
+  let currentIndex = 0;
+  
+  tapToNextContainer.addEventListener('click', ()=>{
+    console.log("tap tap!")
+
+   
+    //終了した場合
+    if(currentIndex == tapmeLengthValue-1){
+      tapToNextDiv.classList.add('text-center')
+      tapToNextDiv.classList.remove('text-right')
+      tapToNextValue.classList.add('font-semibold', 'text-6xl', 'text-black', 'text-center');
+      tapToNextValue.textContent = "✅done"
+      console.log("done")
+      location.reload();
+    }
+
+    hitmeItems[currentIndex].style.display = 'none';
+    hitmeItems[currentIndex+1].style.display = 'block';
+    currentIndex++;
+  })
+  
+})
+</script>

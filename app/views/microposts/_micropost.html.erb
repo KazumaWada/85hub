@@ -154,36 +154,6 @@
       attributes: %w(class style src alt href data-*)
     ) : "&nbsp;".html_safe %>
 </div>
-
-  
-
-    
-     <% 
-=begin
-%>
-
-      
-      <div class="text-black bg-gray-50 p-4 border-2 border-gray-700 rounded-md">
-      <%= sanitize micropost.answer, 
-          tags: %w(p br h1 h2 h3 h4 h5 h6 ul ol li strong em u s blockquote pre code span div img a),
-          attributes: %w(class style src alt href data-*) %>
-     </div>
-
-      <div class="text-black bg-gray-100 rounded-md p-3 font-medium">
-      <%= sanitize micropost.answer, 
-      tags: %w(p br h1 h2 h3 h4 h5 h6 ul ol li strong em u s blockquote pre code span div img a),
-      attributes: %w(class style src alt href data-*) %>
-      </div>
-
-      <div class="text-black bg-gray-100 p-3 rounded-md flex items-center">
-      <i class="fas fa-pencil-alt text-sm mr-2"></i> <!-- アイコン -->
-      <%= sanitize micropost.answer, 
-          tags: %w(p br h1 h2 h3 h4 h5 h6 ul ol li strong em u s blockquote pre code span div img a),
-          attributes: %w(class style src alt href data-*) %>
-    </div>
-      <% 
-=end
-%>
       
   <% end %>
 
