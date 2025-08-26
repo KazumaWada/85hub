@@ -27,17 +27,12 @@
   <!--Alpine.js nav用(https://alpinejs.dev/start-here#building-a-dropdown)-->
   <!--<script src="//unpkg.com/alpinejs" defer></script>-->
 
- 
-
-
-
 <!--google font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&family=Lexend:wght@100..900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
   
 </head>
-
 <style>
       * {
         margin: 0;
@@ -122,6 +117,7 @@ button:focus {
 #tailwind CSS (https://tailwindcss.com/docs/guides/ruby-on-rails)
 </style>
 
+
 <body>
 
 
@@ -129,235 +125,14 @@ button:focus {
 <%= render 'layouts/flash_message' %>
 <%= yield %>
 
+<div class="mt-12" style="height: 50px;"></div>
 
-
-
-  <div class="mt-12" style="height: 50px;"></div>
-
-
-
-
-
-<!---投稿フォーム--->
-<% if controller.controller_name == "users" && action_name == "show" && current_user.present? && @user.present? && current_user == @user %>
-
-<div id="post-modal" class="fixed inset-0 hidden z-50 bg-black bg-opacity-50 flex items-center justify-center">
-  <!--<div class="bg-white rounded-lg shadow-lg w-11/12 max-w-6xl p-6">-->
-  <div class="bg-white rounded-lg shadow-lg w-full sm:w-11/12 max-w-full sm:max-w-6xl p-2 sm:p-6">
-  <div class="flashcardContainer m-4 p-3 border-2 border-gray-200 rounded-2xl duration-200">
-  <%= form_with(model: @microposts, url: zen_create_path(slug: @user.slug), method: :post, local: true, data: { turbo: false }) do |f| %>
-    <div id="inputWrapper" class="text-gray-500">
-      <label for="content">覚えたい単語、フレーズ</label>
-      <%= f.text_area :content, 
-          class: "m-2 p-3 border-2 border-gray-200 duration-200 rounded-2xl w-full" %>
-
-      <label for="answer">日本語訳/解説など (optional)</label>
-      <%= f.text_area :answer, 
-          class: "m-2 p-3 border-2 border-gray-200 duration-200 rounded-2xl w-full" %>
-
-      <label for="answer">自作英文  (optional)</label>
-      <%= f.text_area :original, 
-          class: "m-2 p-3 border-2 border-gray-200 duration-200 rounded-2xl w-full" %>
-
-
-    </div>
-
-    <!-- 新しいタグ入力欄と登録ボタンを横並びにするためのグリッド -->
-    
-
-      <!-- リンク入力欄 -->
-      <div>
-      <label for="tags" class="block text-gray-600">🔗 関連リンク  (optional)</label>
-      <%= f.text_field :reference_link, 
-          placeholder: "https:// ~",
-          class: "m-2 p-3 border-2 border-gray-200 duration-200 rounded-2xl w-full" %>
-      </div>
-      <!-- リンクコメント欄 -->
-      <div>
-      <label for="tags" class="block text-gray-600">💬 ログ  (optional)</label>
-      <%= f.text_field :reference_link_comment, 
-          placeholder: "上記動画リンクの~分~秒部分、この本の~行目 etc",
-          class: "m-2 p-3 border-2 border-gray-200 duration-200 rounded-2xl w-full" %>
-      </div>
-     
-     <div class="grid grid-cols-2 gap-2 mt-4">
-      <!-- タグ入力欄 -->
-      <div>
-        <label for="tags" class="block text-gray-600">タグ（1つのみ） (optional)</label>
-        <%= f.text_field :tags, 
-            class: "m-2 p-3 border-2 border-gray-200 duration-200 rounded-2xl w-full" %>
-     </div>
-
-      <!-- 登録ボタン -->
-      <div class="flex justify-end items-center">
-        <%= f.submit "カードを登録", 
-            class: "bg-gray-100 text-gray-800 rounded hover:bg-gray-200 transition duration-300 px-4 py-2" %>
-      </div>
-    </div>
-
-  <% end %>
-</div>
-  </div>
-</div>
-
-<% end %>
-<!---投稿フォーム--->
-
-<!-- hit me! -->
-<% if controller.controller_name == "users" && action_name == "show" && current_user.present? && @user.present? && current_user == @user %>
-<div class="text-left">
-<button id="tap-to-next-container">
-
-<div id="hit-me-modal" class="fixed inset-0 hidden z-50 bg-black bg-opacity-50 flex items-center justify-center">
- <div class="bg-white rounded-lg shadow-lg w-full sm:w-11/12 max-w-full sm:max-w-6xl p-2 sm:p-6">
-  <div class="flashcardContainer m-4 p-3  rounded-2xl duration-200">
-   <div id="inputWrapper" class="text-gray-500">
-
-
-    
-
-      <!-- ここで、5以下だった場合のloopも記述する。
-      5以下だった場合でも、5以上だった場合でも、同じ変数に格納して、それをloopに記述する。
-      javascript側では、その変数の.textContentを取得して、それをcurrentIndexに設定する。
-      -->
-
-      <!--javascriptに渡す値-->
-      <p id="tapmeLength" class="hidden"><%= @tapmeLength %></p>
-
-      <% if @microposts.present? %>
-      <% @microposts.sample(@tapmeLength).each_with_index do |micropost, index| %>
-
-        <div class="hitme-items" style="display: <%= index == 0 ? 'block' : 'none' %>;"> 
-        <div class="font-extrabold text-6xl text-blue-500"><%= micropost.content %></div>
-        <br>
-        <%= micropost.answer %>
-        </div>      
-      <% end %>
-      <% end %>
-      <div id="tap-to-next-div" class="text-right"><p id="tap-to-next-value">🚰 tap to next 🚰</p></div>
-    
-   </div>
-  </div>
- </div>
-</div>
-</button>
-</div>
-<% end %>
-<!-- hit me! -->
-
+<%= render 'layouts/post_pop_up' %>
+<%= render 'layouts/hit_me' %>
 
 </body>
+
+
+
 </html>
 
-<script>
-//カード登録の表示
-document.addEventListener('DOMContentLoaded', function() {
-  const openBtns = document.querySelectorAll('.open-post-modal');
-  const modal = document.getElementById('post-modal');
-
-  if (modal) {
-    openBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        console.log("clicked");
-        modal.classList.remove('hidden');
-      });
-    });
-
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.classList.add('hidden');
-      }
-    });
-  }
-});
-
-//カード登録の表示
-document.addEventListener('DOMContentLoaded', function() {
-  const openBtns = document.querySelectorAll('.open-post-modal02');
-  const modal = document.getElementById('post-modal02');
-
-  if (modal) {
-    openBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        console.log("clicked");
-        modal.classList.remove('hidden');
-      });
-    });
-
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.classList.add('hidden');
-      }
-    });
-  }
-});
-
-//hit meの表示
-document.addEventListener('DOMContentLoaded', function() {
-  const openBtns = document.querySelectorAll('.open-hit-me-modal');
-  const modal = document.getElementById('hit-me-modal');
-
-  if (modal) {
-    openBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        console.log("clicked");
-        modal.classList.remove('hidden');
-      });
-    });
-
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.classList.add('hidden');
-      }
-    });
-  }
-});
-
-//hit meの"tap to next"のカード機能
-document.addEventListener('DOMContentLoaded', function(){
-  const tapToNextContainer = document.getElementById('tap-to-next-container')
-  const tapToNextDiv = document.getElementById('tap-to-next-div')
-  const tapToNextValue = document.getElementById('tap-to-next-value')
-  const hitmeItems = document.querySelectorAll('.hitme-items')
-
-  const tapmeLength = document.getElementById('tapmeLength')
-  const tapmeLengthValue = tapmeLength.textContent
-  console.log("tapmeLengthValue: " + tapmeLengthValue);
-
-  //lengthがゼロだった場合も。(バグあり。機能していない。)
-  if(tapmeLengthValue == ""){
-    tapToNextDiv.classList.add('text-center')
-    tapToNextDiv.classList.remove('text-right')
-    tapToNextValue.classList.add('font-semibold', 'text-6xl', 'text', 'text-center');
-    tapToNextValue.textContent = "まずはフレーズを登録しよう！"
-  }
-
-
-
-
-  let currentIndex = 0;
-  
-  tapToNextContainer.addEventListener('click', ()=>{
-    console.log("tap tap!")
-
-   
-    //終了した場合
-    if(currentIndex == tapmeLengthValue-1){
-      tapToNextDiv.classList.add('text-center')
-      tapToNextDiv.classList.remove('text-right')
-      tapToNextValue.classList.add('font-semibold', 'text-6xl', 'text-black', 'text-center');
-      tapToNextValue.textContent = "✅done"
-      console.log("done")
-      location.reload();
-    }
-
-    hitmeItems[currentIndex].style.display = 'none';
-    hitmeItems[currentIndex+1].style.display = 'block';
-    currentIndex++;
-  })
-  
-})
-
-
-
-</script>
