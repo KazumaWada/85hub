@@ -91,7 +91,7 @@
             <%= image_tag "default_img.png", class: "h-[190px] w-full" %>
            </div>
 
-           <div class="absolute bottom-0 text-blue-600 mb-2 uppercase font-extrabold">  
+           <div class="absolute bottom-0 p-1 text-blue-600 mb-2 uppercase font-extrabold">  
             <!--30文字以上だったら切って、https://も切る。-->
             <% formatted_link =
             micropost.reference_link
@@ -101,7 +101,7 @@
             .sub(/^https?:\/\//, "")
             .truncate(20)
             %>
-            🔗 <a href="<%= micropost.reference_link %>" target="_blank" class="underline hover:text-blue-800">
+             <a href="<%= micropost.reference_link %>" target="_blank" class="underline hover:text-blue-800">
                 <%= formatted_link %>
               </a>
            </div>

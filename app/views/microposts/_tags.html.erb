@@ -1,0 +1,35 @@
+<div class="p-3 m-0 rounded-none sm:m-2 sm:rounded-2xl border-2 border-gray-200 duration-200">
+
+<!-- uniqなtagに絞る -->
+<% tagsArr = [] %>
+<% @microposts.each do |micropost| %>
+ <% tagsArr.push(micropost.tags) %>
+<% end %>
+<% uniqtags = tagsArr.to_set %>
+
+
+<% uniqtags.each do |tag| %>
+
+<% if tag.present? %>
+  
+ 
+ <%= link_to tag_path(tags: tag) do %>
+ <!-- NOTE: なんかelseの方で表示されてるけど、なんで？？ -->
+ <% if params[:tags] === tag %>
+  <span class="inline-flex items-center rounded-md bg-gray-400/10 px-2 py-1 text-xs font-medium text-gray-400 inset-ring inset-ring-gray-400/20">
+    # <%= tag %>
+  </span>
+  <% else %>
+  <span class="inline-flex items-center rounded-md bg-gray-400/10 px-2 py-1 text-xs font-medium text-gray-400 inset-ring inset-ring-gray-400/20">
+    # <%= tag %>
+  </span>
+ <% end %>
+ 
+ <% end %>
+  
+ 
+ <% end %>
+
+<% end %>
+
+</div>
