@@ -43,6 +43,10 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by(slug: params[:slug])   
     @microposts = @user.microposts
+    @posts_count = @microposts.count
+    # where.not: reference_linkがnillでも""でもないものを取得
+    @links_count = Micropost.where.not(reference_link: [nil, ""]).count
+
     @uniq_tags = @microposts.map(&:tags).flatten.uniq 
     puts "🔑🔑🔑🔑🔑🔑🔑🔑", @uniq_tags
 

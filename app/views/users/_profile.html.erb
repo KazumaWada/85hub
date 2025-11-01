@@ -1,86 +1,116 @@
-<!--<h4 class="text-2xl"><%= @user.name %></h4>-->
 
-<% if current_user == @user %>
+<!--- プロフィール画像、status --->
 
-
-<!--左側のカラム-->
-<div class="mt-10">
-<p class="text-gray-500 m-4 fixed bottom-0"><%= @user.name %></p>
-
-<p>
-
-  <!-- カード登録 -->
-  <button id="flashcard-open-button02"
-    class="p-2 px-4 m-3 open-post-modal rounded-lg bg-blue-500 text-white text-lg font-semibold hover:bg-blue-600 transition">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
-      <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32L19.513 8.2Z" />
-    </svg>
-  </button>
-
-  <!--hit me! -->
-  <button class="open-hit-me-modal p-2 px-4 ml-3 rounded-lg bg-blue-500 text-white text-lg font-semibold hover:bg-blue-600 transition">
-  Tap me!
-  </button>
-
-  <!-- みんなのクリップ集 -->
-  <%= link_to clips_path, class: "flex p-2 mt-3 ml-3 mr-9 rounded-lg bg-blue-500 text-white text-lg font-semibold hover:bg-blue-600 transition" do %>
-   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-   <path stroke-linecap="round" stroke-linejoin="round" d="m18.375 12.739-7.693 7.693a4.5 4.5 0 0 1-6.364-6.364l10.94-10.94A3 3 0 1 1 19.5 7.372L8.552 18.32m.009-.01-.01.01m5.699-9.941-7.81 7.81a1.5 1.5 0 0 0 2.112 2.13" />
-   </svg>
-   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-   <path stroke-linecap="round" stroke-linejoin="round" d="m18.375 12.739-7.693 7.693a4.5 4.5 0 0 1-6.364-6.364l10.94-10.94A3 3 0 1 1 19.5 7.372L8.552 18.32m.009-.01-.01.01m5.699-9.941-7.81 7.81a1.5 1.5 0 0 0 2.112 2.13" />
-   </svg>
-   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-   <path stroke-linecap="round" stroke-linejoin="round" d="m18.375 12.739-7.693 7.693a4.5 4.5 0 0 1-6.364-6.364l10.94-10.94A3 3 0 1 1 19.5 7.372L8.552 18.32m.009-.01-.01.01m5.699-9.941-7.81 7.81a1.5 1.5 0 0 0 2.112 2.13" />
-   </svg>
-  <% end %>
-
-</p>
-
-
-<!-- tags -->
-<%= link_to root_path do%>
-  <p class="items-center px-2 pt-4 pl-5 py-1 text-gray-600 text-medium font-medium">
-  all
-  </p>
- <% end %>
-
-<!--tagsの文字列を全部入れている-->
-<% tagsArr = [] %>
-<% @microposts.each do |micropost| %>
- <% tagsArr.push(micropost.tags) %>
-<% end %>
-
-<!--重複したやつを削除した配列にする-->
-<% uniqtags = tagsArr.to_set %>
-
-<% uniqtags.each do |tag| %>
-
-<% if tag.present? %>
+<!-- プロフィール画像部分とstatus部分で大きさが異なるから、gridではなくflexboxを使用している -->
+ <div class="flex items-start gap-4 mb-4"> 
  
- <%= link_to tag_path(tags: tag) do%><!--動的linkを生成するときに、routerで定義した:tagsを渡してあげる必要がある。paramsはcontrollerのみへの受け渡しなので使われない。https://railsdoc.com/page/link_to-->
- 
- <% if params[:tags] == tag %> 
-  <p class="tag items-center px-2 py-1 text-medium font-medium text-white">
-  # <%= tag %>
-  </p>
- <% else %>
-  <p class="tag items-center px-2 py-1 text-medium font-medium text-gray-600">
-  # <%= tag %>
-  </p>
-<% end %>
+ <!-- 🙍🏻‍♂️ profile-pic 外枠薄い線 -->
+  <div class="pl-3">
+  <%= image_tag "character.jpg", class: "w-[200px] h-[250px] object-cover border-2 border-gray-200 duration-200 rounded-2xl p-3" %>
+  
+ </div>
 
-<% end %>
+ <!-- 👑 user.nameとstatus 外枠薄い線 -->
+  <!--name, status-->
+  <div class="border-2 border-gray-200 rounded-2xl p-5 max-w-sm bg-white">
+    <h3 class="text-lg font-semibold text-gray-800 mb-3">
+        <%= @user.name %>'s 85Hub Stats 🚀
+    </h3>
 
-<% end %>
+    <div class="">
+        
+        <div class="text-gray-600 mb-2">
+            🏕️ <strong class="ml-1 text-gray-800 font-medium">Joined:</strong> 
+            <span class="ml-1"><%= @user.created_at.strftime("%Y-%m") %></span>
+        </div>
 
-<% end %>
-<!-- tags -->
+        <div class="text-gray-600 mb-2">
+            <span class="text-xl">📊</span> <strong class="ml-1 text-gray-800 font-medium">Posts:</strong> 
+            <span class="ml-1"><%= @posts_count %></span>
+        </div>
+
+        <div class="text-gray-600 mb-2">
+             <span class="text-xl">🔗</span> <strong class="ml-1 text-gray-800 font-medium">Links:</strong> 
+            <span class="ml-1"><%= @links_count %></span>
+        </div>
+
+        <div class="text-gray-600 mb-2">
+            <span class="text-xl">⭐️</span> <strong class="ml-1 text-gray-800 font-medium">Login stroke:</strong> 
+            <span class="ml-1">15 days in a low!</span>
+        </div>
+    </div>
+    
+    <hr class="my-3 border-gray-200">
+
+     <p class="text-xs text-gray-500">
+         Powered by 85hub Stats ✨
+     </p>
+   </div>
+
+
 
 </div>
 
 
+<!--- 参考リンク --->
+
+<!-- 外枠薄い線 -->
+<div class="p-3 m-0 rounded-none sm:m-2 sm:rounded-2xl border-2 border-gray-200 duration-200">
+<!-- TODO: phoneは非表示にする　-->
+<div class="grid grid-cols-1 md:grid-cols-5 gap-1">
+ <!-- TODO: 動画は10個まで表示する。　-->
+ <% @microposts.first(10).each do |micropost| %>
+  
+  <% if micropost.reference_link.present? %>
+   
+  
+  
+     <!-- YouTubeの時間のparamsがリンクに含まれていたらうまく表示されない。だから含まれていたらカット -->
+         <% if micropost.reference_link.include?("&t=") %>
+         <!--https://docs.ruby-lang.org/ja/latest/method/String/i/sub.html-->
+         <% clean_url = micropost.reference_link.sub(/&t=.*/, '') %>
+         <%= clean_url %>
+         <% end %>
+
+         <!--watchがあるとframeが表示されないから、embedで表示。-->
+         <% if micropost.reference_link.start_with?("https://www.youtube.com") %>   
+            <% embed_url = micropost.reference_link.gsub("watch?v=", "embed/") %>
+            <iframe class="w-full" height="190" src="<%= embed_url %>" 
+              title="YouTube video player" frameborder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              allowfullscreen></iframe>
+          <% else %>
 
 
-<% end %>
+          <!-- YouTube以外だったら、普通に文字列で表示 -->
+          
+          <!-- relativeを親要素、absoluteでその上に浮かせる -->
+          <div class="relative">
+           
+           <div>
+            <%= image_tag "default_img.png", class: "h-[190px] w-full" %>
+           </div>
+
+           <div class="absolute bottom-0 text-blue-600 mb-2 uppercase font-extrabold">  
+            <!--30文字以上だったら切って、https://も切る。-->
+            <% formatted_link =
+            micropost.reference_link
+            .to_s
+            # httpとhttpsをs?でどちらも対応。
+            #//を\で文字列に。最後の\は正規表現を閉じる。
+            .sub(/^https?:\/\//, "")
+            .truncate(20)
+            %>
+            🔗 <a href="<%= micropost.reference_link %>" target="_blank" class="underline hover:text-blue-800">
+                <%= formatted_link %>
+              </a>
+           </div>
+          </div><!-- relative -->
+          
+          <% end %>
+  <% end %>
+
+ <% end %>
+</div>
+</div>
 
