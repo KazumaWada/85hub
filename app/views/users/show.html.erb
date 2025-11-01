@@ -2,7 +2,7 @@
 
   <!-- 左カラム（固定・sm以上で表示） -->
   <div class="hidden sm:block sm:w-[150px] fixed h-full">
-    <%= render 'users/profile' %>
+    <%= render 'users/user_actions' %>
   </div>
 
   <!-- 右カラム（スマホでは余白なし） -->
@@ -10,6 +10,7 @@
 
     <% if @user.microposts.any? %>
       <% if current_user == @user %>
+        <%= render partial: 'users/profile' %>
         <%= render partial: 'microposts/content_navs' %>
       <% end %>
       <%= render partial: 'microposts/micropost' %>

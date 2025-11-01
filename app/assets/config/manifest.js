@@ -38,3 +38,5 @@
 //= link logo08.png
 //= link logo08-footer.png
 //= link favicon-v2.ico
+//= link character.jpg
+//= link default_img.png

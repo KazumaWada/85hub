@@ -18,7 +18,7 @@
       <% if micropost.reference_link.present? %>
         <div class="text-sm border-b pb-4">
 
-         <!--リンクが動画の途中から表示されていたら、うまく表示されないから時間のparamsをカットして表示-->
+         <!-- YouTubeの時間のparamsがリンクに含まれていたらうまく表示されない。だから含まれていたらカット -->
          <% if micropost.reference_link.include?("&t=") %>
          <!--https://docs.ruby-lang.org/ja/latest/method/String/i/sub.html-->
          <% clean_url = micropost.reference_link.sub(/&t=.*/, '') %>
@@ -28,11 +28,15 @@
          <!--watchがあるとframeが表示されないから、embedで表示。-->
          <% if micropost.reference_link.start_with?("https://www.youtube.com") %>   
             <% embed_url = micropost.reference_link.gsub("watch?v=", "embed/") %>
-            <iframe class="w-full" height="200" src="<%= embed_url %>" 
+              <iframe class="w-full" height="200" src="<%= embed_url %>" 
               title="YouTube video player" frameborder="0" 
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
               allowfullscreen></iframe>
           <% else %>
+          <!-- YouTube以外だったら、普通に文字列で表示 -->
+          <!-- 
+               NOTE: なんかYouTubeの画像と同じサイズの箱のデザインを作るかも。tiktokだったらtiktokのロゴとかetc..
+           -->
             <div class="text-blue-600 mb-2">
               🔗 <a href="<%= micropost.reference_link %>" target="_blank" class="underline hover:text-blue-800">
                 <%= micropost.reference_link %>
