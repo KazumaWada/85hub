@@ -59,7 +59,7 @@
 <!-- TODO: phoneは非表示にする　-->
 <div class="grid grid-cols-1 md:grid-cols-5 gap-1">
  <!-- TODO: 動画は10個まで表示する。　-->
- <% @microposts.first(10).each do |micropost| %>
+ <% @microposts.first(5).each do |micropost| %>
   
   <% if micropost.reference_link.present? %>
    

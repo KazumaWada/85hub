@@ -5,6 +5,12 @@ class MicropostsController < ApplicationController
   before_action :require_login, only: [:zen_new]
   # layout false, only: [:index]
 
+
+  def contents_all
+    @user = User.find_by(slug: params[:slug])
+    @microposts = @user.microposts
+  end
+
   # calendar機能をつけて、ユーザーが投稿したら、印が付くような仕組みにする。
     def calendar
       @user = User.find_by(slug: params[:slug])   
