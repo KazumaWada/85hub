@@ -9,7 +9,7 @@
   <!-- 👉右カラム（スマホでは余白なし） -->
   <div class="w-full sm:ml-[150px] overflow-y-auto">
   <p class="pl-4 font-bold text-lg hidden sm:block">#<%= params[:tags] %></p>
-  <%= render partial: 'microposts/content_navs' %>
+  <%= render partial: 'microposts/content_navs_phone' %>
   <!----タグの結果----->
 <!-- where: tagの要素の中でも、params[:tags]に当てはまる内容を取得してくる。-->
 <!--    get '/posts/:tags',←この":tags"からparamsが探している to: 'microposts#tags', as: 'tag'-->
