@@ -58,21 +58,26 @@
 <div class="p-3 m-0 rounded-none sm:m-2 sm:rounded-2xl border-2 border-gray-200 duration-200">
 <!-- TODO: phoneは非表示にする　-->
 <div class="grid grid-cols-1 md:grid-cols-5 gap-1">
+
+ <% count = 0 %>
  <!-- TODO: 動画は10個まで表示する。　-->
- <% @microposts.first(5).each do |micropost| %>
+ <% @microposts.each do |micropost| %>
+ <% break if count >= 5 %>
+
   
-  <% if micropost.reference_link.present? %>
-   
-  
-  
-     <!-- YouTubeの時間のparamsがリンクに含まれていたらうまく表示されない。だから含まれていたらカット -->
+  <% next unless micropost.reference_link.present? %> <!-- ifと似てるけど、ifに入る前に落とす。可読性も兼ねてる。endタグ不要 -->
+  <% count += 1 %>
+         
+
+         <!-- NOTE: これreturnされてるけど、iframeで囲まれていないよ？どういうこと？-->
+         <!-- YouTubeリンク微調節01: YouTubeの時間のparamsがリンクに含まれていたらうまく表示されない。だから含まれていたらカット -->
          <% if micropost.reference_link.include?("&t=") %>
          <!--https://docs.ruby-lang.org/ja/latest/method/String/i/sub.html-->
          <% clean_url = micropost.reference_link.sub(/&t=.*/, '') %>
          <%= clean_url %>
          <% end %>
 
-         <!--watchがあるとframeが表示されないから、embedで表示。-->
+         <!--YouTubeリンク微調節02: watchがあるとframeが表示されないから、embedで表示。-->
          <% if micropost.reference_link.start_with?("https://www.youtube.com") %>   
             <% embed_url = micropost.reference_link.gsub("watch?v=", "embed/") %>
             <iframe class="w-full" height="190" src="<%= embed_url %>" 
@@ -82,11 +87,9 @@
           <% else %>
 
 
-          <!-- YouTube以外だったら、普通に文字列で表示 -->
-          
+          <!-- YouTube以外だったら、普通に文字列で表示 -->   
           <!-- relativeを親要素、absoluteでその上に浮かせる -->
           <div class="relative">
-           
            <div>
             <%= image_tag "default_img.png", class: "h-[190px] w-full" %>
            </div>
@@ -107,10 +110,10 @@
            </div>
           </div><!-- relative -->
           
-          <% end %>
-  <% end %>
+    <% end %>
 
- <% end %>
+<% end %><!-- each.do -->
+
 </div>
 </div>
 
