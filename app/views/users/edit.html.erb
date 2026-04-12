@@ -1,29 +1,38 @@
-<% provide(:title, "Edit user") %>
-<h1>Update your profile</h1>
 <!-- form_forでがこの@userがすでにActiveRecord内に存在したらpatchを返し、なかったら、new.htmlのpostを返すようになっている。 -->
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@user) do |f| %>
-      <%= render 'shared/error_messages' %>
 
-      <%= f.label :name %>
-      <%= f.text_field :name, class: 'form-control' %>
+<div class="max-w-lg mx-auto p-8 bg-white shadow-2xl rounded-xl space-y-6">
+  <h1 class="text-3xl font-bold text-center text-blue-600">
+    設定
+  </h1>
+  <p class="text-sm text-gray-500 text-center -mt-4">
+    ユーザー情報の更新、または新規登録を行います。
+  </p>
+  
+  <%= form_for(@user) do |f| %>
+    <%= render 'shared/error_messages' %>
 
-      <%= f.label :email %>
-      <%= f.email_field :email, class: 'form-control' %>
+    <div class="space-y-4">
+      <div>
+        <%= f.label :name, class: 'block text-sm font-medium text-gray-700' %>
+        <%= f.text_field :name, class: 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm' %>
+      </div>
 
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control' %>
+      <div>
+        <%= f.label :email, class: 'block text-sm font-medium text-gray-700' %>
+        <%= f.email_field :email, class: 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm' %>
+      </div>
 
-      <%= f.label :password_confirmation, "Confirmation" %>
-      <%= f.password_field :password_confirmation, class: 'form-control' %>
+      <div>
+        <%= f.label :password, class: 'block text-sm font-medium text-gray-700' %>
+        <%= f.password_field :password, class: 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm' %>
+      </div>
 
-      <%= f.submit "Save changes", class: "btn btn-primary" %>
-    <% end %>
-
-    <div class="gravatar_edit">
-      <%= gravatar_for @user %>
-      <a href="http://gravatar.com/emails" target="_blank">change</a>
+      <div>
+        <%= f.label :password_confirmation, "Confirmation", class: 'block text-sm font-medium text-gray-700' %>
+        <%= f.password_field :password_confirmation, class: 'mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm' %>
+      </div>
     </div>
-  </div>
+    
+    <%= f.submit "Save changes", class: "w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-lg font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 mt-6 cursor-pointer" %>
+  <% end %>
 </div>

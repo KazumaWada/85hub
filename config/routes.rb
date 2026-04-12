@@ -57,6 +57,9 @@ Rails.application.routes.draw do
     patch 'post/:id/update', to: 'microposts#update', as: "update_micropost"
     get 'bookmark', to: 'microposts#bookmark', as: 'bookmark'
     
+    get 'setting/profile', to: 'users#edit', as: "edit_user"
+    patch 'setting/profile/update', to: 'users#update', as: "update_user"
+
     #get 'draft', to: 'microposts#draft', as: 'draft'
     get '/post/:id', to: 'microposts#show', as: 'post'
     post '/post/:id', to:'microposts#generate_dynamic_ogp', as: 'generate_dynamic_ogp'
@@ -70,7 +73,7 @@ Rails.application.routes.draw do
   
   # Defines the root path route ("/")
   # root "articles#index"
-  resources :users, only: [:index, :new, :create, :destroy]
+  resources :users, only: [:index, :new, :create, :destroy, :edit, :update]
   #get '/profile', to: 'users#show', as: :profile
 
 # # profile配下にpostsをネスト profile/posts/1
