@@ -156,11 +156,11 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
+    @user = User.find_by(slug: params[:slug])
   end
 
   def update
-    @user = User.find(params[:id])
+    @user = User.find(slug: params[:slug])
     #update_attributes: 指定されたデータのmodelのデータを更新
     # user = User.find(1)
     # user.update_attributes(name: "John", age: 30)
