@@ -61,9 +61,11 @@
 
     <% if current_user %>
     <!-- menubar -->
-    <div class="relative p-3">
-  <button id="menu-toggle" class="text-2xl">
-    ☰
+    <div class="relative py-3 pl-3">
+  <button id="menu-toggle" aria-label="メニュー" class="flex items-center justify-center">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+    </svg>
   </button>
 
   <nav id="menu" class="hidden absolute top-full left-0 bg-white shadow-md w-64 max-w-xs overflow-hidden z-50">
@@ -126,9 +128,9 @@
   </div>
 
   <!-- ロゴ -->
-  <div class="logo-container h-16 w-16 p-4">
+  <div class="logo-container h-16 py-3 ml-2">
   <%= link_to root_path, class: "logo-link" do %>
-    <%= image_tag("favicon-v2.ico", class: "logo max-h-[28px] object-contain") %>
+    <%= image_tag("logo/icon_72px_white", class: "logo max-h-[40px] object-contain") %>
   <% end %>
 </div>
 </div>
